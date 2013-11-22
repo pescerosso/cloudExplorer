@@ -34,7 +34,9 @@ public class S3 {
         // Put.put("/tmp/text.txt", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
         // delete Del = new delete();
         //Del.deleteFile("/tmp/text.txt", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
-        // Del.deleteBucket(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+        bucket Bucket = new bucket();
+        Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
 
+// bucket.deleteBucket(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
     }
 }
