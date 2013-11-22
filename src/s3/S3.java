@@ -28,9 +28,13 @@ public class S3 {
         Cred.setSecret_key("6uzntS3cAgUkDQkzmtGoFzQOmVB57KjJGc+koJ8N");
         Cred.setEndpoint("http://s3.linux-toys.com:18080");
         Cred.setBucket("test");
-        get Get = new get();
-        Get.get("/tmp/text.txt", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
-      // put Put = new put();
-       // Put.put("/tmp/text.txt", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+        //   get Get = new get();
+        //  Get.get("/tmp/text.txt", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+        // put Put = new put();
+        // Put.put("/tmp/text.txt", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+        // delete Del = new delete();
+        //Del.deleteFile("/tmp/text.txt", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+        // Del.deleteBucket(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+
     }
 }
