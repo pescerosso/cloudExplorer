@@ -36,7 +36,6 @@ public class delete {
         } catch (Exception Delete) {
             System.out.print("\n\nAn error has occured in DeleteFile.");
             System.out.println("\n\nError Message:    " + Delete.getMessage());
-            System.out.print("\nDebug: key:" + what);
         }
     }
 }

@@ -28,6 +28,8 @@ public class NewJFrame extends javax.swing.JFrame {
     JCheckBox b[] = new JCheckBox[10];
     JLabel c[] = new JLabel[10];
     JCheckBox d[] = new JCheckBox[10];
+    JLabel e[] = new JLabel[10];
+    JCheckBox f[] = new JCheckBox[10];
 
     /**
      * Creates new form NewJFrame
@@ -447,8 +449,20 @@ public class NewJFrame extends javax.swing.JFrame {
         this.var();
 
         try {
+            
+               for (int h = 1; h != 10; h++) {
+                if (b[h] != null) {
+                    if (b[h].isSelected()) {
+                      Cred.setBucket(a[h].getText());
+                 
+                    }
+                }
+            }
+
+            
+            
             for (int i = 1; i != 10; i++) {
-                if (d[i].isSelected()) {
+                if (d[i].isSelected()) {        
                     Delete.deleteFile(c[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
                 }
             }
@@ -500,37 +514,34 @@ public class NewJFrame extends javax.swing.JFrame {
                 validate();
             }
         }
-        String[] bucketarraya = bucketlist.split(" ");
 
-        this.jPanel8.removeAll();
-        this.jPanel8.revalidate();
-        this.jPanel8.repaint();
-        this.jPanel8.setLayout(new BoxLayout(this.jPanel8, BoxLayout.PAGE_AXIS));
-
-        if (bucketarraya != null) {
-            for (int h = 1; h != bucketarraya.length; h++) {
-
-                jPanel8.setLayout(new BoxLayout(jPanel8, BoxLayout.Y_AXIS));
-                a[h] = new JLabel();
-                a[h].setText(bucketarray[h]);
-                b[h] = new JCheckBox();
-                this.jPanel8.add(b[h]);
-                this.setLocation(h, 5);
-                this.jPanel8.add(a[h]);
-                this.jPanel8.revalidate();
-                validate();
-            }
-        }
+        /**
+         *
+         * String[] bucketarraya = bucketlist.split(" ");
+         *
+         * this.jPanel8.removeAll(); this.jPanel8.revalidate();
+         * this.jPanel8.repaint(); this.jPanel8.setLayout(new
+         * BoxLayout(this.jPanel8, BoxLayout.PAGE_AXIS));
+         *
+         * if (bucketarraya != null) { for (int h = 1; h != bucketarraya.length;
+         * h++) {
+         *
+         * jPanel8.setLayout(new BoxLayout(jPanel8, BoxLayout.Y_AXIS)); e[h] =
+         * new JLabel(); e[h].setText(bucketarraya[h]); f[h] = new JCheckBox();
+         * this.jPanel8.add(f[h]); this.setLocation(h, 5);
+         * this.jPanel8.add(e[h]); this.jPanel8.revalidate(); validate(); } }
+     *
+         */
     }
 
     void reloadObjects() {
 
         this.var();
+
         this.jPanel4.removeAll();
         this.jPanel4.revalidate();
         this.jPanel4.repaint();
         this.jPanel4.setLayout(new BoxLayout(this.jPanel4, BoxLayout.PAGE_AXIS));
-        this.var();
 
         String[] objectarray = null;
 
@@ -545,6 +556,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
 
             for (int h = 1; h != 10; h++) {
+
                 jPanel4.setLayout(new BoxLayout(jPanel4, BoxLayout.Y_AXIS));
                 c[h] = new JLabel();
                 c[h].setText(objectarray[h]);
@@ -558,7 +570,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
             this.jPanel4.setLayout(new BoxLayout(this.jPanel4, BoxLayout.PAGE_AXIS));
         } catch (Exception listing) {
-
+            System.out.print("\n\nException in readObjects");
         }
 
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -594,15 +606,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     void var() {
         Cred.setAccess_key(jTextField1.getText());
         Cred.setSecret_key(jTextField2.getText());
         String endpoint = (jTextField3.getText() + ":" + jTextField4.getText());
         Cred.setEndpoint(endpoint);
-        System.out.print(Cred.getEndpoint());
         Cred.setRegion(jTextField5.getText());
     }
 
