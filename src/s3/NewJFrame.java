@@ -7,8 +7,10 @@ package s3;
 import com.amazonaws.services.s3.model.Bucket;
 import java.awt.Component;
 import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -18,7 +20,7 @@ import javax.swing.JTextField;
  *
  * @author philliptribble
  */
-public class NewJFrame  extends javax.swing.JFrame implements Runnable {
+public class NewJFrame extends javax.swing.JFrame implements Runnable {
 
     credentials Cred = new credentials();
     bucket Bucket = new bucket();
@@ -381,25 +383,27 @@ public class NewJFrame  extends javax.swing.JFrame implements Runnable {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField4))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField3))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField2))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(509, Short.MAX_VALUE))
+                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(509, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField4))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField3))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,10 +462,7 @@ public class NewJFrame  extends javax.swing.JFrame implements Runnable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        //    credentials Cred;
         this.var();
-
         reloadBuckets();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -473,7 +474,7 @@ public class NewJFrame  extends javax.swing.JFrame implements Runnable {
             if (b[i] != null) {
 
                 if (b[i].isSelected()) {
-
+                    jTextArea1.append("\nDeleted Bucket:" + a[i].getText());
                     Bucket.deleteBucket(Cred.access_key, Cred.secret_key, a[i].getText(), Cred.end_point, Cred.region);
                 }
             }
@@ -497,6 +498,7 @@ public class NewJFrame  extends javax.swing.JFrame implements Runnable {
 
             for (int i = 1; i != 10; i++) {
                 if (d[i].isSelected()) {
+                    jTextArea1.append("Deleted Object: " + c[i].getText());
                     Delete.deleteFile(c[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
                 }
             }
@@ -509,6 +511,7 @@ public class NewJFrame  extends javax.swing.JFrame implements Runnable {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         this.var();
+        jTextArea1.append("\nCreated Bucket: " + textField1.getText());
         Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), textField1.getText().toLowerCase(), Cred.getEndpoint(), Cred.getRegion());
         reloadBuckets();
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -586,7 +589,6 @@ public class NewJFrame  extends javax.swing.JFrame implements Runnable {
                 if (b[h] != null) {
                     if (b[h].isSelected()) {
                         String objectlist = Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(), a[h].getText(), Cred.getEndpoint());
-                        System.out.print("\nDebug " + objectlist);
                         objectarray = objectlist.split("@");
 
                     }
@@ -607,6 +609,7 @@ public class NewJFrame  extends javax.swing.JFrame implements Runnable {
             }
 
             this.jPanel4.setLayout(new BoxLayout(this.jPanel4, BoxLayout.PAGE_AXIS));
+
         } catch (Exception listing) {
             System.out.print("\n\nException in readObjects");
         }
@@ -664,9 +667,9 @@ public class NewJFrame  extends javax.swing.JFrame implements Runnable {
         } catch (Exception Download) {
         }
     }//GEN-LAST:event_jButton7ActionPerformed
-void Upload(){
-    
-}
+    void Upload() {
+
+    }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         for (int i = 0; i != 10; i++) {
             if (b[i] != null) {

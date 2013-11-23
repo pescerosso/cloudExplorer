@@ -36,8 +36,6 @@ public class bucket {
         } catch (Exception Delete) {
             System.out.print("\n\nAn error has occured in makeBucket.");
             System.out.println("\n\nError Message:    " + Delete.getMessage());
-            System.out.print("\nDebug: Access key: " + access_key);
-            System.out.print("\nDebug: Secret key: " + secret_key);
         }
 
     }

@@ -51,9 +51,6 @@ public class get {
         } catch (Exception get) {
             System.out.print("\n\nAn error has occured in GET.");
             System.out.println("\n\nError Message:    " + get.getMessage());
-            System.out.print("\nDebug: Access key: " + access_key);
-            System.out.print("\nDebug: Secret key: " + secret_key);
-            System.out.print("\nDebug: key:" + what);
         }
 
     }
