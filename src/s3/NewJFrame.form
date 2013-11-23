@@ -387,6 +387,9 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JFileChooser" name="jFileChooser1">
+              <Properties>
+                <Property name="multiSelectionEnabled" type="boolean" value="true"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFileChooser1ActionPerformed"/>
               </Events>

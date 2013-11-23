@@ -18,7 +18,7 @@ import javax.swing.JTextField;
  *
  * @author philliptribble
  */
-public class NewJFrame extends javax.swing.JFrame {
+public class NewJFrame  extends javax.swing.JFrame implements Runnable {
 
     credentials Cred = new credentials();
     bucket Bucket = new bucket();
@@ -278,6 +278,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Buckets", jPanel1);
 
+        jFileChooser1.setMultiSelectionEnabled(true);
         jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFileChooser1ActionPerformed(evt);
@@ -663,14 +664,14 @@ public class NewJFrame extends javax.swing.JFrame {
         } catch (Exception Download) {
         }
     }//GEN-LAST:event_jButton7ActionPerformed
-
+void Upload(){
+    
+}
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-
         for (int i = 0; i != 10; i++) {
             if (b[i] != null) {
 
-                if (b[i].isSelected()) {
+                if (f[i].isSelected()) {
                     File file = jFileChooser1.getSelectedFile();
                     String upload = (file.getAbsolutePath());
                     Cred.setBucket(a[i].getText());
@@ -680,10 +681,12 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
         }
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 
     void var() {
@@ -696,36 +699,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
     public static void main(String args[]) {
 
-        //    Bucket.make
-        //  Bucket.deleteBucket(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Cred.getRegion());
-        // Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Cred.getRegion());
-        // Put.put("/tmp/test.txt", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
-        // Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
-        //    Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);
@@ -770,4 +743,9 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private java.awt.TextField textField1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
