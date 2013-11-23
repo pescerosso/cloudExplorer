@@ -6,6 +6,7 @@ package s3;
 
 import com.amazonaws.services.s3.model.Bucket;
 import java.awt.Component;
+import java.io.File;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
@@ -59,6 +60,9 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         textField1 = new java.awt.TextField();
         jPanel2 = new javax.swing.JPanel();
+        jFileChooser1 = new javax.swing.JFileChooser();
+        jButton5 = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -220,7 +224,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(310, 310, 310))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(337, Short.MAX_VALUE)
+                .addContainerGap(432, Short.MAX_VALUE)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(113, 113, 113))
         );
@@ -245,15 +249,56 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Buckets", jPanel1);
 
+        jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFileChooser1ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Upload");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 139, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 284, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 858, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addGap(249, 249, 249))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 456, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 14, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Upload", jPanel2);
@@ -316,7 +361,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(395, Short.MAX_VALUE))
+                .addContainerGap(490, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -455,6 +500,27 @@ public class NewJFrame extends javax.swing.JFrame {
                 validate();
             }
         }
+        String[] bucketarraya = bucketlist.split(" ");
+
+        this.jPanel8.removeAll();
+        this.jPanel8.revalidate();
+        this.jPanel8.repaint();
+        this.jPanel8.setLayout(new BoxLayout(this.jPanel8, BoxLayout.PAGE_AXIS));
+
+        if (bucketarraya != null) {
+            for (int h = 1; h != bucketarraya.length; h++) {
+
+                jPanel8.setLayout(new BoxLayout(jPanel8, BoxLayout.Y_AXIS));
+                a[h] = new JLabel();
+                a[h].setText(bucketarray[h]);
+                b[h] = new JCheckBox();
+                this.jPanel8.add(b[h]);
+                this.setLocation(h, 5);
+                this.jPanel8.add(a[h]);
+                this.jPanel8.revalidate();
+                validate();
+            }
+        }
     }
 
     void reloadObjects() {
@@ -504,6 +570,29 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFileChooser1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+
+        for (int i = 0; i != 10; i++) {
+            if (b[i] != null) {
+
+                if (b[i].isSelected()) {
+                    File file = jFileChooser1.getSelectedFile();
+                    String upload = (file.getAbsolutePath());
+                    Cred.setBucket(a[i].getText());
+                    Put.put(upload, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+
+                }
+            }
+        }
+
+
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -560,7 +649,9 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -578,6 +669,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
