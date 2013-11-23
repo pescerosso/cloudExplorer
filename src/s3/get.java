@@ -23,9 +23,9 @@ import java.io.InputStreamReader;
 
 public class get {
 
-    void writeFile(InputStream is, String where) {
+    void writeFile(InputStream is, String destination) {
         try {
-            FileOutputStream fo = new FileOutputStream(where);
+            FileOutputStream fo = new FileOutputStream(destination);
             int read = 0;
             byte[] bytes = new byte[1024];
             while ((read = is.read(bytes)) != -1) {
@@ -38,7 +38,7 @@ public class get {
 
     }
 
-    void get(String what, String access_key, String secret_key, String bucket, String endpoint) {
+    void get(String what, String access_key, String secret_key, String bucket, String endpoint, String destination) {
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
         File file = new File(what);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
@@ -47,7 +47,7 @@ public class get {
         try {
             S3Object s3object = s3Client.getObject(new GetObjectRequest(bucket, what));
             InputStream objectData = s3object.getObjectContent();
-            this.writeFile(objectData, what);
+            this.writeFile(objectData, destination);
         } catch (Exception get) {
             System.out.print("\n\nAn error has occured in GET.");
             System.out.println("\n\nError Message:    " + get.getMessage());

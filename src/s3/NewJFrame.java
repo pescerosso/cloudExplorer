@@ -24,12 +24,15 @@ public class NewJFrame extends javax.swing.JFrame {
     bucket Bucket = new bucket();
     delete Delete = new delete();
     put Put = new put();
+    get Get = new get();
     JLabel a[] = new JLabel[10];
     JCheckBox b[] = new JCheckBox[10];
     JLabel c[] = new JLabel[10];
     JCheckBox d[] = new JCheckBox[10];
     JLabel e[] = new JLabel[10];
     JCheckBox f[] = new JCheckBox[10];
+    String Home = System.getProperty("user.home");
+    String File_Destination = Home + "/Desktop/";
 
     /**
      * Creates new form NewJFrame
@@ -61,10 +64,14 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         textField1 = new java.awt.TextField();
+        jButton7 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jFileChooser1 = new javax.swing.JFileChooser();
         jButton5 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -135,9 +142,9 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(0, 148, Short.MAX_VALUE)
+                .addGap(72, 72, 72)
                 .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(jButton3))
         );
         jPanel6Layout.setVerticalGroup(
@@ -204,6 +211,17 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jButton7.setText("Download");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -224,11 +242,16 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
-                        .addGap(310, 310, 310))))
+                        .addGap(379, 379, 379))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(432, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(113, 113, 113))
+                .addGap(126, 126, 126))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 972, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,9 +267,13 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGap(0, 0, 0)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton7)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Buckets", jPanel1);
@@ -268,27 +295,33 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 139, Short.MAX_VALUE)
+            .addGap(0, 280, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 284, Short.MAX_VALUE)
         );
 
+        jLabel8.setText("Buckets");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(215, 215, 215)
+                        .addComponent(jLabel8))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 125, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton5)
-                .addGap(249, 249, 249))
+                .addGap(270, 270, 270))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,11 +329,13 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
         jTabbedPane1.addTab("Upload", jPanel2);
@@ -363,7 +398,7 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(490, Short.MAX_VALUE))
+                .addContainerGap(509, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,7 +423,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(230, Short.MAX_VALUE))
+                .addContainerGap(341, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Settings", jPanel3);
@@ -449,20 +484,18 @@ public class NewJFrame extends javax.swing.JFrame {
         this.var();
 
         try {
-            
-               for (int h = 1; h != 10; h++) {
+
+            for (int h = 1; h != 10; h++) {
                 if (b[h] != null) {
                     if (b[h].isSelected()) {
-                      Cred.setBucket(a[h].getText());
-                 
+                        Cred.setBucket(a[h].getText());
+
                     }
                 }
             }
 
-            
-            
             for (int i = 1; i != 10; i++) {
-                if (d[i].isSelected()) {        
+                if (d[i].isSelected()) {
                     Delete.deleteFile(c[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
                 }
             }
@@ -500,6 +533,11 @@ public class NewJFrame extends javax.swing.JFrame {
         this.jPanel5.repaint();
         this.jPanel5.setLayout(new BoxLayout(this.jPanel5, BoxLayout.PAGE_AXIS));
 
+        this.jPanel8.removeAll();
+        this.jPanel8.revalidate();
+        this.jPanel8.repaint();
+        this.jPanel8.setLayout(new BoxLayout(this.jPanel8, BoxLayout.PAGE_AXIS));
+
         if (bucketarray != null) {
             for (int h = 1; h != bucketarray.length; h++) {
 
@@ -515,23 +553,20 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         }
 
-        /**
-         *
-         * String[] bucketarraya = bucketlist.split(" ");
-         *
-         * this.jPanel8.removeAll(); this.jPanel8.revalidate();
-         * this.jPanel8.repaint(); this.jPanel8.setLayout(new
-         * BoxLayout(this.jPanel8, BoxLayout.PAGE_AXIS));
-         *
-         * if (bucketarraya != null) { for (int h = 1; h != bucketarraya.length;
-         * h++) {
-         *
-         * jPanel8.setLayout(new BoxLayout(jPanel8, BoxLayout.Y_AXIS)); e[h] =
-         * new JLabel(); e[h].setText(bucketarraya[h]); f[h] = new JCheckBox();
-         * this.jPanel8.add(f[h]); this.setLocation(h, 5);
-         * this.jPanel8.add(e[h]); this.jPanel8.revalidate(); validate(); } }
-     *
-         */
+        if (bucketarray != null) {
+            for (int h = 1; h != bucketarray.length; h++) {
+
+                jPanel8.setLayout(new BoxLayout(jPanel8, BoxLayout.Y_AXIS));
+                e[h] = new JLabel();
+                e[h].setText(bucketarray[h]);
+                f[h] = new JCheckBox();
+                this.jPanel8.add(f[h]);
+                this.setLocation(h, 5);
+                this.jPanel8.add(e[h]);
+                this.jPanel8.revalidate();
+                validate();
+            }
+        }
     }
 
     void reloadObjects() {
@@ -550,7 +585,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 if (b[h] != null) {
                     if (b[h].isSelected()) {
                         String objectlist = Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(), a[h].getText(), Cred.getEndpoint());
-                        objectarray = objectlist.split(" ");
+                        System.out.print("\nDebug " + objectlist);
+                        objectarray = objectlist.split("@");
+
                     }
                 }
             }
@@ -582,10 +619,50 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+    String confertObject(String what) {
 
-    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFileChooser1ActionPerformed
+        int count = what.split("/").length;
+        count = count - 1;
+        int slash_counter = 0;
+        String out_file = null;
+        int another_counter = 1;
+
+        for (int y = 0; y != what.length(); y++) {
+
+            if (what.substring(y, another_counter).contains("/")) {
+                slash_counter++;
+            }
+            if (slash_counter == count) {
+                out_file = (what.substring(y + 1, what.length()));
+                break;
+            }
+            another_counter++;
+        }
+        return (out_file);
+    }
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        try {
+
+            for (int h = 1; h != 10; h++) {
+                if (b[h] != null) {
+                    if (b[h].isSelected()) {
+                        Cred.setBucket(a[h].getText());
+
+                    }
+                }
+            }
+
+            for (int i = 1; i != 10; i++) {
+                if (d[i].isSelected()) {
+                    String new_object_name = confertObject(c[i].getText());
+                    jTextArea1.append("\n\nFinished downloading object to: " + File_Destination + new_object_name);
+                    Get.get(c[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name);
+                }
+            }
+
+        } catch (Exception Download) {
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
@@ -597,14 +674,17 @@ public class NewJFrame extends javax.swing.JFrame {
                     File file = jFileChooser1.getSelectedFile();
                     String upload = (file.getAbsolutePath());
                     Cred.setBucket(a[i].getText());
+                    jTextArea1.append("\n\nFinished uploading object: " + upload);
                     Put.put(upload, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
 
                 }
             }
         }
-
-
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFileChooser1ActionPerformed
 
     void var() {
         Cred.setAccess_key(jTextField1.getText());
@@ -659,6 +739,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -667,6 +748,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -678,7 +760,9 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

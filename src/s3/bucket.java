@@ -81,7 +81,7 @@ public class bucket {
         try {
             ObjectListing current = s3Client.listObjects((bucket));
             for (S3ObjectSummary objectSummary : current.getObjectSummaries()) {
-                objectlist = objectlist + " " +  objectSummary.getKey();
+                objectlist = objectlist + "@" +  objectSummary.getKey();
             }
 
         } catch (Exception listBucket) {
