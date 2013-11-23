@@ -24,7 +24,7 @@ public class NewJFrame extends javax.swing.JFrame {
     delete Delete = new delete();
     JLabel a[] = new JLabel[10];
     JCheckBox b[] = new JCheckBox[10];
-     JLabel c[] = new JLabel[10];
+    JLabel c[] = new JLabel[10];
     JCheckBox d[] = new JCheckBox[10];
 
     /**
@@ -117,23 +117,19 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton2)))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(204, 204, 204))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(204, 204, 204))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,9 +142,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton2)
                         .addGap(0, 16, Short.MAX_VALUE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -214,17 +210,18 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //    credentials Cred;
-        this.var();
         
+         
+        this.var();
+       
         String bucketlist = Bucket.listBuckets(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint());
-        String objectlist = Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(),Cred.getBucket(),Cred.getEndpoint());
-   
+        String objectlist = Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+
         String[] bucketarray = bucketlist.split(" ");
-           String[] objectarray = bucketlist.split(" ");
+        String[] objectarray = objectlist.split(" ");
         this.jPanel5.removeAll();
         this.jPanel5.revalidate();
         this.jPanel5.repaint();
-        // this.safeway.readDataBaseList();
         this.jPanel5.setLayout(new BoxLayout(this.jPanel5, BoxLayout.PAGE_AXIS));
 
         for (int h = 0; h != bucketarray.length; h++) {
@@ -240,19 +237,18 @@ public class NewJFrame extends javax.swing.JFrame {
             this.jPanel5.revalidate();
             validate();
         }
-        
+
         this.jPanel4.removeAll();
         this.jPanel4.revalidate();
         this.jPanel4.repaint();
         // this.safeway.readDataBaseList();
         this.jPanel4.setLayout(new BoxLayout(this.jPanel4, BoxLayout.PAGE_AXIS));
 
-        for (int h = 0; h != bucketarray.length; h++) {
+        for (int h = 0; h != objectarray.length; h++) {
             jPanel4.setLayout(new BoxLayout(jPanel4, BoxLayout.Y_AXIS));
-
-            String bfoo = bucketarray[h];
+            String bfoo = objectarray[h];
             c[h] = new JLabel();
-            c[h].setText(bucketarray[h]);
+            c[h].setText(objectarray[h]);
             d[h] = new JCheckBox();
             this.jPanel4.add(d[h]);
             this.setLocation(h, 5);
@@ -264,16 +260,15 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-         try {
-                for (int i = 0; i != 10; i++) {
-                    if (d[i].isSelected()) {
-                    Delete.deleteFile(a.toString(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
-             
-                    }
+ this.var();
+        try {
+            for (int i = 0; i != 10; i++) {
+                if (d[i].isSelected()) {
+                    Delete.deleteFile(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
                 }
-            } catch (Exception checkbox) {
             }
+        } catch (Exception checkbox) {
+        }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -72,6 +72,7 @@ public class bucket {
             ObjectListing current = s3Client.listObjects((bucket));
             for (S3ObjectSummary objectSummary : current.getObjectSummaries()) {
                 objectlist = objectlist + objectSummary.getKey();
+                System.out.print(objectSummary.getKey());
 
             }
 
@@ -81,6 +82,7 @@ public class bucket {
         }
 
         String parse = objectlist.replace("null", "");
+        
 
         return parse;
     }
