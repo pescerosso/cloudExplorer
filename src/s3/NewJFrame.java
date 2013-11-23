@@ -4,11 +4,28 @@
  */
 package s3;
 
+import com.amazonaws.services.s3.model.Bucket;
+import java.awt.Component;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JTextField;
+
 /**
  *
  * @author philliptribble
  */
 public class NewJFrame extends javax.swing.JFrame {
+
+    credentials Cred = new credentials();
+    bucket Bucket = new bucket();
+    delete Delete = new delete();
+    JLabel a[] = new JLabel[10];
+    JCheckBox b[] = new JCheckBox[10];
+     JLabel c[] = new JLabel[10];
+    JCheckBox d[] = new JCheckBox[10];
 
     /**
      * Creates new form NewJFrame
@@ -28,6 +45,12 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -36,15 +59,100 @@ public class NewJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jButton1.setText("Load / Refresh");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setAlignmentX(0.0F);
+        jPanel5.setAlignmentY(0.0F);
+        jPanel5.setAutoscrolls(true);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 115, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 247, Short.MAX_VALUE)
+        );
+
+        jLabel1.setText("Buckets");
+
+        jLabel2.setText("Objects");
+
+        jButton2.setText("Delete ");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 556, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2)))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(204, 204, 204))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 357, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)
+                        .addGap(0, 16, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Buckets", jPanel1);
@@ -57,7 +165,7 @@ public class NewJFrame extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 357, Short.MAX_VALUE)
+            .addGap(0, 379, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Upload", jPanel2);
@@ -70,7 +178,7 @@ public class NewJFrame extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 357, Short.MAX_VALUE)
+            .addGap(0, 379, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("tab3", jPanel3);
@@ -103,10 +211,99 @@ public class NewJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //    credentials Cred;
+        this.var();
+        
+        String bucketlist = Bucket.listBuckets(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint());
+        String objectlist = Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(),Cred.getBucket(),Cred.getEndpoint());
+   
+        String[] bucketarray = bucketlist.split(" ");
+           String[] objectarray = bucketlist.split(" ");
+        this.jPanel5.removeAll();
+        this.jPanel5.revalidate();
+        this.jPanel5.repaint();
+        // this.safeway.readDataBaseList();
+        this.jPanel5.setLayout(new BoxLayout(this.jPanel5, BoxLayout.PAGE_AXIS));
+
+        for (int h = 0; h != bucketarray.length; h++) {
+            jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
+
+            String bfoo = bucketarray[h];
+            a[h] = new JLabel();
+            a[h].setText(bucketarray[h]);
+            b[h] = new JCheckBox();
+            this.jPanel5.add(b[h]);
+            this.setLocation(h, 5);
+            this.jPanel5.add(a[h]);
+            this.jPanel5.revalidate();
+            validate();
+        }
+        
+        this.jPanel4.removeAll();
+        this.jPanel4.revalidate();
+        this.jPanel4.repaint();
+        // this.safeway.readDataBaseList();
+        this.jPanel4.setLayout(new BoxLayout(this.jPanel4, BoxLayout.PAGE_AXIS));
+
+        for (int h = 0; h != bucketarray.length; h++) {
+            jPanel4.setLayout(new BoxLayout(jPanel4, BoxLayout.Y_AXIS));
+
+            String bfoo = bucketarray[h];
+            c[h] = new JLabel();
+            c[h].setText(bucketarray[h]);
+            d[h] = new JCheckBox();
+            this.jPanel4.add(d[h]);
+            this.setLocation(h, 5);
+            this.jPanel4.add(c[h]);
+            this.jPanel4.revalidate();
+            validate();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+         try {
+                for (int i = 0; i != 10; i++) {
+                    if (d[i].isSelected()) {
+                    Delete.deleteFile(a.toString(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+             
+                    }
+                }
+            } catch (Exception checkbox) {
+            }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
+    void var() {
+        Cred.setAccess_key("1696dffa32015a5782fe");
+        Cred.setSecret_key("6uzntS3cAgUkDQkzmtGoFzQOmVB57KjJGc+koJ8N");
+        Cred.setEndpoint("http://s3.linux-toys.com:18080");
+        Cred.setBucket("test");
+        Cred.setRegion("region1");
+    }
+
     public static void main(String args[]) {
+
+
+
+        //    Bucket.make
+
+        //  Bucket.deleteBucket(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Cred.getRegion());
+        // Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Cred.getRegion());
+        // Put.put("/tmp/test.txt", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+
+
+
+
+        // Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+
+        //    Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -138,12 +335,18 @@ public class NewJFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

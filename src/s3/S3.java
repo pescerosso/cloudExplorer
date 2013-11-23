@@ -23,20 +23,9 @@ public class S3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        credentials Cred = new credentials();
-        Cred.setAccess_key("1696dffa32015a5782fe");
-        Cred.setSecret_key("6uzntS3cAgUkDQkzmtGoFzQOmVB57KjJGc+koJ8N");
-        Cred.setEndpoint("http://s3.linux-toys.com:18080");
-        Cred.setBucket("test");
-        //   get Get = new get();
-        //  Get.get("/tmp/text.txt", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
-        // put Put = new put();
-        // Put.put("/tmp/text.txt", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
-        // delete Del = new delete();
-        //Del.deleteFile("/tmp/text.txt", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
-        bucket Bucket = new bucket();
-        Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+       
+        NewJFrame gui = new NewJFrame();
+        gui.main(args);
 
-// bucket.deleteBucket(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
     }
 }

@@ -15,8 +15,12 @@ public class credentials {
     String secret_key = null;
     String end_point = null;
     String bucket = null;
-        
-      
+    String region = null;
+
+    public String getRegion() {
+        return region;
+    }
+
     public String getBucket() {
         return bucket;
     }
@@ -47,5 +51,9 @@ public class credentials {
 
     void setBucket(String what) {
         bucket = what;
+    }
+
+    void setRegion(String what) {
+        region = what;
     }
 }
