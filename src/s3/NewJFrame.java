@@ -27,17 +27,18 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     delete Delete = new delete();
     put Put = new put();
     get Get = new get();
-    JLabel a[] = new JLabel[10];
-    JCheckBox b[] = new JCheckBox[10];
-    JLabel c[] = new JLabel[10];
-    JCheckBox d[] = new JCheckBox[10];
+
     String Home = System.getProperty("user.home");
     String File_Destination = Home + "/Desktop/";
     String[] bucketarray = null;
     String[] objectarray = null;
+    JLabel a[] = new JLabel[1000];
+    JCheckBox b[] = new JCheckBox[1000];
+    JLabel c[] = new JLabel[1000];
+    JCheckBox d[] = new JCheckBox[1000];
 
     /**
-     * Creates new form NewJFrame
+     * Creates new form NewJFrame1
      */
     public NewJFrame() {
         initComponents();
@@ -438,7 +439,9 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
             another_counter++;
         }
         return (out_file);
-    }    void Upload() {
+    }
+
+    void Upload() {
 
     }
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -526,78 +529,75 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         reloadObjects();
-        }
+    }
 
-        void reloadBuckets() {
-            this.var();
-            this.bucketarray = null;
+    void reloadBuckets() {
+        this.var();
+        this.bucketarray = null;
 
-            String bucketlist = Bucket.listBuckets(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint());
+        String bucketlist = Bucket.listBuckets(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint());
 
-            bucketarray = bucketlist.split(" ");
+        bucketarray = bucketlist.split(" ");
 
-            this.jPanel5.removeAll();
-            this.jPanel5.revalidate();
-            this.jPanel5.repaint();
-            this.jPanel5.setLayout(new BoxLayout(this.jPanel5, BoxLayout.PAGE_AXIS));
+        this.jPanel5.removeAll();
+        this.jPanel5.revalidate();
+        this.jPanel5.repaint();
+        this.jPanel5.setLayout(new BoxLayout(this.jPanel5, BoxLayout.PAGE_AXIS));
 
-        
+        if (bucketarray != null) {
+            for (int h = 1; h != bucketarray.length; h++) {
 
-            if (bucketarray != null) {
-                for (int h = 1; h != bucketarray.length; h++) {
-
-                    jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
-                    a[h] = new JLabel();
-                    a[h].setText(bucketarray[h]);
-                    b[h] = new JCheckBox();
-                    this.jPanel5.add(b[h]);
-                    this.setLocation(h, 5);
-                    this.jPanel5.add(a[h]);
-                    this.jPanel5.revalidate();
-                    validate();
-                }
+                jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
+                a[h] = new JLabel();
+                a[h].setText(bucketarray[h]);
+                b[h] = new JCheckBox();
+                this.jPanel5.add(b[h]);
+                this.setLocation(h, 5);
+                this.jPanel5.add(a[h]);
+                this.jPanel5.revalidate();
+                validate();
             }
-
         }
+    }
 
-        void reloadObjects() {
+    void reloadObjects() {
 
-            this.var();
-            this.objectarray = null;
-            this.jPanel1.removeAll();
-            this.jPanel1.revalidate();
-            this.jPanel1.repaint();
-            this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
+        this.var();
+        this.objectarray = null;
+        this.jPanel1.removeAll();
+        this.jPanel1.revalidate();
+        this.jPanel1.repaint();
+        this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
 
-            try {
-                for (int h = 1; h != bucketarray.length; h++) {
-                    if (b[h] != null) {
-                        if (b[h].isSelected()) {
-                            String objectlist = Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(), a[h].getText(), Cred.getEndpoint());
-                            objectarray = objectlist.split("@");
+        try {
+            for (int h = 1; h != bucketarray.length; h++) {
+                if (b[h] != null) {
+                    if (b[h].isSelected()) {
+                        String objectlist = Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(), a[h].getText(), Cred.getEndpoint());
+                        objectarray = objectlist.split("@");
 
-                        }
                     }
                 }
-
-                for (int h = 1; h != objectarray.length; h++) {
-
-                    jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
-                    c[h] = new JLabel();
-                    c[h].setText(objectarray[h]);
-                    d[h] = new JCheckBox();
-                    this.jPanel1.add(d[h]);
-                    this.setLocation(h, 5);
-                    this.jPanel1.add(c[h]);
-                    this.jPanel1.revalidate();
-                    validate();
-                }
-
-                this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
-
-            } catch (Exception listing) {
-                System.out.print("\n\nException in readObjects");
             }
+
+            for (int h = 1; h != objectarray.length; h++) {
+
+                jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
+                c[h] = new JLabel();
+                c[h].setText(objectarray[h]);
+                d[h] = new JCheckBox();
+                this.jPanel1.add(d[h]);
+                this.setLocation(h, 5);
+                this.jPanel1.add(c[h]);
+                this.jPanel1.revalidate();
+                validate();
+            }
+
+            this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
+
+        } catch (Exception listing) {
+            System.out.print("\n\nException in readObjects");
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
