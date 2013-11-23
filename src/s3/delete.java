@@ -25,15 +25,14 @@ import java.io.InputStreamReader;
 
 public class delete {
 
-  
     void deleteFile(String what, String access_key, String secret_key, String bucket, String endpoint) {
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
-
+       
         try {
             s3Client.deleteObject(new DeleteObjectRequest(bucket, what));
-            
+
         } catch (Exception Delete) {
             System.out.print("\n\nAn error has occured in DeleteFile.");
             System.out.println("\n\nError Message:    " + Delete.getMessage());

@@ -32,9 +32,7 @@ public class put {
         } catch (Exception put) {
             System.out.print("\n\nAn error has occured with PUT.");
             System.out.println("\n\nError Message:    " + put.getMessage());
-            System.out.print("\nDebug: Access key: " + access_key);
-            System.out.print("\nDebug: Secret key: " + secret_key);
-            System.out.print("\nDebug: key:" + key);
+           
         }
 
     }
