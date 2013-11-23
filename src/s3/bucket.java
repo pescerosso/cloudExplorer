@@ -24,6 +24,8 @@ import java.util.List;
  */
 public class bucket {
 
+    String objectlist = null;
+
     void makeBucket(String access_key, String secret_key, String bucket, String endpoint, String region) {
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
@@ -52,14 +54,22 @@ public class bucket {
         try {
 
             for (Bucket bucket : s3Client.listBuckets()) {
-                bucketlist = bucketlist + bucket.getName();
+                bucketlist = bucketlist + " "  + bucket.getName();
 
             }
         } catch (Exception listBucket) {
             System.out.print("\n\nAn error has occured in lustBucket.");
             System.out.println("\n\nError Message:    " + listBucket.getMessage());
         }
-        String parse = bucketlist.replace("null", "");
+        String parse = null;
+        
+        if (bucketlist != null) {
+            parse = bucketlist.replace("null", "");
+
+        } else {
+            parse = "no_bucket_found";
+        }
+
         return parse;
     }
 
@@ -67,13 +77,11 @@ public class bucket {
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
-        String objectlist = null;
+        objectlist = null;
         try {
             ObjectListing current = s3Client.listObjects((bucket));
             for (S3ObjectSummary objectSummary : current.getObjectSummaries()) {
                 objectlist = objectlist + objectSummary.getKey();
-                System.out.print(objectSummary.getKey());
-
             }
 
         } catch (Exception listBucket) {
@@ -81,9 +89,13 @@ public class bucket {
             System.out.println("\n\nError Message:    " + listBucket.getMessage());
         }
 
-        String parse = objectlist.replace("null", "");
-        
+        String parse = null;
 
+        if (objectlist != null) {
+            parse = objectlist.replace("null", "");
+        } else {
+            parse = "no_objects_found";
+        }
         return parse;
     }
 
