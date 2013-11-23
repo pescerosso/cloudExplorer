@@ -58,7 +58,7 @@ public class bucket {
 
             }
         } catch (Exception listBucket) {
-            System.out.print("\n\nAn error has occured in lustBucket.");
+            System.out.print("\n\nAn error has occured in listBucket.");
             System.out.println("\n\nError Message:    " + listBucket.getMessage());
         }
         String parse = null;
