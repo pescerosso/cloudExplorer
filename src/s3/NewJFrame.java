@@ -4,17 +4,10 @@
  */
 package s3;
 
-import com.amazonaws.services.s3.model.Bucket;
-import java.awt.Component;
 import java.io.File;
-import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JTextField;
 
 /**
  *
