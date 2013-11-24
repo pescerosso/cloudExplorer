@@ -34,7 +34,6 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     JLabel c[] = new JLabel[1000];
     JCheckBox d[] = new JCheckBox[1000];
     int firstrun = 1;
-    String editorobject = null;
 
     /**
      * Creates new form NewJFrame1
@@ -73,6 +72,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jButton11 = new javax.swing.JButton();
+        jTextField6 = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -296,6 +296,12 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -304,7 +310,9 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jTextField6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton11)
                 .addGap(14, 14, 14))
         );
@@ -312,7 +320,9 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton11)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton11)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
@@ -529,7 +539,8 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
                 slash_counter++;
             }
             if (slash_counter == count) {
-                out_file = (what.substring(y + 1, what.length()));
+                //out_file = (what.substring(y + 1, what.length()));
+                 out_file = (what.substring(y, what.length()));
                 break;
             }
             another_counter++;
@@ -836,7 +847,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
 
                     }
                     jTabbedPane1.setSelectedIndex(4);
-                    editorobject = c[i].getText();
+                    jTextField6.setText(c[i].getText());
                 }
 
             }
@@ -846,27 +857,38 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jButton12ActionPerformed
     void editorSync(String file) {
         File tmp = new File(Home + "/object.tmp");
-        if (tmp.exists()) {
+        //  if (tmp.exists()) {
 
-            try {
-                FileWriter fr = new FileWriter(Home + "/object.tmp");
-                BufferedWriter bfr = new BufferedWriter(fr);
-                bfr.write(jTextArea2.getText());
-                bfr.close();
-            } catch (Exception writeConfig) {
-            }
-        } else {
-            jTextArea1.append("\n\nError, no file loaded to edit.");
-            jTabbedPane1.setSelectedIndex(0);
+        try {
+            FileWriter fr = new FileWriter(Home + "/object.tmp");
+            BufferedWriter bfr = new BufferedWriter(fr);
+            bfr.write(jTextArea2.getText());
+            bfr.close();
+        } catch (Exception writeConfig) {
         }
+        //       } else {
+        //         jTextArea1.append("\n\nError, no file loaded to edit.");
+        //       jTabbedPane1.setSelectedIndex(0);
+        // }
     }
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         this.var();
-        editorSync(editorobject);
-        Delete.deleteFile(editorobject, Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
-        Put.put(Home + "/object.tmp", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), editorobject);
-        jTextArea1.append("\nSaved File");
+        for (int h = 1; h != bucketarray.length; h++) {
+            if (b[h] != null) {
+                if (b[h].isSelected()) {
+                    Cred.setBucket(a[h].getText());
+                }
+            }
+        }
+        editorSync(jTextField6.getText());
+        Delete.deleteFile(jTextField6.getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+        Put.put(Home + "/object.tmp", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), jTextField6.getText());
+        jTextArea1.append("\nSaved Object");
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
 
     void var() {
         Cred.setAccess_key(jTextField1.getText());
@@ -924,6 +946,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private java.awt.ScrollPane scrollPane1;
