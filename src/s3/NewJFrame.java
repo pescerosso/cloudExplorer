@@ -63,6 +63,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
         scrollPane1 = new java.awt.ScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -84,6 +85,8 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
         setPreferredSize(new java.awt.Dimension(900, 700));
         setResizable(false);
 
+        jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
+        jFileChooser1.setDragEnabled(true);
         jFileChooser1.setMultiSelectionEnabled(true);
         jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,6 +261,19 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
         scrollPane1.add(jPanel1);
 
         jTabbedPane1.addTab("Object Explorer", scrollPane1);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 721, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 419, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Sync", jPanel4);
 
         jButton3.setText("Delete Object");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -711,7 +727,13 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
         jTextField4.setText(config_array[3]);
         jTextField5.setText(config_array[4]);
         jTextArea1.append("\nLoaded configuration.");
-
+        if (firstrun == 1) {
+            reloadBuckets();
+            b[1].setSelected(true);
+            jTabbedPane1.setSelectedIndex(2);
+            jButton6.doClick();
+            firstrun = 0;
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -766,6 +788,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;

@@ -115,6 +115,8 @@
           <SubComponents>
             <Component class="javax.swing.JFileChooser" name="jFileChooser1">
               <Properties>
+                <Property name="fileSelectionMode" type="int" value="2"/>
+                <Property name="dragEnabled" type="boolean" value="true"/>
                 <Property name="multiSelectionEnabled" type="boolean" value="true"/>
               </Properties>
               <Events>
@@ -338,6 +340,28 @@
               </SubComponents>
             </Container>
           </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel4">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Sync">
+                <Property name="tabTitle" type="java.lang.String" value="Sync"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="721" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="419" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
         </Container>
       </SubComponents>
     </Container>
