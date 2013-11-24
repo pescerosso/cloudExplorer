@@ -134,7 +134,6 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
 
         jLabel3.setText("Access Key");
 
-        jTextField1.setText("1696dffa32015a5782fe");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -143,11 +142,8 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
 
         jLabel4.setText("Secret Key");
 
-        jTextField2.setText("6uzntS3cAgUkDQkzmtGoFzQOmVB57KjJGc+koJ8N");
-
         jLabel5.setText("Host");
 
-        jTextField3.setText("http://s3.linux-toys.com");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -156,11 +152,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
 
         jLabel6.setText("Port");
 
-        jTextField4.setText("18080");
-
         jLabel7.setText("Region");
-
-        jTextField5.setText("region1");
 
         jButton8.setText("Save");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
