@@ -37,14 +37,14 @@ public class get {
         File file = new File(what);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
-
+  System.out.print("\n\nDebug:" +  what +  access_key +   secret_key +  bucket +   endpoint +  destination);
         try {
             S3Object s3object = s3Client.getObject(new GetObjectRequest(bucket, what));
             InputStream objectData = s3object.getObjectContent();
             this.writeFile(objectData, destination);
         } catch (Exception get) {
             System.out.print("\n\nAn error has occured in GET.");
-            System.out.println("\n\nError Message:    " + get.getMessage());
+            System.out.println("\n\nError Message:    " + get.getMessage()); 
         }
 
     }
