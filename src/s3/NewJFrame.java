@@ -570,6 +570,9 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        if (firstrun == 1) {
+            jButton9.doClick();
+        }
         this.var();
         jTextArea1.append("\nCreated Bucket: " + textField1.getText());
         Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), textField1.getText().toLowerCase(), Cred.getEndpoint(), Cred.getRegion());
@@ -606,10 +609,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
             this.var();
             reloadBuckets();
             if (firstrun == 1) {
-                b[1].setSelected(true);
-                jTabbedPane1.setSelectedIndex(2);
-                jButton6.doClick();
-                firstrun = 0;
+                jButton9.doClick();
             }
         } else {
             jTextArea1.append("\nError: Configuration not loaded");
