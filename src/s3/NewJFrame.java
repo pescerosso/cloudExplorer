@@ -36,7 +36,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     JCheckBox b[] = new JCheckBox[1000];
     JLabel c[] = new JLabel[1000];
     JCheckBox d[] = new JCheckBox[1000];
-
+    int firstrun = 1;
     /**
      * Creates new form NewJFrame1
      */
@@ -548,6 +548,13 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.var();
         reloadBuckets();
+        if (firstrun == 1) {
+        b[1].setSelected(true);
+        jTabbedPane1.setSelectedIndex(2);
+        jButton6.doClick();
+        firstrun = 0;
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -578,10 +585,12 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         reloadObjects();
+        jTabbedPane1.setSelectedIndex(2);
     }
 
     void reloadBuckets() {
         this.var();
+
         this.bucketarray = null;
 
         String bucketlist = Bucket.listBuckets(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint());
