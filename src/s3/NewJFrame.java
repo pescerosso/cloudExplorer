@@ -37,6 +37,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     JLabel c[] = new JLabel[1000];
     JCheckBox d[] = new JCheckBox[1000];
     int firstrun = 1;
+
     /**
      * Creates new form NewJFrame1
      */
@@ -70,6 +71,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
         jTextField5 = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
         scrollPane1 = new java.awt.ScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -168,6 +170,13 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        jButton10.setText("Clear");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -176,6 +185,8 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton8))
@@ -229,7 +240,8 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton8)
-                    .addComponent(jButton9))
+                    .addComponent(jButton9)
+                    .addComponent(jButton10))
                 .addContainerGap(152, Short.MAX_VALUE))
         );
 
@@ -530,12 +542,12 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
         this.var();
         reloadBuckets();
         if (firstrun == 1) {
-        b[1].setSelected(true);
-        jTabbedPane1.setSelectedIndex(2);
-        jButton6.doClick();
-        firstrun = 0;
+            b[1].setSelected(true);
+            jTabbedPane1.setSelectedIndex(2);
+            jButton6.doClick();
+            firstrun = 0;
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -704,6 +716,14 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
         jTextArea1.append(save);
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+    }//GEN-LAST:event_jButton10ActionPerformed
+
     void var() {
         Cred.setAccess_key(jTextField1.getText());
         Cred.setSecret_key(jTextField2.getText());
@@ -722,6 +742,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
