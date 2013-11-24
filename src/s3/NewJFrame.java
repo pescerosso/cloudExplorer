@@ -546,7 +546,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
             }
             if (slash_counter == count) {
                 //out_file = (what.substring(y + 1, what.length()));
-                 out_file = (what.substring(y, what.length()));
+                out_file = (what.substring(y, what.length()));
                 break;
             }
             another_counter++;
@@ -586,10 +586,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_textField1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        if (firstrun == 1) {
-            jButton9.doClick();
-        }
+        preload();
         this.var();
         jTextArea1.append("\nCreated Bucket: " + textField1.getText());
         Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), textField1.getText().toLowerCase(), Cred.getEndpoint(), Cred.getRegion());
@@ -616,11 +613,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        File checkConfig = new File(Home + "/s3.config");
-        if (checkConfig.exists()) {
-            jButton9.doClick();
-        }
+        preload();
 
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
@@ -662,7 +655,6 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
         reloadObjects();
         jTabbedPane1.setSelectedIndex(2);
     }
@@ -742,7 +734,12 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
             jTextArea1.append("\nError: Configuration not loaded");
         }
     }//GEN-LAST:event_jButton6ActionPerformed
-
+    void preload() {
+        File checkConfig = new File(Home + "/s3.config");
+        if (checkConfig.exists()) {
+            jButton9.doClick();
+        }
+    }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             for (int i = 0; i != bucketarray.length; i++) {
