@@ -1,4 +1,3 @@
-
 package s3;
 
 import java.awt.event.ItemEvent;
@@ -550,11 +549,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        
+
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        
+
     }//GEN-LAST:event_jTextField1ActionPerformed
     String confertObject(String what) {
 
@@ -801,12 +800,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
 
         try {
-
             for (int i = 1; i != objectarray.length; i++) {
-
                 d[i].setSelected(true);
             }
-
         } catch (Exception SelectALL) {
         }
     }//GEN-LAST:event_jToggleButton2ActionPerformed
@@ -830,7 +826,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
         String save = Cred.writeConfig(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jTextField5.getText());
         jTextArea1.append(save);
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -845,7 +840,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         try {
-        
+
             for (int i = 1; i != objectarray.length; i++) {
                 if (d[i].isSelected()) {
                     String new_object_name = confertObject(c[i].getText());
@@ -875,7 +870,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton12ActionPerformed
     void editorSync(String file) {
         File tmp = new File(Home + "/object.tmp");
-        
+
         try {
             FileWriter fr = new FileWriter(Home + "/object.tmp");
             BufferedWriter bfr = new BufferedWriter(fr);
@@ -900,7 +895,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        
+
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
@@ -916,11 +911,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jFileChooser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser2ActionPerformed
-      
+
     }//GEN-LAST:event_jFileChooser2ActionPerformed
 
     private void uploadfileList(File dir) {
-      
+
         File[] files = dir.listFiles();
 
         for (int i = 0; i < files.length; i++) {

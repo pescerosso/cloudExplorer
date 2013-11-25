@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package s3;
 
 import com.amazonaws.auth.AWSCredentials;
@@ -12,10 +7,6 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import java.io.File;
 
-/**
- *
- * @author ptribble
- */
 public class put {
 
     void put(String what, String access_key, String secret_key, String bucket, String endpoint, String ObjectKey) {
@@ -31,8 +22,7 @@ public class put {
  
         } catch (Exception put) {
             System.out.print("\n\nAn error has occured with PUT.");
-            System.out.println("\n\nError Message:    " + put.getMessage());
-           
+            System.out.println("\n\nError Message:    " + put.getMessage()); 
         }
 
     }
