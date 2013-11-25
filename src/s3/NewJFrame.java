@@ -909,7 +909,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         if (buckets_loaded > 0) {
             editorSync(jTextField6.getText());
-            Delete.deleteFile(jTextField6.getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+            Delete.deleteFile(jTextField6.getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
             Put.put(Home + "/object.tmp", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), jTextField6.getText());
             jTextArea1.append("\nSaved Object");
         } else {
