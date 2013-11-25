@@ -662,7 +662,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
                         jTextArea1.append("\nDeleted Object: " + c[i].getText());
-                        Delete.deleteFile(c[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+                        Delete.deleteFile(c[i].getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
                     }
                 }
             } else {
