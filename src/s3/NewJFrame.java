@@ -785,19 +785,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-        if (this.buckets_loaded > 0) {
-            Thread uploadthread = new Thread(new thread());
+          if (this.buckets_loaded > 0) {
             File file = jFileChooser1.getSelectedFile();
-            thread.upload = file.getAbsolutePath();
-            thread.access_key = Cred.getAccess_key();
-            thread.secret_key = Cred.getSecret_key();
-            thread.endpoint = Cred.getEndpoint();
-            thread.bucket = Cred.getBucket();
-            uploadthread.start();
-          
+            String upload = (file.getAbsolutePath());
+            jTextArea1.append("\n\nFinished uploading object: " + upload);
+            Put.put(upload, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), upload);
         } else {
             jTextArea1.append("\nError: No bucket selected.");
-
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
