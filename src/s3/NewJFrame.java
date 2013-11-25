@@ -663,6 +663,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     if (d[i].isSelected()) {
                         jTextArea1.append("\nDeleted Object: " + c[i].getText());
                         Delete.deleteFile(c[i].getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                     }
                 }
             } else {
@@ -785,7 +786,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-          if (this.buckets_loaded > 0) {
+        if (this.buckets_loaded > 0) {
             File file = jFileChooser1.getSelectedFile();
             String upload = (file.getAbsolutePath());
             jTextArea1.append("\n\nFinished uploading object: " + upload);
@@ -950,6 +951,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 jTextArea1.append("\nUploading file: " + files[i].getAbsolutePath());
                 jTextArea1.repaint();
                 Put.put(files[i].getAbsolutePath(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), files[i].getAbsolutePath());
+                jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
             }
         }
     }
