@@ -68,6 +68,8 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        jFileChooser2 = new javax.swing.JFileChooser();
+        jToggleButton3 = new javax.swing.JToggleButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
@@ -273,15 +275,42 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
 
         jTabbedPane1.addTab("Object Explorer", scrollPane1);
 
+        jFileChooser2.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+        jFileChooser2.setDragEnabled(true);
+        jFileChooser2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFileChooser2ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton3.setText("Sync");
+        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 691, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jToggleButton3)
+                .addGap(91, 91, 91))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 393, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jToggleButton3)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sync", jPanel4);
@@ -893,6 +922,46 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+        if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
+            this.var();
+
+            for (int h = 1; h != bucketarray.length; h++) {
+                if (b[h] != null) {
+                    if (b[h].isSelected()) {
+                        Cred.setBucket(a[h].getText());
+                        jTextArea1.append("\nStarting Sync:");
+                        uploadfileList(jFileChooser2.getSelectedFile());
+
+                    }
+                }
+            }
+
+        } else {
+            jTextArea1.append("\nError: Configuration not loaded");
+        }
+    }//GEN-LAST:event_jToggleButton3ActionPerformed
+
+    private void jFileChooser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFileChooser2ActionPerformed
+
+    private void uploadfileList(File dir) {
+        this.var();
+
+        File[] files = dir.listFiles();
+
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].isDirectory()) //Recursively call file list function on the new directory
+            {
+                uploadfileList(files[i]);
+            } else {
+                jTextArea1.append("\nUploading file: " + files[i].getAbsolutePath());
+                jTextArea1.repaint();
+                Put.put(files[i].getAbsolutePath(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), files[i].getAbsolutePath());
+            }
+        }
+    }
     void var() {
         Cred.setAccess_key(jTextField1.getText());
         Cred.setSecret_key(jTextField2.getText());
@@ -923,6 +992,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JFileChooser jFileChooser1;
+    private javax.swing.JFileChooser jFileChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -953,6 +1023,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
     private java.awt.ScrollPane scrollPane1;
     private java.awt.TextField textField1;
     // End of variables declaration//GEN-END:variables
