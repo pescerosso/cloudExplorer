@@ -615,9 +615,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         preload();
         this.var();
-        jTextArea1.append("\nCreated Bucket: " + textField1.getText());
-        Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), textField1.getText().toLowerCase(), Cred.getEndpoint(), Cred.getRegion());
-        reloadBuckets();
+        if (textField1.getText().length() > 2) {
+            jTextArea1.append("\nCreated Bucket: " + textField1.getText());
+            Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), textField1.getText().toLowerCase(), Cred.getEndpoint(), Cred.getRegion());
+            reloadBuckets();
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -698,7 +700,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 }
             }
         }
-
     }
 
     void reloadBuckets() {
@@ -707,7 +708,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             this.bucketarray = null;
 
             String bucketlist = Bucket.listBuckets(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint());
-
             bucketarray = bucketlist.split(" ");
 
             this.jPanel5.removeAll();
@@ -906,7 +906,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         // }
     }
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-     
+
         if (buckets_loaded > 0) {
             editorSync(jTextField6.getText());
             Delete.deleteFile(jTextField6.getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
