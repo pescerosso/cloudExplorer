@@ -37,7 +37,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     JCheckBox b[] = new JCheckBox[1000];
     JLabel c[] = new JLabel[1000];
     JCheckBox d[] = new JCheckBox[1000];
-    int firstrun = 0;
+    int firstrun = 1;
     int buckets_loaded = 0;
     int active_bucket = 0;
 
