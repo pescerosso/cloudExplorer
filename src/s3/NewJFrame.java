@@ -905,17 +905,24 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     }
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         this.var();
+        int count_buckets_checked = 0;
+
         for (int h = 1; h != bucketarray.length; h++) {
             if (b[h] != null) {
                 if (b[h].isSelected()) {
+                    count_buckets_checked++;
                     Cred.setBucket(a[h].getText());
                 }
             }
         }
-        editorSync(jTextField6.getText());
-        Delete.deleteFile(jTextField6.getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
-        Put.put(Home + "/object.tmp", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), jTextField6.getText());
-        jTextArea1.append("\nSaved Object");
+        if (count_buckets_checked > 0) {
+            editorSync(jTextField6.getText());
+            Delete.deleteFile(jTextField6.getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+            Put.put(Home + "/object.tmp", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), jTextField6.getText());
+            jTextArea1.append("\nSaved Object");
+        } else {
+            jTextArea1.append("\nError: no bucket selected.");
+        }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
@@ -962,6 +969,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
             }
         }
     }
+
     void var() {
         Cred.setAccess_key(jTextField1.getText());
         Cred.setSecret_key(jTextField2.getText());
