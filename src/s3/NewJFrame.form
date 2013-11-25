@@ -88,7 +88,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jFileChooser1" min="-2" pref="657" max="-2" attributes="0"/>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <EmptySpace pref="34" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -181,7 +181,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="228" max="32767" attributes="0"/>
+                      <EmptySpace pref="234" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -352,7 +352,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="jFileChooser2" min="-2" pref="587" max="-2" attributes="0"/>
-                      <EmptySpace pref="60" max="32767" attributes="0"/>
+                      <EmptySpace pref="66" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -376,8 +376,12 @@
           <SubComponents>
             <Component class="javax.swing.JFileChooser" name="jFileChooser2">
               <Properties>
+                <Property name="fileSelectionMode" type="int" value="2"/>
                 <Property name="dragEnabled" type="boolean" value="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFileChooser2ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="jToggleButton3">
               <Properties>
@@ -402,7 +406,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane4" pref="685" max="32767" attributes="0"/>
+                      <Component id="jScrollPane4" pref="691" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">

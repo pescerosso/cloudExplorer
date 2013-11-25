@@ -4,6 +4,10 @@
  */
 package s3;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,7 +21,7 @@ import javax.swing.JLabel;
  *
  * @author philliptribble
  */
-public class NewJFrame extends javax.swing.JFrame implements Runnable {
+public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     credentials Cred = new credentials();
     bucket Bucket = new bucket();
@@ -33,8 +37,9 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     JCheckBox b[] = new JCheckBox[1000];
     JLabel c[] = new JLabel[1000];
     JCheckBox d[] = new JCheckBox[1000];
-    int firstrun = 1;
+    int firstrun = 0;
     int buckets_loaded = 0;
+    int active_bucket = 0;
 
     /**
      * Creates new form NewJFrame1
@@ -122,7 +127,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton5)
@@ -217,7 +222,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,7 +281,13 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
 
         jTabbedPane1.addTab("Object Explorer", scrollPane1);
 
+        jFileChooser2.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
         jFileChooser2.setDragEnabled(true);
+        jFileChooser2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFileChooser2ActionPerformed(evt);
+            }
+        });
 
         jToggleButton3.setText("Sync");
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -292,7 +303,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jToggleButton3)
@@ -334,7 +345,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
@@ -584,23 +595,17 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         try {
 
-            for (int h = 1; h != bucketarray.length; h++) {
-                if (b[h] != null) {
-                    if (b[h].isSelected()) {
-                        Cred.setBucket(a[h].getText());
-
+            if (this.buckets_loaded > 0) {
+                for (int i = 1; i != objectarray.length; i++) {
+                    if (d[i].isSelected()) {
+                        String new_object_name = confertObject(c[i].getText());
+                        jTextArea1.append("\n\nFinished downloading object to: " + File_Destination + new_object_name);
+                        Get.get(c[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name);
                     }
                 }
+            } else {
+                jTextArea1.append("\nError: No bucket has been selected");
             }
-
-            for (int i = 1; i != objectarray.length; i++) {
-                if (d[i].isSelected()) {
-                    String new_object_name = confertObject(c[i].getText());
-                    jTextArea1.append("\n\nFinished downloading object to: " + File_Destination + new_object_name);
-                    Get.get(c[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name);
-                }
-            }
-
         } catch (Exception Download) {
         }
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -651,35 +656,22 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
-            this.var();
-            try {
 
-                for (int h = 1; h != bucketarray.length; h++) {
-                    if (b[h] != null) {
-                        if (b[h].isSelected()) {
-                            Cred.setBucket(a[h].getText());
-                            buckets_loaded++;
-                        }
+        try {
+
+            if (buckets_loaded > 0) {
+                for (int i = 1; i != objectarray.length; i++) {
+                    if (d[i].isSelected()) {
+                        jTextArea1.append("\nDeleted Object: " + c[i].getText());
+                        Delete.deleteFile(c[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
                     }
                 }
-                if (buckets_loaded > 0) {
-                    for (int i = 1; i != objectarray.length; i++) {
-                        if (d[i].isSelected()) {
-                            jTextArea1.append("\nDeleted Object: " + c[i].getText());
-                            Delete.deleteFile(c[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
-                        }
-                    }
-                } else {
-                    jTextArea1.append("\nError: No bucked selected.");
-                }
-            } catch (Exception checkbox) {
+            } else {
+                jTextArea1.append("\nError: No bucked selected.");
             }
-            reloadObjects();
-        } else {
-            jTextArea1.append("\nError: Configuration not loaded");
+        } catch (Exception checkbox) {
         }
-        buckets_loaded = 0;
+        reloadObjects();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -694,6 +686,21 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
 
         reloadObjects();
         jTabbedPane1.setSelectedIndex(2);
+    }
+
+    public void itemStateChanged(ItemEvent e) {
+        buckets_loaded = 0;
+
+        for (int h = 1; h != bucketarray.length; h++) {
+            if (b[h] != null) {
+                if (b[h].isSelected()) {
+                    active_bucket = h;
+                    Cred.setBucket(a[h].getText());
+                    buckets_loaded++;
+                }
+            }
+        }
+
     }
 
     void reloadBuckets() {
@@ -712,11 +719,11 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
 
             if (bucketarray != null) {
                 for (int h = 1; h != bucketarray.length; h++) {
-
                     jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
                     a[h] = new JLabel();
                     a[h].setText(bucketarray[h]);
                     b[h] = new JCheckBox();
+                    b[h].addItemListener(this);
                     this.jPanel5.add(b[h]);
                     this.setLocation(h, 5);
                     this.jPanel5.add(a[h]);
@@ -778,23 +785,15 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
         }
     }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
 
-            for (int i = 0; i != bucketarray.length; i++) {
-                if (b[i] != null) {
-
-                    if (b[i].isSelected()) {
-                        File file = jFileChooser1.getSelectedFile();
-                        String upload = (file.getAbsolutePath());
-                        Cred.setBucket(a[i].getText());
-                        jTextArea1.append("\n\nFinished uploading object: " + upload);
-                        Put.put(upload, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), upload);
-
-                    }
-                }
-            }
+        if (this.buckets_loaded > 0) {
+            File file = jFileChooser1.getSelectedFile();
+            String upload = (file.getAbsolutePath());
+            jTextArea1.append("\n\nFinished uploading object: " + upload);
+            Put.put(upload, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), upload);
         } else {
-            jTextArea1.append("\nError: Configuration not loaded");
+            jTextArea1.append("\nError: No bucket selected.");
+
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -860,15 +859,11 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         try {
-
-            for (int h = 1; h != bucketarray.length; h++) {
-                if (b[h] != null) {
-                    if (b[h].isSelected()) {
-                        Cred.setBucket(a[h].getText());
-                    }
-                }
-            }
-
+            /**
+             * for (int h = 1; h != bucketarray.length; h++) { if (b[h] != null)
+             * { if (b[h].isSelected()) { Cred.setBucket(a[h].getText()); } } }
+             *
+             */
             for (int i = 1; i != objectarray.length; i++) {
                 if (d[i].isSelected()) {
                     String new_object_name = confertObject(c[i].getText());
@@ -913,16 +908,7 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
         // }
     }
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        this.var();
-
-        for (int h = 1; h != bucketarray.length; h++) {
-            if (b[h] != null) {
-                if (b[h].isSelected()) {
-                    buckets_loaded++;
-                    Cred.setBucket(a[h].getText());
-                }
-            }
-        }
+     
         if (buckets_loaded > 0) {
             editorSync(jTextField6.getText());
             Delete.deleteFile(jTextField6.getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
@@ -939,33 +925,28 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
-            this.var();
+        if (buckets_loaded > 0) {
+            if (b[active_bucket].isSelected()) {
+                jTextArea1.append("\nStarting Sync:");
+                uploadfileList(jFileChooser2.getSelectedFile());
 
-            for (int h = 1; h != bucketarray.length; h++) {
-                if (b[h] != null) {
-                    if (b[h].isSelected()) {
-                        Cred.setBucket(a[h].getText());
-                        jTextArea1.append("\nStarting Sync:");
-                        uploadfileList(jFileChooser2.getSelectedFile());
-
-                    }
-                }
             }
-
         } else {
-            jTextArea1.append("\nError: Configuration not loaded");
+            jTextArea1.append("\nError: No bucket selected.");
         }
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
+    private void jFileChooser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFileChooser2ActionPerformed
+
     private void uploadfileList(File dir) {
-        this.var();
+        //  this.var();
 
         File[] files = dir.listFiles();
 
         for (int i = 0; i < files.length; i++) {
-            if (files[i].isDirectory()) //Recursively call file list function on the new directory
-            {
+            if (files[i].isDirectory()) {
                 uploadfileList(files[i]);
             } else {
                 jTextArea1.append("\nUploading file: " + files[i].getAbsolutePath());
@@ -1041,8 +1022,8 @@ public class NewJFrame extends javax.swing.JFrame implements Runnable {
     private java.awt.TextField textField1;
     // End of variables declaration//GEN-END:variables
 
-    @Override
     public void run() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }
