@@ -24,9 +24,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     credentials Cred = new credentials();
     bucket Bucket = new bucket();
     delete Delete = new delete();
-    put Put = new put();
+    public put Put = new put();
     get Get = new get();
-
     String Home = System.getProperty("user.home");
     String File_Destination = Home + "/Desktop/";
     String[] bucketarray = null;
@@ -125,7 +124,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton5)
@@ -301,7 +300,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jToggleButton3)
@@ -343,7 +342,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
+                .addComponent(jScrollPane4)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
@@ -782,13 +781,20 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jButton9.doClick();
         }
     }
+
+
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
         if (this.buckets_loaded > 0) {
+            Thread uploadthread = new Thread(new thread());
             File file = jFileChooser1.getSelectedFile();
-            String upload = (file.getAbsolutePath());
-            jTextArea1.append("\n\nFinished uploading object: " + upload);
-            Put.put(upload, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), upload);
+            thread.upload = file.getAbsolutePath();
+            thread.access_key = Cred.getAccess_key();
+            thread.secret_key = Cred.getSecret_key();
+            thread.endpoint = Cred.getEndpoint();
+            thread.bucket = Cred.getBucket();
+            uploadthread.start();
+          
         } else {
             jTextArea1.append("\nError: No bucket selected.");
 
@@ -1005,7 +1011,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
+    public static javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -1019,9 +1025,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private java.awt.ScrollPane scrollPane1;
     private java.awt.TextField textField1;
     // End of variables declaration//GEN-END:variables
-
-    public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+/**
+     * public void run() { throw new UnsupportedOperationException("Not
+     * supported yet."); //To change body of generated methods, choose Tools |
+     * Templates. } *
+     */
 
 }
