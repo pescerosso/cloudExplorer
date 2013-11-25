@@ -24,6 +24,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     credentials Cred = new credentials();
     bucket Bucket = new bucket();
     delete Delete = new delete();
+    acl ACL = new acl();
     public put Put = new put();
     get Get = new get();
     String Home = System.getProperty("user.home");
@@ -37,6 +38,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     int firstrun = 1;
     int buckets_loaded = 0;
     int active_bucket = 0;
+    String object_acl_change = null;
 
     public NewJFrame() {
         initComponents();
@@ -941,30 +943,38 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         try {
             if (this.buckets_loaded > 0) {
 
-                final JCheckBox a = new JCheckBox("Public");
-                final JCheckBox b = new JCheckBox("URL Access");
-                final JButton acl = new JButton("Commt");
+                final JCheckBox public_box = new JCheckBox("Public");
+                final JCheckBox url_box = new JCheckBox("URL Access");
+                final JCheckBox private_box = new JCheckBox("Private Access");
+                final JButton acl = new JButton("Commit");
 
                 acl.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e) {
-                        if (a.isSelected()) {
+                        if (public_box.isSelected()) {
+                            ACL.setACLpublic(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
                             jTextArea1.append("\nPublic access set.");
                         }
-                        if (b.isSelected()) {
+
+                        if (url_box.isSelected()) {
                             jTextArea1.append("\nURL access set.");
+                        }
+                        if (private_box.isSelected()) {
+                            ACL.setACLprivate(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
+                            jTextArea1.append("\nPrivate access set.");
                         }
                     }
                 });
 
                 final JFrame parent = new JFrame("Object ACL Settings");
                 JPanel foopanel = new JPanel();
-                parent.setPreferredSize(new Dimension(200, 75));
+                parent.setPreferredSize(new Dimension(225, 95));
                 parent.setResizable(false);
                 foopanel.setLayout(new BoxLayout(foopanel, BoxLayout.PAGE_AXIS));
                 parent.add(foopanel);
-                foopanel.add(a);
-                foopanel.add(b);
+                foopanel.add(public_box);
+                foopanel.add(url_box);
+                foopanel.add(private_box);
                 foopanel.add(acl);
                 parent.setLocation(500, 500);
                 parent.pack();
@@ -972,6 +982,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
+                        object_acl_change = c[i].getText();
                         parent.setVisible(true);
                     }
                 }
