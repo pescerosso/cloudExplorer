@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package s3;
 
 import java.awt.event.ItemEvent;
@@ -15,10 +12,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 
-/**
- *
- * @author philliptribble
- */
 public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     credentials Cred = new credentials();
@@ -38,9 +31,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     int buckets_loaded = 0;
     int active_bucket = 0;
 
-    /**
-     * Creates new form NewJFrame1
-     */
     public NewJFrame() {
         initComponents();
     }
@@ -560,11 +550,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
     String confertObject(String what) {
 
@@ -580,7 +570,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 slash_counter++;
             }
             if (slash_counter == count) {
-                //out_file = (what.substring(y + 1, what.length()));
                 out_file = (what.substring(y, what.length()));
                 break;
             }
@@ -611,7 +600,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_textField1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -823,7 +812,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
         String load = Cred.loadConfig();
         String[] config_array = load.split(" ");
         jTextField1.setText(config_array[0]);
@@ -857,11 +845,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         try {
-            /**
-             * for (int h = 1; h != bucketarray.length; h++) { if (b[h] != null)
-             * { if (b[h].isSelected()) { Cred.setBucket(a[h].getText()); } } }
-             *
-             */
+        
             for (int i = 1; i != objectarray.length; i++) {
                 if (d[i].isSelected()) {
                     String new_object_name = confertObject(c[i].getText());
@@ -891,8 +875,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton12ActionPerformed
     void editorSync(String file) {
         File tmp = new File(Home + "/object.tmp");
-        //  if (tmp.exists()) {
-
+        
         try {
             FileWriter fr = new FileWriter(Home + "/object.tmp");
             BufferedWriter bfr = new BufferedWriter(fr);
@@ -917,7 +900,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
@@ -933,12 +916,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jFileChooser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser2ActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_jFileChooser2ActionPerformed
 
     private void uploadfileList(File dir) {
-        //  this.var();
-
+      
         File[] files = dir.listFiles();
 
         for (int i = 0; i < files.length; i++) {
@@ -1018,10 +1000,5 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private java.awt.ScrollPane scrollPane1;
     private java.awt.TextField textField1;
     // End of variables declaration//GEN-END:variables
-/**
-     * public void run() { throw new UnsupportedOperationException("Not
-     * supported yet."); //To change body of generated methods, choose Tools |
-     * Templates. } *
-     */
 
 }
