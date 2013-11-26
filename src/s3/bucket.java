@@ -14,17 +14,23 @@ public class bucket {
 
     String objectlist = null;
 
-    void makeBucket(String access_key, String secret_key, String bucket, String endpoint, String region) {
+    String makeBucket(String access_key, String secret_key, String bucket, String endpoint, String region) {
+        String message = null;
+
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
         try {
             s3Client.createBucket(new CreateBucketRequest(bucket, region));
-
-        } catch (Exception Delete) {
+            message = ("\nMaking bucket: " + bucket);
+        } catch (Exception makeBucket) {
             System.out.print("\n\nAn error has occured in makeBucket.");
-            System.out.println("\n\nError Message:    " + Delete.getMessage());
+            System.out.println("\n\nError Message:    " + makeBucket.getMessage());
+            message = message + "\n" + makeBucket.getMessage();
         }
+
+        message.replace("null", "");
+        return message;
 
     }
 
@@ -40,7 +46,7 @@ public class bucket {
         try {
 
             for (Bucket bucket : s3Client.listBuckets()) {
-                bucketlist = bucketlist + " "  + bucket.getName();
+                bucketlist = bucketlist + " " + bucket.getName();
 
             }
         } catch (Exception listBucket) {
@@ -48,7 +54,7 @@ public class bucket {
             System.out.println("\n\nError Message:    " + listBucket.getMessage());
         }
         String parse = null;
-        
+
         if (bucketlist != null) {
             parse = bucketlist.replace("null", "");
 
@@ -67,7 +73,7 @@ public class bucket {
         try {
             ObjectListing current = s3Client.listObjects((bucket));
             for (S3ObjectSummary objectSummary : current.getObjectSummaries()) {
-                objectlist = objectlist + "@" +  objectSummary.getKey();
+                objectlist = objectlist + "@" + objectSummary.getKey();
             }
 
         } catch (Exception listBucket) {
@@ -85,16 +91,22 @@ public class bucket {
         return parse;
     }
 
-    void deleteBucket(String access_key, String secret_key, String bucket, String endpoint, String region) {
+    String deleteBucket(String access_key, String secret_key, String bucket, String endpoint, String region) {
+        
+        String message = null;
+
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
-
+        message = ("\nDeleting bucket: " + bucket);
         try {
             s3Client.deleteBucket(new DeleteBucketRequest(bucket));
         } catch (Exception Delete) {
             System.out.print("\n\nAn error has occured in DeleteBucket.");
             System.out.println("\n\nError Message:    " + Delete.getMessage());
+            message = message + "\n" + Delete.getMessage();
         }
+        message.replace("null", "");
+        return message;
     }
 }

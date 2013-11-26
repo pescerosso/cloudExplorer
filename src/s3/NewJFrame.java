@@ -869,9 +869,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             this.var();
             reloadBuckets();
             String response = JOptionPane.showInputDialog(null, "Bucket Name: ", JOptionPane.OK_CANCEL_OPTION);
-            Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), response.toLowerCase(), Cred.getEndpoint(), Cred.getRegion());
+            jTextArea1.append("\n" + Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), response.toLowerCase(), Cred.getEndpoint(), Cred.getRegion()));
             reloadBuckets();
-            jTextArea1.append("\nCreated bucket: " + response);
+
         } else {
             jTextArea1.append("\nError: Configuration not loaded");
         }
@@ -927,8 +927,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 if (b[i] != null) {
 
                     if (b[i].isSelected()) {
-                        jTextArea1.append("\nDeleted Bucket:" + b[i].getText());
-                        Bucket.deleteBucket(Cred.access_key, Cred.secret_key, b[i].getText(), Cred.end_point, Cred.region);
+                        jTextArea1.append(Bucket.deleteBucket(Cred.access_key, Cred.secret_key, b[i].getText(), Cred.end_point, Cred.region));
                     }
                 }
             }
