@@ -90,6 +90,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jToggleButton2 = new javax.swing.JToggleButton();
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -446,6 +447,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
 
+        jButton14.setText("Bucket ACL");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -456,7 +464,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2)
@@ -471,12 +479,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                 .addComponent(jButton6))
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                             .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
@@ -498,7 +508,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jToggleButton1)
                             .addComponent(jToggleButton2)
-                            .addComponent(jButton12))
+                            .addComponent(jButton12)
+                            .addComponent(jButton14))
                         .addGap(18, 18, 18))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -991,6 +1002,44 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     }//GEN-LAST:event_jButton13ActionPerformed
 
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        try {
+
+            if (this.buckets_loaded > 0) {
+                final JFrame bucketACL = new JFrame("Bucket ACL Settings");
+                final JCheckBox static_website = new JCheckBox("Static Website");
+                final JButton bucketACLbutton = new JButton("Commit");
+
+                bucketACLbutton.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e) {
+                        if (static_website.isSelected()) {
+                            ACL.setBUCKETwebsite(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
+                            jTextArea1.append("\nWebsite access enabled.");
+                            bucketACL.setVisible(false);
+                        }
+                    }
+                });
+
+                JPanel foopanel = new JPanel();
+                bucketACL.setPreferredSize(new Dimension(225, 120));
+                bucketACL.setResizable(false);
+                foopanel.setLayout(new BoxLayout(foopanel, BoxLayout.PAGE_AXIS));
+                bucketACL.add(foopanel);
+                foopanel.add(static_website);
+                foopanel.add(bucketACLbutton);
+                bucketACL.setLocation(500, 500);
+                bucketACL.pack();
+                bucketACL.setVisible(true);
+                
+            } else {
+                jTextArea1.append("\nError: No bucket has been selected");
+            }
+        } catch (Exception Download) {
+        }
+
+    }//GEN-LAST:event_jButton14ActionPerformed
+
     private void uploadfileList(File dir) {
 
         File[] files = dir.listFiles();
@@ -1029,6 +1078,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

@@ -5,6 +5,7 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.BucketWebsiteConfiguration;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import java.net.URL;
@@ -29,6 +30,30 @@ public class acl {
             s3Client.setEndpoint(endpoint);
             s3Client.setObjectAcl(bucket, object, CannedAccessControlList.Private);
         } catch (Exception setACLpublic) {
+            System.out.print("\nException occured in ACL");
+        }
+    }
+
+    void setBUCKETwebsite(String object, String access_key, String secret_key, String endpoint, String bucket) {
+        try {
+            AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
+            AmazonS3 s3Client = new AmazonS3Client(credentials);
+            s3Client.setEndpoint(endpoint);
+            BucketWebsiteConfiguration bucketWebsiteConfiguration = s3Client.getBucketWebsiteConfiguration(bucket);
+            s3Client.setBucketAcl(bucket, CannedAccessControlList.PublicRead);
+            s3Client.setBucketWebsiteConfiguration(bucket, new BucketWebsiteConfiguration("index.html", "error.html"));
+        } catch (Exception setACLpublic) {
+            System.out.print("\nException occured in ACL");
+        }
+    }
+
+    void removeBUCKETwebsite(String object, String access_key, String secret_key, String endpoint, String bucket) {
+        try {
+            AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
+            AmazonS3 s3Client = new AmazonS3Client(credentials);
+            s3Client.setEndpoint(endpoint);
+            s3Client.deleteBucketWebsiteConfiguration(bucket);
+        } catch (Exception removeBUCKETwebsite) {
             System.out.print("\nException occured in ACL");
         }
     }
