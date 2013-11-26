@@ -708,10 +708,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }
 
-    public void aclClicked(ItemEvent e) {
-        jTextArea1.append("\nACL updated");
-    }
-
     void reloadBuckets() {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
