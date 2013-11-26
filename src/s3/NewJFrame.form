@@ -685,6 +685,9 @@
                 <Property name="alignmentY" type="float" value="0.0"/>
                 <Property name="autoscrolls" type="boolean" value="true"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
 
               <Layout>
                 <DimensionLayout dim="0">
