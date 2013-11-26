@@ -9,9 +9,11 @@ import java.io.File;
 
 public class put {
 
-    void put(String what, String access_key, String secret_key, String bucket, String endpoint, String ObjectKey) {
+    String message = null;
+
+    String put(String what, String access_key, String secret_key, String bucket, String endpoint, String ObjectKey) {
         File file = new File(what);
-        
+
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
 
         AmazonS3 s3Client = new AmazonS3Client(credentials);
@@ -19,11 +21,13 @@ public class put {
 
         try {
             s3Client.putObject(new PutObjectRequest(bucket, ObjectKey, file));
- 
+            message = ("Put object: " + what);
         } catch (Exception put) {
             System.out.print("\n\nAn error has occured with PUT.");
-            System.out.println("\n\nError Message:    " + put.getMessage()); 
+            System.out.println("\n\nError Message:    " + put.getMessage());
+            message = message + put.getMessage();
         }
-
+        message.replace("null", "");
+        return message;
     }
 }

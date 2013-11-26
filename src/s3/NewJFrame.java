@@ -615,8 +615,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
                         String new_object_name = confertObject(d[i].getText());
+                        jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name));
                         jTextArea1.append("\n\nFinished downloading object to: " + File_Destination + new_object_name);
-                        Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name);
                     }
                 }
             } else {
@@ -644,8 +644,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (buckets_loaded > 0) {
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
-                        jTextArea1.append("\nDeleted Object: " + d[i].getText());
-                        Delete.deleteFile(d[i].getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+                        jTextArea1.append("\n" + Delete.deleteFile(d[i].getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint()));
                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                     }
                 }
@@ -766,7 +765,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             File file = jFileChooser1.getSelectedFile();
             String upload = (file.getAbsolutePath());
             jTextArea1.append("\n\nFinished uploading object: " + upload + " to bucket: " + Cred.getBucket());
-            Put.put(upload, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), upload);
+            jTextArea1.append("\n" + Put.put(upload, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), upload));
         } else {
             jTextArea1.append("\nError: No bucket selected.");
         }
@@ -834,8 +833,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         if (buckets_loaded > 0) {
             editorSync(jTextField6.getText());
-            Delete.deleteFile(jTextField6.getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
-            Put.put(Home + "/object.tmp", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), jTextField6.getText());
+            jTextArea1.append("\n" + Delete.deleteFile(jTextField6.getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint()));
+            jTextArea1.append("\n" + Put.put(Home + "/object.tmp", Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), jTextField6.getText()));
             jTextArea1.append("\nSaved Object");
             reloadBuckets();
             b[active_bucket].setSelected(true);
@@ -949,8 +948,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             for (int i = 1; i != objectarray.length; i++) {
                 if (d[i].isSelected()) {
                     String new_object_name = confertObject(d[i].getText());
-                    jTextArea1.append("\nRetreiving the following object to edit: " + d[i].getText());
-                    Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Home + "/object.tmp");
+                    jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Home + "/object.tmp"));
 
                     try {
                         FileReader frr = new FileReader(Home + "/object.tmp");
@@ -1044,7 +1042,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             } else {
                 jTextArea1.append("\nUploading file: " + files[i].getAbsolutePath());
                 jTextArea1.repaint();
-                Put.put(files[i].getAbsolutePath(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), files[i].getAbsolutePath());
+                jTextArea1.append("\n" + Put.put(files[i].getAbsolutePath(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), files[i].getAbsolutePath()));
                 jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
             }
         }
