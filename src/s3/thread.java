@@ -51,9 +51,8 @@ class thread implements Runnable {
     public void get(int h) {
 
     }
-
-    public void put(int h) {
-
+public void put(String what) {
+  jTextArea1.append("\n" + foo.Put.put(what, foo.Cred.getAccess_key(), foo.Cred.getSecret_key(), foo.Cred.getBucket(), foo.Cred.getEndpoint(), what));
     }
 
     public void saveFile(int h) {

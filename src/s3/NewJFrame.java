@@ -849,7 +849,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (b[active_bucket].isSelected()) {
                 jTextArea1.append("\nStarting Sync:");
                 uploadfileList(jFileChooser2.getSelectedFile());
-
             }
         } else {
             jTextArea1.append("\nError: No bucket selected.");
@@ -1030,13 +1029,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void uploadfileList(File dir) {
 
         File[] files = dir.listFiles();
-
+        thread[] putObject = new thread[files.length];
         for (int i = 0; i < files.length; i++) {
             if (files[i].isDirectory()) {
                 uploadfileList(files[i]);
             } else {
                 jTextArea1.repaint();
-                jTextArea1.append("\n" + Put.put(files[i].getAbsolutePath(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), files[i].getAbsolutePath()));
+                putObject[i] = new thread(this);
+                putObject[i].put(files[i].getAbsolutePath().toString());
                 jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
             }
         }
@@ -1070,7 +1070,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JButton jButton9;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JFileChooser jFileChooser2;
+    public static javax.swing.JFileChooser jFileChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
