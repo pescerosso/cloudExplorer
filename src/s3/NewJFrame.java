@@ -957,7 +957,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         }
 
                         if (url_box.isSelected()) {
-                            jTextArea1.append("\nURL access set.");
+                            jTextArea1.append("\n" + ACL.setACLurl(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket()));
                         }
                         if (private_box.isSelected()) {
                             ACL.setACLprivate(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
@@ -968,7 +968,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
                 final JFrame parent = new JFrame("Object ACL Settings");
                 JPanel foopanel = new JPanel();
-                parent.setPreferredSize(new Dimension(225, 95));
+                parent.setPreferredSize(new Dimension(225, 120));
                 parent.setResizable(false);
                 foopanel.setLayout(new BoxLayout(foopanel, BoxLayout.PAGE_AXIS));
                 parent.add(foopanel);
