@@ -1017,6 +1017,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             ACL.setBUCKETwebsite(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
                             jTextArea1.append("\nWebsite access enabled.");
                             bucketACL.setVisible(false);
+                        } else {
+                            ACL.removeBUCKETwebsite(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
+                            jTextArea1.append("\nBucket is no longer serving a website.");
+                            bucketACL.setVisible(false);
                         }
                     }
                 });
@@ -1031,7 +1035,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 bucketACL.setLocation(500, 500);
                 bucketACL.pack();
                 bucketACL.setVisible(true);
-                
+
             } else {
                 jTextArea1.append("\nError: No bucket has been selected");
             }
