@@ -770,7 +770,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if (this.buckets_loaded > 0) {
             File file = jFileChooser1.getSelectedFile();
             String upload = (file.getAbsolutePath());
-            jTextArea1.append("\n\nFinished uploading object: " + upload);
+            jTextArea1.append("\n\nFinished uploading object: " + upload + " to bucket: " + Cred.getBucket());
             Put.put(upload, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), upload);
         } else {
             jTextArea1.append("\nError: No bucket selected.");
