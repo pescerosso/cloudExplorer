@@ -30,9 +30,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String File_Destination = Home + "/Desktop/";
     String[] bucketarray = null;
     String[] objectarray = null;
-    JLabel a[] = new JLabel[1000];
     JCheckBox b[] = new JCheckBox[1000];
-    JLabel c[] = new JLabel[1000];
     JCheckBox d[] = new JCheckBox[1000];
     int buckets_loaded = 0;
     int active_bucket = 0;
@@ -616,9 +614,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (this.buckets_loaded > 0) {
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
-                        String new_object_name = confertObject(c[i].getText());
+                        String new_object_name = confertObject(d[i].getText());
                         jTextArea1.append("\n\nFinished downloading object to: " + File_Destination + new_object_name);
-                        Get.get(c[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name);
+                        Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name);
                     }
                 }
             } else {
@@ -646,8 +644,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (buckets_loaded > 0) {
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
-                        jTextArea1.append("\nDeleted Object: " + c[i].getText());
-                        Delete.deleteFile(c[i].getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
+                        jTextArea1.append("\nDeleted Object: " + d[i].getText());
+                        Delete.deleteFile(d[i].getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint());
                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                     }
                 }
@@ -676,7 +674,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (b[h] != null) {
                 if (b[h].isSelected()) {
                     active_bucket = h;
-                    Cred.setBucket(a[h].getText());
+                    Cred.setBucket(b[h].getText());
                     buckets_loaded++;
                 }
             }
@@ -699,13 +697,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (bucketarray != null) {
                 for (int h = 1; h != bucketarray.length; h++) {
                     jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
-                    a[h] = new JLabel();
-                    a[h].setText(bucketarray[h]);
                     b[h] = new JCheckBox();
+                    b[h].setText(bucketarray[h]);
+
                     b[h].addItemListener(this);
                     this.jPanel5.add(b[h]);
                     this.setLocation(h, 5);
-                    this.jPanel5.add(a[h]);
                     this.jPanel5.revalidate();
                     validate();
                 }
@@ -728,7 +725,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 for (int h = 1; h != bucketarray.length; h++) {
                     if (b[h] != null) {
                         if (b[h].isSelected()) {
-                            String objectlist = Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(), a[h].getText(), Cred.getEndpoint());
+                            String objectlist = Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(), b[h].getText(), Cred.getEndpoint());
                             objectarray = objectlist.split("@");
 
                         }
@@ -738,12 +735,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 for (int h = 1; h != objectarray.length; h++) {
 
                     jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
-                    c[h] = new JLabel();
-                    c[h].setText(objectarray[h]);
                     d[h] = new JCheckBox();
+                    d[h].setText(objectarray[h]);
                     this.jPanel1.add(d[h]);
                     this.setLocation(h, 5);
-                    this.jPanel1.add(c[h]);
                     this.jPanel1.revalidate();
                     validate();
                 }
@@ -874,17 +869,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
             reloadBuckets();
-
-        } else {
-            jTextArea1.append("\nError: Configuration not loaded");
-        }
-        if (this.buckets_loaded > 0) {
             String response = JOptionPane.showInputDialog(null, "Bucket Name: ", JOptionPane.OK_CANCEL_OPTION);
             Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), response.toLowerCase(), Cred.getEndpoint(), Cred.getRegion());
             reloadBuckets();
             jTextArea1.append("\nCreated bucket: " + response);
         } else {
-            jTextArea1.append("\nError: buckets are not loaded");
+            jTextArea1.append("\nError: Configuration not loaded");
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -938,8 +928,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 if (b[i] != null) {
 
                     if (b[i].isSelected()) {
-                        jTextArea1.append("\nDeleted Bucket:" + a[i].getText());
-                        Bucket.deleteBucket(Cred.access_key, Cred.secret_key, a[i].getText(), Cred.end_point, Cred.region);
+                        jTextArea1.append("\nDeleted Bucket:" + b[i].getText());
+                        Bucket.deleteBucket(Cred.access_key, Cred.secret_key, b[i].getText(), Cred.end_point, Cred.region);
                     }
                 }
             }
@@ -958,9 +948,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
             for (int i = 1; i != objectarray.length; i++) {
                 if (d[i].isSelected()) {
-                    String new_object_name = confertObject(c[i].getText());
-                    jTextArea1.append("\nRetreiving the following object to edit: " + c[i].getText());
-                    Get.get(c[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Home + "/object.tmp");
+                    String new_object_name = confertObject(d[i].getText());
+                    jTextArea1.append("\nRetreiving the following object to edit: " + d[i].getText());
+                    Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Home + "/object.tmp");
 
                     try {
                         FileReader frr = new FileReader(Home + "/object.tmp");
@@ -975,7 +965,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
                     }
                     jTabbedPane1.setSelectedIndex(4);
-                    jTextField6.setText(c[i].getText());
+                    jTextField6.setText(d[i].getText());
                 }
 
             }
@@ -1032,7 +1022,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
-                        object_acl_change = c[i].getText();
+                        object_acl_change = d[i].getText();
                         parent.setVisible(true);
                     }
                 }
