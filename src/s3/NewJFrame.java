@@ -5,11 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.im.InputMethodRequests;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -34,6 +38,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     int buckets_loaded = 0;
     int active_bucket = 0;
     String object_acl_change = null;
+    String[] fooarray = null;
 
     public NewJFrame() {
         initComponents();
@@ -101,7 +106,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenuItem5.setText("jMenuItem5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 700));
         setResizable(false);
 
         jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
@@ -126,8 +130,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton5)
@@ -725,20 +728,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         if (b[h].isSelected()) {
                             String objectlist = Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(), b[h].getText(), Cred.getEndpoint());
                             objectarray = objectlist.split("@");
-
                         }
                     }
                 }
 
-                for (int h = 1; h != objectarray.length; h++) {
+                thread[] foo = new thread[objectarray.length];
 
-                    jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
-                    d[h] = new JCheckBox();
-                    d[h].setText(objectarray[h]);
-                    this.jPanel1.add(d[h]);
-                    this.setLocation(h, 5);
-                    this.jPanel1.revalidate();
-                    validate();
+                for (int h = 1; h != objectarray.length; h++) {
+                    foo[h] = new thread(this);
+                    foo[h].run(h);
                 }
 
                 this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
@@ -1093,7 +1091,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JPanel jPanel1;
+    public static javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1118,5 +1116,4 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JToggleButton jToggleButton3;
     private java.awt.ScrollPane scrollPane1;
     // End of variables declaration//GEN-END:variables
-
 }
