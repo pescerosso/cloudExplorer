@@ -22,7 +22,7 @@ class thread implements Runnable {
         foo = bar;
     }
 
-    public void run(int h) {
+    public void listobjects(int h) {
         foo.d[h] = new JCheckBox();
         foo.d[h].setText(foo.objectarray[h]);
         foo.jPanel1.add(foo.d[h]);
