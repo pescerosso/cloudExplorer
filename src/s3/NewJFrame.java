@@ -935,8 +935,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         try {
-            if (this.buckets_loaded > 0) {
 
+            if (this.buckets_loaded > 0) {
+                final JFrame parent = new JFrame("Object ACL Settings");
                 final JCheckBox public_box = new JCheckBox("Public");
                 final JCheckBox url_box = new JCheckBox("URL Access");
                 final JCheckBox private_box = new JCheckBox("Private Access");
@@ -948,19 +949,21 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         if (public_box.isSelected()) {
                             ACL.setACLpublic(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
                             jTextArea1.append("\nPublic access set.");
+                            parent.setVisible(false);
                         }
 
                         if (url_box.isSelected()) {
                             jTextArea1.append("\n" + ACL.setACLurl(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket()));
+                            parent.setVisible(false);
                         }
                         if (private_box.isSelected()) {
                             ACL.setACLprivate(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
                             jTextArea1.append("\nPrivate access set.");
+                            parent.setVisible(false);
                         }
                     }
                 });
 
-                final JFrame parent = new JFrame("Object ACL Settings");
                 JPanel foopanel = new JPanel();
                 parent.setPreferredSize(new Dimension(225, 120));
                 parent.setResizable(false);
@@ -972,7 +975,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 foopanel.add(acl);
                 parent.setLocation(500, 500);
                 parent.pack();
-                parent.setVisible(true);
 
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
