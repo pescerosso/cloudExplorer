@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class NewJFrame extends javax.swing.JFrame implements ItemListener {
@@ -33,7 +34,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     JCheckBox b[] = new JCheckBox[1000];
     JLabel c[] = new JLabel[1000];
     JCheckBox d[] = new JCheckBox[1000];
-    int firstrun = 1;
     int buckets_loaded = 0;
     int active_bucket = 0;
     String object_acl_change = null;
@@ -46,6 +46,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem5 = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jFileChooser1 = new javax.swing.JFileChooser();
@@ -80,21 +81,27 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        textField1 = new java.awt.TextField();
-        jButton4 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+
+        jMenuItem5.setText("jMenuItem5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(900, 700));
@@ -122,20 +129,19 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton5)
-                .addGap(146, 146, 146))
+                .addGap(119, 119, 119))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jButton5))
         );
 
         jTabbedPane1.addTab("Upload", jPanel2);
@@ -218,7 +224,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(290, Short.MAX_VALUE))
+                .addContainerGap(300, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,7 +347,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 757, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
@@ -388,30 +394,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
 
-        textField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField1ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("Make Bucket");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         jButton1.setText("Load");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Delete ");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -433,27 +419,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
 
-        jButton12.setText("Edit");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
-            }
-        });
-
-        jButton13.setText("ACL");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
-            }
-        });
-
-        jButton14.setText("Bucket ACL");
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -462,32 +427,18 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton6))
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jToggleButton1)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
         );
@@ -500,23 +451,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     .addComponent(jButton6)
                     .addComponent(jButton7)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton13))
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jToggleButton1)
-                            .addComponent(jToggleButton2)
-                            .addComponent(jButton12)
-                            .addComponent(jButton14))
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jToggleButton2)
+                    .addComponent(jToggleButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -540,6 +477,69 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jScrollPane2.setViewportView(jPanel5);
 
         jScrollPane3.setViewportView(jScrollPane2);
+
+        jMenu1.setText("File");
+
+        jMenuItem4.setText("Exit");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu3.setText("Bucket");
+
+        jMenuItem1.setText("Create Bucket");
+        jMenuItem1.setToolTipText("");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
+
+        jMenuItem2.setText("Bucket ACL");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
+        jMenuItem3.setText("Delete");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu2.setText("Objects");
+
+        jMenuItem6.setText("ACL");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem6);
+
+        jCheckBoxMenuItem1.setText("Edit File");
+        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jCheckBoxMenuItem1);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -628,48 +628,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
-
-    }//GEN-LAST:event_textField1ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        preload();
-        this.var();
-        if (textField1.getText().length() > 2) {
-            jTextArea1.append("\nCreated Bucket: " + textField1.getText());
-            Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), textField1.getText().toLowerCase(), Cred.getEndpoint(), Cred.getRegion());
-            reloadBuckets();
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
-            this.var();
-
-            for (int i = 0; i != bucketarray.length; i++) {
-                if (b[i] != null) {
-
-                    if (b[i].isSelected()) {
-                        jTextArea1.append("\nDeleted Bucket:" + a[i].getText());
-                        Bucket.deleteBucket(Cred.access_key, Cred.secret_key, a[i].getText(), Cred.end_point, Cred.region);
-                    }
-                }
-            }
-            reloadBuckets();
-        } else {
-            jTextArea1.append("\nError: Configuration not loaded");
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         preload();
 
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
             reloadBuckets();
-            if (firstrun == 1) {
-                jButton9.doClick();
-            }
         } else {
             jTextArea1.append("\nError: Configuration not loaded");
         }
@@ -846,13 +810,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextField4.setText(config_array[3]);
         jTextField5.setText(config_array[4]);
         jTextArea1.append("\nLoaded configuration.");
-        if (firstrun == 1) {
-            reloadBuckets();
-            b[1].setSelected(true);
-            jTabbedPane1.setSelectedIndex(2);
-            jButton6.doClick();
-            firstrun = 0;
-        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -867,37 +824,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextField4.setText("");
         jTextField5.setText("");
     }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        try {
-
-            for (int i = 1; i != objectarray.length; i++) {
-                if (d[i].isSelected()) {
-                    String new_object_name = confertObject(c[i].getText());
-                    jTextArea1.append("\nRetreiving the following object to edit: " + c[i].getText());
-                    Get.get(c[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Home + "/object.tmp");
-
-                    try {
-                        FileReader frr = new FileReader(Home + "/object.tmp");
-                        BufferedReader bfrr = new BufferedReader(frr);
-                        String read = null;
-                        jTextArea2.setText("");
-                        while ((read = bfrr.readLine()) != null) {
-                            jTextArea2.append("\n" + read);
-                        }
-                        bfrr.close();
-                    } catch (Exception tempFile) {
-
-                    }
-                    jTabbedPane1.setSelectedIndex(4);
-                    jTextField6.setText(c[i].getText());
-                }
-
-            }
-
-        } catch (Exception Download) {
-        }
-    }//GEN-LAST:event_jButton12ActionPerformed
     void editorSync(String file) {
         File tmp = new File(Home + "/object.tmp");
 
@@ -944,7 +870,121 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     }//GEN-LAST:event_jFileChooser2ActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
+            this.var();
+            reloadBuckets();
+
+        } else {
+            jTextArea1.append("\nError: Configuration not loaded");
+        }
+        if (this.buckets_loaded > 0) {
+            String response = JOptionPane.showInputDialog(null, "Bucket Name: ", JOptionPane.OK_CANCEL_OPTION);
+            Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), response.toLowerCase(), Cred.getEndpoint(), Cred.getRegion());
+            reloadBuckets();
+            jTextArea1.append("\nCreated bucket: " + response);
+        } else {
+            jTextArea1.append("\nError: buckets are not loaded");
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        try {
+            if (this.buckets_loaded > 0) {
+                final JFrame bucketACL = new JFrame("Bucket ACL Settings");
+                final JCheckBox static_website = new JCheckBox("Static Website");
+                final JButton bucketACLbutton = new JButton("Commit");
+
+                bucketACLbutton.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e) {
+                        if (static_website.isSelected()) {
+                            ACL.setBUCKETwebsite(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
+                            jTextArea1.append("\nWebsite access enabled.");
+                            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                            bucketACL.setVisible(false);
+                        } else {
+                            ACL.removeBUCKETwebsite(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
+                            jTextArea1.append("\nBucket is no longer serving a website.");
+                            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                            bucketACL.setVisible(false);
+                        }
+                    }
+                });
+
+                JPanel foopanel = new JPanel();
+                bucketACL.setPreferredSize(new Dimension(225, 75));
+                bucketACL.setResizable(false);
+                foopanel.setLayout(new BoxLayout(foopanel, BoxLayout.PAGE_AXIS));
+                bucketACL.add(foopanel);
+                foopanel.add(static_website);
+                foopanel.add(bucketACLbutton);
+                bucketACL.setLocation(500, 500);
+                bucketACL.pack();
+                bucketACL.setVisible(true);
+
+            } else {
+                jTextArea1.append("\nError: No bucket has been selected");
+            }
+        } catch (Exception Download) {
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
+            this.var();
+
+            for (int i = 0; i != bucketarray.length; i++) {
+                if (b[i] != null) {
+
+                    if (b[i].isSelected()) {
+                        jTextArea1.append("\nDeleted Bucket:" + a[i].getText());
+                        Bucket.deleteBucket(Cred.access_key, Cred.secret_key, a[i].getText(), Cred.end_point, Cred.region);
+                    }
+                }
+            }
+            reloadBuckets();
+        } else {
+            jTextArea1.append("\nError: Configuration not loaded");
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        System.exit(-1);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
+        try {
+
+            for (int i = 1; i != objectarray.length; i++) {
+                if (d[i].isSelected()) {
+                    String new_object_name = confertObject(c[i].getText());
+                    jTextArea1.append("\nRetreiving the following object to edit: " + c[i].getText());
+                    Get.get(c[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Home + "/object.tmp");
+
+                    try {
+                        FileReader frr = new FileReader(Home + "/object.tmp");
+                        BufferedReader bfrr = new BufferedReader(frr);
+                        String read = null;
+                        jTextArea2.setText("");
+                        while ((read = bfrr.readLine()) != null) {
+                            jTextArea2.append("\n" + read);
+                        }
+                        bfrr.close();
+                    } catch (Exception tempFile) {
+
+                    }
+                    jTabbedPane1.setSelectedIndex(4);
+                    jTextField6.setText(c[i].getText());
+                }
+
+            }
+
+        } catch (Exception Download) {
+        }
+    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         try {
 
             if (this.buckets_loaded > 0) {
@@ -960,16 +1000,19 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         if (public_box.isSelected()) {
                             ACL.setACLpublic(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
                             jTextArea1.append("\nPublic access set.");
+                            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                             parent.setVisible(false);
                         }
 
                         if (url_box.isSelected()) {
                             jTextArea1.append("\n" + ACL.setACLurl(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket()));
+                            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                             parent.setVisible(false);
                         }
                         if (private_box.isSelected()) {
                             ACL.setACLprivate(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
                             jTextArea1.append("\nPrivate access set.");
+                            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                             parent.setVisible(false);
                         }
                     }
@@ -999,50 +1042,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception Download) {
         }
 
-
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        try {
-
-            if (this.buckets_loaded > 0) {
-                final JFrame bucketACL = new JFrame("Bucket ACL Settings");
-                final JCheckBox static_website = new JCheckBox("Static Website");
-                final JButton bucketACLbutton = new JButton("Commit");
-
-                bucketACLbutton.addActionListener(new ActionListener() {
-
-                    public void actionPerformed(ActionEvent e) {
-                        if (static_website.isSelected()) {
-                            ACL.setBUCKETwebsite(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
-                            jTextArea1.append("\nWebsite access enabled.");
-                            bucketACL.setVisible(false);
-                        } else {
-                            ACL.removeBUCKETwebsite(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
-                            jTextArea1.append("\nBucket is no longer serving a website.");
-                            bucketACL.setVisible(false);
-                        }
-                    }
-                });
-
-                JPanel foopanel = new JPanel();
-                bucketACL.setPreferredSize(new Dimension(225, 120));
-                bucketACL.setResizable(false);
-                foopanel.setLayout(new BoxLayout(foopanel, BoxLayout.PAGE_AXIS));
-                bucketACL.add(foopanel);
-                foopanel.add(static_website);
-                foopanel.add(bucketACLbutton);
-                bucketACL.setLocation(500, 500);
-                bucketACL.pack();
-                bucketACL.setVisible(true);
-
-            } else {
-                jTextArea1.append("\nError: No bucket has been selected");
-            }
-        } catch (Exception Download) {
-        }
-
-    }//GEN-LAST:event_jButton14ActionPerformed
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void uploadfileList(File dir) {
 
@@ -1080,17 +1080,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JFileChooser jFileChooser2;
     private javax.swing.JLabel jLabel1;
@@ -1101,6 +1097,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1125,7 +1131,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
     private java.awt.ScrollPane scrollPane1;
-    private java.awt.TextField textField1;
     // End of variables declaration//GEN-END:variables
 
 }
