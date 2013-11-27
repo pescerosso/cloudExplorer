@@ -645,6 +645,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     if (d[i].isSelected()) {
                         jTextArea1.append("\n" + Delete.deleteFile(d[i].getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint()));
                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                        
                     }
                 }
             } else {
@@ -652,7 +653,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         } catch (Exception checkbox) {
         }
-        reloadObjects();
+       reloadObjects();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
