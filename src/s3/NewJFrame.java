@@ -616,7 +616,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 slash_counter++;
             }
             if (slash_counter == count) {
-                out_file = (what.substring(y+1, what.length()));
+                out_file = (what.substring(y + 1, what.length()));
                 break;
             }
             another_counter++;
@@ -636,6 +636,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         String new_object_name = confertObject(d[i].getText());
                         jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name));
                         jTextArea1.append("\n\nFinished downloading object to: " + File_Destination + new_object_name);
+                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                     }
                 }
             } else {
@@ -665,7 +666,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     if (d[i].isSelected()) {
                         jTextArea1.append("\n" + Delete.deleteFile(d[i].getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint()));
                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-                        
+
                     }
                 }
             } else {
@@ -673,7 +674,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         } catch (Exception checkbox) {
         }
-       reloadObjects();
+        reloadObjects();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
