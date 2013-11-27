@@ -644,12 +644,20 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         try {
 
             if (buckets_loaded > 0) {
-                thread[] deleteObject = new thread[objectarray.length];
+
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
                         for (int h = 1; h != objectarray.length; h++) {
-                            deleteObject[h] = new thread(this);
-                            deleteObject[h].deleteObject(h);
+                            // deleteObject[h] = new thread(this);
+                            //deleteObject[h].deleteObject(h);
+                            jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
+                            b[h] = new JCheckBox();
+                            b[h].setText(bucketarray[h]);
+                            jPanel5.add(b[h]);
+                            setLocation(h, 5);
+                            jPanel5.revalidate();
+                            validate();
+
                         }
                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                     }
@@ -687,7 +695,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
 
     void reloadBuckets() {
-        if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
+       if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
             this.bucketarray = null;
 
@@ -699,21 +707,26 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             this.jPanel5.repaint();
             this.jPanel5.setLayout(new BoxLayout(this.jPanel5, BoxLayout.PAGE_AXIS));
 
-            thread[] listbuckets = new thread[bucketarray.length];
+            if (bucketarray != null) {
+                for (int h = 1; h != bucketarray.length; h++) {
+                    jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
+                    b[h] = new JCheckBox();
+                    b[h].setText(bucketarray[h]);
 
-            for (int h = 1; h != bucketarray.length; h++) {
-                listbuckets[h] = new thread(this);
-                listbuckets[h].listBuckets(h);
-                b[h].addItemListener(this);
+                    b[h].addItemListener(this);
+                    this.jPanel5.add(b[h]);
+                    this.setLocation(h, 5);
+                    this.jPanel5.revalidate();
+                    validate();
+                }
             }
-
         } else {
             jTextArea1.append("\nError: Configuration not loaded");
         }
     }
 
     void reloadObjects() {
-        if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
+       if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
             this.objectarray = null;
             this.jPanel1.removeAll();
@@ -727,15 +740,20 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         if (b[h].isSelected()) {
                             String objectlist = Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(), b[h].getText(), Cred.getEndpoint());
                             objectarray = objectlist.split("@");
+
                         }
                     }
                 }
 
-                thread[] listobjects = new thread[objectarray.length];
-
                 for (int h = 1; h != objectarray.length; h++) {
-                    listobjects[h] = new thread(this);
-                    listobjects[h].listObjects(h);
+
+                    jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
+                    d[h] = new JCheckBox();
+                    d[h].setText(objectarray[h]);
+                    this.jPanel1.add(d[h]);
+                    this.setLocation(h, 5);
+                    this.jPanel1.revalidate();
+                    validate();
                 }
 
                 this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
@@ -1027,16 +1045,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void uploadfileList(File dir) {
-
+      
         File[] files = dir.listFiles();
-        thread[] putObject = new thread[files.length];
+
         for (int i = 0; i < files.length; i++) {
             if (files[i].isDirectory()) {
                 uploadfileList(files[i]);
             } else {
+                jTextArea1.append("\nUploading file: " + files[i].getAbsolutePath());
                 jTextArea1.repaint();
-                putObject[i] = new thread(this);
-                putObject[i].put(files[i].getAbsolutePath().toString());
+                jTextArea1.append("\n" + Put.put(files[i].getAbsolutePath(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), files[i].getAbsolutePath()));
                 jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
             }
         }
