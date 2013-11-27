@@ -640,25 +640,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
         try {
 
             if (buckets_loaded > 0) {
-
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
-                        for (int h = 1; h != objectarray.length; h++) {
-                            // deleteObject[h] = new thread(this);
-                            //deleteObject[h].deleteObject(h);
-                            jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
-                            b[h] = new JCheckBox();
-                            b[h].setText(bucketarray[h]);
-                            jPanel5.add(b[h]);
-                            setLocation(h, 5);
-                            jPanel5.revalidate();
-                            validate();
-
-                        }
+                        jTextArea1.append("\n" + Delete.deleteFile(d[i].getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint()));
                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                     }
                 }
@@ -695,7 +682,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
 
     void reloadBuckets() {
-       if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
+        if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
             this.bucketarray = null;
 
@@ -726,7 +713,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
 
     void reloadObjects() {
-       if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
+        if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
             this.objectarray = null;
             this.jPanel1.removeAll();
@@ -1045,7 +1032,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void uploadfileList(File dir) {
-      
+
         File[] files = dir.listFiles();
 
         for (int i = 0; i < files.length; i++) {
