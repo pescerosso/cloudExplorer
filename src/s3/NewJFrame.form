@@ -8,9 +8,17 @@
       </Properties>
     </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cd" green="5d" id="Button.light" palette="3" red="2c" type="palette"/>
+        </Property>
+      </Properties>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cd" green="5d" id="Button.light" palette="3" red="2c" type="palette"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
           <SubComponents>
@@ -26,6 +34,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu3">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cd" green="5d" id="Button.light" palette="3" red="2c" type="palette"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Bucket"/>
           </Properties>
           <SubComponents>
@@ -58,6 +69,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cd" green="5d" id="Button.light" palette="3" red="2c" type="palette"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Objects"/>
           </Properties>
           <SubComponents>

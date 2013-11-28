@@ -500,6 +500,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/logo_cloudian.png"))); // NOI18N
 
+        jMenuBar1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+
+        jMenu1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
         jMenu1.setText("File");
 
         jMenuItem4.setText("Exit");
@@ -512,6 +515,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
         jMenu3.setText("Bucket");
 
         jMenuItem1.setText("Create Bucket");
@@ -541,6 +545,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu2.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
         jMenu2.setText("Objects");
 
         jMenuItem6.setText("ACL");
