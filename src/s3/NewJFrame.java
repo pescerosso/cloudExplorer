@@ -637,7 +637,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (this.buckets_loaded > 0) {
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
-                        String new_object_name = confertObject(d[i].getText(),"download");
+                        String new_object_name = confertObject(d[i].getText(), "download");
                         jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name));
                         jTextArea1.append("\n\nFinished downloading object to: " + File_Destination + new_object_name);
                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
@@ -789,7 +789,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if (this.buckets_loaded > 0) {
             File file = jFileChooser1.getSelectedFile();
             String upload = (file.getAbsolutePath());
-            String new_object_name = confertObject(file.getAbsolutePath().toString(),"upload");
+            String new_object_name = confertObject(file.getAbsolutePath().toString(), "upload");
             jTextArea1.append("\n\nFinished uploading object: " + upload + " to bucket: " + Cred.getBucket());
             jTextField7.setText(jTextField7.getText().replace("null", ""));
             jTextArea1.append("\n" + Put.put(upload, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), this.jTextField7.getText() + new_object_name));
@@ -973,7 +973,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
             for (int i = 1; i != objectarray.length; i++) {
                 if (d[i].isSelected()) {
-                    String new_object_name = confertObject(d[i].getText(),"download");
+                    String new_object_name = confertObject(d[i].getText(), "download");
                     jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Home + "/object.tmp"));
 
                     try {
@@ -1011,24 +1011,31 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 acl.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e) {
-                        if (public_box.isSelected()) {
-                            ACL.setACLpublic(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
-                            jTextArea1.append("\nPublic set for object: " + object_acl_change);
-                            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-                            parent.setVisible(false);
+                        for (int i = 1; i != objectarray.length; i++) {
+                            if (d[i].isSelected()) {
+                                object_acl_change = d[i].getText();
+                                if (public_box.isSelected()) {
+                                    ACL.setACLpublic(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
+                                    jTextArea1.append("\nPublic set for object: " + object_acl_change);
+                                    jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                                    parent.setVisible(false);
+                                }
+
+                                if (url_box.isSelected()) {
+                                    jTextArea1.append("\n" + ACL.setACLurl(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket()));
+                                    jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                                    parent.setVisible(false);
+                                }
+                                if (private_box.isSelected()) {
+                                    ACL.setACLprivate(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
+                                    jTextArea1.append("\nPrivate access set for object: " + object_acl_change);
+                                    jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                                    parent.setVisible(false);
+                                }
+
+                            }
                         }
 
-                        if (url_box.isSelected()) {
-                            jTextArea1.append("\n" + ACL.setACLurl(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket()));
-                            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-                            parent.setVisible(false);
-                        }
-                        if (private_box.isSelected()) {
-                            ACL.setACLprivate(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
-                            jTextArea1.append("\nPrivate access set for object: " + object_acl_change);
-                            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-                            parent.setVisible(false);
-                        }
                     }
                 });
 
@@ -1043,13 +1050,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 foopanel.add(acl);
                 parent.setLocation(500, 500);
                 parent.pack();
-
-                for (int i = 1; i != objectarray.length; i++) {
-                    if (d[i].isSelected()) {
-                        object_acl_change = d[i].getText();
-                        parent.setVisible(true);
-                    }
-                }
+                parent.setVisible(true);
             } else {
                 jTextArea1.append("\nError: No bucket has been selected");
             }
