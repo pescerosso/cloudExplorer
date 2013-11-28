@@ -18,6 +18,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
@@ -32,15 +34,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String OS = System.getProperty("os.name");
     String[] bucketarray = null;
     String[] objectarray = null;
-    JCheckBox b[] = new JCheckBox[1000];
-    JCheckBox d[] = new JCheckBox[1000];
-    JLabel image[] = new JLabel[1000];
+    JCheckBox b[] = new JCheckBox[1000000];
+    JCheckBox d[] = new JCheckBox[1000000];
+    JLabel image[] = new JLabel[10000000];
     int buckets_loaded = 0;
     int active_bucket = 0;
     String object_acl_change = null;
     String temp_file = (Home + "/object.tmp");
     String config_file = (Home + "/s3.config");
-    ImageIcon[] photo = new ImageIcon[1000];
+    ImageIcon[] photo = new ImageIcon[10000000];
 
     public NewJFrame() {
         initComponents();
@@ -87,9 +89,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jButton11 = new javax.swing.JButton();
         jTextField6 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jPanel10 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -431,34 +430,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jTabbedPane1.addTab("Text Editor", jPanel6);
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 773, Short.MAX_VALUE)
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 384, Short.MAX_VALUE)
-        );
-
-        jScrollPane5.setViewportView(jPanel10);
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane5))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-
-        jTabbedPane1.addTab("Image Viewer", jPanel7);
-
         jButton3.setText("Delete Object");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -696,14 +667,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-
-    }//GEN-LAST:event_jTextField1ActionPerformed
     String convertObject(String what, String operation) {
 
         String slash = "/";
@@ -899,24 +862,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
 
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-
-        if (this.buckets_loaded > 0) {
-            File file = jFileChooser1.getSelectedFile();
-            String upload = (file.getAbsolutePath());
-            String new_object_name = convertObject(file.getAbsolutePath().toString(), "upload");
-            jTextArea1.append("\n\nFinished uploading object: " + upload + " to bucket: " + Cred.getBucket());
-            jTextField7.setText(jTextField7.getText().replace("null", ""));
-            jTextArea1.append("\n" + Put.put(upload, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), this.jTextField7.getText() + new_object_name));
-        } else {
-            jTextArea1.append("\nError: No bucket selected.");
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFileChooser1ActionPerformed
-
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         try {
             for (int i = 1; i != objectarray.length; i++) {
@@ -936,40 +881,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception SelectALL) {
         }
     }//GEN-LAST:event_jToggleButton2ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        String load = Cred.loadConfig();
-        String[] config_array = load.split(" ");
-        jTextField1.setText(config_array[0]);
-        jTextField2.setText(config_array[1]);
-        jTextField3.setText(config_array[2]);
-        jTextField4.setText(config_array[3]);
-        jTextField5.setText(config_array[4]);
-
-        try {
-            jTextField8.setText(config_array[5]);
-            jTextField9.setText(config_array[6]);
-        } catch (Exception sdd) {
-
-        }
-
-        jTextArea1.append("\nLoaded configuration.");
-    }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        String save = Cred.writeConfig(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), jTextField8.getText(), jTextField9.getText());
-        jTextArea1.append(save);
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField5.setText("");
-        jTextField8.setText("");
-        jTextField9.setText("");
-    }//GEN-LAST:event_jButton10ActionPerformed
     void editorSync(String file) {
         if (!OScheck()) {
             temp_file = (Home + "\\object.tmp");
@@ -985,44 +896,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception writeConfig) {
         }
     }
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        if (buckets_loaded > 0) {
-            if (!OScheck()) {
-                temp_file = (Home + "\\object.tmp");
-            }
-
-            editorSync(jTextField6.getText());
-            jTextArea1.append("\n" + Delete.deleteFile(jTextField6.getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint()));
-            jTextArea1.append("\n" + Put.put(temp_file, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), jTextField6.getText()));
-            jTextArea1.append("\nSaved Object");
-            reloadBuckets();
-            b[active_bucket].setSelected(true);
-        } else {
-            jTextArea1.append("\nError: no bucket selected.");
-        }
-
-    }//GEN-LAST:event_jButton11ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-
-    }//GEN-LAST:event_jTextField6ActionPerformed
-
-    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        if (buckets_loaded > 0) {
-            if (b[active_bucket].isSelected()) {
-                jTextArea1.append("\nStarting Sync:");
-                uploadfileList(jFileChooser2.getSelectedFile());
-
-            }
-        } else {
-            jTextArea1.append("\nError: No bucket selected.");
-        }
-    }//GEN-LAST:event_jToggleButton3ActionPerformed
-
-    private void jFileChooser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser2ActionPerformed
-
-    }//GEN-LAST:event_jFileChooser2ActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
@@ -1203,10 +1076,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         try {
 
@@ -1223,47 +1092,155 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception Download) {
         }
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+    void deleteFle(String what) {
+        try {
+            File file = new File(what);
+            if (file.exists()) {
+                file.delete();
+            }
+        } catch (Exception deleteFIle) {
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-void deleteFle(String what){
-   try {
-       File file = new File(what);
-       if(file.exists()){
-       file.delete();
-       }
-   } catch ( Exception deleteFIle){
-       
-   }
-}
+        }
+    }
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         try {
 
             if (!OScheck()) {
                 temp_file = (Home + "\\object.tmp");
             }
+            JFrame image_frame = new JFrame();
+            JScrollBar bar = new JScrollBar(JScrollBar.VERTICAL);
+            JPanel image_panel = new JPanel();
+            JScrollPane scrolling_pane = new JScrollPane(image_panel);
+            image_frame.setSize(new Dimension(2000, 1000));
+            image_frame.add(scrolling_pane);
 
             for (int i = 1; i != objectarray.length; i++) {
                 if (d[i].isSelected()) {
-                    jPanel10.setLayout(new BoxLayout(this.jPanel10, BoxLayout.PAGE_AXIS));
+                    image_panel.setLayout(new BoxLayout(image_panel, BoxLayout.PAGE_AXIS));
                     String new_object_name = convertObject(d[i].getText(), "download");
                     jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), temp_file + i));
                     photo[i] = new ImageIcon(temp_file + i);
-                    image[i] = new JLabel(photo[i]);     
-                    jPanel10.add(image[i]);
-                    jPanel10.repaint();
-                    jPanel10.revalidate();
-                    jPanel10.validate();
+                    image[i] = new JLabel(photo[i]);
+
+                    image_panel.add(image[i]);
+                    image_frame.repaint();
+                    image_frame.revalidate();
+                    image_frame.validate();
+
                     deleteFle(temp_file + i);
-                    jTabbedPane1.setSelectedIndex(5);
                 }
 
             }
-
+            image_frame.setVisible(true);
         } catch (Exception Download) {
         }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        if (buckets_loaded > 0) {
+            if (!OScheck()) {
+                temp_file = (Home + "\\object.tmp");
+            }
+
+            editorSync(jTextField6.getText());
+            jTextArea1.append("\n" + Delete.deleteFile(jTextField6.getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint()));
+            jTextArea1.append("\n" + Put.put(temp_file, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), jTextField6.getText()));
+            jTextArea1.append("\nSaved Object");
+            reloadBuckets();
+            b[active_bucket].setSelected(true);
+        } else {
+            jTextArea1.append("\nError: no bucket selected.");
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+        if (buckets_loaded > 0) {
+            if (b[active_bucket].isSelected()) {
+                jTextArea1.append("\nStarting Sync:");
+                uploadfileList(jFileChooser2.getSelectedFile());
+
+            }
+        } else {
+            jTextArea1.append("\nError: No bucket selected.");
+        }
+    }//GEN-LAST:event_jToggleButton3ActionPerformed
+
+    private void jFileChooser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser2ActionPerformed
+
+    }//GEN-LAST:event_jFileChooser2ActionPerformed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField8.setText("");
+        jTextField9.setText("");
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        String load = Cred.loadConfig();
+        String[] config_array = load.split(" ");
+        jTextField1.setText(config_array[0]);
+        jTextField2.setText(config_array[1]);
+        jTextField3.setText(config_array[2]);
+        jTextField4.setText(config_array[3]);
+        jTextField5.setText(config_array[4]);
+
+        try {
+            jTextField8.setText(config_array[5]);
+            jTextField9.setText(config_array[6]);
+        } catch (Exception sdd) {
+
+        }
+
+        jTextArea1.append("\nLoaded configuration.");
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        String save = Cred.writeConfig(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), jTextField8.getText(), jTextField9.getText());
+        jTextArea1.append(save);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+
+        if (this.buckets_loaded > 0) {
+            File file = jFileChooser1.getSelectedFile();
+            String upload = (file.getAbsolutePath());
+            String new_object_name = convertObject(file.getAbsolutePath().toString(), "upload");
+            jTextArea1.append("\n\nFinished uploading object: " + upload + " to bucket: " + Cred.getBucket());
+            jTextField7.setText(jTextField7.getText().replace("null", ""));
+            jTextArea1.append("\n" + Put.put(upload, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), this.jTextField7.getText() + new_object_name));
+        } else {
+            jTextArea1.append("\nError: No bucket selected.");
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFileChooser1ActionPerformed
 
     private void uploadfileList(File dir) {
 
@@ -1309,7 +1286,7 @@ void deleteFle(String what){
     private javax.swing.JButton jButton9;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JFileChooser jFileChooser1;
-    public static javax.swing.JFileChooser jFileChooser2;
+    private javax.swing.JFileChooser jFileChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1334,20 +1311,17 @@ void deleteFle(String what){
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    public static javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     public static javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     public static javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
