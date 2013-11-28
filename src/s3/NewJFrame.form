@@ -628,8 +628,8 @@
                       <Component id="jToggleButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jToggleButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="61" max="32767" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="107" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="162" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
