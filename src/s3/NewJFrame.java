@@ -664,16 +664,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         String slash = "/";
 
-        if (what.contains("\\")) {
-            slash = "\\";
+        if (what.contains(":")) {
+            what = what.substring(3, what.length());
         }
-//NEED TO FIX WINDOWS SUPPORT HERE
-        
+
         int count = what.split(slash).length;
-      
-// UNABE TO PRINT COUNT FOR WINDOWS
-        
-        
         count = count - 1;
         int slash_counter = 0;
         String out_file = null;
