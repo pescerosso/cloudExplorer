@@ -664,7 +664,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         String slash = "/";
 
-        if (what.contains(":")) {
+        if (what.contains("\\")) {
+            what = what.replace("\\", "/");
             what = what.substring(3, what.length());
         }
 
@@ -690,6 +691,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
             another_counter++;
         }
+        jTextArea1.append("\nDebug:" + out_file);
         return (out_file);
     }
 
