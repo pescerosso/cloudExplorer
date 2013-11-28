@@ -29,9 +29,23 @@ public class acl {
             AmazonS3 s3Client = new AmazonS3Client(credentials);
             s3Client.setEndpoint(endpoint);
             s3Client.setObjectAcl(bucket, object, CannedAccessControlList.Private);
-        } catch (Exception setACLpublic) {
-            System.out.print("\nException occured in ACL");
+        } catch (Exception setACLprivate) {
+            System.out.print("\nException occured in setACLprivate");
         }
+    }
+
+    String viewACL(String object, String access_key, String secret_key, String endpoint, String bucket) {
+        String message = null;
+        try {
+            AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
+            AmazonS3 s3Client = new AmazonS3Client(credentials);
+            s3Client.setEndpoint(endpoint);
+            message = s3Client.getObjectAcl(bucket, object).toString();
+        } catch (Exception viewACL) {
+            System.out.print("\nException occured in viewACL");
+        }
+
+        return object + ":     " + message;
     }
 
     void setBUCKETwebsite(String object, String access_key, String secret_key, String endpoint, String bucket) {

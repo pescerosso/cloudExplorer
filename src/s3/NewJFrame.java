@@ -98,6 +98,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
 
         jMenuItem5.setText("jMenuItem5");
@@ -545,6 +546,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
         jMenu2.add(jMenuItem6);
+
+        jMenuItem7.setText("View ACL");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem7);
 
         jCheckBoxMenuItem1.setText("Edit File");
         jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -1063,6 +1072,23 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        try {
+
+            if (this.buckets_loaded > 0) {
+                for (int i = 1; i != objectarray.length; i++) {
+                    if (d[i].isSelected()) {
+                        object_acl_change = d[i].getText();
+                        jTextArea1.append("\n" + ACL.viewACL(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket()));
+                    }
+                }
+            } else {
+                jTextArea1.append("\nError: No bucket has been selected");
+            }
+        } catch (Exception Download) {
+        }
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     private void uploadfileList(File dir) {
 
         File[] files = dir.listFiles();
@@ -1127,6 +1153,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     public static javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
