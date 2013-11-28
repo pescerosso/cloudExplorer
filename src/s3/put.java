@@ -20,21 +20,27 @@ public class put {
     String message = null;
 
     String put(String what, String access_key, String secret_key, String bucket, String endpoint, String ObjectKey) {
-        File file = new File(what);   
+        File file = new File(what);
         MimetypesFileTypeMap mimeTypesMap = new MimetypesFileTypeMap();
         String mimeType = mimeTypesMap.getContentType(file);
         mimeType = mimeTypesMap.getContentType(file);
         ObjectMetadata objectMetadata = new ObjectMetadata();
-        objectMetadata.setContentType(mimeType);     
+       
+        if ((ObjectKey.contains(".html")) || ObjectKey.contains(".txt")) {
+            objectMetadata.setContentType("text/html");
+        } else {
+            objectMetadata.setContentType(mimeType);
+        }
+
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
-      
+
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
         PutObjectRequest putRequest = new PutObjectRequest(bucket, ObjectKey, file);
-         putRequest.setMetadata(objectMetadata);
-        
+        putRequest.setMetadata(objectMetadata);
+
         try {
-           PutObjectResult response = s3Client.putObject(putRequest);     
+            PutObjectResult response = s3Client.putObject(putRequest);
             message = ("Put object: " + what);
         } catch (Exception put) {
             System.out.print("\n\nAn error has occured with PUT.");
