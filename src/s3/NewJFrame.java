@@ -11,9 +11,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -32,11 +34,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String[] objectarray = null;
     JCheckBox b[] = new JCheckBox[1000];
     JCheckBox d[] = new JCheckBox[1000];
+    JLabel image[] = new JLabel[1000];
     int buckets_loaded = 0;
     int active_bucket = 0;
     String object_acl_change = null;
     String temp_file = (Home + "/object.tmp");
     String config_file = (Home + "/s3.config");
+    ImageIcon[] photo = new ImageIcon[1000];
 
     public NewJFrame() {
         initComponents();
@@ -83,6 +87,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jButton11 = new javax.swing.JButton();
         jTextField6 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jPanel10 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -106,6 +113,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
 
@@ -165,7 +173,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     .addComponent(jLabel9)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Upload", jPanel2);
@@ -368,7 +376,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToggleButton3)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sync", jPanel4);
@@ -422,6 +430,34 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         );
 
         jTabbedPane1.addTab("Text Editor", jPanel6);
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 773, Short.MAX_VALUE)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 384, Short.MAX_VALUE)
+        );
+
+        jScrollPane5.setViewportView(jPanel10);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+
+        jTabbedPane1.addTab("Image Viewer", jPanel7);
 
         jButton3.setText("Delete Object");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -588,6 +624,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         });
         jMenu2.add(jMenuItem6);
 
+        jMenuItem8.setText("View in Image Viewer");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem8);
+
         jMenuItem7.setText("View ACL");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -626,7 +670,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                 .addComponent(jLabel1)
                                 .addGap(30, 30, 30)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTabbedPane1)
+                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(291, 291, 291)))))
@@ -664,11 +708,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         String slash = "/";
 
-            if (what.contains("\\")) {
-                what = what.replace("\\", "/");
-                what = what.substring(3, what.length());
-            }
-       
+        if (what.contains("\\")) {
+            what = what.replace("\\", "/");
+            what = what.substring(3, what.length());
+        }
+
         int count = what.split(slash).length;
         count = count - 1;
         int slash_counter = 0;
@@ -1183,6 +1227,43 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField8ActionPerformed
+void deleteFle(String what){
+   try {
+       File file = new File(what);
+       if(file.exists()){
+       file.delete();
+       }
+   } catch ( Exception deleteFIle){
+       
+   }
+}
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        try {
+
+            if (!OScheck()) {
+                temp_file = (Home + "\\object.tmp");
+            }
+
+            for (int i = 1; i != objectarray.length; i++) {
+                if (d[i].isSelected()) {
+                    jPanel10.setLayout(new BoxLayout(this.jPanel10, BoxLayout.PAGE_AXIS));
+                    String new_object_name = convertObject(d[i].getText(), "download");
+                    jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), temp_file + i));
+                    photo[i] = new ImageIcon(temp_file + i);
+                    image[i] = new JLabel(photo[i]);     
+                    jPanel10.add(image[i]);
+                    jPanel10.repaint();
+                    jPanel10.revalidate();
+                    jPanel10.validate();
+                    deleteFle(temp_file + i);
+                    jTabbedPane1.setSelectedIndex(5);
+                }
+
+            }
+
+        } catch (Exception Download) {
+        }
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void uploadfileList(File dir) {
 
@@ -1252,17 +1333,21 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     public static javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     public static javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     public static javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
