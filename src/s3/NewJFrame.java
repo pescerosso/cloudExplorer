@@ -1122,13 +1122,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), temp_file + i));
                     photo[i] = new ImageIcon(temp_file + i);
                     image[i] = new JLabel(photo[i]);
-
                     image_panel.add(image[i]);
                     image_frame.repaint();
                     image_frame.revalidate();
                     image_frame.validate();
-
                     deleteFle(temp_file + i);
+                    break;
                 }
 
             }
