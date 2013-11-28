@@ -662,7 +662,18 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jTextField1ActionPerformed
     String confertObject(String what, String operation) {
 
-        int count = what.split("/").length;
+        String slash = "/";
+
+        if (what.contains("\\")) {
+            slash = "\\";
+        }
+//NEED TO FIX WINDOWS SUPPORT HERE
+        
+        int count = what.split(slash).length;
+      
+// UNABE TO PRINT COUNT FOR WINDOWS
+        
+        
         count = count - 1;
         int slash_counter = 0;
         String out_file = null;
@@ -670,9 +681,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         for (int y = 0; y != what.length(); y++) {
 
-            if (what.substring(y, another_counter).contains("/")) {
+            if (what.substring(y, another_counter).contains(slash)) {
                 slash_counter++;
             }
+
             if (slash_counter == count) {
                 if (operation.contains("download")) {
                     out_file = (what.substring(y, what.length()));
@@ -686,9 +698,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         return (out_file);
     }
 
-    void Upload() {
-
-    }
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         if (!OScheck()) {
             File_Destination = ("\\Desktop\\");
@@ -1061,7 +1070,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
     private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
         try {
-            
+
             if (!OScheck()) {
                 temp_file = (Home + "\\object.tmp");
             }
