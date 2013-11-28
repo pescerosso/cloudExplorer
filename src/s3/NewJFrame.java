@@ -660,7 +660,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
 
     }//GEN-LAST:event_jTextField1ActionPerformed
-    String confertObject(String what, String operation) {
+    String convertObject(String what, String operation) {
 
         String slash = "/";
 
@@ -707,7 +707,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (this.buckets_loaded > 0) {
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
-                        String new_object_name = confertObject(d[i].getText(), "download");
+                        String new_object_name = convertObject(d[i].getText(), "download");
                         jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name));
                         jTextArea1.append("\n\nFinished downloading object to: " + File_Destination + new_object_name);
                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
@@ -864,7 +864,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if (this.buckets_loaded > 0) {
             File file = jFileChooser1.getSelectedFile();
             String upload = (file.getAbsolutePath());
-            String new_object_name = confertObject(file.getAbsolutePath().toString(), "upload");
+            String new_object_name = convertObject(file.getAbsolutePath().toString(), "upload");
             jTextArea1.append("\n\nFinished uploading object: " + upload + " to bucket: " + Cred.getBucket());
             jTextField7.setText(jTextField7.getText().replace("null", ""));
             jTextArea1.append("\n" + Put.put(upload, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), this.jTextField7.getText() + new_object_name));
@@ -1077,7 +1077,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
             for (int i = 1; i != objectarray.length; i++) {
                 if (d[i].isSelected()) {
-                    String new_object_name = confertObject(d[i].getText(), "download");
+                    String new_object_name = convertObject(d[i].getText(), "download");
                     jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), temp_file));
 
                     try {
