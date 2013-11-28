@@ -13,7 +13,20 @@ public class credentials {
     String bucket = null;
     String region = null;
     String Home = System.getProperty("user.home");
-    String File_Destination = Home + "/Desktop/";
+    String userid = null;
+    String groupid = null;
+    String OS = System.getProperty("os.name");
+    String config_file = (Home + "/s3.config");
+
+    boolean OScheck() {
+        boolean result;
+        if ((OS.contains("windows")) || OS.contains("Windows")) {
+            result = false;
+        } else {
+            result = true;
+        }
+        return result;
+    }
 
     public String getRegion() {
         return region;
@@ -21,6 +34,14 @@ public class credentials {
 
     public String getBucket() {
         return bucket;
+    }
+
+    public String getGROUPID() {
+        return groupid;
+    }
+
+    public String getUSERID() {
+        return userid;
     }
 
     public String getEndpoint() {
@@ -55,10 +76,22 @@ public class credentials {
         region = what;
     }
 
+    void setGROUPID(String what) {
+        groupid = what;
+    }
+
+    void setUSERID(String what) {
+        userid = what;
+    }
+
     String loadConfig() {
         String data = null;
+
+        if (!OScheck()) {
+            config_file = (Home + "\\s3.config");
+        }
         try {
-            FileReader fr = new FileReader(Home + "/s3.config");
+            FileReader fr = new FileReader(config_file);
             BufferedReader bfr = new BufferedReader(fr);
             String read = null;
 
@@ -73,14 +106,19 @@ public class credentials {
 
     }
 
-    String writeConfig(String access_key, String secret_key, String host, String port, String region) {
+    String writeConfig(String access_key, String secret_key, String host, String port, String region, String userid, String groupid) {
         try {
-            FileWriter fr = new FileWriter(Home + "/s3.config");
+
+            if (!OScheck()) {
+                config_file = (Home + "\\s3.config");
+            }
+
+            FileWriter fr = new FileWriter(config_file);
             BufferedWriter bfr = new BufferedWriter(fr);
-            bfr.write(access_key + "@" + secret_key + "@" + host + "@" + port + "@" + region);
+            bfr.write(access_key + "@" + secret_key + "@" + host + "@" + port + "@" + region + "@" + userid + "@" + groupid);
             bfr.close();
         } catch (Exception writeConfig) {
         }
-        return "Saved Config";
+        return "\nSaved Config";
     }
 }
