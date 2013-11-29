@@ -733,7 +733,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
         if (buckets_loaded > 0) {
-            reloadObjects();
+            reloadObjects(1);
             jTabbedPane1.setSelectedIndex(2);
         } else {
             jTextArea1.append("\nError: no bucket has been selected.");
@@ -785,7 +785,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }
 
-    void reloadObjects() {
+    void reloadObjects(int draw) {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
             jMenuItem11.setEnabled(true);
@@ -811,10 +811,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
                     d[h] = new JCheckBox();
                     d[h].setText(objectarray[h]);
-                    this.jPanel1.add(d[h]);
-                    this.setLocation(h, 5);
-                    this.jPanel1.revalidate();
-                    validate();
+                    if (draw == 1) {
+                        this.jPanel1.add(d[h]);
+                        this.setLocation(h, 5);
+                        this.jPanel1.revalidate();
+                        validate();
+                    }
                 }
 
                 this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
@@ -1200,7 +1202,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
         if (buckets_loaded > 0) {
-            reloadObjects();
+            reloadObjects(0);
             if (b[active_bucket].isSelected()) {
                 jTextArea1.append("\nStarting Sync:");
                 for (int i = 1; i != objectarray.length; i++) {
@@ -1221,7 +1223,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         try {
 
             if (this.buckets_loaded > 0) {
-                reloadObjects();
+                reloadObjects(0);
                 final JFrame search = new JFrame("Search for objects\n\n");
                 final JTextField searchbox = new JTextField();
                 searchbox.setSize(new Dimension(5, 5));
@@ -1231,12 +1233,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 searchbutton.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e) {
-                        reloadObjects();
+                        reloadObjects(0);
                         int found = 0;
                         for (int i = 1; i != objectarray.length; i++) {
                             if (d[i].getText().toLowerCase().contains(searchbox.getText().toLowerCase())) {
+
                                 jTabbedPane1.setSelectedIndex(2);
                                 jTextArea1.append("\nFound object(s): " + d[i].getText());
+                                jPanel1.add(d[i]);
+                                d[i].setVisible(true);
                                 jMenuItem11.setEnabled(false);
                                 found++;
                             } else {
@@ -1244,7 +1249,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             }
                         }
                         if (found == 0) {
-                            reloadObjects();
+                            reloadObjects(0);
                             jTextArea1.append("\nError: no objects found.");
                         }
 
@@ -1289,7 +1294,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-       try {
+        try {
 
             if (buckets_loaded > 0) {
                 for (int i = 1; i != objectarray.length; i++) {
@@ -1304,11 +1309,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         } catch (Exception checkbox) {
         }
-        reloadObjects();
+        reloadObjects(1);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-      if (!OScheck()) {
+        if (!OScheck()) {
             File_Destination = ("\\Desktop\\");
         }
 
