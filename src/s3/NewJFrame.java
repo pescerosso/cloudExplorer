@@ -44,6 +44,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String temp_file = (Home + "/object.tmp");
     String config_file = (Home + "/s3.config");
     ImageIcon[] photo = new ImageIcon[10000000];
+    String slash = "/";
 
     public NewJFrame() {
         initComponents();
@@ -688,8 +689,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     String convertObject(String what, String operation) {
+        OScheck();
 
-        String slash = "/";
+        if (what.substring(0, 0).contains(slash)) {
+        } else {
+            what = slash + what;
+        }
 
         if (what.contains("\\")) {
             what = what.replace("\\", "/");
@@ -936,6 +941,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     boolean OScheck() {
         boolean result;
         if ((OS.contains("windows")) || OS.contains("Windows")) {
+            slash = "\\";
             result = false;
         } else {
             result = true;
@@ -1207,10 +1213,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (b[active_bucket].isSelected()) {
                 jTextArea1.append("\nStarting Sync:");
                 for (int i = 1; i != objectarray.length; i++) {
-                    //    File_Destination = jFileChooser2.getSelectedFile().toString();
+                    String Destination = jFileChooser2.getSelectedFile().toString();
                     String new_object_name = convertObject(d[i].getText(), "download");
-                    //  jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name));
-                    //   jTextArea1.append("\n\nFinished downloading object to: " + File_Destination + new_object_name);
+                    jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Destination + new_object_name));
                     jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                 }
             }
