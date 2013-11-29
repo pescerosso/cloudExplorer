@@ -1245,6 +1245,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                 jPanel1.add(d[i]);
                                 d[i].setVisible(true);
                                 jMenuItem11.setEnabled(false);
+                                search.setVisible(false);
                                 found++;
                             } else {
                                 d[i].setVisible(false);
