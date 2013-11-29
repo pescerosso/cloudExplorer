@@ -1190,7 +1190,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             File file = jFileChooser1.getSelectedFile();
             String upload = (file.getAbsolutePath());
             String new_object_name = convertObject(file.getAbsolutePath().toString(), "upload");
-            jTextArea1.append("\n\nFinished uploading object: " + upload + " to bucket: " + Cred.getBucket());
             jTextField7.setText(jTextField7.getText().replace("null", ""));
             jTextArea1.append("\n" + Put.put(upload, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), this.jTextField7.getText() + new_object_name));
         } else {
@@ -1348,7 +1347,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (files[i].isDirectory()) {
                 uploadfileList(files[i]);
             } else {
-                jTextArea1.append("\nUploading file: " + files[i].getAbsolutePath());
                 jTextArea1.repaint();
                 jTextArea1.append("\n" + Put.put(files[i].getAbsolutePath(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), files[i].getAbsolutePath()));
                 jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
