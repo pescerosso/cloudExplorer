@@ -34,7 +34,7 @@ public class get {
         File file = new File(what);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
-        message = ("Getting object: " + what);
+        message = ("Get object: " + what);
         
         try {
             S3Object s3object = s3Client.getObject(new GetObjectRequest(bucket, what));

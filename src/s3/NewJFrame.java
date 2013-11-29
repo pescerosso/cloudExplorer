@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -31,7 +32,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     public put Put = new put();
     get Get = new get();
     String Home = System.getProperty("user.home");
-    String File_Destination = Home + "/Desktop/";
     String OS = System.getProperty("os.name");
     String[] bucketarray = null;
     String[] objectarray = null;
@@ -690,7 +690,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String convertObject(String what, String operation) {
 
         String slash = "/";
-
+   
         if (what.contains("\\")) {
             what = what.replace("\\", "/");
             what = what.substring(3, what.length());
@@ -1207,10 +1207,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (b[active_bucket].isSelected()) {
                 jTextArea1.append("\nStarting Sync:");
                 for (int i = 1; i != objectarray.length; i++) {
-                    File_Destination = jFileChooser2.getSelectedFile().toString();
+                    //    File_Destination = jFileChooser2.getSelectedFile().toString();
                     String new_object_name = convertObject(d[i].getText(), "download");
-                    jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name));
-                    jTextArea1.append("\n\nFinished downloading object to: " + File_Destination + new_object_name);
+                    //  jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name));
+                    //   jTextArea1.append("\n\nFinished downloading object to: " + File_Destination + new_object_name);
                     jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                 }
             }
@@ -1314,20 +1314,39 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        if (!OScheck()) {
-            File_Destination = ("\\Desktop\\");
-        }
-
         try {
+
             if (this.buckets_loaded > 0) {
-                for (int i = 1; i != objectarray.length; i++) {
-                    if (d[i].isSelected()) {
-                        String new_object_name = convertObject(d[i].getText(), "download");
-                        jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name));
-                        jTextArea1.append("\n\nFinished downloading object to: " + File_Destination + new_object_name);
-                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                final JFrame download = new JFrame("Please choose destination directory.");
+                final JPanel downloadPanel = new JPanel();
+                final JFileChooser downloadChooser = new JFileChooser();
+                downloadChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                final JButton downloadButton = new JButton("OK");
+
+                downloadButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+
+                        File File_Destination = new File(downloadChooser.getSelectedFile().toString());
+                        jTextArea1.append("Debug; " + File_Destination.toString());
+                        for (int i = 1; i != objectarray.length; i++) {
+                            if (d[i].isSelected()) {
+                                download.setVisible(false);
+                                String new_object_name = convertObject(d[i].getText(), "download");
+                                jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination.toString() + new_object_name));
+                                jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+
+                            }
+                        }
                     }
-                }
+                });
+
+                downloadPanel.setLayout(new BoxLayout(downloadPanel, BoxLayout.PAGE_AXIS));
+                downloadPanel.add(downloadChooser);
+                downloadPanel.add(downloadButton);
+                download.add(downloadPanel);
+                download.setLocation(500, 500);
+                download.pack();
+                download.setVisible(true);
             } else {
                 jTextArea1.append("\nError: No bucket has been selected");
             }
