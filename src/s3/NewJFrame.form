@@ -10,14 +10,14 @@
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cd" green="5d" id="Button.light" palette="3" red="2c" type="palette"/>
+          <Color blue="cd" green="5d" id="Control Highlight" palette="2" red="2c" type="palette"/>
         </Property>
       </Properties>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cd" green="5d" id="Button.light" palette="3" red="2c" type="palette"/>
+              <Color blue="cd" green="5d" id="Control Highlight" palette="2" red="2c" type="palette"/>
             </Property>
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
@@ -35,7 +35,7 @@
         <Menu class="javax.swing.JMenu" name="jMenu4">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cd" green="5d" id="Button.light" palette="3" red="2c" type="palette"/>
+              <Color blue="cd" green="5d" id="Control Highlight" palette="2" red="2c" type="palette"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Edit"/>
           </Properties>
@@ -70,7 +70,7 @@
         <Menu class="javax.swing.JMenu" name="jMenu3">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cd" green="5d" id="Button.light" palette="3" red="2c" type="palette"/>
+              <Color blue="cd" green="5d" id="Control Highlight" palette="2" red="2c" type="palette"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Bucket"/>
           </Properties>
@@ -105,7 +105,7 @@
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cd" green="5d" id="Button.light" palette="3" red="2c" type="palette"/>
+              <Color blue="cd" green="5d" id="Control Highlight" palette="2" red="2c" type="palette"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Objects"/>
           </Properties>
@@ -534,6 +534,9 @@
           <SubComponents>
             <Container class="javax.swing.JPanel" name="jPanel1">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" id="Active Caption" palette="2" red="ff" type="palette"/>
+                </Property>
                 <Property name="autoscrolls" type="boolean" value="true"/>
               </Properties>
               <AuxValues>
@@ -805,6 +808,9 @@
           <SubComponents>
             <Container class="javax.swing.JPanel" name="jPanel5">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" id="Active Caption" palette="2" red="ff" type="palette"/>
+                </Property>
                 <Property name="alignmentX" type="float" value="0.0"/>
                 <Property name="alignmentY" type="float" value="0.0"/>
                 <Property name="autoscrolls" type="boolean" value="true"/>

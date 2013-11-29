@@ -319,6 +319,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jTabbedPane1.addTab("Settings", jPanel3);
 
+        jPanel1.setBackground(java.awt.SystemColor.activeCaption);
         jPanel1.setAutoscrolls(true);
 
         jLabel2.setText("Objects");
@@ -490,6 +491,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jLabel1.setText("Buckets");
 
+        jPanel5.setBackground(java.awt.SystemColor.activeCaption);
         jPanel5.setAlignmentX(0.0F);
         jPanel5.setAlignmentY(0.0F);
         jPanel5.setAutoscrolls(true);
@@ -511,9 +513,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/logo_cloudian.png"))); // NOI18N
 
-        jMenuBar1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        jMenuBar1.setBackground(java.awt.SystemColor.controlHighlight);
 
-        jMenu1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        jMenu1.setBackground(java.awt.SystemColor.controlHighlight);
         jMenu1.setText("File");
 
         jMenuItem4.setText("Exit");
@@ -526,7 +528,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu4.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        jMenu4.setBackground(java.awt.SystemColor.controlHighlight);
         jMenu4.setText("Edit");
 
         jMenuItem11.setText("Select All");
@@ -556,7 +558,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        jMenu3.setBackground(java.awt.SystemColor.controlHighlight);
         jMenu3.setText("Bucket");
 
         jMenuItem1.setText("Create Bucket");
@@ -586,7 +588,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu2.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        jMenu2.setBackground(java.awt.SystemColor.controlHighlight);
         jMenu2.setText("Objects");
 
         jMenuItem6.setText("ACL");
