@@ -690,7 +690,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String convertObject(String what, String operation) {
 
         String slash = "/";
-   
+
         if (what.contains("\\")) {
             what = what.replace("\\", "/");
             what = what.substring(3, what.length());
@@ -1326,16 +1326,20 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 downloadButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
 
-                        File File_Destination = new File(downloadChooser.getSelectedFile().toString());
-                        jTextArea1.append("Debug; " + File_Destination.toString());
-                        for (int i = 1; i != objectarray.length; i++) {
-                            if (d[i].isSelected()) {
-                                download.setVisible(false);
-                                String new_object_name = convertObject(d[i].getText(), "download");
-                                jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination.toString() + new_object_name));
-                                jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                        if (downloadChooser.getSelectedFile() != null) {
+                            File File_Destination = new File(downloadChooser.getSelectedFile().toString());
+                            for (int i = 1; i != objectarray.length; i++) {
+                                if (d[i].isSelected()) {
+                                    download.setVisible(false);
+                                    String new_object_name = convertObject(d[i].getText(), "download");
+                                    jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination.toString() + new_object_name));
+                                    jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
 
+                                }
                             }
+                        } else {
+                            download.setVisible(false);
+                            jTextArea1.append("\nError: destination not specified.");
                         }
                     }
                 });
@@ -1346,7 +1350,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 download.add(downloadPanel);
                 download.setLocation(500, 500);
                 download.pack();
-                download.setVisible(true);
+                for (int i = 1; i != objectarray.length; i++) {
+                    if (d[i].isSelected()) {
+                        download.setVisible(true);
+                    }
+                }
+
             } else {
                 jTextArea1.append("\nError: No bucket has been selected");
             }
