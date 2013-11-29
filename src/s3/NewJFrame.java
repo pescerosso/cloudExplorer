@@ -1239,7 +1239,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         int found = 0;
                         for (int i = 1; i != objectarray.length; i++) {
                             if (d[i].getText().toLowerCase().contains(searchbox.getText().toLowerCase())) {
-
                                 jTabbedPane1.setSelectedIndex(2);
                                 jTextArea1.append("\nFound object(s): " + d[i].getText());
                                 jPanel1.add(d[i]);
