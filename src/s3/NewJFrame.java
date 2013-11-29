@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
@@ -91,14 +92,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextField6 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -107,15 +104,21 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         jMenuItem5.setText("jMenuItem5");
 
@@ -441,24 +444,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jTabbedPane1.addTab("Text Editor", jPanel6);
 
-        jButton3.setText("Delete Object");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         jButton6.setText("View Objects");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
-            }
-        });
-
-        jButton7.setText("Download");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
             }
         });
 
@@ -473,20 +462,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jToggleButton1.setText("Deselect All");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
-            }
-        });
-
-        jToggleButton2.setText("Select All");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -494,34 +469,20 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 907, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 907, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jToggleButton1)
-                        .addGap(63, 63, 63))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
                     .addComponent(jButton6)
-                    .addComponent(jButton7)
-                    .addComponent(jButton1)
-                    .addComponent(jToggleButton2)
-                    .addComponent(jToggleButton1))
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(8, Short.MAX_VALUE))
@@ -565,6 +526,36 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu4.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
+        jMenu4.setText("Edit");
+
+        jMenuItem11.setText("Select All");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem11);
+
+        jMenuItem10.setText("Deselect All");
+        jMenuItem10.setToolTipText("");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem10);
+
+        jMenuItem9.setText("Search for Objects");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem9);
+
+        jMenuBar1.add(jMenu4);
+
         jMenu3.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
         jMenu3.setText("Bucket");
 
@@ -606,13 +597,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         });
         jMenu2.add(jMenuItem6);
 
-        jMenuItem8.setText("View in Image Viewer");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxMenuItem1.setText("Edit File");
+        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                jCheckBoxMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem8);
+        jMenu2.add(jCheckBoxMenuItem1);
 
         jMenuItem7.setText("View ACL");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
@@ -622,13 +613,29 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         });
         jMenu2.add(jMenuItem7);
 
-        jCheckBoxMenuItem1.setText("Edit File");
-        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem12.setText("Delete Object");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem1ActionPerformed(evt);
+                jMenuItem12ActionPerformed(evt);
             }
         });
-        jMenu2.add(jCheckBoxMenuItem1);
+        jMenu2.add(jMenuItem12);
+
+        jMenuItem13.setText("Download Object");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem13);
+
+        jMenuItem8.setText("View in Image Viewer");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
 
@@ -712,28 +719,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         return (out_file);
     }
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        if (!OScheck()) {
-            File_Destination = ("\\Desktop\\");
-        }
-
-        try {
-            if (this.buckets_loaded > 0) {
-                for (int i = 1; i != objectarray.length; i++) {
-                    if (d[i].isSelected()) {
-                        String new_object_name = convertObject(d[i].getText(), "download");
-                        jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name));
-                        jTextArea1.append("\n\nFinished downloading object to: " + File_Destination + new_object_name);
-                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-                    }
-                }
-            } else {
-                jTextArea1.append("\nError: No bucket has been selected");
-            }
-        } catch (Exception Download) {
-        }
-    }//GEN-LAST:event_jButton7ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         preload();
 
@@ -744,26 +729,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jTextArea1.append("\nError: Configuration not loaded");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-        try {
-
-            if (buckets_loaded > 0) {
-                for (int i = 1; i != objectarray.length; i++) {
-                    if (d[i].isSelected()) {
-                        jTextArea1.append("\n" + Delete.deleteFile(d[i].getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint()));
-                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-
-                    }
-                }
-            } else {
-                jTextArea1.append("\nError: No bucked selected.");
-            }
-        } catch (Exception checkbox) {
-        }
-        reloadObjects();
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
@@ -823,6 +788,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     void reloadObjects() {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
+            jMenuItem11.setEnabled(true);
             this.objectarray = null;
             this.jPanel1.removeAll();
             this.jPanel1.revalidate();
@@ -872,26 +838,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }
 
-
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        try {
-            for (int i = 1; i != objectarray.length; i++) {
-                d[i].setSelected(false);
-            }
-        } catch (Exception SelectALL) {
-        }
-
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
-
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-
-        try {
-            for (int i = 1; i != objectarray.length; i++) {
-                d[i].setSelected(true);
-            }
-        } catch (Exception SelectALL) {
-        }
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
     void editorSync(String file) {
         if (!OScheck()) {
             temp_file = (Home + "\\object.tmp");
@@ -1271,6 +1217,122 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        try {
+
+            if (this.buckets_loaded > 0) {
+                reloadObjects();
+                final JFrame search = new JFrame("Search for objects\n\n");
+                final JTextField searchbox = new JTextField();
+                searchbox.setSize(new Dimension(5, 5));
+                final JLabel searchlabel = new JLabel("Type an object name to search for:");
+                final JButton searchbutton = new JButton("Search");
+
+                searchbutton.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e) {
+                        reloadObjects();
+                        int found = 0;
+                        for (int i = 1; i != objectarray.length; i++) {
+                            if (d[i].getText().toLowerCase().contains(searchbox.getText().toLowerCase())) {
+                                jTabbedPane1.setSelectedIndex(2);
+                                jTextArea1.append("\nFound object(s): " + d[i].getText());
+                                jMenuItem11.setEnabled(false);
+                                found++;
+                            } else {
+                                d[i].setVisible(false);
+                            }
+                        }
+                        if (found == 0) {
+                            reloadObjects();
+                            jTextArea1.append("\nError: no objects found.");
+                        }
+
+                    }
+                });
+
+                JPanel foopanel = new JPanel();
+                search.setPreferredSize(new Dimension(225, 120));
+                search.setResizable(false);
+                foopanel.setLayout(new BoxLayout(foopanel, BoxLayout.PAGE_AXIS));
+                search.add(foopanel);
+                foopanel.add(searchlabel);
+                foopanel.add(searchbox);
+                foopanel.add(searchbutton);
+                search.setLocation(500, 500);
+                search.pack();
+                search.setVisible(true);
+            } else {
+                jTextArea1.append("\nError: No bucket has been selected");
+            }
+        } catch (Exception Download) {
+        }
+
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        try {
+            for (int i = 1; i != objectarray.length; i++) {
+                d[i].setSelected(false);
+            }
+        } catch (Exception SelectALL) {
+        }
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        try {
+            for (int i = 1; i != objectarray.length; i++) {
+                d[i].setSelected(true);
+            }
+        } catch (Exception SelectALL) {
+        }
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+       try {
+
+            if (buckets_loaded > 0) {
+                for (int i = 1; i != objectarray.length; i++) {
+                    if (d[i].isSelected()) {
+                        jTextArea1.append("\n" + Delete.deleteFile(d[i].getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint()));
+                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+
+                    }
+                }
+            } else {
+                jTextArea1.append("\nError: No bucked selected.");
+            }
+        } catch (Exception checkbox) {
+        }
+        reloadObjects();
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+      if (!OScheck()) {
+            File_Destination = ("\\Desktop\\");
+        }
+
+        try {
+            if (this.buckets_loaded > 0) {
+                for (int i = 1; i != objectarray.length; i++) {
+                    if (d[i].isSelected()) {
+                        String new_object_name = convertObject(d[i].getText(), "download");
+                        jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination + new_object_name));
+                        jTextArea1.append("\n\nFinished downloading object to: " + File_Destination + new_object_name);
+                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                    }
+                }
+            } else {
+                jTextArea1.append("\nError: No bucket has been selected");
+            }
+        } catch (Exception Download) {
+        }
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    void drawWindow() {
+
+    }
+
     private void uploadfileList(File dir) {
 
         File[] files = dir.listFiles();
@@ -1307,10 +1369,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
@@ -1331,8 +1391,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -1340,6 +1405,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     public static javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1363,8 +1429,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JToggleButton jToggleButton4;
     private java.awt.ScrollPane scrollPane1;
