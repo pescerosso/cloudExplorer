@@ -745,7 +745,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
         if (buckets_loaded > 0) {
-            reloadObjects(1);
+            //  reloadObjects(1);
+            ObjectListThread test;
+            test = new ObjectListThread(this);
+            test.run();
+
             jTabbedPane1.setSelectedIndex(2);
         } else {
             jTextArea1.append("\nError: no bucket has been selected.");
@@ -797,7 +801,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }
 
-    void reloadObjects(int draw) {
+    void reloadObjects() {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
             jMenuItem11.setEnabled(true);
@@ -823,12 +827,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
                     d[h] = new JCheckBox();
                     d[h].setText(objectarray[h]);
-                    if (draw == 1) {
-                        this.jPanel1.add(d[h]);
-                        this.setLocation(h, 5);
-                        this.jPanel1.revalidate();
-                        validate();
-                    }
+
+                    this.jPanel1.add(d[h]);
+                    this.setLocation(h, 5);
+                    this.jPanel1.revalidate();
+                    validate();
+
                 }
 
                 this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
@@ -871,7 +875,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
             reloadBuckets();
-            String response = JOptionPane.showInputDialog(null, "Bucket Name: ", JOptionPane.OK_CANCEL_OPTION);
+
+            String response = JOptionPane.showInputDialog(null, "Bucket Name: ", "logo_cloudian.png", JOptionPane.OK_CANCEL_OPTION);
             jTextArea1.append("\n" + Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), response.toLowerCase(), Cred.getEndpoint(), Cred.getRegion()));
             reloadBuckets();
 
@@ -1217,7 +1222,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
         if (buckets_loaded > 0) {
-            reloadObjects(0);
+            reloadObjects();
             if (b[active_bucket].isSelected()) {
                 jTextArea1.append("\nStarting Sync:");
                 if (jFileChooser2.getSelectedFile() == null) {
@@ -1240,7 +1245,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         try {
 
             if (this.buckets_loaded > 0) {
-                reloadObjects(0);
+                reloadObjects();
                 final JFrame search = new JFrame("Search for objects\n\n");
                 final JTextField searchbox = new JTextField();
                 searchbox.setSize(new Dimension(5, 5));
@@ -1250,7 +1255,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 searchbutton.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e) {
-                        reloadObjects(0);
+                        reloadObjects();
                         int found = 0;
                         for (int i = 1; i != objectarray.length; i++) {
                             if (d[i].getText().toLowerCase().contains(searchbox.getText().toLowerCase())) {
@@ -1266,7 +1271,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             }
                         }
                         if (found == 0) {
-                            reloadObjects(0);
+                            reloadObjects();
                             jTextArea1.append("\nError: no objects found.");
                         }
 
@@ -1326,52 +1331,17 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         } catch (Exception checkbox) {
         }
-        reloadObjects(1);
+        reloadObjects();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         try {
 
             if (this.buckets_loaded > 0) {
-                final JFrame download = new JFrame("Please choose destination directory.");
-                final JPanel downloadPanel = new JPanel();
-                final JFileChooser downloadChooser = new JFileChooser();
-                downloadChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                final JButton downloadButton = new JButton("OK");
-
-                downloadButton.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        if (downloadChooser.getSelectedFile().getAbsolutePath() != null) {
-                            File File_Destination = new File(downloadChooser.getSelectedFile().getAbsolutePath());
-                            for (int i = 1; i != objectarray.length; i++) {
-                                if (d[i].isSelected()) {
-                                    download.setVisible(false);
-                                    String new_object_name = convertObject(d[i].getText(), "download");
-                                    OScheck();
-                                    jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination.toString() + slash + new_object_name));
-                                    jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-
-                                }
-                            }
-                        } else {
-                            download.setVisible(false);
-                            jTextArea1.append("\nError: destination not specified.");
-                        }
-                    }
-                });
-
-                downloadPanel.setLayout(new BoxLayout(downloadPanel, BoxLayout.PAGE_AXIS));
-                downloadPanel.add(downloadChooser);
-                downloadPanel.add(downloadButton);
-                download.add(downloadPanel);
-                download.setLocation(500, 500);
-                download.pack();
-                for (int i = 1; i != objectarray.length; i++) {
-                    if (d[i].isSelected()) {
-                        download.setVisible(true);
-                    }
-                }
-
+                jTextArea1.append("\nPlease wait......");
+                GetThread GetThread;
+                GetThread = new GetThread(this);
+                GetThread.run();
             } else {
                 jTextArea1.append("\nError: No bucket has been selected");
             }
