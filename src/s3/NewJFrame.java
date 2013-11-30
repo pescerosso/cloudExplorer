@@ -746,10 +746,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         if (buckets_loaded > 0) {
             //  reloadObjects(1);
-            ObjectListThread test;
-            test = new ObjectListThread(this);
+            ObjectListThread test = new ObjectListThread(this);
             test.run();
-
             jTabbedPane1.setSelectedIndex(2);
         } else {
             jTextArea1.append("\nError: no bucket has been selected.");
@@ -1206,8 +1204,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
   
         if (this.buckets_loaded > 0) {
-            PutThread PutThread;
-            PutThread = new PutThread(this);
+            PutThread PutThread = new PutThread(this);
             PutThread.run();
         } else {
             jTextArea1.append("\nError: No bucket selected.");
@@ -1336,8 +1333,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         if (this.buckets_loaded > 0) {
             jTextArea1.append("\nPlease wait for the download operation to complete......");
-            GetThread GetThread;
-            GetThread = new GetThread(this);
+            GetThread GetThread = new GetThread(this);
             GetThread.run();
         } else {
             jTextArea1.append("\nError: No bucket has been selected");
