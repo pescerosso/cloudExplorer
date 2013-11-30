@@ -320,7 +320,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jTabbedPane1.addTab("Settings", jPanel3);
 
-        jPanel1.setBackground(java.awt.SystemColor.activeCaption);
+        jPanel1.setBackground(java.awt.SystemColor.text);
         jPanel1.setAutoscrolls(true);
 
         jLabel2.setText("Objects");
@@ -446,7 +446,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jTabbedPane1.addTab("Text Editor", jPanel6);
 
-        jButton6.setText("View Objects");
+        jButton6.setText("Show Objects");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -473,8 +473,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 907, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton6)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -492,10 +492,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jLabel1.setText("Buckets");
 
-        jPanel5.setBackground(java.awt.SystemColor.activeCaption);
+        jPanel5.setBackground(java.awt.SystemColor.text);
         jPanel5.setAlignmentX(0.0F);
         jPanel5.setAlignmentY(0.0F);
         jPanel5.setAutoscrolls(true);
+        jPanel5.setOpaque(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -689,41 +690,51 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     String convertObject(String what, String operation) {
-        OScheck();
 
-        if (what.substring(0, 0).contains(slash)) {
-        } else {
-            what = slash + what;
+        if (!OScheck()) {
+            if (what.contains("/")) {
+                what = what.replace("/", "\\");
+            }
         }
 
-        if (what.contains("\\")) {
-            what = what.replace("\\", "/");
-            what = what.substring(3, what.length());
+        if (OScheck()) {
+            if (what.contains("\\")) {
+                what = what.replace("\\", "/");
+            }
         }
 
-        int count = what.split(slash).length;
-        count = count - 1;
+        int count = 0;
         int slash_counter = 0;
         String out_file = null;
-        int another_counter = 1;
+        int another_counter = 0;
+
+        jTextArea1.append("\n debug count=" + count);
 
         for (int y = 0; y != what.length(); y++) {
-
-            if (what.substring(y, another_counter).contains(slash)) {
+            if (what.substring(y, y + 1).contains(slash)) {
                 slash_counter++;
+                another_counter = y;
             }
+        }
+        jTextArea1.append("\n debug slash_counter=" + slash_counter);
 
-            if (slash_counter == count) {
+        for (int y = 0; y != what.length(); y++) {
+            if (y == another_counter) {
                 if (operation.contains("download")) {
-                    out_file = (what.substring(y, what.length()));
+                    if (what.contains(slash)) {
+                        out_file = (what.substring(y, what.length()));
+                    } else {
+                        out_file = (what);
+                    }
                 } else {
                     out_file = (what.substring(y + 1, what.length()));
                 }
-                break;
             }
-            another_counter++;
+
+            jTextArea1.append("\ndebug outfile=" + out_file);
+
         }
-        return (out_file);
+        return out_file;
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1330,14 +1341,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
                 downloadButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
+                        jTextArea1.append("\nDebug: downloadfile " + downloadChooser.getSelectedFile().getAbsolutePath());
+                        if (downloadChooser.getSelectedFile().getAbsolutePath() != null) {
 
-                        if (downloadChooser.getSelectedFile() != null) {
-                            File File_Destination = new File(downloadChooser.getSelectedFile().toString());
+                            File File_Destination = new File(downloadChooser.getSelectedFile().getAbsolutePath());
                             for (int i = 1; i != objectarray.length; i++) {
                                 if (d[i].isSelected()) {
                                     download.setVisible(false);
                                     String new_object_name = convertObject(d[i].getText(), "download");
-                                    jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination.toString() + new_object_name));
+                                    OScheck();
+                                    jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), File_Destination.toString() + slash + new_object_name));
                                     jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
 
                                 }
