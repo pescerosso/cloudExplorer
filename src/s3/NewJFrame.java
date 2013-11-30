@@ -1338,7 +1338,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         try {
 
             if (this.buckets_loaded > 0) {
-                jTextArea1.append("\nPlease wait......");
+                jTextArea1.append("\nPlease wait for the download operation to complete......");
                 GetThread GetThread;
                 GetThread = new GetThread(this);
                 GetThread.run();
