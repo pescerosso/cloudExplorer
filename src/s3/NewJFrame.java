@@ -1133,8 +1133,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if (buckets_loaded > 0) {
             if (b[active_bucket].isSelected()) {
                 jTextArea1.append("\nStarting Sync:");
-                uploadfileList(jFileChooser2.getSelectedFile());
-
+                if (jFileChooser2.getSelectedFile() == null) {
+                    jTextArea1.append("\nError: please select a destination directroy.");
+                } else {
+                    uploadfileList(jFileChooser2.getSelectedFile());
+                }
             }
         } else {
             jTextArea1.append("\nError: No bucket selected.");
@@ -1217,17 +1220,20 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             reloadObjects(0);
             if (b[active_bucket].isSelected()) {
                 jTextArea1.append("\nStarting Sync:");
-                for (int i = 1; i != objectarray.length; i++) {
-                    String Destination = jFileChooser2.getSelectedFile().toString();
-                    String new_object_name = convertObject(d[i].getText(), "download");
-                    jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Destination + new_object_name));
-                    jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                if (jFileChooser2.getSelectedFile() == null) {
+                    jTextArea1.append("\nError: please select a destination directroy.");
+                } else {
+                    for (int i = 1; i != objectarray.length; i++) {
+                        String Destination = jFileChooser2.getSelectedFile().toString();
+                        String new_object_name = convertObject(d[i].getText(), "download");
+                        jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Destination + new_object_name));
+                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                    }
                 }
+            } else {
+                jTextArea1.append("\nError: No bucket selected.");
             }
-        } else {
-            jTextArea1.append("\nError: No bucket selected.");
         }
-
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
