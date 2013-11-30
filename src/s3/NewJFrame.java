@@ -517,7 +517,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.setBackground(java.awt.Color.blue);
 
-        jMenu1.setBackground(java.awt.SystemColor.controlHighlight);
+        jMenu1.setBackground(new java.awt.Color(0, 0, 255));
         jMenu1.setText("File");
 
         jMenuItem4.setText("Exit");
@@ -530,7 +530,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu4.setBackground(java.awt.SystemColor.controlHighlight);
+        jMenu4.setBackground(new java.awt.Color(0, 0, 255));
         jMenu4.setText("Edit");
 
         jMenuItem11.setText("Select All");
@@ -560,7 +560,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu3.setBackground(java.awt.SystemColor.controlHighlight);
+        jMenu3.setBackground(new java.awt.Color(0, 0, 255));
         jMenu3.setText("Bucket");
 
         jMenuItem1.setText("Create Bucket");
@@ -590,7 +590,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu2.setBackground(java.awt.SystemColor.controlHighlight);
+        jMenu2.setBackground(new java.awt.Color(0, 0, 255));
         jMenu2.setText("Objects");
 
         jMenuItem6.setText("ACL");
