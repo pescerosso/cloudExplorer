@@ -10,7 +10,7 @@
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cd" green="5d" id="Control Highlight" palette="2" red="2c" type="palette"/>
+          <Color blue="ff" green="0" id="blue" palette="1" red="0" type="palette"/>
         </Property>
       </Properties>
       <SubComponents>

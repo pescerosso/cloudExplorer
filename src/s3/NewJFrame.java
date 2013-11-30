@@ -515,7 +515,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/logo_cloudian.png"))); // NOI18N
 
-        jMenuBar1.setBackground(java.awt.SystemColor.controlHighlight);
+        jMenuBar1.setBackground(java.awt.Color.blue);
 
         jMenu1.setBackground(java.awt.SystemColor.controlHighlight);
         jMenu1.setText("File");
@@ -708,15 +708,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         String out_file = null;
         int another_counter = 0;
 
-        jTextArea1.append("\n debug count=" + count);
-
         for (int y = 0; y != what.length(); y++) {
             if (what.substring(y, y + 1).contains(slash)) {
                 slash_counter++;
                 another_counter = y;
             }
         }
-        jTextArea1.append("\n debug slash_counter=" + slash_counter);
 
         for (int y = 0; y != what.length(); y++) {
             if (y == another_counter) {
@@ -730,9 +727,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     out_file = (what.substring(y + 1, what.length()));
                 }
             }
-
-            jTextArea1.append("\ndebug outfile=" + out_file);
-
         }
         return out_file;
     }
@@ -1341,9 +1335,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
                 downloadButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        jTextArea1.append("\nDebug: downloadfile " + downloadChooser.getSelectedFile().getAbsolutePath());
                         if (downloadChooser.getSelectedFile().getAbsolutePath() != null) {
-
                             File File_Destination = new File(downloadChooser.getSelectedFile().getAbsolutePath());
                             for (int i = 1; i != objectarray.length; i++) {
                                 if (d[i].isSelected()) {
@@ -1380,10 +1372,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception Download) {
         }
     }//GEN-LAST:event_jMenuItem13ActionPerformed
-
-    void drawWindow() {
-
-    }
 
     private void uploadfileList(File dir) {
 
