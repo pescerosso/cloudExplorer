@@ -1388,7 +1388,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     if (d[h].isSelected()) {
                         musicFrame.setPreferredSize(new Dimension(225, 120));
                         musicFrame.setResizable(false);
-                        musicPanel.setLayout(new BoxLayout(musicPanel, BoxLayout.PAGE_AXIS));
+                       // musicPanel.setLayout(new BoxLayout(musicPanel, BoxLayout.PAGE_AXIS));
                         musicFrame.add(musicPanel);
                         musicPanel.add(stopMusic);
                         musicPanel.add(replayMusic);
