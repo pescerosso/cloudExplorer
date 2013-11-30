@@ -24,7 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 public class NewJFrame extends javax.swing.JFrame implements ItemListener {
-    
+
     credentials Cred = new credentials();
     bucket Bucket = new bucket();
     delete Delete = new delete();
@@ -45,11 +45,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String config_file = (Home + "/s3.config");
     ImageIcon[] photo = new ImageIcon[10000000];
     String slash = "/";
-    
+
     public NewJFrame() {
         initComponents();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -690,31 +690,31 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     String convertObject(String what, String operation) {
-        
+
         if (!OScheck()) {
             if (what.contains("/")) {
                 what = what.replace("/", "\\");
             }
         }
-        
+
         if (OScheck()) {
             if (what.contains("\\")) {
                 what = what.replace("\\", "/");
             }
         }
-        
+
         int count = 0;
         int slash_counter = 0;
         String out_file = null;
         int another_counter = 0;
-        
+
         for (int y = 0; y != what.length(); y++) {
             if (what.substring(y, y + 1).contains(slash)) {
                 slash_counter++;
                 another_counter = y;
             }
         }
-        
+
         for (int y = 0; y != what.length(); y++) {
             if (y == another_counter) {
                 if (operation.contains("download")) {
@@ -733,7 +733,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         preload();
-        
+
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
             reloadBuckets();
@@ -743,22 +743,22 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
+
         if (buckets_loaded > 0) {
             //  reloadObjects(1);
             ObjectListThread test;
             test = new ObjectListThread(this);
             test.run();
-            
+
             jTabbedPane1.setSelectedIndex(2);
         } else {
             jTextArea1.append("\nError: no bucket has been selected.");
         }
     }
-    
+
     public void itemStateChanged(ItemEvent e) {
         buckets_loaded = 0;
-        
+
         for (int h = 1; h != bucketarray.length; h++) {
             if (b[h] != null) {
                 if (b[h].isSelected()) {
@@ -769,26 +769,26 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         }
     }
-    
+
     void reloadBuckets() {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
             this.bucketarray = null;
-            
+
             String bucketlist = Bucket.listBuckets(Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint());
             bucketarray = bucketlist.split(" ");
-            
+
             this.jPanel5.removeAll();
             this.jPanel5.revalidate();
             this.jPanel5.repaint();
             this.jPanel5.setLayout(new BoxLayout(this.jPanel5, BoxLayout.PAGE_AXIS));
-            
+
             if (bucketarray != null) {
                 for (int h = 1; h != bucketarray.length; h++) {
                     jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
                     b[h] = new JCheckBox();
                     b[h].setText(bucketarray[h]);
-                    
+
                     b[h].addItemListener(this);
                     this.jPanel5.add(b[h]);
                     this.setLocation(h, 5);
@@ -800,7 +800,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jTextArea1.append("\nError: Configuration not loaded");
         }
     }
-    
+
     void reloadObjects() {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
@@ -810,33 +810,33 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             this.jPanel1.revalidate();
             this.jPanel1.repaint();
             this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
-            
+
             try {
                 for (int h = 1; h != bucketarray.length; h++) {
                     if (b[h] != null) {
                         if (b[h].isSelected()) {
                             String objectlist = Bucket.listBucketContents(Cred.getAccess_key(), Cred.getSecret_key(), b[h].getText(), Cred.getEndpoint());
                             objectarray = objectlist.split("@");
-                            
+
                         }
                     }
                 }
-                
+
                 for (int h = 1; h != objectarray.length; h++) {
-                    
+
                     jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
                     d[h] = new JCheckBox();
                     d[h].setText(objectarray[h]);
-                    
+
                     this.jPanel1.add(d[h]);
                     this.setLocation(h, 5);
                     this.jPanel1.revalidate();
                     validate();
-                    
+
                 }
-                
+
                 this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
-                
+
             } catch (Exception listing) {
                 System.out.print("\n\nException in readObjects");
             }
@@ -845,24 +845,24 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
     void preload() {
-        
+
         if (!OScheck()) {
             config_file = (Home + "\\s3.config");
         }
-        
+
         File checkConfig = new File(config_file);
         if (checkConfig.exists()) {
             jButton9.doClick();
         }
     }
-    
+
     void editorSync(String file) {
         if (!OScheck()) {
             temp_file = (Home + "\\object.tmp");
         }
-        
+
         File tmp = new File(temp_file);
-        
+
         try {
             FileWriter fr = new FileWriter(temp_file);
             BufferedWriter bfr = new BufferedWriter(fr);
@@ -875,11 +875,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
             reloadBuckets();
-            
+
             String response = JOptionPane.showInputDialog(null, "Bucket Name: ", "logo_cloudian.png", JOptionPane.OK_CANCEL_OPTION);
             jTextArea1.append("\n" + Bucket.makeBucket(Cred.getAccess_key(), Cred.getSecret_key(), response.toLowerCase(), Cred.getEndpoint(), Cred.getRegion()));
             reloadBuckets();
-            
+
         } else {
             jTextArea1.append("\nError: Configuration not loaded");
         }
@@ -891,9 +891,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 final JFrame bucketACL = new JFrame("Bucket ACL Settings");
                 final JCheckBox static_website = new JCheckBox("Static Website");
                 final JButton bucketACLbutton = new JButton("Commit");
-                
+
                 bucketACLbutton.addActionListener(new ActionListener() {
-                    
+
                     public void actionPerformed(ActionEvent e) {
                         if (static_website.isSelected()) {
                             ACL.setBUCKETwebsite(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
@@ -908,7 +908,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         }
                     }
                 });
-                
+
                 JPanel foopanel = new JPanel();
                 bucketACL.setPreferredSize(new Dimension(225, 75));
                 bucketACL.setResizable(false);
@@ -919,7 +919,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 bucketACL.setLocation(500, 500);
                 bucketACL.pack();
                 bucketACL.setVisible(true);
-                
+
             } else {
                 jTextArea1.append("\nError: No bucket has been selected");
             }
@@ -930,10 +930,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
-            
+
             for (int i = 0; i != bucketarray.length; i++) {
                 if (b[i] != null) {
-                    
+
                     if (b[i].isSelected()) {
                         jTextArea1.append(Bucket.deleteBucket(Cred.access_key, Cred.secret_key, b[i].getText(), Cred.end_point, Cred.region));
                     }
@@ -960,16 +960,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
     private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
         try {
-            
+
             if (!OScheck()) {
                 temp_file = (Home + "\\object.tmp");
             }
-            
+
             for (int i = 1; i != objectarray.length; i++) {
                 if (d[i].isSelected()) {
                     String new_object_name = convertObject(d[i].getText(), "download");
                     jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), temp_file));
-                    
+
                     try {
                         FileReader frr = new FileReader(temp_file);
                         BufferedReader bfrr = new BufferedReader(frr);
@@ -980,30 +980,30 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         }
                         bfrr.close();
                     } catch (Exception tempFile) {
-                        
+
                     }
                     jTabbedPane1.setSelectedIndex(4);
                     jTextField6.setText(d[i].getText());
                 }
-                
+
             }
-            
+
         } catch (Exception Download) {
         }
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         try {
-            
+
             if (this.buckets_loaded > 0) {
                 final JFrame parent = new JFrame("Object ACL Settings");
                 final JCheckBox public_box = new JCheckBox("Public");
                 final JCheckBox url_box = new JCheckBox("URL Access");
                 final JCheckBox private_box = new JCheckBox("Private Access");
                 final JButton acl = new JButton("Commit");
-                
+
                 acl.addActionListener(new ActionListener() {
-                    
+
                     public void actionPerformed(ActionEvent e) {
                         for (int i = 1; i != objectarray.length; i++) {
                             if (d[i].isSelected()) {
@@ -1014,7 +1014,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                     jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                                     parent.setVisible(false);
                                 }
-                                
+
                                 if (url_box.isSelected()) {
                                     jTextArea1.append("\n" + ACL.setACLurl(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket()));
                                     jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
@@ -1026,13 +1026,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                     jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                                     parent.setVisible(false);
                                 }
-                                
+
                             }
                         }
-                        
+
                     }
                 });
-                
+
                 JPanel foopanel = new JPanel();
                 parent.setPreferredSize(new Dimension(225, 120));
                 parent.setResizable(false);
@@ -1055,7 +1055,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         try {
-            
+
             if (this.buckets_loaded > 0) {
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
@@ -1076,12 +1076,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 file.delete();
             }
         } catch (Exception deleteFIle) {
-            
+
         }
     }
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         try {
-            
+
             if (!OScheck()) {
                 temp_file = (Home + "\\object.tmp");
             }
@@ -1091,7 +1091,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             JScrollPane scrolling_pane = new JScrollPane(image_panel);
             image_frame.setSize(new Dimension(2000, 1000));
             image_frame.add(scrolling_pane);
-            
+
             for (int i = 1; i != objectarray.length; i++) {
                 if (d[i].isSelected()) {
                     image_panel.setLayout(new BoxLayout(image_panel, BoxLayout.PAGE_AXIS));
@@ -1106,7 +1106,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     deleteFle(temp_file + i);
                     break;
                 }
-                
+
             }
             image_frame.setVisible(true);
         } catch (Exception Download) {
@@ -1122,7 +1122,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (!OScheck()) {
                 temp_file = (Home + "\\object.tmp");
             }
-            
+
             editorSync(jTextField6.getText());
             jTextArea1.append("\n" + Delete.deleteFile(jTextField6.getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint()));
             jTextArea1.append("\n" + Put.put(temp_file, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), jTextField6.getText()));
@@ -1175,14 +1175,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextField3.setText(config_array[2]);
         jTextField4.setText(config_array[3]);
         jTextField5.setText(config_array[4]);
-        
+
         try {
             jTextField8.setText(config_array[5]);
             jTextField9.setText(config_array[6]);
         } catch (Exception sdd) {
-            
+
         }
-        
+
         jTextArea1.append("\nLoaded configuration.");
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -1204,9 +1204,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
+  
         if (this.buckets_loaded > 0) {
-            jTextArea1.append("\nPlease wait for PUT operation to complete........");
             PutThread PutThread;
             PutThread = new PutThread(this);
             PutThread.run();
@@ -1242,7 +1241,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         try {
-            
+
             if (this.buckets_loaded > 0) {
                 reloadObjects();
                 final JFrame search = new JFrame("Search for objects\n\n");
@@ -1250,9 +1249,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 searchbox.setSize(new Dimension(5, 5));
                 final JLabel searchlabel = new JLabel("Type an object name to search for:");
                 final JButton searchbutton = new JButton("Search");
-                
+
                 searchbutton.addActionListener(new ActionListener() {
-                    
+
                     public void actionPerformed(ActionEvent e) {
                         reloadObjects();
                         int found = 0;
@@ -1273,10 +1272,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             reloadObjects();
                             jTextArea1.append("\nError: no objects found.");
                         }
-                        
+
                     }
                 });
-                
+
                 JPanel foopanel = new JPanel();
                 search.setPreferredSize(new Dimension(225, 120));
                 search.setResizable(false);
@@ -1316,13 +1315,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         try {
-            
+
             if (buckets_loaded > 0) {
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
                         jTextArea1.append("\n" + Delete.deleteFile(d[i].getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint()));
                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-                        
+
                     }
                 }
             } else {
@@ -1334,23 +1333,21 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        try {
-            if (this.buckets_loaded > 0) {
-                jTextArea1.append("\nPlease wait for the download operation to complete......");
-                GetThread GetThread;
-                GetThread = new GetThread(this);
-                GetThread.run();
-            } else {
-                jTextArea1.append("\nError: No bucket has been selected");
-            }
-        } catch (Exception Download) {
+
+        if (this.buckets_loaded > 0) {
+            jTextArea1.append("\nPlease wait for the download operation to complete......");
+            GetThread GetThread;
+            GetThread = new GetThread(this);
+            GetThread.run();
+        } else {
+            jTextArea1.append("\nError: No bucket has been selected");
         }
     }//GEN-LAST:event_jMenuItem13ActionPerformed
-    
+
     private void uploadfileList(File dir) {
-        
+
         File[] files = dir.listFiles();
-        
+
         for (int i = 0; i < files.length; i++) {
             if (files[i].isDirectory()) {
                 uploadfileList(files[i]);
@@ -1361,7 +1358,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         }
     }
-    
+
     void var() {
         Cred.setAccess_key(jTextField1.getText());
         Cred.setSecret_key(jTextField2.getText());
@@ -1369,9 +1366,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         Cred.setEndpoint(endpoint);
         Cred.setRegion(jTextField5.getText());
     }
-    
+
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);
