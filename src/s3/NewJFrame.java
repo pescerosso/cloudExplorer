@@ -50,6 +50,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     JFrame dialog = new JFrame();
     JLabel dialog_label = new JLabel("Please wait for operation to complete. This will close upon completion.");
     JPanel dialog_panel = new JPanel();
+    JButton more = new JButton("Show More");
+    int object_display_counter = 0;
+    int initial_display = 11;
 
     public NewJFrame() {
         initComponents();
@@ -814,8 +817,45 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
 
     void reloadObjects(int draw) {
+
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
+
+            more.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        if (objectarray.length < 11) {
+                        } else {
+                            int old_counter = object_display_counter + 1;
+                            int new_counter = old_counter + 11;
+
+                            for (int h = old_counter; h != new_counter; h++) {
+                                if (old_counter == objectarray.length) {
+                                    jPanel1.remove(more);
+                                    jPanel1.repaint();
+                                    jPanel1.revalidate();
+                                    jPanel1.validate();
+                                } else {
+                                    jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
+                                    d[h] = new JCheckBox();
+                                    d[h].setText(objectarray[h]);
+                                    jPanel1.add(d[h]);
+                                    jPanel1.add(more);
+                                    setLocation(h, 5);
+
+                                    jPanel1.revalidate();
+                                    validate();
+                                    object_display_counter = h;
+                                }
+                            }
+                        }
+                    } catch (Exception more) {
+
+                    }
+                }
+            });
+
             jMenuItem11.setEnabled(true);
             this.objectarray = null;
             this.jPanel1.removeAll();
@@ -833,22 +873,34 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         }
                     }
                 }
+                if (draw == 1) {
+                    for (int h = 1; h != initial_display; h++) {
+                        jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
+                        d[h] = new JCheckBox();
+                        d[h].setText(objectarray[h]);
 
-                for (int h = 1; h != objectarray.length; h++) {
-
-                    jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
-                    d[h] = new JCheckBox();
-                    d[h].setText(objectarray[h]);
-                    if (draw == 1) {
                         this.jPanel1.add(d[h]);
-                        this.setLocation(h, 5);
-                        this.jPanel1.revalidate();
-                        validate();
+                        if (objectarray.length >10 ) {
+                            this.jPanel1.add(more);
+                            this.setLocation(h, 5);
+                            this.jPanel1.revalidate();
+                            validate();
+                        }
+                        object_display_counter = h;
                     }
+
+                    this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
+                } else {
+                    for (int h = 1; h != objectarray.length; h++) {
+                        jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
+                        d[h] = new JCheckBox();
+                        d[h].setText(objectarray[h]);
+                        System.out.print("\n" + h);
+                        object_display_counter = h;
+                    }
+
+                    this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
                 }
-
-                this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
-
             } catch (Exception listing) {
                 System.out.print("\n\nException in readObjects");
             }
@@ -1332,21 +1384,23 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         reloadObjects(0);
                         int found = 0;
                         for (int i = 1; i != objectarray.length; i++) {
-                            if (d[i].getText().toLowerCase().contains(searchbox.getText().toLowerCase())) {
-                                jTabbedPane1.setSelectedIndex(2);
-                                jTextArea1.append("\nFound object(s): " + d[i].getText());
-                                jPanel1.add(d[i]);
-                                d[i].setVisible(true);
-                                jMenuItem11.setEnabled(false);
-                                search.setVisible(false);
-                                found++;
-                            } else {
-                                d[i].setVisible(false);
+                            if (d[i] != null) {
+                                if (d[i].getText().toLowerCase().contains(searchbox.getText().toLowerCase())) {
+                                    jTabbedPane1.setSelectedIndex(2);
+                                    jTextArea1.append("\nFound object(s): " + d[i].getText());
+                                    jPanel1.add(d[i]);
+                                    d[i].setVisible(true);
+                                    jMenuItem11.setEnabled(false);
+                                    search.setVisible(false);
+                                    found++;
+                                } else {
+                                    d[i].setVisible(false);
+                                }
                             }
                         }
                         if (found == 0) {
                             reloadObjects(0);
-                            jTextArea1.append("\nError: no objects found.");
+                            jTextArea1.append("\nError: no objects found for search: " + searchbox.getText().toLowerCase());
                         }
 
                     }

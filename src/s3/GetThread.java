@@ -40,6 +40,8 @@ public class GetThread implements Runnable {
                             jTextArea1.append("\n" + foo.Get.get(foo.d[i].getText(), foo.Cred.access_key, foo.Cred.getSecret_key(), foo.Cred.getBucket(), foo.Cred.getEndpoint(), File_Destination.toString() + foo.slash + new_object_name));
                             jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                             foo.dialog.setVisible(false);
+                            foo.d[i].setSelected(false);
+                            foo.reloadObjects(1);
                         }
                     }
                 } else {
@@ -56,11 +58,12 @@ public class GetThread implements Runnable {
         download.setLocation(500, 500);
         download.pack();
         for (int i = 1; i != foo.objectarray.length; i++) {
-            if (foo.d[i].isSelected()) {
-                download.setVisible(true);
+            if (foo.d[i] != null) {
+                if (foo.d[i].isSelected()) {
+                    download.setVisible(true);
+                }
             }
         }
-
     }
 
 }
