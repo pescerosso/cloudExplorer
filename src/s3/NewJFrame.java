@@ -760,7 +760,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         if (buckets_loaded > 0) {
             //  reloadObjects(1);
-            ObjectListThread  listThread = new ObjectListThread(this);
+            ObjectListThread listThread = new ObjectListThread(this);
             listThread.run();
             jTabbedPane1.setSelectedIndex(2);
         } else {
@@ -1108,6 +1108,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 if (d[i].isSelected()) {
                     image_panel.setLayout(new BoxLayout(image_panel, BoxLayout.PAGE_AXIS));
                     String new_object_name = convertObject(d[i].getText(), "download");
+                    dialog("Please wait, the image is loading.");
                     jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), temp_file + i));
                     photo[i] = new ImageIcon(temp_file + i);
                     image[i] = new JLabel(photo[i]);
@@ -1121,6 +1122,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
             }
             image_frame.setVisible(true);
+            dialog.setVisible(false);
         } catch (Exception Download) {
         }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
@@ -1297,11 +1299,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 if (jFileChooser2.getSelectedFile() == null) {
                     jTextArea1.append("\nError: please select a destination directroy.");
                 } else {
-                     dialog("Please wait for SYNC to complete");
+                    dialog("Please wait for SYNC to complete");
                     for (int i = 1; i != objectarray.length; i++) {
                         String Destination = jFileChooser2.getSelectedFile().toString();
                         String new_object_name = convertObject(d[i].getText(), "download");
-                     
+
                         jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Destination + new_object_name));
                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                     }
@@ -1463,8 +1465,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         musicPanel.add(closeMusic);
                         musicFrame.setLocation(500, 500);
                         musicFrame.pack();
+                        dialog("Please wait while, the song is loading.");
                         jTextArea1.append("\n" + Get.get(d[h].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), temp_file));
                         mp3.play();
+                        dialog.setVisible(false);
                         musicFrame.setVisible(true);
                         break;
                     }
