@@ -880,7 +880,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         d[h].setText(objectarray[h]);
 
                         this.jPanel1.add(d[h]);
-                        if (objectarray.length >10 ) {
+                        if (objectarray.length > 10) {
                             this.jPanel1.add(more);
                             this.setLocation(h, 5);
                             this.jPanel1.revalidate();
@@ -895,7 +895,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
                         d[h] = new JCheckBox();
                         d[h].setText(objectarray[h]);
-                        System.out.print("\n" + h);
                         object_display_counter = h;
                     }
 
