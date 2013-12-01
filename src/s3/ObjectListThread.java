@@ -7,10 +7,10 @@ NewJFrame foo;
        foo = bar;
     }
 
-    
-
     public void run() {
-        foo.reloadObjects();
+         foo.dialog("Gathering Objects..........");
+        foo.reloadObjects(1);
+        foo.dialog.setVisible(false);
     }
 
 }

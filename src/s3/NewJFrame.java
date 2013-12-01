@@ -46,6 +46,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String config_file = (Home + "/s3.config");
     ImageIcon[] photo = new ImageIcon[10000000];
     String slash = "/";
+    String[] localdata = new String[100000];
+    JFrame dialog = new JFrame();
+    JLabel dialog_label = new JLabel("Please wait for operation to complete. This will close upon completion.");
+    JPanel dialog_panel = new JPanel();
 
     public NewJFrame() {
         initComponents();
@@ -374,7 +378,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(113, Short.MAX_VALUE)
+                .addContainerGap(107, Short.MAX_VALUE)
                 .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
@@ -675,7 +679,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel10)
                                 .addGap(346, 346, 346)))))
                 .addContainerGap())
@@ -757,8 +760,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         if (buckets_loaded > 0) {
             //  reloadObjects(1);
-            ObjectListThread test = new ObjectListThread(this);
-            test.run();
+            ObjectListThread  listThread = new ObjectListThread(this);
+            listThread.run();
             jTabbedPane1.setSelectedIndex(2);
         } else {
             jTextArea1.append("\nError: no bucket has been selected.");
@@ -810,7 +813,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }
 
-    void reloadObjects() {
+    void reloadObjects(int draw) {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
             jMenuItem11.setEnabled(true);
@@ -836,12 +839,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
                     d[h] = new JCheckBox();
                     d[h].setText(objectarray[h]);
-
-                    this.jPanel1.add(d[h]);
-                    this.setLocation(h, 5);
-                    this.jPanel1.revalidate();
-                    validate();
-
+                    if (draw == 1) {
+                        this.jPanel1.add(d[h]);
+                        this.setLocation(h, 5);
+                        this.jPanel1.revalidate();
+                        validate();
+                    }
                 }
 
                 this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
@@ -1143,16 +1146,76 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    void Sync(File dir) {
+        File[] files = dir.listFiles();
+
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].isDirectory()) {
+                Sync(files[i]);
+            } else {
+                if (searchS3(files[i].getAbsolutePath())) {
+                } else {
+                    jTextArea1.append("\n" + Put.put(files[i].getAbsolutePath(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), files[i].getAbsolutePath()));
+                }
+            }
+        }
+    }
+
+    Boolean searchS3(String what) {
+        Boolean bool = false;
+
+        try {
+            for (int i = 1; i != objectarray.length; i++) {
+                String simple_what = convertObject(what, "download");
+                if (objectarray[i] != null) {
+                    if (objectarray[i].contains(simple_what)) {
+                        bool = true;
+                        break;
+                    }
+                }
+            }
+        } catch (Exception boolFUnction) {
+
+        }
+        return bool;
+    }
+
+    void dialog(String what) {
+        dialog.setTitle(what);
+        dialog_panel.setLayout(new BoxLayout(dialog_panel, BoxLayout.PAGE_AXIS));
+        dialog_panel.add(dialog_label);
+        dialog.add(dialog_panel);
+        dialog.setLocation(500, 500);
+        dialog_panel.revalidate();
+        dialog_panel.repaint();
+        dialog_panel.validate();
+        dialog.pack();
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    }
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+        final JFrame search = new JFrame("Search for objects\n\n");
+        final JTextField searchbox = new JTextField();
+        searchbox.setSize(new Dimension(5, 5));
+        final JLabel searchlabel = new JLabel("Type an object name to search for:");
+        final JButton searchbutton = new JButton("Search");
+
         if (buckets_loaded > 0) {
             if (b[active_bucket].isSelected()) {
                 jTextArea1.append("\nStarting Sync:");
+
                 if (jFileChooser2.getSelectedFile() == null) {
                     jTextArea1.append("\nError: please select a destination directroy.");
                 } else {
-                    uploadfileList(jFileChooser2.getSelectedFile());
+                    reloadObjects(0);
+                    // uploadfileList(jFileChooser2.getSelectedFile());
+                    dialog("Please wait for Sync to complete.");
+                    Sync(jFileChooser2.getSelectedFile());
+
+                    dialog.setVisible(true);
                 }
             }
+            dialog.setVisible(false);
         } else {
             jTextArea1.append("\nError: No bucket selected.");
         }
@@ -1228,18 +1291,21 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
         if (buckets_loaded > 0) {
-            reloadObjects();
+            reloadObjects(0);
             if (b[active_bucket].isSelected()) {
                 jTextArea1.append("\nStarting Sync:");
                 if (jFileChooser2.getSelectedFile() == null) {
                     jTextArea1.append("\nError: please select a destination directroy.");
                 } else {
+                     dialog("Please wait for SYNC to complete");
                     for (int i = 1; i != objectarray.length; i++) {
                         String Destination = jFileChooser2.getSelectedFile().toString();
                         String new_object_name = convertObject(d[i].getText(), "download");
+                     
                         jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Destination + new_object_name));
                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                     }
+                    dialog.setVisible(false);
                 }
             } else {
                 jTextArea1.append("\nError: No bucket selected.");
@@ -1251,7 +1317,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         try {
 
             if (this.buckets_loaded > 0) {
-                reloadObjects();
+                reloadObjects(0);
                 final JFrame search = new JFrame("Search for objects\n\n");
                 final JTextField searchbox = new JTextField();
                 searchbox.setSize(new Dimension(5, 5));
@@ -1261,7 +1327,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 searchbutton.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e) {
-                        reloadObjects();
+                        reloadObjects(0);
                         int found = 0;
                         for (int i = 1; i != objectarray.length; i++) {
                             if (d[i].getText().toLowerCase().contains(searchbox.getText().toLowerCase())) {
@@ -1277,7 +1343,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             }
                         }
                         if (found == 0) {
-                            reloadObjects();
+                            reloadObjects(0);
                             jTextArea1.append("\nError: no objects found.");
                         }
 
@@ -1293,6 +1359,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 foopanel.add(searchbox);
                 foopanel.add(searchbutton);
                 search.setLocation(500, 500);
+                search.setAlwaysOnTop(true);
                 search.pack();
                 search.setVisible(true);
             } else {
@@ -1337,13 +1404,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         } catch (Exception checkbox) {
         }
-        reloadObjects();
+        reloadObjects(1);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
 
         if (this.buckets_loaded > 0) {
-            jTextArea1.append("\nPlease wait for the download operation to complete......");
+            //    jTextArea1.append("\nPlease wait for the download operation to complete......");
             GetThread GetThread = new GetThread(this);
             GetThread.run();
         } else {

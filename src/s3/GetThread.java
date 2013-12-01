@@ -29,7 +29,7 @@ public class GetThread implements Runnable {
         downloadButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-
+                foo.dialog("Please wait for the download operation to complete.");
                 if (downloadChooser.getSelectedFile().getAbsolutePath() != null) {
                     File File_Destination = new File(downloadChooser.getSelectedFile().getAbsolutePath());
                     for (int i = 1; i != foo.objectarray.length; i++) {
@@ -39,6 +39,7 @@ public class GetThread implements Runnable {
                             foo.OScheck();
                             jTextArea1.append("\n" + foo.Get.get(foo.d[i].getText(), foo.Cred.access_key, foo.Cred.getSecret_key(), foo.Cred.getBucket(), foo.Cred.getEndpoint(), File_Destination.toString() + foo.slash + new_object_name));
                             jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                            foo.dialog.setVisible(false);
                         }
                     }
                 } else {
