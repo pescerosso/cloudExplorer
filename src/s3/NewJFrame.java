@@ -37,17 +37,17 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String OS = System.getProperty("os.name");
     String[] bucketarray = null;
     String[] objectarray = null;
-    JCheckBox b[] = new JCheckBox[1000000];
-    JCheckBox d[] = new JCheckBox[1000000];
+    JCheckBox b[] = new JCheckBox[10000000];
+    JCheckBox d[] = new JCheckBox[10000000];
     JLabel image[] = new JLabel[10000000];
     int buckets_loaded = 0;
     int active_bucket = 0;
     String object_acl_change = null;
     String temp_file = (Home + "/object.tmp");
     String config_file = (Home + "/s3.config");
-    ImageIcon[] photo = new ImageIcon[10000000];
+    ImageIcon[] photo = new ImageIcon[100000000];
     String slash = "/";
-    String[] localdata = new String[100000];
+    String[] localdata = new String[1000000];
     JFrame dialog = new JFrame();
     JLabel dialog_label = new JLabel("Please wait for operation to complete. This will close upon completion.");
     JPanel dialog_panel = new JPanel();
@@ -1557,11 +1557,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 d[h].setText(objectarray[h]);
                 jPanel1.add(d[h]);
                 setLocation(h, 5);
-                jPanel1.repaint();
-                jPanel1.revalidate();
-                validate();
                 object_display_counter = h;
             }
+            jPanel1.repaint();
+            jPanel1.revalidate();
+            validate();
         } else {
             jTextArea1.append("\nError: No bucket has been selected");
         }
