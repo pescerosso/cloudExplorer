@@ -1526,14 +1526,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 });
                 for (int h = 1; h != objectarray.length; h++) {
                     if (d[h].isSelected()) {
-                        musicFrame.setPreferredSize(new Dimension(225, 120));
                         musicFrame.setResizable(false);
-                        // musicPanel.setLayout(new BoxLayout(musicPanel, BoxLayout.PAGE_AXIS));
                         musicFrame.add(musicPanel);
                         musicPanel.add(stopMusic);
                         musicPanel.add(replayMusic);
                         musicPanel.add(closeMusic);
-                        musicFrame.setLocation(500, 500);
+                        musicFrame.setLocation(500, 200);
+                        musicPanel.repaint();
+                        musicPanel.revalidate();
+                        musicPanel.validate();
                         musicFrame.pack();
                         dialog("Please wait, the song is loading.");
                         jTextArea1.append("\n" + Get.get(d[h].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), temp_file));
