@@ -1449,18 +1449,20 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
             if (buckets_loaded > 0) {
                 for (int i = 1; i != objectarray.length; i++) {
+                    dialog("Please wait, deleting file(s)");
                     if (d[i].isSelected()) {
                         dialog("Please wait, deleting file(s)");
                         jTextArea1.append("\n" + Delete.deleteFile(d[i].getText(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint()));
                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-                        dialog.setVisible(false);
                     }
                 }
+
             } else {
                 jTextArea1.append("\nError: No bucked selected.");
             }
         } catch (Exception checkbox) {
         }
+        dialog.setVisible(false);
         reloadObjects(1);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
