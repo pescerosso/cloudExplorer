@@ -1,6 +1,7 @@
 package s3;
 
 import jaco.mp3.player.MP3Player;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -524,8 +525,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/logo_cloudian.png"))); // NOI18N
 
-        jMenuBar1.setBackground(java.awt.Color.blue);
-
         jMenu1.setBackground(new java.awt.Color(0, 0, 255));
         jMenu1.setText("File");
 
@@ -682,8 +681,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel10)
-                                .addGap(346, 346, 346)))))
+                                .addGap(296, 296, 296)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
