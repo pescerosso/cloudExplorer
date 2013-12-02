@@ -117,6 +117,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenu4 = new javax.swing.JMenu();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -128,7 +129,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
 
@@ -559,6 +559,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         });
         jMenu4.add(jMenuItem12);
 
+        jMenuItem13.setText("Download Object");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem13);
+
         jMenuItem11.setText("Select All");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -642,14 +650,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
         jMenu2.add(jMenuItem15);
-
-        jMenuItem13.setText("Download Object");
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem13);
 
         jMenuItem14.setText("Play Music File");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
