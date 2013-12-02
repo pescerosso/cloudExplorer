@@ -496,7 +496,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel1.setText("Buckets");
@@ -522,7 +522,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jScrollPane3.setViewportView(jScrollPane2);
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/cloud.jpg"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/logo_cloudian.png"))); // NOI18N
 
         jMenuBar1.setBackground(java.awt.Color.blue);
 
@@ -1523,6 +1523,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         mp3.play();
                         dialog.setVisible(false);
                         musicFrame.setVisible(true);
+                        musicFrame.setAlwaysOnTop(true);
                         break;
                     }
                 }
