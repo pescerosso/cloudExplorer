@@ -864,7 +864,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 }
             });
 
-            jMenuItem11.setEnabled(true);
             this.objectarray = null;
             this.jPanel1.removeAll();
             this.jPanel1.revalidate();
@@ -1381,7 +1380,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 reloadObjects(0);
                 final JFrame search = new JFrame("Search for objects\n\n");
                 final JTextField searchbox = new JTextField();
-                searchbox.setSize(new Dimension(5, 5));
                 final JLabel searchlabel = new JLabel("Type an object name to search for:");
                 final JButton searchbutton = new JButton("Search");
 
@@ -1397,7 +1395,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                     jTextArea1.append("\nFound object(s): " + d[i].getText());
                                     jPanel1.add(d[i]);
                                     d[i].setVisible(true);
-                                    jMenuItem11.setEnabled(false);
                                     search.setVisible(false);
                                     found++;
                                 } else {
@@ -1414,7 +1411,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 });
 
                 JPanel foopanel = new JPanel();
-                search.setPreferredSize(new Dimension(225, 120));
+                search.setPreferredSize(new Dimension(250, 60));
                 search.setResizable(false);
                 foopanel.setLayout(new BoxLayout(foopanel, BoxLayout.PAGE_AXIS));
                 search.add(foopanel);
@@ -1422,7 +1419,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 foopanel.add(searchbox);
                 foopanel.add(searchbutton);
                 search.setLocation(500, 500);
+                searchbox.setSize(new Dimension(10, 20));
                 search.setAlwaysOnTop(true);
+                foopanel.repaint();
+                foopanel.revalidate();
+                foopanel.validate();
                 search.pack();
                 search.setVisible(true);
             } else {
