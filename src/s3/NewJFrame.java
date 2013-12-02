@@ -1209,7 +1209,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             } else {
                 if (searchS3(files[i].getAbsolutePath())) {
                 } else {
-                    jTextArea1.append("\n" + Put.put(files[i].getAbsolutePath(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), files[i].getAbsolutePath()));
+                   String simple_what = convertObject(files[i].getAbsolutePath(), "download");
+                    jTextArea1.append("\n" + Put.put(files[i].getAbsolutePath(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), simple_what));
                 }
             }
         }
@@ -1262,10 +1263,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jTextArea1.append("\nError: please select a destination directroy.");
                 } else {
                     reloadObjects(0);
-                    // uploadfileList(jFileChooser2.getSelectedFile());
                     dialog("Please wait for Sync to complete.");
                     Sync(jFileChooser2.getSelectedFile());
-
                     dialog.setVisible(true);
                 }
             }
