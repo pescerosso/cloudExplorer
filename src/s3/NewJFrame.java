@@ -1436,7 +1436,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         try {
             for (int i = 1; i != objectarray.length; i++) {
-                d[i].setSelected(false);
+                if (d[i].isVisible()) {
+                    d[i].setSelected(false);
+                }
             }
         } catch (Exception SelectALL) {
         }
@@ -1445,7 +1447,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         try {
             for (int i = 1; i != objectarray.length; i++) {
-                d[i].setSelected(true);
+                if (d[i].isVisible()) {
+                    d[i].setSelected(true);
+                }
             }
         } catch (Exception SelectALL) {
         }
