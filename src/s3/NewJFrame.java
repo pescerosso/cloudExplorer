@@ -1209,7 +1209,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             } else {
                 if (searchS3(files[i].getAbsolutePath())) {
                 } else {
-                   String simple_what = convertObject(files[i].getAbsolutePath(), "download");
+                    String simple_what = convertObject(files[i].getAbsolutePath(), "upload");
                     jTextArea1.append("\n" + Put.put(files[i].getAbsolutePath(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), simple_what));
                 }
             }
@@ -1538,21 +1538,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
 
     }//GEN-LAST:event_jMenuItem14ActionPerformed
-
-    private void uploadfileList(File dir) {
-
-        File[] files = dir.listFiles();
-
-        for (int i = 0; i < files.length; i++) {
-            if (files[i].isDirectory()) {
-                uploadfileList(files[i]);
-            } else {
-                jTextArea1.repaint();
-                jTextArea1.append("\n" + Put.put(files[i].getAbsolutePath(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), files[i].getAbsolutePath()));
-                jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-            }
-        }
-    }
 
     void var() {
         Cred.setAccess_key(jTextField1.getText());
