@@ -1173,6 +1173,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
             }
             image_frame.setVisible(true);
+            image_frame.setAlwaysOnTop(true);
             dialog.setVisible(false);
         } catch (Exception Download) {
         }
