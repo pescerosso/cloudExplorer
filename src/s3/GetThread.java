@@ -33,17 +33,19 @@ public class GetThread implements Runnable {
                 if (downloadChooser.getSelectedFile().getAbsolutePath() != null) {
                     File File_Destination = new File(downloadChooser.getSelectedFile().getAbsolutePath());
                     for (int i = 1; i != foo.objectarray.length; i++) {
-                        if (foo.d[i].isSelected()) {
-                            download.setVisible(false);
-                            String new_object_name = foo.convertObject(foo.d[i].getText(), "download");
-                            foo.OScheck();
-                            jTextArea1.append("\n" + foo.Get.get(foo.d[i].getText(), foo.Cred.access_key, foo.Cred.getSecret_key(), foo.Cred.getBucket(), foo.Cred.getEndpoint(), File_Destination.toString() + foo.slash + new_object_name));
-                            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-                            foo.dialog.setVisible(false);
-                            foo.d[i].setSelected(false);
-                            foo.reloadObjects(1);
+                        if (foo.d[i] != null) {
+                            if (foo.d[i].isSelected()) {
+                                download.setVisible(false);
+                                String new_object_name = foo.convertObject(foo.d[i].getText(), "download");
+                                foo.OScheck();
+                                jTextArea1.append("\n" + foo.Get.get(foo.d[i].getText(), foo.Cred.access_key, foo.Cred.getSecret_key(), foo.Cred.getBucket(), foo.Cred.getEndpoint(), File_Destination.toString() + foo.slash + new_object_name));
+                                jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                                foo.dialog.setVisible(false);
+                                foo.d[i].setSelected(false);
+                            }
                         }
                     }
+                    foo.reloadObjects(1);
                 } else {
                     download.setVisible(false);
                     jTextArea1.append("\nError: destination not specified.");
