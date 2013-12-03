@@ -1398,7 +1398,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         }
                         if (found == 0) {
                             reloadObjects(0);
-                            jTextArea1.append("\nError: no objects found for search: " + searchbox.getText().toLowerCase());
+                            jTextArea1.append("\nNo objects found for: " + searchbox.getText().toLowerCase());
                             search.setVisible(false);
                         }
 
@@ -1406,7 +1406,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 });
 
                 JPanel foopanel = new JPanel();
-                search.setPreferredSize(new Dimension(250, 60));
                 search.setResizable(false);
                 foopanel.setLayout(new BoxLayout(foopanel, BoxLayout.PAGE_AXIS));
                 search.add(foopanel);
