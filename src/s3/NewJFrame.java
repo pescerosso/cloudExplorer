@@ -39,13 +39,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String[] objectarray = null;
     JCheckBox b[] = new JCheckBox[1000000];
     JCheckBox d[] = new JCheckBox[1000000];
-    JLabel image[] = new JLabel[10];
     int buckets_loaded = 0;
     int active_bucket = 0;
     String object_acl_change = null;
     String temp_file = (Home + "/object.tmp");
     String config_file = (Home + "/s3.config");
-    ImageIcon[] photo = new ImageIcon[1000];
     String slash = "/";
     String[] localdata = new String[1000000];
     JFrame dialog = new JFrame();
@@ -1149,6 +1147,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (!OScheck()) {
                 temp_file = (Home + "\\object.tmp");
             }
+            
+            JLabel image[] = new JLabel[objectarray.length];
+            ImageIcon[] photo = new ImageIcon[objectarray.length];
             JFrame image_frame = new JFrame();
             JScrollBar bar = new JScrollBar(JScrollBar.VERTICAL);
             JPanel image_panel = new JPanel();
