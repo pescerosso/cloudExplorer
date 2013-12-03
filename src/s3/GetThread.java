@@ -40,11 +40,11 @@ public class GetThread implements Runnable {
                                 foo.OScheck();
                                 jTextArea1.append("\n" + foo.Get.get(foo.d[i].getText(), foo.Cred.access_key, foo.Cred.getSecret_key(), foo.Cred.getBucket(), foo.Cred.getEndpoint(), File_Destination.toString() + foo.slash + new_object_name));
                                 jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-                                foo.dialog.setVisible(false);
                                 foo.d[i].setSelected(false);
                             }
                         }
                     }
+                    foo.dialog.setVisible(false);
                     foo.reloadObjects(1);
                 } else {
                     download.setVisible(false);
