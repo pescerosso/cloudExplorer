@@ -135,7 +135,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenuItem5.setText("jMenuItem5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1190, 726));
         setResizable(false);
 
         jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
@@ -623,7 +622,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenu2.setText("Objects");
 
-        jMenuItem6.setText("ACL");
+        jMenuItem6.setText("Modify Object ACL");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -631,7 +630,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         });
         jMenu2.add(jMenuItem6);
 
-        jMenuItem7.setText("View ACL");
+        jMenuItem7.setText("View Object ACL");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
