@@ -527,7 +527,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/logo_cloudian.png"))); // NOI18N
 
-        jMenu1.setBackground(new java.awt.Color(0, 0, 255));
         jMenu1.setText("File");
 
         jMenuItem4.setText("Exit");
@@ -541,7 +540,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenuBar1.add(jMenu1);
 
         jMenu4.setText("Edit");
-        jMenu4.setOpaque(true);
 
         jCheckBoxMenuItem1.setText("Edit File");
         jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -594,7 +592,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu3.setBackground(new java.awt.Color(0, 0, 255));
         jMenu3.setText("Bucket");
 
         jMenuItem1.setText("Create Bucket");
@@ -624,7 +621,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu2.setBackground(new java.awt.Color(0, 0, 255));
         jMenu2.setText("Objects");
 
         jMenuItem6.setText("ACL");
@@ -685,7 +681,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTabbedPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel10)
                                 .addGap(435, 435, 435)))))
                 .addContainerGap())
