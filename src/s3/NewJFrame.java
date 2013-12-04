@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -38,8 +39,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String[] bucketarray = null;
     String[] objectarray = null;
     int object_size = 500000;
-    JCheckBox b[] = new JCheckBox[object_size ];
-    JCheckBox d[] = new JCheckBox[object_size ];
+    JRadioButton b[] = new JRadioButton[object_size ];
+    JRadioButton d[] = new JRadioButton[object_size ];
     int buckets_loaded = 0;
     int active_bucket = 0;
     String object_acl_change = null;
@@ -802,7 +803,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (bucketarray != null) {
                 for (int h = 1; h != bucketarray.length; h++) {
                     jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
-                    b[h] = new JCheckBox();
+                    b[h] = new JRadioButton();
                     b[h].setText(bucketarray[h]);
 
                     b[h].addItemListener(this);
@@ -839,7 +840,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                     jPanel1.validate();
                                 } else {
                                     jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
-                                    d[h] = new JCheckBox();
+                                    d[h] = new JRadioButton();
                                     d[h].setText(objectarray[h]);
                                     jPanel1.add(d[h]);
                                     jPanel1.add(more);
@@ -876,7 +877,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 if (draw == 1) {
                     for (int h = 1; h != initial_display; h++) {
                         jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
-                        d[h] = new JCheckBox();
+                        d[h] = new JRadioButton();
                         d[h].setText(objectarray[h]);
 
                         this.jPanel1.add(d[h]);
@@ -893,7 +894,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 } else {
                     for (int h = 1; h != objectarray.length; h++) {
                         jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
-                        d[h] = new JCheckBox();
+                        d[h] = new JRadioButton();
                         d[h].setText(objectarray[h]);
                         object_display_counter = h;
                     }
@@ -1554,7 +1555,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             int old_counter = object_display_counter + 1;
             for (int h = old_counter; h != objectarray.length; h++) {
                 jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
-                d[h] = new JCheckBox();
+                d[h] = new JRadioButton();
                 jPanel1.remove(more);
                 d[h].setText(objectarray[h]);
                 jPanel1.add(d[h]);
