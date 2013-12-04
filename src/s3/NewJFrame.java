@@ -1118,31 +1118,35 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
                     public void actionPerformed(ActionEvent e) {
                         for (int i = 1; i != objectarray.length; i++) {
-                            if (d[i].isSelected()) {
-                                object_acl_change = d[i].getText();
-                                if (public_box.isSelected()) {
-                                    ACL.setACLpublic(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
-                                    jTextArea1.append("\nPublic set for object: " + object_acl_change);
-                                    jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-                                    parent.setVisible(false);
-                                }
+                            try {
+                                if (d[i].isSelected()) {
+                                    object_acl_change = d[i].getText();
+                                    if (public_box.isSelected()) {
+                                        ACL.setACLpublic(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
+                                        jTextArea1.append("\nPublic set for object: " + object_acl_change);
+                                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                                        parent.setVisible(false);
+                                    }
 
-                                if (url_box.isSelected()) {
-                                    jTextArea1.append("\n" + ACL.setACLurl(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket()));
-                                    jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-                                    parent.setVisible(false);
-                                }
-                                if (private_box.isSelected()) {
-                                    ACL.setACLprivate(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
-                                    jTextArea1.append("\nPrivate access set for object: " + object_acl_change);
-                                    jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-                                    parent.setVisible(false);
-                                }
+                                    if (url_box.isSelected()) {
+                                        jTextArea1.append("\n" + ACL.setACLurl(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket()));
+                                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                                        parent.setVisible(false);
+                                    }
+                                    if (private_box.isSelected()) {
+                                        ACL.setACLprivate(object_acl_change, Cred.getAccess_key(), Cred.getSecret_key(), Cred.getEndpoint(), Cred.getBucket());
+                                        jTextArea1.append("\nPrivate access set for object: " + object_acl_change);
+                                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                                        parent.setVisible(false);
+                                    }
 
+                                }
+                            } catch (Exception ObjectACL) {
                             }
                         }
 
                     }
+
                 });
 
                 JPanel foopanel = new JPanel();
