@@ -776,27 +776,32 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
 
     void clear_old_radio_buttons() {
-        for (int c = 1; c != bucketarray.length; c++) {
-            if (c == active_bucket) {
-            } else {
-                b[c].setSelected(false);
+        try {
+            for (int c = 1; c != bucketarray.length; c++) {
+                if (c == active_bucket) {
+                } else {
+                    b[c].setSelected(false);
+                }
             }
+        } catch (Exception clear_old_radio) {
         }
     }
 
     public void itemStateChanged(ItemEvent e) {
-
-        for (int h = 1; h != bucketarray.length; h++) {
-            if (b[h] != null) {
-                if (b[h].isSelected()) {
-                    if (h != active_bucket) {
-                        active_bucket = h;
-                        Cred.setBucket(b[h].getText());
-                        clear_old_radio_buttons();
-                        h = bucketarray.length;
+        try {
+            for (int h = 1; h != bucketarray.length; h++) {
+                if (b[h] != null) {
+                    if (b[h].isSelected()) {
+                        if (h != active_bucket) {
+                            active_bucket = h;
+                            Cred.setBucket(b[h].getText());
+                            clear_old_radio_buttons();
+                            h = bucketarray.length;
+                        }
                     }
                 }
             }
+        } catch (Exception ItemStateChanged) {
         }
     }
 

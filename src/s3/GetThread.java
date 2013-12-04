@@ -59,12 +59,15 @@ public class GetThread implements Runnable {
         download.add(downloadPanel);
         download.setLocation(500, 500);
         download.pack();
-        for (int i = 1; i != foo.objectarray.length; i++) {
-            if (foo.d[i] != null) {
-                if (foo.d[i].isSelected()) {
-                    download.setVisible(true);
+        try {
+            for (int i = 1; i != foo.objectarray.length; i++) {
+                if (foo.d[i] != null) {
+                    if (foo.d[i].isSelected()) {
+                        download.setVisible(true);
+                    }
                 }
             }
+        } catch (Exception GetThreadRUN) {
         }
     }
 
