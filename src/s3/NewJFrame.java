@@ -461,7 +461,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jTabbedPane1.addTab("Text Editor", jPanel6);
 
-        jLabel13.setText("Version: 1.0 Beta. Build Date December 4,2013");
+        jLabel13.setText("Version: 1.0.   Build Date December 4,2013");
 
         jLabel14.setText("Please submit bugs via github: https://github.com/rusher81572/s3 ");
 
@@ -481,9 +481,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel13)
-                .addGap(18, 18, 18)
+                .addGap(44, 44, 44)
                 .addComponent(jLabel14)
-                .addContainerGap(309, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("About", jPanel7);
