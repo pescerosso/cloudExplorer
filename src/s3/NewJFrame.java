@@ -461,7 +461,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jTabbedPane1.addTab("Text Editor", jPanel6);
 
-        jLabel13.setText("Version: 1.0.   Build Date December 4,2013");
+        jLabel13.setText("Version: 1.1.   Build Date February 1,2014");
 
         jLabel14.setText("Please submit bugs via github: https://github.com/rusher81572/s3 ");
 

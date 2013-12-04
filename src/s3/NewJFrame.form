@@ -762,7 +762,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Version: 1.0.   Build Date December 4,2013"/>
+                <Property name="text" type="java.lang.String" value="Version: 1.1.   Build Date February 1,2014"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
