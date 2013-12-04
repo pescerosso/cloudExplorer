@@ -39,15 +39,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String[] bucketarray = null;
     String[] objectarray = null;
     int object_size = 500000;
-    JRadioButton b[] = new JRadioButton[object_size ];
-    JRadioButton d[] = new JRadioButton[object_size ];
-    int buckets_loaded = 0;
+    JRadioButton b[] = new JRadioButton[object_size];
+    JRadioButton d[] = new JRadioButton[object_size];
     int active_bucket = 0;
     String object_acl_change = null;
     String temp_file = (Home + "/object.tmp");
     String config_file = (Home + "/s3.config");
     String slash = "/";
-    String[] localdata = new String[object_size ];
+    String[] localdata = new String[object_size];
     JFrame dialog = new JFrame();
     JLabel dialog_label = new JLabel("Please wait for operation to complete. This will close upon completion.");
     JPanel dialog_panel = new JPanel();
@@ -763,7 +762,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
-        if (buckets_loaded > 0) {
+        if (active_bucket > 0) {
             //  reloadObjects(1);
             ObjectListThread listThread = new ObjectListThread(this);
             listThread.run();
@@ -773,15 +772,26 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }
 
+    void clear_old_radio_buttons() {
+        for (int c = 1; c != bucketarray.length; c++) {
+            if (c == active_bucket) {
+            } else {
+                b[c].setSelected(false);
+            }
+        }
+    }
+
     public void itemStateChanged(ItemEvent e) {
-        buckets_loaded = 0;
 
         for (int h = 1; h != bucketarray.length; h++) {
             if (b[h] != null) {
                 if (b[h].isSelected()) {
-                    active_bucket = h;
-                    Cred.setBucket(b[h].getText());
-                    buckets_loaded++;
+                    if (h != active_bucket) {
+                        active_bucket = h;
+                        Cred.setBucket(b[h].getText());
+                        clear_old_radio_buttons();
+                        h = bucketarray.length;
+                    }
                 }
             }
         }
@@ -951,7 +961,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         try {
-            if (this.buckets_loaded > 0) {
+            if (this.active_bucket > 0) {
                 final JFrame bucketACL = new JFrame("Bucket ACL Settings");
                 final JCheckBox static_website = new JCheckBox("Static Website");
                 final JButton bucketACLbutton = new JButton("Commit");
@@ -1059,7 +1069,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         try {
 
-            if (this.buckets_loaded > 0) {
+            if (this.active_bucket > 0) {
                 final JFrame parent = new JFrame("Object ACL Settings");
                 final JCheckBox public_box = new JCheckBox("Public");
                 final JCheckBox url_box = new JCheckBox("URL Access");
@@ -1120,7 +1130,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         try {
 
-            if (this.buckets_loaded > 0) {
+            if (this.active_bucket > 0) {
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
                         object_acl_change = d[i].getText();
@@ -1149,7 +1159,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (!OScheck()) {
                 temp_file = (Home + "\\object.tmp");
             }
-            
+
             JLabel image[] = new JLabel[objectarray.length];
             ImageIcon[] photo = new ImageIcon[objectarray.length];
             JFrame image_frame = new JFrame();
@@ -1188,7 +1198,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        if (buckets_loaded > 0) {
+        if (active_bucket > 0) {
             if (!OScheck()) {
                 temp_file = (Home + "\\object.tmp");
             }
@@ -1259,7 +1269,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         final JLabel searchlabel = new JLabel("Type an object name to search for:");
         final JButton searchbutton = new JButton("Search");
 
-        if (buckets_loaded > 0) {
+        if (active_bucket > 0) {
             if (b[active_bucket].isSelected()) {
                 jTextArea1.append("\nStarting Sync:");
 
@@ -1334,7 +1344,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-        if (this.buckets_loaded > 0) {
+        if (this.active_bucket > 0) {
             PutThread PutThread = new PutThread(this);
             PutThread.run();
         } else {
@@ -1347,7 +1357,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-        if (buckets_loaded > 0) {
+        if (active_bucket > 0) {
             reloadObjects(0);
             if (b[active_bucket].isSelected()) {
                 jTextArea1.append("\nStarting Sync:");
@@ -1373,7 +1383,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         try {
 
-            if (this.buckets_loaded > 0) {
+            if (this.active_bucket > 0) {
                 reloadObjects(0);
                 final JFrame search = new JFrame("Search for objects\n\n");
                 final JTextField searchbox = new JTextField();
@@ -1456,7 +1466,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         try {
 
-            if (buckets_loaded > 0) {
+            if (active_bucket > 0) {
                 for (int i = 1; i != objectarray.length; i++) {
                     dialog("Please wait, deleting file(s)");
                     if (d[i].isSelected()) {
@@ -1477,7 +1487,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
 
-        if (this.buckets_loaded > 0) {
+        if (this.active_bucket > 0) {
             //    jTextArea1.append("\nPlease wait for the download operation to complete......");
             GetThread GetThread = new GetThread(this);
             GetThread.run();
@@ -1492,7 +1502,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 temp_file = (Home + "\\object.tmp");
             }
 
-            if (this.buckets_loaded > 0) {
+            if (this.active_bucket > 0) {
                 final MP3Player mp3 = new MP3Player(new File(temp_file));
                 final JFrame musicFrame = new JFrame("Music Player");
                 final JPanel musicPanel = new JPanel();
@@ -1551,7 +1561,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-        if (buckets_loaded > 0) {
+        if (active_bucket > 0) {
             int old_counter = object_display_counter + 1;
             for (int h = old_counter; h != objectarray.length; h++) {
                 jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
