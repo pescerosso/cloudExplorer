@@ -1364,8 +1364,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception sdd) {
 
         }
-
-        jTextArea1.append("\nLoaded configuration.");
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
