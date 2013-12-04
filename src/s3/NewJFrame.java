@@ -1253,24 +1253,25 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     void Sync(File dir) {
-        File[] files = dir.listFiles();
-
-        for (int i = 0; i < files.length; i++) {
-            if (files[i].isDirectory()) {
-                Sync(files[i]);
-            } else {
-                if (searchS3(files[i].getAbsolutePath())) {
+        try {
+            File[] files = dir.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].isDirectory()) {
+                    Sync(files[i]);
                 } else {
-                    String simple_what = convertObject(files[i].getAbsolutePath(), "upload");
-                    jTextArea1.append("\n" + Put.put(files[i].getAbsolutePath(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), simple_what));
+                    if (searchS3(files[i].getAbsolutePath())) {
+                    } else {
+                        String simple_what = convertObject(files[i].getAbsolutePath(), "upload");
+                        jTextArea1.append("\n" + Put.put(files[i].getAbsolutePath(), Cred.getAccess_key(), Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), simple_what));
+                    }
                 }
             }
+        } catch (Exception Sync) {
         }
     }
 
     Boolean searchS3(String what) {
         Boolean bool = false;
-
         try {
             for (int i = 1; i != objectarray.length; i++) {
                 String simple_what = convertObject(what, "download");
@@ -1403,14 +1404,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jTextArea1.append("\nError: please select a destination directroy.");
                 } else {
                     dialog("Please wait for SYNC to complete");
-                    for (int i = 1; i != objectarray.length; i++) {
-                        String Destination = jFileChooser2.getSelectedFile().toString();
-                        String new_object_name = convertObject(d[i].getText(), "download");
-
-                        jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Destination + new_object_name));
-                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                    try {
+                        for (int i = 1; i != objectarray.length; i++) {
+                            String Destination = jFileChooser2.getSelectedFile().toString();
+                            String new_object_name = convertObject(d[i].getText(), "download");
+                            jTextArea1.append("\n" + Get.get(d[i].getText(), Cred.access_key, Cred.getSecret_key(), Cred.getBucket(), Cred.getEndpoint(), Destination + slash + new_object_name));
+                            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                        }
+                        dialog.setVisible(false);
+                    } catch (Exception SyncLocal) {
                     }
-                    dialog.setVisible(false);
                 }
             } else {
                 jTextArea1.append("\nError: No bucket selected.");
