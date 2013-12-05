@@ -1362,7 +1362,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (b[active_bucket].isSelected()) {
 
                 if (jFileChooser2.getSelectedFile() == null) {
-                    jTextArea1.append("\nError: please select a destination directroy.");
+                    jTextArea1.append("\nError: please select a destination directory.");
                 } else {
                     reloadObjects(0);
                     dialog("Please wait for Sync to complete.");
