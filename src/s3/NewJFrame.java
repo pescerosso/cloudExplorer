@@ -783,13 +783,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         preload();
-
+ dialog("Please wait, loading Buckets.");
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
             reloadBuckets();
         } else {
             jTextArea1.append("\nError: Configuration not loaded");
         }
+        dialog.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -1529,7 +1530,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
 
         if (this.active_bucket > 0) {
-            //    jTextArea1.append("\nPlease wait for the download operation to complete......");
             GetThread GetThread = new GetThread(this);
             GetThread.run();
         } else {
