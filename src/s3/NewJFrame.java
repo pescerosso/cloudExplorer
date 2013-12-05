@@ -1258,14 +1258,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     void Sync(File dir) {
         try {
             File[] files = dir.listFiles();
-            for (int i = 0; i < files.length; i++) {
-                if (files[i].isDirectory()) {
-                    Sync(files[i]);
+
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    Sync(file);
                 } else {
-                    if (searchS3(files[i].getAbsolutePath())) {
+                    if (searchS3(file.getAbsolutePath())) {
                     } else {
-                        String simple_what = convertObject(files[i].getAbsolutePath(), "upload");
-                        jTextArea1.append("\n" + put.put(files[i].getAbsolutePath(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), simple_what));
+                        String simple_what = convertObject(file.getAbsolutePath(), "upload");
+                        jTextArea1.append("\n" + put.put(file.getAbsolutePath(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), simple_what));
                     }
                 }
             }
