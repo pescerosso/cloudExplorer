@@ -1323,24 +1323,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }
 
-    Boolean searchS3(String what) {
-        Boolean bool = false;
-        try {
-            for (int i = 1; i != objectarray.length; i++) {
-                String simple_what = convertObject(what, "download");
-                if (objectarray[i] != null) {
-                    if (objectarray[i].contains(simple_what)) {
-                        bool = true;
-                        break;
-                    }
-                }
-            }
-        } catch (Exception boolFUnction) {
-
-        }
-        return bool;
-    }
-
     void dialog(String what) {
         dialog.setTitle(what);
         dialog_panel.setLayout(new BoxLayout(dialog_panel, BoxLayout.PAGE_AXIS));
