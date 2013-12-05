@@ -5,19 +5,19 @@ import static s3.NewJFrame.jTextArea1;
 
 public class SyncPutThread {
 
-    NewJFrame foo;
+    NewJFrame mainFrame;
 
     SyncPutThread(NewJFrame bar) {
-        foo = bar;
+        mainFrame = bar;
     }
 
     public void run(String what) {
-        File file = foo.jFileChooser2.getSelectedFile();
+        File file = mainFrame.jFileChooser2.getSelectedFile();
         String upload = (file.getAbsolutePath());
-        String new_object_name = foo.convertObject(file.getAbsolutePath().toString(), "upload");
-        foo.jTextField7.setText(foo.jTextField7.getText().replace("null", ""));
-        jTextArea1.append("\n" + foo.put.put(what, foo.cred.getAccess_key(), foo.cred.getSecret_key(), foo.cred.getBucket(), foo.cred.getEndpoint(), what));
-        foo.jTextArea1.setCaretPosition(foo.jTextArea1.getSelectionEnd());
+        String new_object_name = mainFrame.convertObject(file.getAbsolutePath().toString(), "upload");
+        mainFrame.jTextField7.setText(mainFrame.jTextField7.getText().replace("null", ""));
+        jTextArea1.append("\n" + mainFrame.put.put(what, mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), what));
+        mainFrame.jTextArea1.setCaretPosition(mainFrame.jTextArea1.getSelectionEnd());
     }
 
 }

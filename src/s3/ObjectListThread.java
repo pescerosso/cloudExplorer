@@ -1,16 +1,16 @@
 package s3;
 
 public class ObjectListThread implements Runnable {
-NewJFrame foo;
+NewJFrame mainFrame;
 
     ObjectListThread(NewJFrame bar) {
-       foo = bar;
+       mainFrame = bar;
     }
 
     public void run() {
-         foo.dialog("Gathering Objects..........");
-        foo.reloadObjects(1);
-        foo.dialog.setVisible(false);
+         mainFrame.dialog("Gathering Objects..........");
+        mainFrame.reloadObjects(1);
+        mainFrame.dialog.setVisible(false);
     }
 
 }

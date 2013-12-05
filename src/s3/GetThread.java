@@ -12,10 +12,10 @@ import static s3.NewJFrame.jTextArea1;
 
 public class GetThread implements Runnable {
 
-    NewJFrame foo;
+    NewJFrame mainFrame;
 
     GetThread(NewJFrame bar) {
-        foo = bar;
+        mainFrame = bar;
     }
 
     public void run() {
@@ -29,23 +29,23 @@ public class GetThread implements Runnable {
         downloadButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                foo.dialog("Please wait for the download operation to complete.");
+                mainFrame.dialog("Please wait for the download operation to complete.");
                 if (downloadChooser.getSelectedFile().getAbsolutePath() != null) {
                     File File_Destination = new File(downloadChooser.getSelectedFile().getAbsolutePath());
-                    for (int i = 1; i != foo.objectarray.length; i++) {
-                        if (foo.d[i] != null) {
-                            if (foo.d[i].isSelected()) {
+                    for (int i = 1; i != mainFrame.objectarray.length; i++) {
+                        if (mainFrame.d[i] != null) {
+                            if (mainFrame.d[i].isSelected()) {
                                 download.setVisible(false);
-                                String new_object_name = foo.convertObject(foo.d[i].getText(), "download");
-                                foo.OScheck();
-                                jTextArea1.append("\n" + foo.get.get(foo.d[i].getText(), foo.cred.access_key, foo.cred.getSecret_key(), foo.cred.getBucket(), foo.cred.getEndpoint(), File_Destination.toString() + foo.slash + new_object_name));
+                                String new_object_name = mainFrame.convertObject(mainFrame.d[i].getText(), "download");
+                                mainFrame.OScheck();
+                                jTextArea1.append("\n" + mainFrame.get.get(mainFrame.d[i].getText(), mainFrame.cred.access_key, mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), File_Destination.toString() + mainFrame.slash + new_object_name));
                                 jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
-                                foo.d[i].setSelected(false);
+                                mainFrame.d[i].setSelected(false);
                             }
                         }
                     }
-                    foo.dialog.setVisible(false);
-                    foo.reloadObjects(1);
+                    mainFrame.dialog.setVisible(false);
+                    mainFrame.reloadObjects(1);
                 } else {
                     download.setVisible(false);
                     jTextArea1.append("\nError: destination not specified.");
@@ -60,9 +60,9 @@ public class GetThread implements Runnable {
         download.setLocation(500, 500);
         download.pack();
         try {
-            for (int i = 1; i != foo.objectarray.length; i++) {
-                if (foo.d[i] != null) {
-                    if (foo.d[i].isSelected()) {
+            for (int i = 1; i != mainFrame.objectarray.length; i++) {
+                if (mainFrame.d[i] != null) {
+                    if (mainFrame.d[i].isSelected()) {
                         download.setVisible(true);
                     }
                 }
