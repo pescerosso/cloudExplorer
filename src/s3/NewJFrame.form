@@ -884,11 +884,6 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
@@ -901,8 +896,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace pref="7" max="32767" attributes="0"/>
                   <Component id="jLabel10" min="-2" pref="71" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -917,11 +911,6 @@
               <Image iconType="3" name="/s3/logo_cloudian.png"/>
             </Property>
             <Property name="opaque" type="boolean" value="true"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Buckets"/>
           </Properties>
         </Component>
       </SubComponents>

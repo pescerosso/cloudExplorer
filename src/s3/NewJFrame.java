@@ -109,7 +109,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea1 = new javax.swing.JTextArea();
         jPanel8 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
@@ -558,16 +557,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/logo_cloudian.png"))); // NOI18N
         jLabel10.setOpaque(true);
 
-        jLabel1.setText("Buckets");
-
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel10)
@@ -578,8 +571,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap(7, Short.MAX_VALUE)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1))
+                .addGap(22, 22, 22))
         );
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
@@ -1701,7 +1693,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     public javax.swing.JFileChooser jFileChooser1;
     public static javax.swing.JFileChooser jFileChooser2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
