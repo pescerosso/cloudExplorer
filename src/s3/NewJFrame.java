@@ -795,7 +795,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
         if (active_bucket > 0) {
-            //  reloadObjects(1);
             ObjectListThread listThread = new ObjectListThread(this);
             listThread.run();
             jTabbedPane1.setSelectedIndex(2);
