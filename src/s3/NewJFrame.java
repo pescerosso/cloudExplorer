@@ -88,7 +88,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextField9 = new javax.swing.JTextField();
         scrollPane1 = new java.awt.ScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jFileChooser2 = new javax.swing.JFileChooser();
         jToggleButton3 = new javax.swing.JToggleButton();
@@ -346,22 +345,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel1.setBackground(java.awt.SystemColor.text);
         jPanel1.setAutoscrolls(true);
 
-        jLabel2.setText("Objects");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(428, 428, 428)
-                .addComponent(jLabel2)
-                .addContainerGap(554, Short.MAX_VALUE))
+            .addGap(0, 1030, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(0, 560, Short.MAX_VALUE))
+            .addGap(0, 576, Short.MAX_VALUE)
         );
 
         scrollPane1.add(jPanel1);
@@ -1702,7 +1694,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
