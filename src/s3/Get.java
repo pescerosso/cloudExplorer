@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-public class get {
+public class Get {
 
     void writeFile(InputStream is, String destination) {
         try {

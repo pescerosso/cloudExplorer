@@ -10,7 +10,7 @@ import com.amazonaws.services.s3.model.DeleteBucketRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 
-public class bucket {
+public class BucketClass {
 
     String objectlist = null;
 

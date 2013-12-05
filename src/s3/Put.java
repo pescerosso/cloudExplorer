@@ -15,7 +15,7 @@ import java.net.URLConnection;
 import java.nio.file.Files;
 import javax.activation.MimetypesFileTypeMap;
 
-public class put {
+public class Put {
 
     String message = null;
 

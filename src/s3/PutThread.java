@@ -17,7 +17,7 @@ public class PutThread {
         String upload = (file.getAbsolutePath());
         String new_object_name = foo.convertObject(file.getAbsolutePath().toString(), "upload");
         foo.jTextField7.setText(foo.jTextField7.getText().replace("null", ""));
-        jTextArea1.append("\n" + foo.Put.put(upload, foo.Cred.getAccess_key(), foo.Cred.getSecret_key(), foo.Cred.getBucket(), foo.Cred.getEndpoint(), foo.jTextField7.getText() + new_object_name));
+        jTextArea1.append("\n" + foo.put.put(upload, foo.cred.getAccess_key(), foo.cred.getSecret_key(), foo.cred.getBucket(), foo.cred.getEndpoint(), foo.jTextField7.getText() + new_object_name));
         foo.jTextArea1.setCaretPosition(foo.jTextArea1.getSelectionEnd());
         foo.dialog.setVisible(false);
     }

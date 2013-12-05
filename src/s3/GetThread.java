@@ -38,7 +38,7 @@ public class GetThread implements Runnable {
                                 download.setVisible(false);
                                 String new_object_name = foo.convertObject(foo.d[i].getText(), "download");
                                 foo.OScheck();
-                                jTextArea1.append("\n" + foo.Get.get(foo.d[i].getText(), foo.Cred.access_key, foo.Cred.getSecret_key(), foo.Cred.getBucket(), foo.Cred.getEndpoint(), File_Destination.toString() + foo.slash + new_object_name));
+                                jTextArea1.append("\n" + foo.get.get(foo.d[i].getText(), foo.cred.access_key, foo.cred.getSecret_key(), foo.cred.getBucket(), foo.cred.getEndpoint(), File_Destination.toString() + foo.slash + new_object_name));
                                 jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                                 foo.d[i].setSelected(false);
                             }

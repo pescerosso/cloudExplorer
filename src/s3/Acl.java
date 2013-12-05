@@ -10,7 +10,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import java.net.URL;
 
-public class acl {
+public class Acl {
 
     void setACLpublic(String object, String access_key, String secret_key, String endpoint, String bucket) {
         try {
