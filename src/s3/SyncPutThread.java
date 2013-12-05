@@ -7,8 +7,8 @@ public class SyncPutThread {
 
     NewJFrame mainFrame;
 
-    SyncPutThread(NewJFrame bar) {
-        mainFrame = bar;
+    SyncPutThread(NewJFrame frame) {
+        mainFrame = frame;
     }
 
     public void run(String what) {

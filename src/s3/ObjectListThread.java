@@ -3,8 +3,8 @@ package s3;
 public class ObjectListThread implements Runnable {
 NewJFrame mainFrame;
 
-    ObjectListThread(NewJFrame bar) {
-       mainFrame = bar;
+    ObjectListThread(NewJFrame frame) {
+       mainFrame = frame;
     }
 
     public void run() {

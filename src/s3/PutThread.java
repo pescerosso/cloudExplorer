@@ -7,8 +7,8 @@ public class PutThread {
 
     NewJFrame mainFrame;
 
-    PutThread(NewJFrame bar) {
-        mainFrame = bar;
+    PutThread(NewJFrame frame) {
+        mainFrame = frame;
     }
 
     public void run() {

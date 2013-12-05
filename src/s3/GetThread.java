@@ -14,8 +14,8 @@ public class GetThread implements Runnable {
 
     NewJFrame mainFrame;
 
-    GetThread(NewJFrame bar) {
-        mainFrame = bar;
+    GetThread(NewJFrame frame) {
+        mainFrame = frame;
     }
 
     public void run() {
