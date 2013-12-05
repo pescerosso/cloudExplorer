@@ -48,8 +48,8 @@ public class BucketClass {
 
             for (Bucket bucket : s3Client.listBuckets()) {
                 bucketlist = bucketlist + " " + bucket.getName();
-
             }
+            
         } catch (Exception listBucket) {
             System.out.print("\n\nAn error has occured in listBucket.");
             System.out.println("\n\nError Message:    " + listBucket.getMessage());
@@ -73,6 +73,7 @@ public class BucketClass {
         objectlist = null;
         try {
             ObjectListing current = s3Client.listObjects((bucket));
+           
             for (S3ObjectSummary objectSummary : current.getObjectSummaries()) {
                 objectlist = objectlist + "@" + objectSummary.getKey();
             }
