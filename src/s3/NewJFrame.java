@@ -1452,11 +1452,17 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 } else {
                     dialog("Please wait for SYNC to complete");
                     try {
+                        File[] foo = new File[100000000];
                         for (int i = 1; i != objectarray.length; i++) {
                             String Destination = jFileChooser2.getSelectedFile().toString();
                             String new_object_name = convertObject(d[i].getText(), "download");
-                            jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + slash + new_object_name));
-                            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                            foo[i] = new File(Destination + slash + new_object_name);
+                            if (foo[i].exists()) {
+                                jTextArea1.append("\n" + new_object_name + " already exists on this machine.");
+                            } else {
+                                jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + slash + new_object_name));
+                                jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                            }
                         }
                         dialog.setVisible(false);
                     } catch (Exception SyncLocal) {
