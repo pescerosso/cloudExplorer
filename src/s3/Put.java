@@ -43,7 +43,7 @@ public class Put {
             PutObjectResult response = s3Client.putObject(putRequest);
             message = ("Put object: " + what);
         } catch (Exception put) {
-            System.out.print("\n\nAn error has occured with PUT.");
+            System.out.print("\n\nAn error has occurred with PUT.");
             System.out.println("\n\nError Message:    " + put.getMessage());
             message = message + put.getMessage();
         }
