@@ -24,7 +24,7 @@ public class BucketClass {
             s3Client.createBucket(new CreateBucketRequest(bucket, region));
             message = ("\nMaking bucket: " + bucket);
         } catch (Exception makeBucket) {
-            System.out.print("\n\nAn error has occured in makeBucket.");
+            System.out.print("\n\nAn error has occurred in makeBucket.");
             System.out.println("\n\nError Message:    " + makeBucket.getMessage());
             message = message + "\n" + makeBucket.getMessage();
         }
@@ -51,7 +51,7 @@ public class BucketClass {
             }
             
         } catch (Exception listBucket) {
-            System.out.print("\n\nAn error has occured in listBucket.");
+            System.out.print("\n\nAn error has occurred in listBucket.");
             System.out.println("\n\nError Message:    " + listBucket.getMessage());
         }
         String parse = null;
@@ -79,7 +79,7 @@ public class BucketClass {
             }
 
         } catch (Exception listBucket) {
-            System.out.print("\n\nAn error has occured in listBucketContents.");
+            System.out.print("\n\nAn error has occurred in listBucketContents.");
             System.out.println("\n\nError Message:    " + listBucket.getMessage());
         }
 
@@ -104,7 +104,7 @@ public class BucketClass {
         try {
             s3Client.deleteBucket(new DeleteBucketRequest(bucket));
         } catch (Exception Delete) {
-            System.out.print("\n\nAn error has occured in DeleteBucket.");
+            System.out.print("\n\nAn error has occurred in DeleteBucket.");
             System.out.println("\n\nError Message:    " + Delete.getMessage());
             message = message + "\n" + Delete.getMessage();
         }

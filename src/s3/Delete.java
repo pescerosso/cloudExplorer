@@ -19,7 +19,7 @@ public class Delete {
             s3Client.deleteObject(new DeleteObjectRequest(bucket, what));
             message = ("Deleting object: " + what);
         } catch (Exception Delete) {
-            System.out.print("\n\nAn error has occured in DeleteFile.");
+            System.out.print("\n\nAn error has occurred in DeleteFile.");
             System.out.println("\n\nError Message:    " + Delete.getMessage());
             message = message + "\n" + Delete.getMessage();
         }

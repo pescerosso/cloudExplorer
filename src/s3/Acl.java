@@ -19,7 +19,7 @@ public class Acl {
             s3Client.setEndpoint(endpoint);
             s3Client.setObjectAcl(bucket, object, CannedAccessControlList.PublicRead);
         } catch (Exception setACLpublic) {
-            System.out.print("\nException occured in ACL");
+            System.out.print("\nException occurred in ACL");
         }
     }
 
@@ -30,7 +30,7 @@ public class Acl {
             s3Client.setEndpoint(endpoint);
             s3Client.setObjectAcl(bucket, object, CannedAccessControlList.Private);
         } catch (Exception setACLprivate) {
-            System.out.print("\nException occured in setACLprivate");
+            System.out.print("\nException occurred in setACLprivate");
         }
     }
 
@@ -42,7 +42,7 @@ public class Acl {
             s3Client.setEndpoint(endpoint);
             message = s3Client.getObjectAcl(bucket, object).toString();
         } catch (Exception viewACL) {
-            System.out.print("\nException occured in viewACL");
+            System.out.print("\nException occurred in viewACL");
         }
 
         return object + ":     " + message;
@@ -57,7 +57,7 @@ public class Acl {
             s3Client.setBucketAcl(bucket, CannedAccessControlList.PublicRead);
             s3Client.setBucketWebsiteConfiguration(bucket, new BucketWebsiteConfiguration("index.html", "error.html"));
         } catch (Exception setACLpublic) {
-            System.out.print("\nException occured in ACL");
+            System.out.print("\nException occurred in ACL");
         }
     }
 
@@ -68,7 +68,7 @@ public class Acl {
             s3Client.setEndpoint(endpoint);
             s3Client.deleteBucketWebsiteConfiguration(bucket);
         } catch (Exception removeBUCKETwebsite) {
-            System.out.print("\nException occured in ACL");
+            System.out.print("\nException occurred in ACL");
         }
     }
 
