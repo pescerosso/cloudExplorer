@@ -1383,29 +1383,35 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField5.setText("");
-        jTextField8.setText("");
-        jTextField9.setText("");
+        try {
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jTextField8.setText("");
+            jTextField9.setText("");
+        } catch (Exception clear) {
+        }
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        String load = cred.loadConfig();
-        String[] config_array = load.split(" ");
-        jTextField1.setText(config_array[0]);
-        jTextField2.setText(config_array[1]);
-        jTextField3.setText(config_array[2]);
-        jTextField4.setText(config_array[3]);
-        jTextField5.setText(config_array[4]);
-
         try {
-            jTextField8.setText(config_array[5]);
-            jTextField9.setText(config_array[6]);
-        } catch (Exception sdd) {
+            String load = cred.loadConfig();
+            String[] config_array = load.split(" ");
+            jTextField1.setText(config_array[0]);
+            jTextField2.setText(config_array[1]);
+            jTextField3.setText(config_array[2]);
+            jTextField4.setText(config_array[3]);
+            jTextField5.setText(config_array[4]);
 
+            try {
+                jTextField8.setText(config_array[5]);
+                jTextField9.setText(config_array[6]);
+            } catch (Exception sdd) {
+
+            }
+        } catch (Exception load) {
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
