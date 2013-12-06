@@ -41,7 +41,7 @@ public class Get {
             InputStream objectData = s3object.getObjectContent();
             this.writeFile(objectData, destination);
         } catch (Exception get) {
-            System.out.print("\n\nAn error has occured in GET.");
+            System.out.print("\n\nAn error has occurred in GET.");
             System.out.println("\n\nError Message:    " + get.getMessage());
             message = message + "\n" + get.getMessage();
         }
