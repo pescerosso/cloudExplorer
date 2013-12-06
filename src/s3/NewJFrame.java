@@ -263,7 +263,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel13.setText("Version: 1.1");
+        jLabel13.setText("Version: Development");
         jLabel13.setToolTipText("");
 
         jLabel14.setText("Please submit bugs via github: https://github.com/rusher81572/s3 ");
