@@ -1116,12 +1116,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
     boolean OScheck() {
         boolean result;
-        if ((OS.contains("windows")) || OS.contains("Windows")) {
-            slash = "\\";
-            result = false;
-        } else {
-            result = true;
-        }
+        result = !((OS.contains("windows")) || OS.contains("Windows"));
         return result;
     }
     private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
