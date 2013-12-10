@@ -18,6 +18,7 @@ import javax.activation.MimetypesFileTypeMap;
 public class Put {
 
     String message = null;
+    NewJFrame mainFrame;
 
     String put(String what, String access_key, String secret_key, String bucket, String endpoint, String ObjectKey) {
         File file = new File(what);
@@ -25,7 +26,7 @@ public class Put {
         String mimeType = mimeTypesMap.getContentType(file);
         mimeType = mimeTypesMap.getContentType(file);
         ObjectMetadata objectMetadata = new ObjectMetadata();
-       
+
         if ((ObjectKey.contains(".html")) || ObjectKey.contains(".txt")) {
             objectMetadata.setContentType("text/html");
         } else {
@@ -43,8 +44,8 @@ public class Put {
             PutObjectResult response = s3Client.putObject(putRequest);
             message = ("Put object: " + what);
         } catch (Exception put) {
-            System.out.print("\n\nAn error has occurred with PUT.");
-            System.out.println("\n\nError Message:    " + put.getMessage());
+            mainFrame.jTextArea1.append("\n\nAn error has occurred with PUT.");
+            mainFrame.jTextArea1.append("\n\nError Message:    " + put.getMessage());
             message = message + put.getMessage();
         }
         message.replace("null", "");

@@ -14,6 +14,8 @@ public class BucketClass {
 
     String objectlist = null;
 
+    NewJFrame mainFrame;
+
     String makeBucket(String access_key, String secret_key, String bucket, String endpoint, String region) {
         String message = null;
 
@@ -24,8 +26,8 @@ public class BucketClass {
             s3Client.createBucket(new CreateBucketRequest(bucket, region));
             message = ("\nMaking bucket: " + bucket);
         } catch (Exception makeBucket) {
-            System.out.print("\n\nAn error has occurred in makeBucket.");
-            System.out.println("\n\nError Message:    " + makeBucket.getMessage());
+            mainFrame.jTextArea1.append("\n\nAn error has occurred in makeBucket.");
+            mainFrame.jTextArea1.append("\n\nError Message:    " + makeBucket.getMessage());
             message = message + "\n" + makeBucket.getMessage();
         }
 
@@ -35,7 +37,7 @@ public class BucketClass {
     }
 
     String listBuckets(String access_key, String secret_key, String endpoint) {
-  
+
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
@@ -49,10 +51,10 @@ public class BucketClass {
             for (Bucket bucket : s3Client.listBuckets()) {
                 bucketlist = bucketlist + " " + bucket.getName();
             }
-            
+
         } catch (Exception listBucket) {
             System.out.print("\n\nAn error has occurred in listBucket.");
-            System.out.println("\n\nError Message:    " + listBucket.getMessage());
+            mainFrame.jTextArea1.append("\n\nError Message:    " + listBucket.getMessage());
         }
         String parse = null;
 
@@ -73,14 +75,14 @@ public class BucketClass {
         objectlist = null;
         try {
             ObjectListing current = s3Client.listObjects((bucket));
-           
+
             for (S3ObjectSummary objectSummary : current.getObjectSummaries()) {
                 objectlist = objectlist + "@" + objectSummary.getKey();
             }
 
         } catch (Exception listBucket) {
-            System.out.print("\n\nAn error has occurred in listBucketContents.");
-            System.out.println("\n\nError Message:    " + listBucket.getMessage());
+            mainFrame.jTextArea1.append("\n\nAn error has occurred in listBucketContents.");
+            mainFrame.jTextArea1.append("\n\nError Message:    " + listBucket.getMessage());
         }
 
         String parse = null;
@@ -104,8 +106,8 @@ public class BucketClass {
         try {
             s3Client.deleteBucket(new DeleteBucketRequest(bucket));
         } catch (Exception Delete) {
-            System.out.print("\n\nAn error has occurred in DeleteBucket.");
-            System.out.println("\n\nError Message:    " + Delete.getMessage());
+            mainFrame.jTextArea1.append("\n\nAn error has occurred in DeleteBucket.");
+            mainFrame.jTextArea1.append("\n\nError Message:    " + Delete.getMessage());
             message = message + "\n" + Delete.getMessage();
         }
         message.replace("null", "");

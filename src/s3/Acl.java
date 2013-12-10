@@ -12,6 +12,8 @@ import java.net.URL;
 
 public class Acl {
 
+    NewJFrame mainFrame;
+
     void setACLpublic(String object, String access_key, String secret_key, String endpoint, String bucket) {
         try {
             AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
@@ -19,7 +21,7 @@ public class Acl {
             s3Client.setEndpoint(endpoint);
             s3Client.setObjectAcl(bucket, object, CannedAccessControlList.PublicRead);
         } catch (Exception setACLpublic) {
-            System.out.print("\nException occurred in ACL");
+            mainFrame.jTextArea1.append("\nException occurred in ACL");
         }
     }
 
@@ -30,7 +32,7 @@ public class Acl {
             s3Client.setEndpoint(endpoint);
             s3Client.setObjectAcl(bucket, object, CannedAccessControlList.Private);
         } catch (Exception setACLprivate) {
-            System.out.print("\nException occurred in setACLprivate");
+            mainFrame.jTextArea1.append("\nException occurred in setACLprivate");
         }
     }
 
@@ -57,7 +59,7 @@ public class Acl {
             s3Client.setBucketAcl(bucket, CannedAccessControlList.PublicRead);
             s3Client.setBucketWebsiteConfiguration(bucket, new BucketWebsiteConfiguration("index.html", "error.html"));
         } catch (Exception setACLpublic) {
-            System.out.print("\nException occurred in ACL");
+            mainFrame.jTextArea1.append("\nException occurred in ACL");
         }
     }
 
@@ -68,7 +70,7 @@ public class Acl {
             s3Client.setEndpoint(endpoint);
             s3Client.deleteBucketWebsiteConfiguration(bucket);
         } catch (Exception removeBUCKETwebsite) {
-            System.out.print("\nException occurred in ACL");
+            mainFrame.jTextArea1.append("\nException occurred in ACL");
         }
     }
 
@@ -89,7 +91,7 @@ public class Acl {
             URL url = s3Client.generatePresignedUrl(generatePresignedUrlRequest);
             URL = ("Pre-Signed URL = " + url.toString());
         } catch (Exception setACLpublic) {
-            System.out.print("\nException occured in ACL");
+            mainFrame.jTextArea1.append("\nException occured in ACL");
         }
         return URL;
     }

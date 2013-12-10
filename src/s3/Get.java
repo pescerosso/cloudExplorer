@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 
 public class Get {
+NewJFrame mainFrame;
 
     void writeFile(InputStream is, String destination) {
         try {
@@ -41,8 +42,8 @@ public class Get {
             InputStream objectData = s3object.getObjectContent();
             this.writeFile(objectData, destination);
         } catch (Exception get) {
-            System.out.print("\n\nAn error has occurred in GET.");
-            System.out.println("\n\nError Message:    " + get.getMessage());
+            mainFrame.jTextArea1.append("\n\nAn error has occurred in GET.");
+     mainFrame.jTextArea1.append("\n\nError Message:    " + get.getMessage());
             message = message + "\n" + get.getMessage();
         }
         message.replace("null", "");

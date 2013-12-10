@@ -9,6 +9,7 @@ import com.amazonaws.services.s3.model.DeleteObjectRequest;
 public class Delete {
 
     String message = null;
+    NewJFrame mainFrame;
 
     String deleteFile(String what, String access_key, String secret_key, String bucket, String endpoint) {
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
@@ -19,8 +20,8 @@ public class Delete {
             s3Client.deleteObject(new DeleteObjectRequest(bucket, what));
             message = ("Deleting object: " + what);
         } catch (Exception Delete) {
-            System.out.print("\n\nAn error has occurred in DeleteFile.");
-            System.out.println("\n\nError Message:    " + Delete.getMessage());
+            mainFrame.jTextArea1.append("\n\nAn error has occurred in DeleteFile.");
+            mainFrame.jTextArea1.append("\n\nError Message:    " + Delete.getMessage());
             message = message + "\n" + Delete.getMessage();
         }
         message.replace("null", "");
