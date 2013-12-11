@@ -7,6 +7,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.CreateBucketRequest;
 import com.amazonaws.services.s3.model.DeleteBucketRequest;
+import com.amazonaws.services.s3.model.ListObjectsRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
@@ -78,10 +79,15 @@ public class BucketClass {
         try {
             ObjectListing current = s3Client.listObjects((bucket));
 
-            List<S3ObjectSummary> list = current.getObjectSummaries();
-            for (S3ObjectSummary image : list) {
-                objectlist = objectlist + "@" + image.getKey();
-            }
+            ListObjectsRequest listObjectsRequest = new ListObjectsRequest().withBucketName(bucket);
+            ObjectListing objectListing;
+            do {
+                objectListing = s3Client.listObjects(listObjectsRequest);
+                for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
+                    objectlist = objectlist + "@" + objectSummary.getKey();
+                }
+                listObjectsRequest.setMarker(objectListing.getNextMarker());
+            } while (objectListing.isTruncated());
 
         } catch (Exception listBucket) {
             mainFrame.jTextArea1.append("\n\nAn error has occurred in listBucketContents.");
