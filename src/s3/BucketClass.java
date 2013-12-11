@@ -8,7 +8,9 @@ import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.CreateBucketRequest;
 import com.amazonaws.services.s3.model.DeleteBucketRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
+import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import java.util.List;
 
 public class BucketClass {
 
@@ -76,8 +78,9 @@ public class BucketClass {
         try {
             ObjectListing current = s3Client.listObjects((bucket));
 
-            for (S3ObjectSummary objectSummary : current.getObjectSummaries()) {
-                objectlist = objectlist + "@" + objectSummary.getKey();
+            List<S3ObjectSummary> list = current.getObjectSummaries();
+            for (S3ObjectSummary image : list) {
+                objectlist = objectlist + "@" + image.getKey();
             }
 
         } catch (Exception listBucket) {
