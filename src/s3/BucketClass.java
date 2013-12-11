@@ -53,7 +53,7 @@ public class BucketClass {
             }
 
         } catch (Exception listBucket) {
-            System.out.print("\n\nAn error has occurred in listBucket.");
+            mainFrame.jTextArea1.append("\n\nAn error has occurred in listBucket.");
             mainFrame.jTextArea1.append("\n\nError Message:    " + listBucket.getMessage());
         }
         String parse = null;

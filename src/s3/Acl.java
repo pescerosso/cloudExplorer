@@ -44,7 +44,7 @@ public class Acl {
             s3Client.setEndpoint(endpoint);
             message = s3Client.getObjectAcl(bucket, object).toString();
         } catch (Exception viewACL) {
-            System.out.print("\nException occurred in viewACL");
+            mainFrame.jTextArea1.append("\nException occurred in viewACL");
         }
 
         return object + ":     " + message;

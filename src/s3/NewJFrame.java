@@ -1008,7 +1008,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
                 }
             } catch (Exception listing) {
-                System.out.print("\n\nException in readObjects");
+                jTextArea1.append("\n\nException in readObjects");
             }
         } else {
             jTextArea1.append("\nError: Configuration not loaded");
