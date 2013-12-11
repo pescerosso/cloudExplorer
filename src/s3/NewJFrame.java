@@ -1,7 +1,6 @@
 package s3;
 
 import jaco.mp3.player.MP3Player;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
