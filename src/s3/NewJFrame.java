@@ -25,7 +25,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 public class NewJFrame extends javax.swing.JFrame implements ItemListener {
-
+    
     Credentials cred = new Credentials();
     BucketClass bucket = new BucketClass();
     Delete delete = new Delete();
@@ -51,25 +51,24 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     JButton more = new JButton("Show More");
     int object_display_counter = 0;
     int initial_display = 11;
-
+    
     public NewJFrame() {
         initComponents();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jMenuItem5 = new javax.swing.JMenuItem();
         jPanel9 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jPanel8 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
@@ -131,7 +130,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
 
@@ -143,13 +141,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton6.setText("Show Objects");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
         jButton1.setText("Load");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +150,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setBorder(null);
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -168,23 +160,19 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jButton6)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(64, 64, 64))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -194,7 +182,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/logo_cloudian.png"))); // NOI18N
         jLabel10.setOpaque(true);
 
-        jTextField10.setText("jTextField10");
         jTextField10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTextField10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,10 +189,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
 
-        jButton2.setText("Search");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton6.setText("Search");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton6ActionPerformed(evt);
             }
         });
 
@@ -215,10 +202,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addGap(339, 339, 339))
+                .addComponent(jButton6)
+                .addGap(335, 335, 335))
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(570, 570, 570)
                 .addComponent(jLabel10)
@@ -228,11 +215,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)))
+                    .addComponent(jButton6))
+                .addGap(3, 3, 3))
         );
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
@@ -254,8 +242,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -265,15 +254,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         panel1.setBackground(java.awt.Color.white);
@@ -312,7 +300,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel14)
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -760,14 +748,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         });
         jMenu2.add(jMenuItem7);
 
-        jMenuItem15.setText("Show All Objects");
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem15);
-
         jMenuItem14.setText("Play Music File");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -815,31 +795,31 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     String convertObject(String what, String operation) {
-
+        
         if (!OScheck()) {
             if (what.contains("/")) {
                 what = what.replace("/", "\\");
             }
         }
-
+        
         if (OScheck()) {
             if (what.contains("\\")) {
                 what = what.replace("\\", "/");
             }
         }
-
+        
         int count = 0;
         int slash_counter = 0;
         String out_file = null;
         int another_counter = 0;
-
+        
         for (int y = 0; y != what.length(); y++) {
             if (what.substring(y, y + 1).contains(slash)) {
                 slash_counter++;
                 another_counter = y;
             }
         }
-
+        
         for (int y = 0; y != what.length(); y++) {
             if (y == another_counter) {
                 if (operation.contains("download")) {
@@ -869,16 +849,37 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
-        if (active_bucket > 0) {
-            ObjectListThread listThread = new ObjectListThread(this);
-            listThread.run();
-            jTabbedPane1.setSelectedIndex(2);
-        } else {
-            jTextArea1.append("\nError: no bucket has been selected.");
+        try {
+            
+            if (this.active_bucket > 0) {
+                dialog("Please wait for search to complete.");
+                reloadObjects(0);
+                int found = 0;
+                for (int i = 1; i != objectarray.length; i++) {
+                    if (d[i] != null) {
+                        if (d[i].getText().toLowerCase().contains(jTextField10.getText().toLowerCase())) {
+                            jTabbedPane1.setSelectedIndex(2);
+                            jTextArea1.append("\nFound object(s): " + d[i].getText());
+                            jPanel1.add(d[i]);
+                            d[i].setVisible(true);
+                            found++;
+                        } else {
+                            d[i].setVisible(false);
+                        }
+                    }
+                }
+                if (found == 0) {
+                    reloadObjects(0);
+                    jTextArea1.append("\nNo objects found for: " + jTextField10.getText().toLowerCase());
+                }
+            } else {
+                jTextArea1.append("\nError: No bucket has been selected");
+            }
+        } catch (Exception Download) {
         }
+        dialog.setVisible(false);
     }
-
+    
     void clear_old_radio_buttons() {
         try {
             for (int c = 1; c != bucketarray.length; c++) {
@@ -890,7 +891,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception clear_old_radio) {
         }
     }
-
+    
     public void itemStateChanged(ItemEvent e) {
         try {
             for (int h = 1; h != bucketarray.length; h++) {
@@ -908,26 +909,26 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception ItemStateChanged) {
         }
     }
-
+    
     void reloadBuckets() {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
             this.bucketarray = null;
-
+            
             String bucketlist = bucket.listBuckets(cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint());
             bucketarray = bucketlist.split(" ");
-
+            
             this.jPanel5.removeAll();
             this.jPanel5.revalidate();
             this.jPanel5.repaint();
             this.jPanel5.setLayout(new BoxLayout(this.jPanel5, BoxLayout.PAGE_AXIS));
-
+            
             if (bucketarray != null) {
                 for (int h = 1; h != bucketarray.length; h++) {
                     jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
                     b[h] = new JRadioButton();
                     b[h].setText(bucketarray[h]);
-
+                    
                     b[h].addItemListener(this);
                     this.jPanel5.add(b[h]);
                     this.setLocation(h, 5);
@@ -939,21 +940,21 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jTextArea1.append("\nError: Configuration not loaded");
         }
     }
-
+    
     void reloadObjects(int draw) {
-
+        
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
-
+            
             more.addActionListener(new ActionListener() {
-
+                
                 public void actionPerformed(ActionEvent e) {
                     try {
                         if (objectarray.length < 11) {
                         } else {
                             int old_counter = object_display_counter + 1;
                             int new_counter = old_counter + 11;
-
+                            
                             for (int h = old_counter; h != new_counter; h++) {
                                 if (old_counter == objectarray.length) {
                                     jPanel1.remove(more);
@@ -967,7 +968,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                     jPanel1.add(d[h]);
                                     jPanel1.add(more);
                                     setLocation(h, 5);
-
+                                    
                                     jPanel1.revalidate();
                                     validate();
                                     object_display_counter = h;
@@ -975,24 +976,24 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             }
                         }
                     } catch (Exception more) {
-
+                        
                     }
                 }
             });
-
+            
             this.objectarray = null;
             this.jPanel1.removeAll();
             this.jPanel1.revalidate();
             this.jPanel1.repaint();
             this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
-
+            
             try {
                 for (int h = 1; h != bucketarray.length; h++) {
                     if (b[h] != null) {
                         if (b[h].isSelected()) {
                             String objectlist = bucket.listBucketContents(cred.getAccess_key(), cred.getSecret_key(), b[h].getText(), cred.getEndpoint());
                             objectarray = objectlist.split("@");
-
+                            
                         }
                     }
                 }
@@ -1001,7 +1002,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
                         d[h] = new JRadioButton();
                         d[h].setText(objectarray[h]);
-
+                        
                         this.jPanel1.add(d[h]);
                         if (objectarray.length > 10) {
                             this.jPanel1.add(more);
@@ -1011,7 +1012,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         }
                         object_display_counter = h;
                     }
-
+                    
                     this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
                 } else {
                     for (int h = 1; h != objectarray.length; h++) {
@@ -1020,7 +1021,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         d[h].setText(objectarray[h]);
                         object_display_counter = h;
                     }
-
+                    
                     this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
                 }
             } catch (Exception listing) {
@@ -1031,24 +1032,24 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
     void preload() {
-
+        
         if (!OScheck()) {
             config_file = (Home + "\\s3.config");
         }
-
+        
         File checkConfig = new File(config_file);
         if (checkConfig.exists()) {
             jButton9.doClick();
         }
     }
-
+    
     void editorSync(String file) {
         if (!OScheck()) {
             temp_file = (Home + "\\object.tmp");
         }
-
+        
         File tmp = new File(temp_file);
-
+        
         try {
             FileWriter fr = new FileWriter(temp_file);
             BufferedWriter bfr = new BufferedWriter(fr);
@@ -1064,7 +1065,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             String response = JOptionPane.showInputDialog(null, "Bucket Name: ", "logo_cloudian.png", JOptionPane.OK_CANCEL_OPTION);
             jTextArea1.append("\n" + bucket.makeBucket(cred.getAccess_key(), cred.getSecret_key(), response.toLowerCase(), cred.getEndpoint(), cred.getRegion()));
             reloadBuckets();
-
+            
         } else {
             jTextArea1.append("\nError: Configuration not loaded");
         }
@@ -1076,9 +1077,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 final JFrame bucketACL = new JFrame("Bucket ACL Settings");
                 final JCheckBox static_website = new JCheckBox("Static Website");
                 final JButton bucketACLbutton = new JButton("Commit");
-
+                
                 bucketACLbutton.addActionListener(new ActionListener() {
-
+                    
                     public void actionPerformed(ActionEvent e) {
                         if (static_website.isSelected()) {
                             objectacl.setBUCKETwebsite(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
@@ -1093,7 +1094,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         }
                     }
                 });
-
+                
                 JPanel foopanel = new JPanel();
                 bucketACL.setPreferredSize(new Dimension(225, 75));
                 bucketACL.setResizable(false);
@@ -1104,7 +1105,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 bucketACL.setLocation(500, 500);
                 bucketACL.pack();
                 bucketACL.setVisible(true);
-
+                
             } else {
                 jTextArea1.append("\nError: No bucket has been selected");
             }
@@ -1115,10 +1116,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
-
+            
             for (int i = 0; i != bucketarray.length; i++) {
                 if (b[i] != null) {
-
+                    
                     if (b[i].isSelected()) {
                         jTextArea1.append(bucket.deleteBucket(cred.access_key, cred.secret_key, b[i].getText(), cred.end_point, cred.region));
                     }
@@ -1140,16 +1141,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
     private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
         try {
-
+            
             if (!OScheck()) {
                 temp_file = (Home + "\\object.tmp");
             }
-
+            
             for (int i = 1; i != objectarray.length; i++) {
                 if (d[i].isSelected()) {
                     String new_object_name = convertObject(d[i].getText(), "download");
                     jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file));
-
+                    
                     try {
                         FileReader frr = new FileReader(temp_file);
                         BufferedReader bfrr = new BufferedReader(frr);
@@ -1160,30 +1161,30 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         }
                         bfrr.close();
                     } catch (Exception tempFile) {
-
+                        
                     }
                     jTabbedPane1.setSelectedIndex(5);
                     jTextField6.setText(d[i].getText());
                 }
-
+                
             }
-
+            
         } catch (Exception Download) {
         }
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         try {
-
+            
             if (this.active_bucket > 0) {
                 final JFrame parent = new JFrame("Object ACL Settings");
                 final JCheckBox public_box = new JCheckBox("Public");
                 final JCheckBox url_box = new JCheckBox("URL Access");
                 final JCheckBox private_box = new JCheckBox("Private Access");
                 final JButton acl = new JButton("Commit");
-
+                
                 acl.addActionListener(new ActionListener() {
-
+                    
                     public void actionPerformed(ActionEvent e) {
                         for (int i = 1; i != objectarray.length; i++) {
                             try {
@@ -1195,7 +1196,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                                         parent.setVisible(false);
                                     }
-
+                                    
                                     if (url_box.isSelected()) {
                                         jTextArea1.append("\n" + objectacl.setACLurl(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket()));
                                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
@@ -1211,11 +1212,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             } catch (Exception ObjectACL) {
                             }
                         }
-
+                        
                     }
-
+                    
                 });
-
+                
                 JPanel foopanel = new JPanel();
                 parent.setPreferredSize(new Dimension(225, 120));
                 parent.setResizable(false);
@@ -1238,7 +1239,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         try {
-
+            
             if (this.active_bucket > 0) {
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i].isSelected()) {
@@ -1259,16 +1260,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 file.delete();
             }
         } catch (Exception deleteFIle) {
-
+            
         }
     }
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         try {
-
+            
             if (!OScheck()) {
                 temp_file = (Home + "\\object.tmp");
             }
-
+            
             JLabel image[] = new JLabel[objectarray.length];
             ImageIcon[] photo = new ImageIcon[objectarray.length];
             JFrame image_frame = new JFrame();
@@ -1277,7 +1278,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             JScrollPane scrolling_pane = new JScrollPane(image_panel);
             image_frame.setSize(new Dimension(2000, 1000));
             image_frame.add(scrolling_pane);
-
+            
             for (int i = 1; i != objectarray.length; i++) {
                 if (d[i].isSelected()) {
                     image_panel.setLayout(new BoxLayout(image_panel, BoxLayout.PAGE_AXIS));
@@ -1293,7 +1294,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     deleteFle(temp_file + i);
                     break;
                 }
-
+                
             }
             image_frame.setVisible(true);
             image_frame.setAlwaysOnTop(true);
@@ -1311,7 +1312,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (!OScheck()) {
                 temp_file = (Home + "\\object.tmp");
             }
-
+            
             editorSync(jTextField6.getText());
             jTextArea1.append("\n" + delete.deleteFile(jTextField6.getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint()));
             jTextArea1.append("\n" + put.put(temp_file, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField6.getText()));
@@ -1322,17 +1323,17 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jTextArea1.append("\nError: no bucket selected.");
         }
     }//GEN-LAST:event_jButton11ActionPerformed
-
+    
     void Sync(File dir) {
         try {
             File[] files = dir.listFiles();
-
+            
             for (File file : files) {
                 if (file.isDirectory()) {
                     Sync(file);
                 } else {
                     String simple_what = convertObject(file.getAbsolutePath(), "upload");
-
+                    
                     int found = 0;
                     for (int y = 1; y != objectarray.length; y++) {
                         if (objectarray[y].contains(simple_what)) {
@@ -1340,7 +1341,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             found++;
                         }
                     }
-
+                    
                     if (found == 0) {
                         jTextArea1.append("\n" + put.put(file.getAbsolutePath(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), simple_what));
                         found = 0;
@@ -1350,7 +1351,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception Sync) {
         }
     }
-
+    
     void dialog(String what) {
         dialog.setTitle(what);
         dialog_panel.setLayout(new BoxLayout(dialog_panel, BoxLayout.PAGE_AXIS));
@@ -1367,7 +1368,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         if (active_bucket > 0) {
             if (b[active_bucket].isSelected()) {
-
+                
                 if (jFileChooser2.getSelectedFile() == null) {
                     jTextArea1.append("\nError: please select a destination directory.");
                 } else {
@@ -1413,12 +1414,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jTextField3.setText(config_array[2]);
             jTextField4.setText(config_array[3]);
             jTextField5.setText(config_array[4]);
-
+            
             try {
                 jTextField8.setText(config_array[5]);
                 jTextField9.setText(config_array[6]);
             } catch (Exception sdd) {
-
+                
             }
         } catch (Exception load) {
         }
@@ -1442,7 +1443,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-
+        
         if (this.active_bucket > 0) {
             PutThread PutThread = new PutThread(this);
             PutThread.run();
@@ -1511,7 +1512,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         try {
-
+            
             if (active_bucket > 0) {
                 for (int i = 1; i != objectarray.length; i++) {
                     dialog("Please wait, deleting file(s)");
@@ -1521,7 +1522,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                     }
                 }
-
+                
             } else {
                 jTextArea1.append("\nError: No bucked selected.");
             }
@@ -1532,7 +1533,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-
+        
         if (this.active_bucket > 0) {
             GetThread GetThread = new GetThread(this);
             GetThread.run();
@@ -1546,7 +1547,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (!OScheck()) {
                 temp_file = (Home + "\\object.tmp");
             }
-
+            
             if (this.active_bucket > 0) {
                 final MP3Player mp3 = new MP3Player(new File(temp_file));
                 final JFrame musicFrame = new JFrame("Music Player");
@@ -1554,22 +1555,22 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 final JButton stopMusic = new JButton("Stop Music");
                 final JButton replayMusic = new JButton("Replay");
                 final JButton closeMusic = new JButton("Close");
-
+                
                 stopMusic.addActionListener(new ActionListener() {
-
+                    
                     public void actionPerformed(ActionEvent e) {
                         mp3.stop();
                     }
                 });
                 replayMusic.addActionListener(new ActionListener() {
-
+                    
                     public void actionPerformed(ActionEvent e) {
                         mp3.stop();
                         mp3.play();
                     }
                 });
                 closeMusic.addActionListener(new ActionListener() {
-
+                    
                     public void actionPerformed(ActionEvent e) {
                         mp3.stop();
                         musicFrame.setVisible(false);
@@ -1596,7 +1597,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         break;
                     }
                 }
-
+                
             } else {
                 jTextArea1.append("\nError: No bucket has been selected");
             }
@@ -1605,62 +1606,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
-    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-        if (active_bucket > 0) {
-            int old_counter = object_display_counter + 1;
-            for (int h = old_counter; h != objectarray.length; h++) {
-                jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
-                d[h] = new JRadioButton();
-                jPanel1.remove(more);
-                d[h].setText(objectarray[h]);
-                jPanel1.add(d[h]);
-                setLocation(h, 5);
-                object_display_counter = h;
-            }
-            jPanel1.repaint();
-            jPanel1.revalidate();
-            validate();
-        } else {
-            jTextArea1.append("\nError: No bucket has been selected");
-        }
-    }//GEN-LAST:event_jMenuItem15ActionPerformed
-
     private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField10ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-
-            if (this.active_bucket > 0) {
-                reloadObjects(0);
-
-                reloadObjects(0);
-                int found = 0;
-                for (int i = 1; i != objectarray.length; i++) {
-                    if (d[i] != null) {
-                        if (d[i].getText().toLowerCase().contains(jTextField10.getText().toLowerCase())) {
-                            jTabbedPane1.setSelectedIndex(2);
-                            jTextArea1.append("\nFound object(s): " + d[i].getText());
-                            jPanel1.add(d[i]);
-                            d[i].setVisible(true);
-                            found++;
-                        } else {
-                            d[i].setVisible(false);
-                        }
-                    }
-                }
-                if (found == 0) {
-                    reloadObjects(0);
-                    jTextArea1.append("\nNo objects found for: " + jTextField10.getText().toLowerCase());
-                }
-            } else {
-                jTextArea1.append("\nError: No bucket has been selected");
-            }
-        } catch (Exception Download) {
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+    
     void var() {
         cred.setAccess_key(jTextField1.getText());
         cred.setSecret_key(jTextField2.getText());
@@ -1668,9 +1617,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         cred.setEndpoint(endpoint);
         cred.setRegion(jTextField5.getText());
     }
-
+    
     public static void main(String args[]) {
-
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);
@@ -1681,7 +1630,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
@@ -1713,7 +1661,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
