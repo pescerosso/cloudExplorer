@@ -1,15 +1,10 @@
 package s3;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import javax.swing.BoxLayout;
-import javax.swing.JRadioButton;
-import static s3.NewJFrame.jFileChooser2;
-import static s3.NewJFrame.jPanel1;
-import static s3.NewJFrame.jTextArea1;
+import java.util.concurrent.TimeUnit;
+import javax.swing.Timer;
 
 public class Daemon {
 
@@ -30,6 +25,7 @@ public class Daemon {
     String[] syncarray = null;
     String[] saved_s3_configs = null;
     String[] saved_directory_to_sync = null;
+    File dirToSync = new File("");
 
     public Put put = new Put();
 
@@ -60,7 +56,7 @@ public class Daemon {
             cred.setEndpoint(endpoint);
             cred.setRegion(saved_s3_configs[4]);
         } catch (Exception loadS3Credentials) {
-            System.out.print("\n" +loadS3Credentials.getMessage() );
+            System.out.print("\n" + loadS3Credentials.getMessage());
         }
     }
 
@@ -100,12 +96,23 @@ public class Daemon {
         saved_directory_to_sync = loadConfig(sync_config_file).toString().split(" ");
         cred.setBucket(saved_directory_to_sync[1]);
 
-        File dirToSync = new File(saved_directory_to_sync[0]);
-       // System.out.print("\n\nDirectroy to sync: " + dirToSync.toString() + " to Bucket: " + cred.getBucket());
-       
-        reloadObjects();
-      SyncToS3(dirToSync);
-      syncFromS3(dirToSync.toString());
+        dirToSync = new File(saved_directory_to_sync[0]);
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    mainmenu();
+                    System.out.print("\n\nDirectroy to sync: " + dirToSync.toString() + " to Bucket: " + cred.getBucket());
+                    reloadObjects();
+                    SyncToS3(dirToSync);
+                    syncFromS3(dirToSync.toString());
+                    Thread.sleep(TimeUnit.MINUTES.toMillis(5));
+                    run();
+
+                } catch (InterruptedException e) {
+                }
+            }
+        }).start();
 
     }
 
