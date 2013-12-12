@@ -481,10 +481,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addContainerGap(185, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -494,8 +495,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -537,9 +538,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(340, 340, 340)
+                        .addGap(404, 404, 404)
                         .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(213, 213, 213)
@@ -550,8 +551,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton3)
                     .addComponent(jToggleButton4))
@@ -834,7 +835,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             
             if (this.active_bucket > 0) {
                 dialog("Please wait for search to complete.");
-                reloadObjects(0);
+                reloadObjects();
                 int found = 0;
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i] != null) {
@@ -850,7 +851,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     }
                 }
                 if (found == 0) {
-                    reloadObjects(0);
+                    reloadObjects();
                     jTextArea1.append("\nNo objects found for: " + jTextField10.getText().toLowerCase());
                 }
             } else {
@@ -922,7 +923,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }
     
-    void reloadObjects(int draw) {
+    void reloadObjects() {
         
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
@@ -978,24 +979,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         }
                     }
                 }
-                if (draw == 1) {
-                    for (int h = 1; h != initial_display; h++) {
-                        jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
-                        d[h] = new JRadioButton();
-                        d[h].setText(objectarray[h]);
-                        
-                        this.jPanel1.add(d[h]);
-                        if (objectarray.length > 10) {
-                            this.jPanel1.add(more);
-                            this.setLocation(h, 5);
-                            this.jPanel1.revalidate();
-                            validate();
-                        }
-                        object_display_counter = h;
-                    }
-                    
                     this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
-                } else {
+            
                     for (int h = 1; h != objectarray.length; h++) {
                         jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
                         d[h] = new JRadioButton();
@@ -1004,7 +989,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     }
                     
                     this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
-                }
+                
             } catch (Exception listing) {
                 jTextArea1.append("\n\nException in readObjects");
             }
@@ -1353,7 +1338,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 if (jFileChooser2.getSelectedFile() == null) {
                     jTextArea1.append("\nError: please select a destination directory.");
                 } else {
-                    reloadObjects(0);
+                    reloadObjects();
                     dialog("Please wait for Sync to complete.");
                     Sync(jFileChooser2.getSelectedFile());
                     dialog.setVisible(true);
@@ -1439,7 +1424,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
         if (active_bucket > 0) {
-            reloadObjects(0);
+            reloadObjects();
             if (b[active_bucket].isSelected()) {
                 jTextArea1.append("\nStarting Sync:");
                 if (jFileChooser2.getSelectedFile() == null) {
@@ -1510,7 +1495,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception checkbox) {
         }
         dialog.setVisible(false);
-        reloadObjects(1);
+        reloadObjects();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed

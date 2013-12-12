@@ -45,7 +45,7 @@ public class GetThread implements Runnable {
                         }
                     }
                     mainFrame.dialog.setVisible(false);
-                    mainFrame.reloadObjects(1);
+                    mainFrame.reloadObjects();
                 } else {
                     download.setVisible(false);
                     jTextArea1.append("\nError: destination not specified.");

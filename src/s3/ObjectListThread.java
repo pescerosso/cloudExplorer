@@ -9,7 +9,7 @@ NewJFrame mainFrame;
 
     public void run() {
         mainFrame.dialog("Gathering Objects..........");
-        mainFrame.reloadObjects(1);
+        mainFrame.reloadObjects();
         mainFrame.dialog.setVisible(false);
     }
 
