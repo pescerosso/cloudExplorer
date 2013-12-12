@@ -272,7 +272,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version; Development\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. All Logging for exceptions is now done via the main text area. This will make it easier to debug problems like having incorrect AWS credentials.\n\n2. Optimized code by removing unused imports.\n\n3. Added support for displaying over 1000 objects in Object Explorer.\n\n4. New search bar replaces \"Show all Objects\".\n\n5. New search bar replaces \"Show Objects\"\n\n6. Fixed a bug in search that reloads the objects twice.\n\n");
+        jTextArea4.setText("Version: 1.2\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. All Logging for exceptions is now done via the main text area. This will make it easier to debug problems like having incorrect AWS credentials.\n\n2. Optimized code by removing unused imports.\n\n3. Added support for displaying over 1000 objects in Object Explorer.\n\n4. New search bar replaces \"Show all Objects\".\n\n5. New search bar replaces \"Show Objects\"\n\n6. Fixed a bug in search that reloads the objects twice.\n\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
