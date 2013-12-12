@@ -49,7 +49,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     JFrame dialog = new JFrame();
     JLabel dialog_label = new JLabel("Please wait for operation to complete. This will close upon completion.");
     JPanel dialog_panel = new JPanel();
-    JButton more = new JButton("Show More");
     int object_display_counter = 0;
     int initial_display = 11;
 
@@ -949,43 +948,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     void reloadObjects() {
 
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
+            
             this.var();
-
-            more.addActionListener(new ActionListener() {
-
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        if (objectarray.length < 11) {
-                        } else {
-                            int old_counter = object_display_counter + 1;
-                            int new_counter = old_counter + 11;
-
-                            for (int h = old_counter; h != new_counter; h++) {
-                                if (old_counter == objectarray.length) {
-                                    jPanel1.remove(more);
-                                    jPanel1.repaint();
-                                    jPanel1.revalidate();
-                                    jPanel1.validate();
-                                } else {
-                                    jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
-                                    d[h] = new JRadioButton();
-                                    d[h].setText(objectarray[h]);
-                                    jPanel1.add(d[h]);
-                                    jPanel1.add(more);
-                                    setLocation(h, 5);
-
-                                    jPanel1.revalidate();
-                                    validate();
-                                    object_display_counter = h;
-                                }
-                            }
-                        }
-                    } catch (Exception more) {
-
-                    }
-                }
-            });
-
             this.objectarray = null;
             this.jPanel1.removeAll();
             this.jPanel1.revalidate();
