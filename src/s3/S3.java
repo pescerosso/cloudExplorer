@@ -18,6 +18,7 @@ public class S3 {
         if (args.length > 0) {
             if (args[0].contains("daemon")) {
                 Daemon daemon = new Daemon();
+                daemon.gui = false;
                 daemon.start();
             }
         } else {

@@ -8,6 +8,7 @@ import javax.swing.Timer;
 
 public class Daemon {
 
+    NewJFrame mainFrame;
     String Home = System.getProperty("user.home");
     String OS = System.getProperty("os.name");
     String slash = "/";
@@ -26,8 +27,17 @@ public class Daemon {
     String[] saved_s3_configs = null;
     String[] saved_directory_to_sync = null;
     File dirToSync = new File("");
+    boolean gui = false;
 
     public Put put = new Put();
+
+    void messageParser(String message) {
+        if (gui) {
+            mainFrame.jTextArea1.append(message);
+        } else {
+            System.out.print(message);
+        }
+    }
 
     boolean OScheck() {
         boolean result;
@@ -37,18 +47,18 @@ public class Daemon {
 
     void mainmenu() {
         for (int i = 0; i != 20; i++) {
-            System.out.print("\n");
+            messageParser("\n");
         }
-        System.out.print("\n------------------------------------------------");
-        System.out.print("\nCloudian Explorer is running in Daemon mode.");
-        System.out.print("\n------------------------------------------------");
+        messageParser("\n------------------------------------------------");
+        messageParser("\nCloudian Explorer is running in Daemon mode.");
+        messageParser("\n------------------------------------------------");
     }
 
     void loadS3credentials() {
         try {
             for (String what : saved_s3_configs) {
                 if (what == null) {
-                    System.out.print("\nError: an S3 config was null");
+                    messageParser("\nError: an S3 config was null");
                     System.exit(-1);
                 }
             }
@@ -58,7 +68,7 @@ public class Daemon {
             cred.setEndpoint(endpoint);
             cred.setRegion(saved_s3_configs[4]);
         } catch (Exception loadS3Credentials) {
-            System.out.print("\n" + loadS3Credentials.getMessage());
+            messageParser("\n" + loadS3Credentials.getMessage());
         }
     }
 
@@ -87,20 +97,20 @@ public class Daemon {
             sync_config_file = (Home + slash + "s3config.sync");
         }
         mainmenu();
-        System.out.print("\n\nCloudian Explorer will perform a bidirectional \nsync on the directory listed in the config file:\n\n" + sync_config_file);
+        messageParser("\n\nCloudian Explorer will perform a bidirectional \nsync on the directory listed in the config file:\n\n" + sync_config_file);
 
         try {
             File s3config = new File(Home + slash + "s3config.sync");
             if (s3config.exists()) {
             } else {
-                System.out.print("\nError: S3 config file not found.");
+                messageParser("\nError: S3 config file not found.");
                 System.exit(-1);
             }
 
             File syncconfig = new File(Home + slash + "s3config.sync");
             if (syncconfig.exists()) {
             } else {
-                System.out.print("\nError: Sync config file not found.");
+                messageParser("\nError: Sync config file not found.");
                 System.exit(-1);
             }
 
@@ -112,7 +122,7 @@ public class Daemon {
             cred.setBucket(saved_directory_to_sync[1]);
 
             dirToSync = new File(saved_directory_to_sync[0]);
-            System.out.print("\n\nDirectroy to sync: " + dirToSync.toString() + " to Bucket: " + cred.getBucket());
+            messageParser("\n\nDirectroy to sync: " + dirToSync.toString() + " to Bucket: " + cred.getBucket());
 
             new Thread(new Runnable() {
                 public void run() {
@@ -128,7 +138,7 @@ public class Daemon {
                 }
             }).start();
         } catch (Exception Start) {
-            System.out.print("\n" + Start.getMessage());
+            messageParser("\n" + Start.getMessage());
         }
 
     }
@@ -188,7 +198,7 @@ public class Daemon {
                     int found = 0;
                     for (int y = 1; y != objectarray.length; y++) {
                         if (objectarray[y].contains(simple_what)) {
-                            System.out.print("\nObject already exists on S3: " + simple_what);
+                            messageParser("\nObject already exists on S3: " + simple_what);
                             found++;
                         }
                     }
@@ -200,7 +210,7 @@ public class Daemon {
                 }
             }
         } catch (Exception Sync) {
-            System.out.print("\n" + Sync.getMessage());
+            messageParser("\n" + Sync.getMessage());
         }
     }
 
@@ -211,13 +221,13 @@ public class Daemon {
                 String new_object_name = convertObject(objectarray[i], "download");
                 foo[i] = new File(Destination + slash + new_object_name);
                 if (foo[i].exists()) {
-                    System.out.print("\n" + new_object_name + " already exists on this machine.");
+                    messageParser("\n" + new_object_name + " already exists on this machine.");
                 } else {
                     get.get(objectarray[i], cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + slash + new_object_name);
                 }
             }
         } catch (Exception SyncLocal) {
-            System.out.print("\n" + SyncLocal.getMessage());
+            messageParser("\n" + SyncLocal.getMessage());
         }
     }
 
@@ -225,9 +235,9 @@ public class Daemon {
         try {
             String objectlist = bucket.listBucketContents(cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
             objectarray = objectlist.split("@");
-            System.out.print("\n Objectarray length = " + objectarray.length);
+            messageParser("\n Objectarray length = " + objectarray.length);
         } catch (Exception reloadObjects) {
-            System.out.print("\n" + reloadObjects.getMessage());
+            messageParser("\n" + reloadObjects.getMessage());
         }
     }
 }
