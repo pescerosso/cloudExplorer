@@ -512,7 +512,7 @@
                       <Properties>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="Version: Development&#xa;&#xa;Please submit bugs via github: https://github.com/rusher81572/s3 &#xa;&#xa;What is new in this release?&#xa;&#xa;1. Improved error reporting.&#xa;&#xa;2. Daemon mode introduced to sync files in the background without a GUI.&#xa;&#xa;3. Added Daemon mode support in the GUI in case the user wants a GUI to be running.&#xa;&#xa;"/>
+                        <Property name="text" type="java.lang.String" value="Version: Development&#xa;&#xa;Please submit bugs via github: https://github.com/rusher81572/s3 &#xa;&#xa;What is new in this release?&#xa;&#xa;1. Improved error reporting.&#xa;&#xa;2. Daemon mode for Background syncing introduced to sync files in the background without a GUI.&#xa;&#xa;3. Added Background syncing mode support in the GUI in case the user wants a GUI to be running.&#xa;&#xa;"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="null"/>
                         </Property>

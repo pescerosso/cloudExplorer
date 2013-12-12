@@ -275,7 +275,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: Development\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Improved error reporting.\n\n2. Daemon mode introduced to sync files in the background without a GUI.\n\n3. Added Daemon mode support in the GUI in case the user wants a GUI to be running.\n\n");
+        jTextArea4.setText("Version: Development\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Improved error reporting.\n\n2. Daemon mode for Background syncing introduced to sync files in the background without a GUI.\n\n3. Added Background syncing mode support in the GUI in case the user wants a GUI to be running.\n\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
