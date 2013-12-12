@@ -59,7 +59,9 @@ public class Daemon {
             for (String what : saved_s3_configs) {
                 if (what == null) {
                     messageParser("\nError: an S3 config was null");
-                    System.exit(-1);
+                    if (!gui) {
+                        System.exit(-1);
+                    }
                 }
             }
             cred.setAccess_key(saved_s3_configs[0]);
@@ -100,18 +102,22 @@ public class Daemon {
         messageParser("\n\nCloudian Explorer will perform a bidirectional \nsync on the directory listed in the config file:\n\n" + sync_config_file);
 
         try {
-            File s3config = new File(Home + slash + "s3config.sync");
+            File s3config = new File(s3_config_file);
             if (s3config.exists()) {
             } else {
-                messageParser("\nError: S3 config file not found.");
-                System.exit(-1);
+                messageParser("\nError: Sync config file not found.");
+                if (!gui) {
+                    System.exit(-1);
+                }
             }
 
-            File syncconfig = new File(Home + slash + "s3config.sync");
+            File syncconfig = new File(sync_config_file);
             if (syncconfig.exists()) {
             } else {
                 messageParser("\nError: Sync config file not found.");
-                System.exit(-1);
+                if (!gui) {
+                    System.exit(-1);
+                }
             }
 
             saved_s3_configs = cred.loadConfig().toString().split(" ");
@@ -131,6 +137,9 @@ public class Daemon {
                         SyncToS3(dirToSync);
                         syncFromS3(dirToSync.toString());
                         Thread.sleep(TimeUnit.MINUTES.toMillis(5));
+                        if (gui) {
+                            mainFrame.jTextArea1.setText("");
+                        }
                         run();
 
                     } catch (InterruptedException e) {
