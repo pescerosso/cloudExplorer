@@ -11,7 +11,8 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 
 public class Get {
-NewJFrame mainFrame;
+    
+    NewJFrame mainFrame;
 
     void writeFile(InputStream is, String destination) {
         try {
@@ -36,14 +37,14 @@ NewJFrame mainFrame;
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
         message = ("Get object: " + what);
-        
+
         try {
             S3Object s3object = s3Client.getObject(new GetObjectRequest(bucket, what));
             InputStream objectData = s3object.getObjectContent();
             this.writeFile(objectData, destination);
         } catch (Exception get) {
             mainFrame.jTextArea1.append("\n\nAn error has occurred in GET.");
-     mainFrame.jTextArea1.append("\n\nError Message:    " + get.getMessage());
+            mainFrame.jTextArea1.append("\n\nError Message:    " + get.getMessage());
             message = message + "\n" + get.getMessage();
         }
         message.replace("null", "");

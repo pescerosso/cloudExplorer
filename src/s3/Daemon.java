@@ -50,6 +50,12 @@ public class Daemon {
 
     void loadS3credentials() {
         try {
+            for (String what : saved_s3_configs) {
+                if (what == null) {
+                    System.out.print("\nError: an S3 config was null");
+                    System.exit(-1);
+                }
+            }
             cred.setAccess_key(saved_s3_configs[0]);
             cred.setSecret_key(saved_s3_configs[1]);
             String endpoint = (saved_s3_configs[2] + ":" + saved_s3_configs[3]);
@@ -87,31 +93,47 @@ public class Daemon {
         mainmenu();
         System.out.print("\n\nCloudian Explorer will perform a bidirectional \nsync on the directory listed in the config file:\n\n" + sync_config_file);
 
-        //Need IF's to see if these exists
-        saved_s3_configs = cred.loadConfig().toString().split(" ");
-
-        loadS3credentials();
-
-        //Need IF's to see if these exists
-        saved_directory_to_sync = loadConfig(sync_config_file).toString().split(" ");
-        cred.setBucket(saved_directory_to_sync[1]);
-
-        dirToSync = new File(saved_directory_to_sync[0]);
-        System.out.print("\n\nDirectroy to sync: " + dirToSync.toString() + " to Bucket: " + cred.getBucket());
-
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    reloadObjects();
-                    SyncToS3(dirToSync);
-                    syncFromS3(dirToSync.toString());
-                    Thread.sleep(TimeUnit.MINUTES.toMillis(5));
-                    run();
-
-                } catch (InterruptedException e) {
-                }
+        try {
+            File s3config = new File(Home + slash + "s3config.sync");
+            if (s3config.exists()) {
+            } else {
+                System.out.print("\nError: S3 config file not found.");
+                System.exit(-1);
             }
-        }).start();
+
+            File syncconfig = new File(Home + slash + "s3config.sync");
+            if (syncconfig.exists()) {
+            } else {
+                System.out.print("\nError: Sync config file not found.");
+                System.exit(-1);
+            }
+
+            saved_s3_configs = cred.loadConfig().toString().split(" ");
+
+            loadS3credentials();
+
+            saved_directory_to_sync = loadConfig(sync_config_file).toString().split(" ");
+            cred.setBucket(saved_directory_to_sync[1]);
+
+            dirToSync = new File(saved_directory_to_sync[0]);
+            System.out.print("\n\nDirectroy to sync: " + dirToSync.toString() + " to Bucket: " + cred.getBucket());
+
+            new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        reloadObjects();
+                        SyncToS3(dirToSync);
+                        syncFromS3(dirToSync.toString());
+                        Thread.sleep(TimeUnit.MINUTES.toMillis(5));
+                        run();
+
+                    } catch (InterruptedException e) {
+                    }
+                }
+            }).start();
+        } catch (Exception Start) {
+            System.out.print("\n" + Start.getMessage());
+        }
 
     }
 
