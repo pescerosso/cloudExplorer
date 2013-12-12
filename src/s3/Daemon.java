@@ -1,9 +1,14 @@
 package s3;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import javax.swing.BoxLayout;
+import javax.swing.JRadioButton;
 import static s3.NewJFrame.jFileChooser2;
+import static s3.NewJFrame.jPanel1;
 import static s3.NewJFrame.jTextArea1;
 
 public class Daemon {
@@ -24,7 +29,7 @@ public class Daemon {
     String[] objectarray = null;
     String[] syncarray = null;
     String[] saved_s3_configs = null;
-    String[] saved_directories_to_sync = null;
+    String[] saved_directory_to_sync = null;
 
     public Put put = new Put();
 
@@ -49,13 +54,13 @@ public class Daemon {
 
     void loadS3credentials() {
         try {
-            cred.setAccess_key(saved_s3_configs[1]);
-            cred.setSecret_key(saved_s3_configs[2]);
-            String endpoint = (saved_s3_configs[3] + ":" + saved_s3_configs[4]);
+            cred.setAccess_key(saved_s3_configs[0]);
+            cred.setSecret_key(saved_s3_configs[1]);
+            String endpoint = (saved_s3_configs[2] + ":" + saved_s3_configs[3]);
             cred.setEndpoint(endpoint);
-            cred.setRegion(saved_s3_configs[5]);
+            cred.setRegion(saved_s3_configs[4]);
         } catch (Exception loadS3Credentials) {
-
+            System.out.print("\n" +loadS3Credentials.getMessage() );
         }
     }
 
@@ -84,21 +89,23 @@ public class Daemon {
             sync_config_file = (Home + slash + "s3config.sync");
         }
         mainmenu();
-        System.out.print("\n\nCloudian Explorer will perform a bidirectional \nsync on directories listed in the config file:\n\n" + sync_config_file);
+        System.out.print("\n\nCloudian Explorer will perform a bidirectional \nsync on the directory listed in the config file:\n\n" + sync_config_file);
 
         //Need IF's to see if these exists
-        saved_s3_configs = loadConfig(s3_config_file).toString().split("@");
+        saved_s3_configs = cred.loadConfig().toString().split(" ");
 
         loadS3credentials();
 
         //Need IF's to see if these exists
-        saved_directories_to_sync = loadConfig(sync_config_file).toString().split(" ");
-        cred.setBucket(saved_directories_to_sync[1]);
+        saved_directory_to_sync = loadConfig(sync_config_file).toString().split(" ");
+        cred.setBucket(saved_directory_to_sync[1]);
 
-        File dirToSync = new File(saved_directories_to_sync[0]);
-
-        SyncToS3(dirToSync);
-        syncFromS3(dirToSync.toString());
+        File dirToSync = new File(saved_directory_to_sync[0]);
+       // System.out.print("\n\nDirectroy to sync: " + dirToSync.toString() + " to Bucket: " + cred.getBucket());
+       
+        reloadObjects();
+      SyncToS3(dirToSync);
+      syncFromS3(dirToSync.toString());
 
     }
 
@@ -185,6 +192,16 @@ public class Daemon {
                 }
             }
         } catch (Exception SyncLocal) {
+        }
+    }
+
+    void reloadObjects() {
+        try {
+            String objectlist = bucket.listBucketContents(cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
+            objectarray = objectlist.split("@");
+            System.out.print("\n Objectarray length = " + objectarray.length);
+        } catch (Exception reloadObjects) {
+            System.out.print("\n" + reloadObjects.getMessage());
         }
     }
 }
