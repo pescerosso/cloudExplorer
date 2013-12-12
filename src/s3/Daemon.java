@@ -97,12 +97,11 @@ public class Daemon {
         cred.setBucket(saved_directory_to_sync[1]);
 
         dirToSync = new File(saved_directory_to_sync[0]);
+        System.out.print("\n\nDirectroy to sync: " + dirToSync.toString() + " to Bucket: " + cred.getBucket());
 
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    mainmenu();
-                    System.out.print("\n\nDirectroy to sync: " + dirToSync.toString() + " to Bucket: " + cred.getBucket());
                     reloadObjects();
                     SyncToS3(dirToSync);
                     syncFromS3(dirToSync.toString());
