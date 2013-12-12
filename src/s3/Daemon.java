@@ -46,12 +46,16 @@ public class Daemon {
     }
 
     void mainmenu() {
-        for (int i = 0; i != 20; i++) {
-            messageParser("\n");
+        if (!gui) {
+            for (int i = 0; i != 20; i++) {
+                messageParser("\n");
+            }
+            messageParser("\n------------------------------------------------");
+            messageParser("\nCloudian Explorer is running in Daemon mode.");
+            messageParser("\n------------------------------------------------");
+        } else {
+            messageParser("\n Backgrond Sync mode is running.....");
         }
-        messageParser("\n------------------------------------------------");
-        messageParser("\nCloudian Explorer is running in Daemon mode.");
-        messageParser("\n------------------------------------------------");
     }
 
     void loadS3credentials() {
@@ -99,8 +103,9 @@ public class Daemon {
             sync_config_file = (Home + slash + "s3config.sync");
         }
         mainmenu();
-        messageParser("\n\nCloudian Explorer will perform a bidirectional \nsync on the directory listed in the config file:\n\n" + sync_config_file);
-
+        if(!gui){
+            messageParser("\n\nCloudian Explorer will perform a bidirectional \nsync on the directory listed in the config file:\n\n" + sync_config_file);
+        }
         try {
             File s3config = new File(s3_config_file);
             if (s3config.exists()) {
@@ -128,7 +133,7 @@ public class Daemon {
             cred.setBucket(saved_directory_to_sync[1]);
 
             dirToSync = new File(saved_directory_to_sync[0]);
-            messageParser("\n\nDirectroy to sync: " + dirToSync.toString() + " to Bucket: " + cred.getBucket());
+            messageParser("\n\nDirectroy to sync: " + dirToSync.toString() + "  Bucket: " + cred.getBucket());
 
             new Thread(new Runnable() {
                 public void run() {
