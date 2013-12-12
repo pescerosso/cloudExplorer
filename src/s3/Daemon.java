@@ -35,14 +35,10 @@ public class Daemon {
         return result;
     }
 
-    void clearescreen() {
+    void mainmenu() {
         for (int i = 0; i != 20; i++) {
             System.out.print("\n");
         }
-    }
-
-    void mainmenu() {
-        clearescreen();
         System.out.print("\n------------------------------------------------");
         System.out.print("\nCloudian Explorer is running in Daemon mode.");
         System.out.print("\n------------------------------------------------");
@@ -204,6 +200,7 @@ public class Daemon {
                 }
             }
         } catch (Exception Sync) {
+            System.out.print("\n" + Sync.getMessage());
         }
     }
 
@@ -220,6 +217,7 @@ public class Daemon {
                 }
             }
         } catch (Exception SyncLocal) {
+            System.out.print("\n" + SyncLocal.getMessage());
         }
     }
 
