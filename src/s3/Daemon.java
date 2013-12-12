@@ -1,6 +1,8 @@
 package s3;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import static s3.NewJFrame.jFileChooser2;
 import static s3.NewJFrame.jTextArea1;
 
@@ -10,14 +12,19 @@ public class Daemon {
     String OS = System.getProperty("os.name");
     String slash = "/";
     String temp_file = (Home + "/object.tmp");
-    String config_file = Home + slash + "s3config.sync";
+    String sync_config_file = Home + slash + "s3config.sync";
+    String s3_config_file = Home + slash + "s3.config";
     Credentials cred = new Credentials();
     BucketClass bucket = new BucketClass();
     Delete delete = new Delete();
     Acl objectacl = new Acl();
     Get get = new Get();
     String[] bucketarray = null;
+    String[] locationarray = null;
     String[] objectarray = null;
+    String[] syncarray = null;
+    String[] saved_s3_configs = null;
+    String[] saved_directories_to_sync = null;
 
     public Put put = new Put();
 
@@ -27,33 +34,72 @@ public class Daemon {
         return result;
     }
 
-    public void clearescreen() {
+    void clearescreen() {
         for (int i = 0; i != 20; i++) {
             System.out.print("\n");
         }
     }
 
-    public void mainmenu() {
+    void mainmenu() {
         clearescreen();
         System.out.print("\n------------------------------------------------");
         System.out.print("\nCloudian Explorer is running in Daemon mode.");
         System.out.print("\n------------------------------------------------");
     }
 
-    public void start() {
+    void loadS3credentials() {
+        try {
+            cred.setAccess_key(saved_s3_configs[1]);
+            cred.setSecret_key(saved_s3_configs[2]);
+            String endpoint = (saved_s3_configs[3] + ":" + saved_s3_configs[4]);
+            cred.setEndpoint(endpoint);
+            cred.setRegion(saved_s3_configs[5]);
+        } catch (Exception loadS3Credentials) {
+
+        }
+    }
+
+    String loadConfig(String what) {
+        String data = null;
+
+        try {
+            FileReader fr = new FileReader(what);
+            BufferedReader bfr = new BufferedReader(fr);
+            String read = null;
+
+            while ((read = bfr.readLine()) != null) {
+                data = data + read;
+            }
+        } catch (Exception loadConfig) {
+        }
+        String remove_null = data.replace("null", "");
+        String remove_symbol = remove_null.replace("@", " ");
+        return remove_symbol;
+    }
+
+    void start() {
         OScheck();
         if (!OScheck()) {
             //Needs testing on Windows
-            config_file = (Home + slash + "s3config.sync");
+            sync_config_file = (Home + slash + "s3config.sync");
         }
         mainmenu();
-        System.out.print("\n\nCloudian Explorer will perform a bidirectional \nsync on directories listed in the config file:\n\n" + config_file);
-        
-       //loadConfig();
-       //load SyncConfig();
-       //loadBuckets();
-       //syncTO
-        //syncFrom(
+        System.out.print("\n\nCloudian Explorer will perform a bidirectional \nsync on directories listed in the config file:\n\n" + sync_config_file);
+
+        //Need IF's to see if these exists
+        saved_s3_configs = loadConfig(s3_config_file).toString().split("@");
+
+        loadS3credentials();
+
+        //Need IF's to see if these exists
+        saved_directories_to_sync = loadConfig(sync_config_file).toString().split(" ");
+        cred.setBucket(saved_directories_to_sync[1]);
+
+        File dirToSync = new File(saved_directories_to_sync[0]);
+
+        SyncToS3(dirToSync);
+        syncFromS3(dirToSync.toString());
+
     }
 
     String convertObject(String what, String operation) {
@@ -117,7 +163,7 @@ public class Daemon {
                     }
 
                     if (found == 0) {
-                        System.out.print("\n" + put.put(file.getAbsolutePath(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), simple_what));
+                        put.put(file.getAbsolutePath(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), simple_what);
                         found = 0;
                     }
                 }
@@ -126,17 +172,16 @@ public class Daemon {
         }
     }
 
-    public void syncFromS3() {
+    void syncFromS3(String Destination) {
         try {
-            File[] foo = new File[100000000];
+            File[] foo = new File[objectarray.length];
             for (int i = 1; i != objectarray.length; i++) {
-                String Destination = objectarray[i];
                 String new_object_name = convertObject(objectarray[i], "download");
                 foo[i] = new File(Destination + slash + new_object_name);
                 if (foo[i].exists()) {
                     System.out.print("\n" + new_object_name + " already exists on this machine.");
                 } else {
-                    System.out.print("\n" + get.get(objectarray[i], cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + slash + new_object_name));
+                    get.get(objectarray[i], cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + slash + new_object_name);
                 }
             }
         } catch (Exception SyncLocal) {

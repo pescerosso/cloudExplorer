@@ -17,7 +17,7 @@ public class BucketClass {
 
     String objectlist = null;
 
-    NewJFrame mainFrame;
+ //   NewJFrame mainFrame;
 
     String makeBucket(String access_key, String secret_key, String bucket, String endpoint, String region) {
         String message = null;
@@ -29,8 +29,8 @@ public class BucketClass {
             s3Client.createBucket(new CreateBucketRequest(bucket, region));
             message = ("\nMaking bucket: " + bucket);
         } catch (Exception makeBucket) {
-            mainFrame.jTextArea1.append("\n\nAn error has occurred in makeBucket.");
-            mainFrame.jTextArea1.append("\n\nError Message:    " + makeBucket.getMessage());
+         //   mainFrame.jTextArea1.append("\n\nAn error has occurred in makeBucket.");
+        //    mainFrame.jTextArea1.append("\n\nError Message:    " + makeBucket.getMessage());
             message = message + "\n" + makeBucket.getMessage();
         }
 
@@ -56,8 +56,8 @@ public class BucketClass {
             }
 
         } catch (Exception listBucket) {
-            mainFrame.jTextArea1.append("\n\nAn error has occurred in listBucket.");
-            mainFrame.jTextArea1.append("\n\nError Message:    " + listBucket.getMessage());
+          //  mainFrame.jTextArea1.append("\n\nAn error has occurred in listBucket.");
+          //  mainFrame.jTextArea1.append("\n\nError Message:    " + listBucket.getMessage());
         }
         String parse = null;
 
@@ -90,8 +90,8 @@ public class BucketClass {
             } while (objectListing.isTruncated());
 
         } catch (Exception listBucket) {
-            mainFrame.jTextArea1.append("\n\nAn error has occurred in listBucketContents.");
-            mainFrame.jTextArea1.append("\n\nError Message:    " + listBucket.getMessage());
+         //   mainFrame.jTextArea1.append("\n\nAn error has occurred in listBucketContents.");
+         //   mainFrame.jTextArea1.append("\n\nError Message:    " + listBucket.getMessage());
         }
 
         String parse = null;
@@ -115,8 +115,8 @@ public class BucketClass {
         try {
             s3Client.deleteBucket(new DeleteBucketRequest(bucket));
         } catch (Exception Delete) {
-            mainFrame.jTextArea1.append("\n\nAn error has occurred in DeleteBucket.");
-            mainFrame.jTextArea1.append("\n\nError Message:    " + Delete.getMessage());
+       //     mainFrame.jTextArea1.append("\n\nAn error has occurred in DeleteBucket.");
+      //      mainFrame.jTextArea1.append("\n\nError Message:    " + Delete.getMessage());
             message = message + "\n" + Delete.getMessage();
         }
         message.replace("null", "");
