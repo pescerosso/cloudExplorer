@@ -68,6 +68,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea1 = new javax.swing.JTextArea();
         jPanel8 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
+        jTextField10 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
@@ -193,21 +195,45 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/logo_cloudian.png"))); // NOI18N
         jLabel10.setOpaque(true);
 
+        jTextField10.setText("jTextField10");
+        jTextField10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField10ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Search");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addGap(339, 339, 339))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(570, 570, 570)
                 .addComponent(jLabel10)
-                .addGap(473, 473, 473))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2)))
         );
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
@@ -791,7 +817,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
@@ -1471,63 +1497,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        try {
-
-            if (this.active_bucket > 0) {
-                reloadObjects(0);
-                final JFrame search = new JFrame("Search for objects\n\n");
-                final JTextField searchbox = new JTextField();
-                final JLabel searchlabel = new JLabel("Type an object name to search for:");
-                final JButton searchbutton = new JButton("Search");
-
-                searchbutton.addActionListener(new ActionListener() {
-
-                    public void actionPerformed(ActionEvent e) {
-                        reloadObjects(0);
-                        int found = 0;
-                        for (int i = 1; i != objectarray.length; i++) {
-                            if (d[i] != null) {
-                                if (d[i].getText().toLowerCase().contains(searchbox.getText().toLowerCase())) {
-                                    jTabbedPane1.setSelectedIndex(2);
-                                    jTextArea1.append("\nFound object(s): " + d[i].getText());
-                                    jPanel1.add(d[i]);
-                                    d[i].setVisible(true);
-                                    search.setVisible(false);
-                                    found++;
-                                } else {
-                                    d[i].setVisible(false);
-                                }
-                            }
-                        }
-                        if (found == 0) {
-                            reloadObjects(0);
-                            jTextArea1.append("\nNo objects found for: " + searchbox.getText().toLowerCase());
-                            search.setVisible(false);
-                        }
-
-                    }
-                });
-
-                JPanel foopanel = new JPanel();
-                search.setResizable(false);
-                foopanel.setLayout(new BoxLayout(foopanel, BoxLayout.PAGE_AXIS));
-                search.add(foopanel);
-                foopanel.add(searchlabel);
-                foopanel.add(searchbox);
-                foopanel.add(searchbutton);
-                search.setLocation(500, 500);
-                searchbox.setSize(new Dimension(10, 20));
-                search.setAlwaysOnTop(true);
-                foopanel.repaint();
-                foopanel.revalidate();
-                foopanel.validate();
-                search.pack();
-                search.setVisible(true);
-            } else {
-                jTextArea1.append("\nError: No bucket has been selected");
-            }
-        } catch (Exception Download) {
-        }
 
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
@@ -1669,6 +1638,42 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
+    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField10ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+
+            if (this.active_bucket > 0) {
+                reloadObjects(0);
+
+                reloadObjects(0);
+                int found = 0;
+                for (int i = 1; i != objectarray.length; i++) {
+                    if (d[i] != null) {
+                        if (d[i].getText().toLowerCase().contains(jTextField10.getText().toLowerCase())) {
+                            jTabbedPane1.setSelectedIndex(2);
+                            jTextArea1.append("\nFound object(s): " + d[i].getText());
+                            jPanel1.add(d[i]);
+                            d[i].setVisible(true);
+                            found++;
+                        } else {
+                            d[i].setVisible(false);
+                        }
+                    }
+                }
+                if (found == 0) {
+                    reloadObjects(0);
+                    jTextArea1.append("\nNo objects found for: " + jTextField10.getText().toLowerCase());
+                }
+            } else {
+                jTextArea1.append("\nError: No bucket has been selected");
+            }
+        } catch (Exception Download) {
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     void var() {
         cred.setAccess_key(jTextField1.getText());
         cred.setSecret_key(jTextField2.getText());
@@ -1689,6 +1694,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
@@ -1747,6 +1753,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     public static javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
