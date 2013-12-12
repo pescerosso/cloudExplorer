@@ -244,7 +244,6 @@ public class Daemon {
         try {
             String objectlist = bucket.listBucketContents(cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
             objectarray = objectlist.split("@");
-            messageParser("\n Objectarray length = " + objectarray.length);
         } catch (Exception reloadObjects) {
             messageParser("\n" + reloadObjects.getMessage());
         }

@@ -15,6 +15,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -761,6 +762,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenu5.add(jMenuItem15);
 
         jMenuItem9.setText("Configure");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem9);
 
         jMenuBar1.add(jMenu5);
@@ -1606,6 +1612,49 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         daemon.gui = true;
         daemon.start();
     }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        try {
+
+            if (this.active_bucket > 0) {
+                final JFrame bg_frame = new JFrame("Directory to Sync:");
+                final JFileChooser bg_choose = new JFileChooser();
+                bg_choose.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                final JButton bg_button = new JButton("Save");
+
+                bg_button.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e) {
+                     
+                        File choice = new File(bg_choose.getSelectedFile().toString());
+                        try {
+                            FileWriter fr = new FileWriter(Home + slash + "s3config.sync");
+                            BufferedWriter bfr = new BufferedWriter(fr);
+                            bfr.write(bg_choose.getSelectedFile().toString() + " " + b[active_bucket].getText());
+                            bfr.close();
+                        } catch (Exception writeConfig) {
+                            jTextArea1.append("\n" + writeConfig.getMessage());
+                        }
+                        bg_frame.setVisible(false);
+                    }
+                });
+
+                JPanel bg_panel = new JPanel();
+                bg_frame.setResizable(false);
+                bg_panel.setLayout(new BoxLayout(bg_panel, BoxLayout.PAGE_AXIS));
+                bg_panel.add(bg_choose);
+                bg_frame.add(bg_panel);
+                bg_panel.add(bg_button);
+                bg_frame.setLocation(500, 500);
+                bg_frame.pack();
+                bg_frame.setVisible(true);
+            } else {
+                jTextArea1.append("\nError: No bucket has been selected");
+            }
+        } catch (Exception Download) {
+            jTextArea1.append("\n" + Download.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     void var() {
         cred.setAccess_key(jTextField1.getText());
