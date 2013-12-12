@@ -750,7 +750,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu5.setText("Daemon Mode");
+        jMenu5.setText("Background Syncing");
 
         jMenuItem15.setText("Run");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
