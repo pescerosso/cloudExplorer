@@ -124,7 +124,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -711,14 +710,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
         jMenu4.add(jMenuItem10);
-
-        jMenuItem9.setText("Search for Objects");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem9);
 
         jMenuBar1.add(jMenu4);
 
@@ -1496,10 +1487,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         try {
             for (int i = 1; i != objectarray.length; i++) {
@@ -1734,7 +1721,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     public static javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
