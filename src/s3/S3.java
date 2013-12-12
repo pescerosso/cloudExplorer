@@ -15,9 +15,11 @@ public class S3 {
      **/
 
     public static void main(String[] args) {
-        if (args[0].contains("daemon")) {
-            Daemon daemon = new Daemon();
-            daemon.start();
+        if (args.length > 0) {
+            if (args[0].contains("daemon")) {
+                Daemon daemon = new Daemon();
+                daemon.start();
+            }
         } else {
             try {
                 NewJFrame gui = new NewJFrame();
