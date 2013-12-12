@@ -14,25 +14,15 @@ public class S3 {
      * Place, Suite 330, Boston, MA 02111-1307 USA
      **/
 
-    private static StringBuffer argss = new StringBuffer();
-
-    public static void setArgs(String data) {
-        argss.append(data);
-    }
-
-    public static String getArgs() {
-        return argss.toString();
-    }
-
     public static void main(String[] args) {
-        if (getArgs().contains("daemon")) {
-
+        if (args[0].contains("daemon")) {
+            Daemon daemon = new Daemon();
+            daemon.start();
         } else {
             try {
                 NewJFrame gui = new NewJFrame();
                 gui.main(args);
             } catch (Exception S3) {
-
             }
         }
     }
