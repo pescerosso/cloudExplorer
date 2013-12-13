@@ -103,7 +103,7 @@ public class Daemon {
             sync_config_file = (Home + slash + "s3config.sync");
         }
         mainmenu();
-        if(!gui){
+        if (!gui) {
             messageParser("\n\nCloudian Explorer will perform a bidirectional \nsync on the directory listed in the config file:\n\n" + sync_config_file);
         }
         try {
@@ -133,24 +133,32 @@ public class Daemon {
             cred.setBucket(saved_directory_to_sync[1]);
 
             dirToSync = new File(saved_directory_to_sync[0]);
-            messageParser("\n\nDirectroy to sync: " + dirToSync.toString() + "  Bucket: " + cred.getBucket());
 
-            new Thread(new Runnable() {
-                public void run() {
-                    try {
-                        reloadObjects();
-                        SyncToS3(dirToSync);
-                        syncFromS3(dirToSync.toString());
-                        Thread.sleep(TimeUnit.MINUTES.toMillis(5));
-                        if (gui) {
-                            mainFrame.jTextArea1.setText("");
+            File syncDIR = new File(saved_directory_to_sync[0]);
+            if (syncDIR.exists()) {
+
+                messageParser("\n\nDirectroy to sync: " + dirToSync.toString() + "  Bucket: " + cred.getBucket());
+
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            reloadObjects();
+                            SyncToS3(dirToSync);
+                            syncFromS3(dirToSync.toString());
+                            Thread.sleep(TimeUnit.MINUTES.toMillis(5));
+                            if (gui) {
+                                mainFrame.jTextArea1.setText("");
+                            }
+                            run();
+
+                        } catch (InterruptedException e) {
                         }
-                        run();
-
-                    } catch (InterruptedException e) {
                     }
-                }
-            }).start();
+                }).start();
+
+            } else {
+                messageParser("\nError: " + syncDIR.toString() + " does not exist");
+            }
         } catch (Exception Start) {
             messageParser("\n" + Start.getMessage());
         }
