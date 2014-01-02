@@ -277,7 +277,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 1.2\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Improved error reporting.\n\n2. Daemon mode for Background syncing introduced to sync files in the background without a GUI.\n\n3. Added Background syncing mode support in the GUI in case the user wants a GUI to be running.\n\n\n");
+        jTextArea4.setText("Version: Development\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Improved error reporting.\n\n2. Daemon mode for Background syncing introduced to sync files in the background without a GUI.\n\n3. Added Background syncing mode support in the GUI in case the user wants a GUI to be running.\n\n\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
@@ -952,7 +952,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     void reloadObjects() {
 
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
-            
+
             this.var();
             this.objectarray = null;
             this.jPanel1.removeAll();
@@ -1408,8 +1408,19 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
         if (this.active_bucket > 0) {
-            PutThread PutThread = new PutThread(this);
-            PutThread.run();
+
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    dialog("Please wait for the upload operation to complete.");
+                    File file = jFileChooser1.getSelectedFile();
+                    String upload = (file.getAbsolutePath());
+                    String new_object_name = convertObject(file.getAbsolutePath().toString(), "upload");
+                    jTextField7.setText(jTextField7.getText().replace("null", ""));
+                    jTextArea1.append("\n" + put.put(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name));
+                    jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                    dialog.setVisible(false);
+                }
+            });
         } else {
             jTextArea1.append("\nError: No bucket selected.");
         }
@@ -1499,8 +1510,61 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
 
         if (this.active_bucket > 0) {
-            GetThread GetThread = new GetThread(this);
-            GetThread.run();
+
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    final JFrame download = new JFrame("Please choose destination directory.");
+                    final JPanel downloadPanel = new JPanel();
+                    final JFileChooser downloadChooser = new JFileChooser();
+                    downloadChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                    final JButton downloadButton = new JButton("OK");
+
+                    downloadButton.addActionListener(new ActionListener() {
+
+                        public void actionPerformed(ActionEvent e) {
+                            dialog("Please wait for the download operation to complete.");
+                            if (downloadChooser.getSelectedFile().getAbsolutePath() != null) {
+                                File File_Destination = new File(downloadChooser.getSelectedFile().getAbsolutePath());
+                                for (int i = 1; i != objectarray.length; i++) {
+                                    if (d[i] != null) {
+                                        if (d[i].isSelected()) {
+                                            download.setVisible(false);
+                                            String new_object_name = convertObject(d[i].getText(), "download");
+                                            OScheck();
+                                            jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + slash + new_object_name));
+                                            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                                            d[i].setSelected(false);
+                                        }
+                                    }
+                                }
+                                dialog.setVisible(false);
+                                reloadObjects();
+                            } else {
+                                download.setVisible(false);
+                                jTextArea1.append("\nError: destination not specified.");
+                            }
+                        }
+                    });
+
+                    downloadPanel.setLayout(new BoxLayout(downloadPanel, BoxLayout.PAGE_AXIS));
+                    downloadPanel.add(downloadChooser);
+                    downloadPanel.add(downloadButton);
+                    download.add(downloadPanel);
+                    download.setLocation(500, 500);
+                    download.pack();
+                    try {
+                        for (int i = 1; i != objectarray.length; i++) {
+                            if (d[i] != null) {
+                                if (d[i].isSelected()) {
+                                    download.setVisible(true);
+                                }
+                            }
+                        }
+                    } catch (Exception GetThreadRUN) {
+                    }
+                }
+            });
+
         } else {
             jTextArea1.append("\nError: No bucket has been selected");
         }
@@ -1593,7 +1657,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 bg_button.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e) {
-                     
+
                         File choice = new File(bg_choose.getSelectedFile().toString());
                         try {
                             FileWriter fr = new FileWriter(Home + slash + "s3config.sync");
