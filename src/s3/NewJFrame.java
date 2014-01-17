@@ -37,9 +37,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String OS = System.getProperty("os.name");
     String[] bucketarray = null;
     String[] objectarray = null;
+    String[] account_array = new String[10];
     int object_size = 500000;
     JRadioButton b[] = new JRadioButton[object_size];
     JRadioButton d[] = new JRadioButton[object_size];
+    JCheckBox f[] = new JCheckBox[account_array.length];
     int active_bucket = 0;
     String object_acl_change = null;
     String temp_file = (Home + "/object.tmp");
@@ -358,14 +360,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane28, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addComponent(jScrollPane28, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 58, Short.MAX_VALUE))
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane28, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane28, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         jScrollPane27.setViewportView(jPanel21);
@@ -464,9 +468,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton8)
                         .addComponent(jButton10))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
         );
 
@@ -958,6 +960,48 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }
 
+    String loadConfig() {
+        String data = null;
+
+        if (!OScheck()) {
+            config_file = (Home + "\\s3.config");
+        }
+        try {
+            FileReader fr = new FileReader(config_file);
+            BufferedReader bfr = new BufferedReader(fr);
+            String read = null;
+            int h = 0;
+            while ((read = bfr.readLine()) != null) {
+                data = data + read;
+                account_array[h] = read;
+                h++;
+            }
+        } catch (Exception loadConfig) {
+        }
+        String remove_null = data.replace("null", "");
+        String remove_symbol = remove_null.replace("@", " ");
+        
+        this.jPanel21.removeAll();
+        this.jPanel21.revalidate();
+        this.jPanel21.repaint();
+        jPanel5.setLayout(new BoxLayout(this.jPanel5, BoxLayout.PAGE_AXIS));
+        for (int h = 0; h != account_array.length; h++) {
+            if (account_array[h] != null) {
+                jPanel21.setLayout(new BoxLayout(jPanel21, BoxLayout.Y_AXIS));
+                System.out.print("\n" + account_array[h]);
+                f[h] = new JCheckBox();
+                f[h].setText(account_array[h]);
+                jPanel21.add(f[h]);
+            }
+        }
+        jPanel21.setLayout(new BoxLayout(jPanel21, BoxLayout.Y_AXIS));
+        jPanel21.repaint();
+        jPanel21.revalidate();
+        jPanel21.validate();
+        return remove_symbol;
+
+    }
+
     void reloadBuckets() {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
@@ -1411,7 +1455,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         try {
-            String load = cred.loadConfig();
+            String load = loadConfig();
             String[] config_array = load.split(" ");
             jTextField1.setText(config_array[0]);
             jTextField2.setText(config_array[1]);
@@ -1788,18 +1832,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenuItem jMenuItem9;
     public static javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
-    public static javax.swing.JPanel jPanel21;
+    public javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     public static javax.swing.JPanel jPanel5;
@@ -1808,32 +1842,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane11;
-    private javax.swing.JScrollPane jScrollPane12;
-    private javax.swing.JScrollPane jScrollPane13;
-    private javax.swing.JScrollPane jScrollPane14;
-    private javax.swing.JScrollPane jScrollPane15;
-    private javax.swing.JScrollPane jScrollPane16;
-    private javax.swing.JScrollPane jScrollPane17;
-    private javax.swing.JScrollPane jScrollPane18;
-    private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane20;
-    private javax.swing.JScrollPane jScrollPane21;
-    private javax.swing.JScrollPane jScrollPane22;
-    private javax.swing.JScrollPane jScrollPane23;
-    private javax.swing.JScrollPane jScrollPane24;
-    private javax.swing.JScrollPane jScrollPane25;
-    private javax.swing.JScrollPane jScrollPane26;
     private javax.swing.JScrollPane jScrollPane27;
     private javax.swing.JScrollPane jScrollPane28;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     public static javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;

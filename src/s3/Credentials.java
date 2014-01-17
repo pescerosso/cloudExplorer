@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import javax.swing.JCheckBox;
 
 public class Credentials {
 
@@ -17,10 +18,9 @@ public class Credentials {
     String groupid = null;
     String OS = System.getProperty("os.name");
     String config_file = (Home + "/s3.config");
-    
-  NewJFrame mainFrame;
 
-  
+    NewJFrame mainFrame;
+
     boolean OScheck() {
         boolean result;
         if ((OS.contains("windows")) || OS.contains("Windows")) {
@@ -97,11 +97,16 @@ public class Credentials {
             FileReader fr = new FileReader(config_file);
             BufferedReader bfr = new BufferedReader(fr);
             String read = null;
-
+            int h = 0;
             while ((read = bfr.readLine()) != null) {
                 data = data + read;
-          //      NewJFrame.jList1.add(read);
-                
+                mainFrame.f[h] = new JCheckBox();
+                mainFrame.f[h].setText(read);
+                mainFrame.jPanel21.add(mainFrame.f[h]);
+                mainFrame.jPanel21.repaint();
+                mainFrame.jPanel21.revalidate();
+                mainFrame.jPanel21.validate();
+                h++;
             }
         } catch (Exception loadConfig) {
         }
