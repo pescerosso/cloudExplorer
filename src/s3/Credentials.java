@@ -17,7 +17,10 @@ public class Credentials {
     String groupid = null;
     String OS = System.getProperty("os.name");
     String config_file = (Home + "/s3.config");
+    
+  NewJFrame mainFrame;
 
+  
     boolean OScheck() {
         boolean result;
         if ((OS.contains("windows")) || OS.contains("Windows")) {
@@ -97,6 +100,8 @@ public class Credentials {
 
             while ((read = bfr.readLine()) != null) {
                 data = data + read;
+          //      NewJFrame.jList1.add(read);
+                
             }
         } catch (Exception loadConfig) {
         }
