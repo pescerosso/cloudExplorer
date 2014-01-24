@@ -19,6 +19,8 @@ Click on "Background Syncing"
 Click "Run".
 Syncing will occur every 5 minutes.
 
+
+
 From the Command Line (Useful for running as a background process)
 
 Create your config file from the GUI.
