@@ -53,6 +53,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     JPanel dialog_panel = new JPanel();
     int object_display_counter = 0;
     int initial_display = 11;
+    int account_counter = 0;
 
     public NewJFrame() {
         initComponents();
@@ -101,6 +102,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel21 = new javax.swing.JPanel();
         jScrollPane28 = new javax.swing.JScrollPane();
         jButton9 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         scrollPane1 = new java.awt.ScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -366,10 +368,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane28, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jScrollPane27.setViewportView(jPanel21);
@@ -378,6 +380,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Delete Account");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -422,9 +431,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
+                        .addGap(99, 99, 99)
                         .addComponent(jButton9)
-                        .addContainerGap(200, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addContainerGap(93, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane27, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())))
@@ -463,12 +474,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             .addComponent(jLabel12)
                             .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane27, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(13, 13, 13)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton8)
                         .addComponent(jButton10))
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2)))
                 .addGap(17, 17, 17))
         );
 
@@ -887,7 +900,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        preload();
+        //preload();
         dialog("Please wait, loading Buckets.");
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             this.var();
@@ -980,7 +993,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
         String remove_null = data.replace("null", "");
         String remove_symbol = remove_null.replace("@", " ");
-        
+
         this.jPanel21.removeAll();
         this.jPanel21.revalidate();
         this.jPanel21.repaint();
@@ -988,10 +1001,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         for (int h = 0; h != account_array.length; h++) {
             if (account_array[h] != null) {
                 jPanel21.setLayout(new BoxLayout(jPanel21, BoxLayout.Y_AXIS));
-                System.out.print("\n" + account_array[h]);
-                f[h] = new JCheckBox();
-                f[h].setText(account_array[h]);
-                jPanel21.add(f[h]);
+                if (account_array[h].length() > 1) {
+                    f[h] = new JCheckBox();
+                    f[h].setText(account_array[h]);
+                    jPanel21.add(f[h]);
+                }
             }
         }
         jPanel21.setLayout(new BoxLayout(jPanel21, BoxLayout.Y_AXIS));
@@ -1454,22 +1468,54 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        try {
-            String load = loadConfig();
-            String[] config_array = load.split(" ");
-            jTextField1.setText(config_array[0]);
-            jTextField2.setText(config_array[1]);
-            jTextField3.setText(config_array[2]);
-            jTextField4.setText(config_array[3]);
-            jTextField5.setText(config_array[4]);
+        String[] account = new String[10];
+        String account_array = null;
 
+        if (account_counter == 0) {
             try {
+                jPanel21.removeAll();
+                String load = loadConfig();
+                String[] config_array = load.split(" ");
+                jTextField1.setText(config_array[0]);
+                jTextField2.setText(config_array[1]);
+                jTextField3.setText(config_array[2]);
+                jTextField4.setText(config_array[3]);
+                jTextField5.setText(config_array[4]);
                 jTextField8.setText(config_array[5]);
                 jTextField9.setText(config_array[6]);
-            } catch (Exception sdd) {
+
+            } catch (Exception load) {
             }
-        } catch (Exception load) {
+            account_counter = 1;
         }
+
+        if (account_counter == 1) {
+            System.out.print("\n" + account_counter + "\n");
+            try {
+
+                for (int i = 0; i != account_counter + 1; i++) {
+                    if (f[i].isSelected()) {
+                        System.out.print("\n Selected:" + account[3]);
+                        String account_value = f[i].getText();
+                        account = account_value.split("@");
+                        jTextField1.setText(account[0]);
+                        jTextField2.setText(account[1]);
+                        jTextField3.setText(account[2]);
+                        jTextField4.setText(account[3]);
+                        jTextField5.setText(account[4]);
+                        jTextField8.setText(account[5]);
+                        jTextField9.setText(account[6]);
+                        jTextArea1.append("\nLoaded account: " + account[3]);
+                        System.out.print("\nAccount_Counter=" + account_counter + "\n");
+                        jButton1.doClick();
+                    }
+                }
+
+            } catch (Exception loadconfig) {
+                System.out.print("\n" + loadconfig.getMessage());
+            }
+        }
+
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -1772,6 +1818,40 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String[] new_account_array = new String[20];
+
+        try {
+            for (int i = 0; i != account_array.length; i++) {
+                if (f[i].isSelected()) {
+                    System.out.print("\nMatch");
+                } else {
+                    new_account_array[i] = f[i].getText();
+                }
+
+            }
+        } catch (Exception new_array) {
+
+        }
+
+        try {
+            FileWriter fr = new FileWriter(config_file);
+            BufferedWriter bfr = new BufferedWriter(fr);
+            String read = null;
+            for (int i = 0; i != new_account_array.length; i++) {
+                if (new_account_array[i] != null) {
+                    bfr.write(("\n" + new_account_array[i]));
+                }
+            }
+            bfr.close();
+            account_counter = 0;
+            jButton9.doClick();
+        } catch (Exception loadConfig) {
+        }
+
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     void var() {
         cred.setAccess_key(jTextField1.getText());
         cred.setSecret_key(jTextField2.getText());
@@ -1792,6 +1872,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
@@ -1844,7 +1925,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane27;
-    private javax.swing.JScrollPane jScrollPane28;
+    public static javax.swing.JScrollPane jScrollPane28;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;

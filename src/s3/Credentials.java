@@ -123,9 +123,9 @@ public class Credentials {
                 config_file = (Home + "\\s3.config");
             }
 
-            FileWriter fr = new FileWriter(config_file);
+            FileWriter fr = new FileWriter(config_file, true);
             BufferedWriter bfr = new BufferedWriter(fr);
-            bfr.write(access_key + "@" + secret_key + "@" + host + "@" + port + "@" + region + "@" + userid + "@" + groupid);
+            bfr.write("\n" + access_key + "@" + secret_key + "@" + host + "@" + port + "@" + region + "@" + userid + "@" + groupid);
             bfr.close();
         } catch (Exception writeConfig) {
         }
