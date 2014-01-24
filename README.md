@@ -7,21 +7,27 @@ This is a simple, free, open-source S3 client made by me as a fun, side project.
 [Background Sync]
 
 Background Sync allows Cloudian Explorer to function like Dropbox. It will sync to and from the S3 server. Please note that no files will be deleted. 
-
+<br>
+<br>
 From the GUI: 
-
+<br>
 Click on "Background Syncing"
+<br>
 Click Configure
+<br>
 Click on a destination Directory
+<br>
 Click Save.
-
+<br>
 Click on "Background Syncing"
+<br>
 Click "Run".
+<br>
 Syncing will occur every 5 minutes.
 
-
-
-From the Command Line (Useful for running as a background process)
+<br>
+Starting background sync from the Command Line (Useful for running as a background process):
 
 Create your config file from the GUI.
-# java -jar CloudianExplorer.jar daemon
+<br>
+$ java -jar CloudianExplorer.jar daemon
