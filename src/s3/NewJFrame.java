@@ -37,7 +37,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String OS = System.getProperty("os.name");
     String[] bucketarray = null;
     String[] objectarray = null;
-    String[] account_array = new String[10];
+    String[] account_array = new String[20];
     int object_size = 500000;
     JRadioButton b[] = new JRadioButton[object_size];
     JRadioButton d[] = new JRadioButton[object_size];
@@ -280,9 +280,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: Development\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Improved error reporting.\n\n2. Daemon mode for Background syncing introduced to sync files in the background without a GUI.\n\n3. Added Background syncing mode support in the GUI in case the user wants a GUI to be running.\n\n\n");
+        jTextArea4.setText("Version: Development\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Support for multiple S3 accounts.\n\n\n\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
@@ -596,27 +597,26 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(157, 157, 157)
+                .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(404, 404, 404)
-                        .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(109, Short.MAX_VALUE))
+                    .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton3)
-                    .addComponent(jToggleButton4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jToggleButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton3))
+                    .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sync", jPanel4);
@@ -973,46 +973,55 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }
 
-    String loadConfig() {
+    void loadConfig() {
         String data = null;
 
         if (!OScheck()) {
             config_file = (Home + "\\s3.config");
         }
+
+        try {
+            for (int k = 0; k != account_array.length; k++) {
+                account_array[k] = null;
+                f[k].setText("");
+            }
+        } catch (Exception nads) {
+        }
+
         try {
             FileReader fr = new FileReader(config_file);
             BufferedReader bfr = new BufferedReader(fr);
             String read = null;
             int h = 0;
             while ((read = bfr.readLine()) != null) {
-                data = data + read;
-                account_array[h] = read;
+                if (read != null) {
+                    if (read.length() > 1) {
+                        account_array[h] = read;
+                    }
+                }
                 h++;
             }
         } catch (Exception loadConfig) {
         }
-        String remove_null = data.replace("null", "");
-        String remove_symbol = remove_null.replace("@", " ");
 
-        this.jPanel21.removeAll();
-        this.jPanel21.revalidate();
-        this.jPanel21.repaint();
-        jPanel5.setLayout(new BoxLayout(this.jPanel5, BoxLayout.PAGE_AXIS));
+        /**
+         * jPanel21.removeAll(); jPanel21.revalidate(); jPanel21.repaint();
+         * jPanel5.setLayout(new BoxLayout(this.jPanel5, BoxLayout.PAGE_AXIS));
+         *
+         */
         for (int h = 0; h != account_array.length; h++) {
             if (account_array[h] != null) {
                 jPanel21.setLayout(new BoxLayout(jPanel21, BoxLayout.Y_AXIS));
-                if (account_array[h].length() > 1) {
-                    f[h] = new JCheckBox();
-                    f[h].setText(account_array[h]);
-                    jPanel21.add(f[h]);
-                }
+                f[h] = new JCheckBox();
+                f[h].setText(account_array[h]);
+                jPanel21.add(f[h]);
             }
         }
+
         jPanel21.setLayout(new BoxLayout(jPanel21, BoxLayout.Y_AXIS));
         jPanel21.repaint();
         jPanel21.revalidate();
         jPanel21.validate();
-        return remove_symbol;
 
     }
 
@@ -1467,37 +1476,17 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        String[] account = new String[10];
-        String account_array = null;
+    void reloadAccounts() {
+        String[] account = new String[account_array.length];
+        String account_value = null;
 
-        if (account_counter == 0) {
-            try {
-                jPanel21.removeAll();
-                String load = loadConfig();
-                String[] config_array = load.split(" ");
-                jTextField1.setText(config_array[0]);
-                jTextField2.setText(config_array[1]);
-                jTextField3.setText(config_array[2]);
-                jTextField4.setText(config_array[3]);
-                jTextField5.setText(config_array[4]);
-                jTextField8.setText(config_array[5]);
-                jTextField9.setText(config_array[6]);
+        try {
 
-            } catch (Exception load) {
-            }
-            account_counter = 1;
-        }
-
-        if (account_counter == 1) {
-            System.out.print("\n" + account_counter + "\n");
-            try {
-
-                for (int i = 0; i != account_counter + 1; i++) {
+            for (int i = 0; i != account_array.length; i++) {
+                if (account_array[i] != null) {
                     if (f[i].isSelected()) {
-                        System.out.print("\n Selected:" + account[3]);
-                        String account_value = f[i].getText();
-                        account = account_value.split("@");
+                        account = f[i].getText().split("@");
+                        jTextArea1.append("\nLoading configuration for: " + f[i].getText());
                         jTextField1.setText(account[0]);
                         jTextField2.setText(account[1]);
                         jTextField3.setText(account[2]);
@@ -1505,15 +1494,28 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         jTextField5.setText(account[4]);
                         jTextField8.setText(account[5]);
                         jTextField9.setText(account[6]);
-                        jTextArea1.append("\nLoaded account: " + account[3]);
-                        System.out.print("\nAccount_Counter=" + account_counter + "\n");
-                        jButton1.doClick();
                     }
                 }
-
-            } catch (Exception loadconfig) {
-                System.out.print("\n" + loadconfig.getMessage());
             }
+
+        } catch (Exception loadconfig) {
+        }
+    }
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+
+        if (account_counter == 0) {
+            try {
+                jPanel21.removeAll();
+                jPanel21.revalidate();
+                jPanel21.validate();
+                jPanel21.repaint();
+                loadConfig();
+            } catch (Exception load) {
+            }
+            account_counter = 1;
+        } else {
+            reloadAccounts();
+            jButton1.doClick();
         }
 
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -1521,6 +1523,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         String save = cred.writeConfig(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), jTextField8.getText(), jTextField9.getText());
         jTextArea1.append(save);
+        account_counter = 0;
+        jButton9.doClick();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -1819,32 +1823,30 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String[] new_account_array = new String[20];
 
-        try {
-            for (int i = 0; i != account_array.length; i++) {
+        for (int i = 0; i != account_array.length; i++) {
+            if (account_array[i] != null) {
                 if (f[i].isSelected()) {
-                    System.out.print("\nMatch");
+                    jTextArea1.append("\nDeleting Account:" + f[i].getText());
+                    account_array[i] = null;
                 } else {
-                    new_account_array[i] = f[i].getText();
+                    account_array[i] = f[i].getText();
                 }
-
             }
-        } catch (Exception new_array) {
-
         }
 
         try {
             FileWriter fr = new FileWriter(config_file);
             BufferedWriter bfr = new BufferedWriter(fr);
             String read = null;
-            for (int i = 0; i != new_account_array.length; i++) {
-                if (new_account_array[i] != null) {
-                    bfr.write(("\n" + new_account_array[i]));
+            for (int i = 0; i != account_array.length; i++) {
+                if (account_array[i] != null) {
+                    bfr.write(("\n" + account_array[i]));
                 }
             }
             bfr.close();
             account_counter = 0;
+            loadConfig();
             jButton9.doClick();
         } catch (Exception loadConfig) {
         }
