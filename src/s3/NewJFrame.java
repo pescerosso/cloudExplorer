@@ -54,6 +54,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     int object_display_counter = 0;
     int initial_display = 11;
     int account_counter = 0;
+    int content_counter = 0;
 
     public NewJFrame() {
         initComponents();
@@ -283,7 +284,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: Development\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Support for multiple S3 accounts.\n\n\n\n");
+        jTextArea4.setText("Version: 1.3\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Support for multiple S3 accounts.\n2. Easier to read log window.\n\n\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
@@ -906,7 +907,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             this.var();
             reloadBuckets();
         } else {
-            jTextArea1.append("\nError: Configuration not loaded");
+            jTextArea1.append("\nError: Configuration not loaded\n");
         }
         dialog.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -922,7 +923,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     if (d[i] != null) {
                         if (d[i].getText().toLowerCase().contains(jTextField10.getText().toLowerCase())) {
                             jTabbedPane1.setSelectedIndex(2);
-                            jTextArea1.append("\nFound object(s): " + d[i].getText());
+                            jTextArea1.append("\nFound object(s): " + d[i].getText() + "\n");
                             jPanel1.add(d[i]);
                             d[i].setVisible(true);
                             found++;
@@ -933,10 +934,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 }
                 if (found == 0) {
                     reloadObjects();
-                    jTextArea1.append("\nNo objects found for: " + jTextField10.getText().toLowerCase());
+                    jTextArea1.append("\nNo objects found for: " + jTextField10.getText().toLowerCase() + "\n");
                 }
             } else {
-                jTextArea1.append("\nError: No bucket has been selected");
+                jTextArea1.append("\nError: No bucket has been selected\n");
             }
         } catch (Exception Download) {
         }
@@ -997,6 +998,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 if (read != null) {
                     if (read.length() > 1) {
                         account_array[h] = read;
+                        content_counter++;
                     }
                 }
                 h++;
@@ -1004,11 +1006,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception loadConfig) {
         }
 
-        /**
-         * jPanel21.removeAll(); jPanel21.revalidate(); jPanel21.repaint();
-         * jPanel5.setLayout(new BoxLayout(this.jPanel5, BoxLayout.PAGE_AXIS));
-         *
-         */
         for (int h = 0; h != account_array.length; h++) {
             if (account_array[h] != null) {
                 jPanel21.setLayout(new BoxLayout(jPanel21, BoxLayout.Y_AXIS));
@@ -1022,6 +1019,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel21.repaint();
         jPanel21.revalidate();
         jPanel21.validate();
+
+        if (content_counter == 0) {
+            jTextArea1.append("\nError: No saved configurations found.\n");
+            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+            account_counter = 0;
+        }
 
     }
 
@@ -1052,7 +1055,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 }
             }
         } else {
-            jTextArea1.append("\nError: Configuration not loaded");
+            jTextArea1.append("\nError: Configuration not loaded\n");
         }
     }
 
@@ -1089,10 +1092,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
 
             } catch (Exception listing) {
-                jTextArea1.append("\n" + listing.getMessage());
+                jTextArea1.append("\n" + listing.getMessage() + "\n");
             }
         } else {
-            jTextArea1.append("\nError: Configuration not loaded");
+            jTextArea1.append("\nError: Configuration not loaded\n");
         }
     }//GEN-LAST:event_jButton6ActionPerformed
     void preload() {
@@ -1120,7 +1123,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             bfr.write(jTextArea2.getText());
             bfr.close();
         } catch (Exception writeConfig) {
-            jTextArea1.append("\n" + writeConfig.getMessage());
+            jTextArea1.append("\n" + writeConfig.getMessage() + "\n");
         }
     }
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -1132,7 +1135,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             reloadBuckets();
 
         } else {
-            jTextArea1.append("\nError: Configuration not loaded");
+            jTextArea1.append("\nError: Configuration not loaded\n");
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -1148,12 +1151,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     public void actionPerformed(ActionEvent e) {
                         if (static_website.isSelected()) {
                             objectacl.setBUCKETwebsite(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
-                            jTextArea1.append("\nWebsite access enabled.");
+                            jTextArea1.append("\nWebsite access enabled.\n");
                             jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                             bucketACL.setVisible(false);
                         } else {
                             objectacl.removeBUCKETwebsite(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
-                            jTextArea1.append("\nBucket is no longer serving a website.");
+                            jTextArea1.append("\nBucket is no longer serving a website.\n");
                             jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                             bucketACL.setVisible(false);
                         }
@@ -1172,10 +1175,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 bucketACL.setVisible(true);
 
             } else {
-                jTextArea1.append("\nError: No bucket has been selected");
+                jTextArea1.append("\nError: No bucket has been selected\n");
             }
         } catch (Exception Download) {
-            jTextArea1.append("\n" + Download.getMessage());
+            jTextArea1.append("\n" + Download.getMessage() + "\n");
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -1193,7 +1196,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
             reloadBuckets();
         } else {
-            jTextArea1.append("\nError: Configuration not loaded");
+            jTextArea1.append("\nError: Configuration not loaded\n");
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -1258,7 +1261,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                     object_acl_change = d[i].getText();
                                     if (public_box.isSelected()) {
                                         objectacl.setACLpublic(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
-                                        jTextArea1.append("\nPublic set for object: " + object_acl_change);
+                                        jTextArea1.append("\nPublic set for object: " + object_acl_change + "\n");
                                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                                         parent.setVisible(false);
                                     }
@@ -1270,13 +1273,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                     }
                                     if (private_box.isSelected()) {
                                         objectacl.setACLprivate(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
-                                        jTextArea1.append("\nPrivate access set for object: " + object_acl_change);
+                                        jTextArea1.append("\nPrivate access set for object: " + object_acl_change + "\n");
                                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                                         parent.setVisible(false);
                                     }
                                 }
                             } catch (Exception ObjectACL) {
-                                jTextArea1.append("\n" + ObjectACL.getMessage());
+                                jTextArea1.append("\n" + ObjectACL.getMessage() + "\n");
                             }
                         }
 
@@ -1486,7 +1489,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 if (account_array[i] != null) {
                     if (f[i].isSelected()) {
                         account = f[i].getText().split("@");
-                        jTextArea1.append("\nLoading configuration for: " + f[i].getText());
+                        jTextArea1.append("\nLoading configuration for: " + f[i].getText() + "\n");
+                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                         jTextField1.setText(account[0]);
                         jTextField2.setText(account[1]);
                         jTextField3.setText(account[2]);
@@ -1512,7 +1516,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 loadConfig();
             } catch (Exception load) {
             }
-            account_counter = 1;
+
+            if (content_counter > 0) {
+                account_counter = 1;
+            }
+
         } else {
             reloadAccounts();
             jButton1.doClick();
@@ -1827,7 +1835,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         for (int i = 0; i != account_array.length; i++) {
             if (account_array[i] != null) {
                 if (f[i].isSelected()) {
-                    jTextArea1.append("\nDeleting Account:" + f[i].getText());
+                    jTextArea1.append("\nDeleting Account:" + f[i].getText() + "\n");
+                    jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                     account_array[i] = null;
                 } else {
                     account_array[i] = f[i].getText();
@@ -1846,6 +1855,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
             bfr.close();
             account_counter = 0;
+            content_counter = 0;
             loadConfig();
             jButton9.doClick();
         } catch (Exception loadConfig) {
