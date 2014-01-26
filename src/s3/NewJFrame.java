@@ -38,6 +38,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String[] bucketarray = null;
     String[] objectarray = null;
     String[] account_array = new String[20];
+    String[] simple_account_array = new String[account_array.length];
     int object_size = 500000;
     JRadioButton b[] = new JRadioButton[object_size];
     JRadioButton d[] = new JRadioButton[object_size];
@@ -168,9 +169,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(17, 17, 17)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84)
+                .addGap(73, 73, 73)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(75, Short.MAX_VALUE))
         );
@@ -284,7 +285,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 1.3\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Support for multiple S3 accounts.\n2. Easier to read log window.\n\n\n");
+        jTextArea4.setText("Version: 1.3\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Support for multiple S3 accounts.\n2. Easier to read log window.\n\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
@@ -433,11 +434,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
+                        .addGap(75, 75, 75)
                         .addComponent(jButton9)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
-                        .addContainerGap(93, Short.MAX_VALUE))
+                        .addContainerGap(76, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane27, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())))
@@ -481,10 +482,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton8)
                         .addComponent(jButton10))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton2)))
-                .addGap(17, 17, 17))
+                .addGap(16, 16, 16))
         );
 
         jTabbedPane1.addTab("Settings", jPanel3);
@@ -1008,9 +1009,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         for (int h = 0; h != account_array.length; h++) {
             if (account_array[h] != null) {
+                String[] foo = account_array[h].split("@");
                 jPanel21.setLayout(new BoxLayout(jPanel21, BoxLayout.Y_AXIS));
                 f[h] = new JCheckBox();
-                f[h].setText(account_array[h]);
+                f[h].setText(foo[2]);
                 jPanel21.add(f[h]);
             }
         }
@@ -1488,7 +1490,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             for (int i = 0; i != account_array.length; i++) {
                 if (account_array[i] != null) {
                     if (f[i].isSelected()) {
-                        account = f[i].getText().split("@");
+                        account = account_array[i].split("@");
                         jTextArea1.append("\nLoading configuration for: " + f[i].getText() + "\n");
                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                         jTextField1.setText(account[0]);
@@ -1839,7 +1841,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                     account_array[i] = null;
                 } else {
-                    account_array[i] = f[i].getText();
+                    account_array[i] = account_array[i];
                 }
             }
         }
@@ -1861,7 +1863,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception loadConfig) {
         }
 
-
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField8.setText("");
+        jTextField9.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     void var() {
