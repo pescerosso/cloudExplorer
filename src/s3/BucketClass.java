@@ -72,6 +72,8 @@ public class BucketClass {
     }
 
     String listBucketContents(String access_key, String secret_key, String bucket, String endpoint) {
+        objectlist = null;
+
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
