@@ -1900,12 +1900,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 for (int i = 1; i != objectarray.length; i++) {
                     try {
                         if (d[i].isSelected()) {
-
-                            /*
-                             properties_label[0].setText(bucket.getObjectInfo(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), b[active_bucket].getText(), cred.getEndpoint(), "objectsize"));
-                             properties_panel.add(properties_label[0]);
-                             properties_label[1].setText(bucket.getObjectInfo(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), b[active_bucket].getText(), cred.getEndpoint(), "objectdate"));
-                             **/
                             JLabel name = new JLabel("File Name: " + d[i].getText());
                             JLabel size = new JLabel("Size: " + bucket.getObjectInfo(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), b[active_bucket].getText(), cred.getEndpoint(), "objectsize") + " KB");
                             JLabel date = new JLabel("Modified Date: " + bucket.getObjectInfo(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), b[active_bucket].getText(), cred.getEndpoint(), "objectdate"));
@@ -1915,10 +1909,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             properties_panel.repaint();
                             properties_panel.revalidate();
                             properties_panel.validate();
-
-                            //   jTextArea1.append("Information for Object:" + d[i].getText() + "" + objectinfolist);
-                            System.out.print("\nDebug");
-                            //  System.out.print("\nDebug:" + properties_label[0].getText());
                             break;
                         }
 
