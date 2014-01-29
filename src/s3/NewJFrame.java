@@ -39,6 +39,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String[] objectarray = null;
     String[] account_array = new String[20];
     String[] simple_account_array = new String[account_array.length];
+    int active_account = 0;
     int object_size = 500000;
     JRadioButton b[] = new JRadioButton[object_size];
     JRadioButton d[] = new JRadioButton[object_size];
@@ -139,6 +140,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
@@ -173,7 +175,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,7 +287,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 1.3\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Support for multiple S3 accounts.\n2. Easier to read log window.\n\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
+        jTextArea4.setText("Version: 1.4\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Fix bug when loading multiple S3 accounts where the program tries to load a bucket if no account has been specified.\n2. Added menu item \"Properties\" to the Object menu so users can see the LastModified and File size of the object.\n\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
@@ -801,6 +803,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         });
         jMenu2.add(jMenuItem14);
 
+        jMenuItem16.setText("Properties");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem16);
+
         jMenuItem8.setText("View in Image Viewer");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -903,8 +913,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //preload();
-        dialog("Please wait, loading Buckets.");
+
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
+            dialog("Please wait, loading Buckets.");
             this.var();
             reloadBuckets();
         } else {
@@ -1078,7 +1089,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         if (b[h].isSelected()) {
                             String objectlist = bucket.listBucketContents(cred.getAccess_key(), cred.getSecret_key(), b[h].getText(), cred.getEndpoint());
                             objectarray = objectlist.split("@");
-
                         }
                     }
                 }
@@ -1490,6 +1500,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             for (int i = 0; i != account_array.length; i++) {
                 if (account_array[i] != null) {
                     if (f[i].isSelected()) {
+                        active_account = i;
                         account = account_array[i].split("@");
                         jTextArea1.append("\nLoading configuration for: " + f[i].getText() + "\n");
                         jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
@@ -1525,7 +1536,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         } else {
             reloadAccounts();
-            jButton1.doClick();
+            if (active_account > 0) {
+                jButton1.doClick();
+            } else {
+                jTextArea1.append("\nError: No account has been selected.");
+            }
         }
 
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -1872,6 +1887,59 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextField9.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        try {
+            final JFrame properties = new JFrame("Object Properties");
+            JPanel properties_panel = new JPanel();
+            properties.setPreferredSize(new Dimension(400, 80));
+            properties.setResizable(false);
+            properties_panel.setLayout(new BoxLayout(properties_panel, BoxLayout.PAGE_AXIS));
+            properties.add(properties_panel);
+
+            if (this.active_bucket > 0) {
+                for (int i = 1; i != objectarray.length; i++) {
+                    try {
+                        if (d[i].isSelected()) {
+
+                            /*
+                             properties_label[0].setText(bucket.getObjectInfo(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), b[active_bucket].getText(), cred.getEndpoint(), "objectsize"));
+                             properties_panel.add(properties_label[0]);
+                             properties_label[1].setText(bucket.getObjectInfo(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), b[active_bucket].getText(), cred.getEndpoint(), "objectdate"));
+                             **/
+                            JLabel name = new JLabel("File Name: " + d[i].getText());
+                            JLabel size = new JLabel("Size: " + bucket.getObjectInfo(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), b[active_bucket].getText(), cred.getEndpoint(), "objectsize") + " KB");
+                            JLabel date = new JLabel("Modified Date: " + bucket.getObjectInfo(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), b[active_bucket].getText(), cred.getEndpoint(), "objectdate"));
+                            properties_panel.add(name);
+                            properties_panel.add(size);
+                            properties_panel.add(date);
+                            properties_panel.repaint();
+                            properties_panel.revalidate();
+                            properties_panel.validate();
+
+                            //   jTextArea1.append("Information for Object:" + d[i].getText() + "" + objectinfolist);
+                            System.out.print("\nDebug");
+                            //  System.out.print("\nDebug:" + properties_label[0].getText());
+                            break;
+                        }
+
+                    } catch (Exception ObjectACL) {
+                        jTextArea1.append("\n" + ObjectACL.getMessage() + "\n");
+                    }
+                }
+            } else {
+                jTextArea1.append("\nError: No bucket has been selected\n");
+            }
+
+            properties.setLocation(500, 500);
+            properties.pack();
+            properties.setVisible(true);
+
+        } catch (Exception Download) {
+            jTextArea1.append("\n" + Download.getMessage());
+        }
+
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
+
     void var() {
         cred.setAccess_key(jTextField1.getText());
         cred.setSecret_key(jTextField2.getText());
@@ -1923,6 +1991,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

@@ -75,7 +75,7 @@ public class BucketClass {
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
-        objectlist = null;
+
         try {
             ObjectListing current = s3Client.listObjects((bucket));
 
@@ -101,7 +101,50 @@ public class BucketClass {
         } else {
             parse = "no_objects_found";
         }
+
         return parse;
+    }
+
+    String getObjectInfo(String key, String access_key, String secret_key, String bucket, String endpoint, String process) {
+        AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
+        AmazonS3 s3Client = new AmazonS3Client(credentials);
+        s3Client.setEndpoint(endpoint);
+        objectlist = null;
+
+        try {
+            ObjectListing current = s3Client.listObjects((bucket));
+
+            ListObjectsRequest listObjectsRequest = new ListObjectsRequest().withBucketName(bucket);
+            ObjectListing objectListing;
+            do {
+                objectListing = s3Client.listObjects(listObjectsRequest);
+
+                for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
+
+                    if (process.contains("objectsize")) {
+                        if (objectSummary.getKey().contains(key)) {
+                            objectlist = String.valueOf(objectSummary.getSize());
+                            break;
+                        }
+                    }
+
+                    if (process.contains("objectdate")) {
+                        if (objectSummary.getKey().contains(key)) {
+                            objectlist = String.valueOf(objectSummary.getLastModified());
+                            break;
+                        }
+
+                    }
+                }
+                listObjectsRequest.setMarker(objectListing.getNextMarker());
+            } while (objectListing.isTruncated());
+
+        } catch (Exception listBucket) {
+            mainFrame.jTextArea1.append("\n\nAn error has occurred in listBucketContents.");
+            mainFrame.jTextArea1.append("\n\nError Message:    " + listBucket.getMessage());
+        }
+
+        return objectlist;
     }
 
     String deleteBucket(String access_key, String secret_key, String bucket, String endpoint, String region) {
