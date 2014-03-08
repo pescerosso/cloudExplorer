@@ -291,7 +291,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 1.4\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Fix bug when loading multiple S3 accounts where the program tries to load a bucket if no account has been specified.\n2. Removed Edit menu and added buttons to Object Explorer for less use of the mouse.\n3. Added  \"Properties\" to the Object Explorer menu so users can see the LastModified and File size of the object.\n4. Fixed a bug  that occurs when deleting an account when no config is loaded. \n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
+        jTextArea4.setText("Version: 1.5\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Fixed a bug when deleting an S3 account. The Account list will display incorrect number of accounts.\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
@@ -1025,6 +1025,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     void loadConfig() {
         String data = null;
+        account_array = new String[20];
 
         if (!OScheck()) {
             config_file = (Home + "\\s3.config");
