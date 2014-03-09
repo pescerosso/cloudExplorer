@@ -1420,7 +1420,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jTextArea1.append("\n" + put.put(temp_file, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField6.getText()));
             jTextArea1.append("\nSaved Object\n");
             jTextArea1.setCaretPosition(jTextArea1.getCaretPosition());
-            reloadBuckets();
+            objectarray = null;
+            //reloadBuckets();
             b[active_bucket].setSelected(true);
         } else {
             jTextArea1.append("\nError: no bucket selected.");
