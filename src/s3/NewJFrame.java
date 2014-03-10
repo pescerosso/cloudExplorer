@@ -968,15 +968,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (active_bucket > 0) {
 
                 reloadObjects();
-                jTextArea1.append("\n\nPlease wait for search to complete.\n");
-                jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
 
                 int found = 0;
                 jTabbedPane1.setSelectedIndex(1);
                 for (int i = 1; i != objectarray.length; i++) {
                     if (d[i] != null) {
                         if (d[i].getText().toLowerCase().contains(jTextField10.getText().toLowerCase())) {
-                            jTextArea1.append("\nFound object(s): " + d[i].getText() + "\n");
                             jPanel11.add(d[i]);
                             d[i].setVisible(true);
                             found++;
@@ -996,6 +993,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         } catch (Exception Download) {
         }
+
+        calibrateTextArea();
 
     }
 
@@ -1021,6 +1020,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             cred.setBucket(b[h].getText());
                             clear_old_radio_buttons();
                             h = bucketarray.length;
+                            objectarray = null;
                             jButton6.doClick();
                         }
                     }
@@ -1080,10 +1080,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         if (content_counter == 0) {
             jTextArea1.append("\nError: No saved configurations found.\n");
-            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
             account_counter = 0;
         }
-
+        calibrateTextArea();
     }
 
     void reloadBuckets() {
@@ -1195,7 +1194,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             String response = JOptionPane.showInputDialog(null, "Bucket Name: ", "logo_cloudian.png", JOptionPane.OK_CANCEL_OPTION);
             jTextArea1.append("\n" + bucket.makeBucket(cred.getAccess_key(), cred.getSecret_key(), response.toLowerCase(), cred.getEndpoint(), cred.getRegion()));
             reloadBuckets();
-
         } else {
             jTextArea1.append("\nError: Configuration not loaded\n");
         }
@@ -1214,12 +1212,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         if (static_website.isSelected()) {
                             objectacl.setBUCKETwebsite(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
                             jTextArea1.append("\nWebsite access enabled.\n");
-                            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                             bucketACL.setVisible(false);
                         } else {
                             objectacl.removeBUCKETwebsite(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
                             jTextArea1.append("\nBucket is no longer serving a website.\n");
-                            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                             bucketACL.setVisible(false);
                         }
                     }
@@ -1242,6 +1238,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception Download) {
             jTextArea1.append("\n" + Download.getMessage() + "\n");
         }
+      calibrateTextArea();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -1290,19 +1287,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                     if (public_box.isSelected()) {
                                         objectacl.setACLpublic(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
                                         jTextArea1.append("\nPublic set for object: " + object_acl_change + "\n");
-                                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                                         parent.setVisible(false);
                                     }
 
                                     if (url_box.isSelected()) {
                                         jTextArea1.append("\n" + objectacl.setACLurl(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket()));
-                                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                                         parent.setVisible(false);
                                     }
                                     if (private_box.isSelected()) {
                                         objectacl.setACLprivate(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
                                         jTextArea1.append("\nPrivate access set for object: " + object_acl_change + "\n");
-                                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                                         parent.setVisible(false);
                                     }
                                 }
@@ -1310,7 +1304,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                 jTextArea1.append("\n" + ObjectACL.getMessage() + "\n");
                             }
                         }
-
+                      calibrateTextArea();
                     }
 
                 });
@@ -1352,6 +1346,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception Download) {
             jTextArea1.append("\n" + Download.getMessage());
         }
+       calibrateTextArea();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
     void deleteFle(String what) {
         try {
@@ -1402,6 +1397,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception imageLoading) {
             jTextArea1.append("\n" + imageLoading.getMessage());
         }
+       calibrateTextArea();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
@@ -1418,13 +1414,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jTextArea1.append("\n" + delete.deleteFile(jTextField6.getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint()));
             jTextArea1.append("\n" + put.put(temp_file, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField6.getText()));
             jTextArea1.append("\nSaved Object\n");
-            jTextArea1.setCaretPosition(jTextArea1.getCaretPosition());
             objectarray = null;
             //reloadBuckets();
             b[active_bucket].setSelected(true);
         } else {
             jTextArea1.append("\nError: no bucket selected.");
         }
+       calibrateTextArea();
     }//GEN-LAST:event_jButton11ActionPerformed
 
     void Sync(File dir) {
@@ -1510,6 +1506,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    void calibrateTextArea() {
+        jTextArea1.append("\n");
+        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+    }
+
     void reloadAccounts() {
         String[] account = new String[account_array.length];
         String account_value = null;
@@ -1522,7 +1523,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         active_account = i;
                         account = account_array[i].split("@");
                         jTextArea1.append("\nLoading configuration for: " + f[i].getText() + "\n");
-                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                         jTextField1.setText(account[0]);
                         jTextField2.setText(account[1]);
                         jTextField3.setText(account[2]);
@@ -1536,6 +1536,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         } catch (Exception loadconfig) {
         }
+        calibrateTextArea();
     }
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
 
@@ -1597,9 +1598,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     String new_object_name = convertObject(file.getAbsolutePath().toString(), "upload");
                     jTextField7.setText(jTextField7.getText().replace("null", ""));
                     jTextArea1.append("\n" + put.put(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name) + "\n");
-                    jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                     dialog.setVisible(false);
                     objectarray = null;
+                    calibrateTextArea();
                 }
             });
         } else {
@@ -1630,8 +1631,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             if (foo[i].exists()) {
                                 jTextArea1.append("\n" + new_object_name + " already exists on this machine.");
                             } else {
-                                jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + slash + new_object_name));
-                                jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                                jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + slash + new_object_name) + "\n");
                             }
                         }
                         dialog.setVisible(false);
@@ -1643,6 +1643,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 jTextArea1.append("\nError: No bucket selected.");
             }
         }
+        calibrateTextArea();
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
@@ -1707,6 +1708,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception mp3player) {
             jTextArea1.append("\n" + mp3player.getMessage());
         }
+        calibrateTextArea();
 
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
@@ -1770,7 +1772,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 if (account_array[i] != null) {
                     if (f[i].isSelected()) {
                         jTextArea1.append("\nDeleting Account:" + f[i].getText() + "\n");
-                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                         account_array[i] = null;
                     } else {
                         account_array[i] = account_array[i];
@@ -1805,6 +1806,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } else {
             jTextArea1.append("\nError: No accounts have been loaded.\n");
         }
+        calibrateTextArea();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1831,8 +1833,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                             download.setVisible(false);
                                             String new_object_name = convertObject(d[i].getText(), "download");
                                             OScheck();
-                                            jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + slash + new_object_name));
-                                            jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+                                            jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + slash + new_object_name) + "\n");
                                             d[i].setSelected(false);
                                         }
                                     }
@@ -1843,6 +1844,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                 download.setVisible(false);
                                 jTextArea1.append("\nError: destination not specified.");
                             }
+
+                            calibrateTextArea();
                         }
                     });
 
@@ -1878,9 +1881,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     dialog("Please wait, deleting file(s)");
                     if (d[i].isSelected()) {
                         dialog("Please wait, deleting file(s)");
-                        jTextArea1.append("\n" + delete.deleteFile(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint()));
+                        jTextArea1.append("\n" + delete.deleteFile(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint()) + "\n");
                         objectarray = null;
-                        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
                     }
                 }
 
@@ -1892,6 +1894,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         dialog.setVisible(false);
         jTextField10.setText("");
         jButton6.doClick();
+        calibrateTextArea();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
