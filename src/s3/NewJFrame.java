@@ -28,7 +28,6 @@ import javax.swing.JTextField;
 public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     Credentials cred = new Credentials();
-    Cache cache = new Cache();
     BucketClass bucket = new BucketClass();
     Delete delete = new Delete();
     Acl objectacl = new Acl();
