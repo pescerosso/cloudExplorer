@@ -150,6 +150,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel8" alignment="1" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="panel1" min="-2" max="-2" attributes="0"/>
@@ -185,18 +186,18 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" pref="71" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="790" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="790" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
@@ -255,11 +256,11 @@
                           <Component id="jTextField10" min="-2" pref="371" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="380" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="347" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -324,18 +325,17 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" pref="90" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jScrollPane2" min="-2" pref="177" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" min="-2" pref="349" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="364" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -362,16 +362,12 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane3" alignment="0" pref="100" max="32767" attributes="0"/>
+                      <Component id="jScrollPane3" alignment="0" pref="175" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="14" max="32767" attributes="0"/>
-                          <Component id="jScrollPane3" min="-2" pref="337" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jScrollPane3" alignment="0" pref="362" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -403,8 +399,8 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTabbedPane1" min="-2" pref="915" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="jTabbedPane1" min="-2" pref="859" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -491,17 +487,17 @@
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                   <Component id="jTextField9" min="-2" pref="328" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                                   <Component id="jButton9" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="130" max="32767" attributes="0"/>
+                                  <EmptySpace pref="86" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jScrollPane27" pref="0" max="32767" attributes="0"/>
@@ -980,32 +976,25 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
-                          <Component id="jFileChooser2" min="-2" pref="587" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jToggleButton4" min="-2" pref="126" max="-2" attributes="0"/>
-                              <Component id="jToggleButton3" min="-2" pref="126" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jToggleButton4" min="-2" pref="126" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jToggleButton3" min="-2" pref="126" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jFileChooser2" alignment="1" min="-2" pref="847" max="-2" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                                  <Component id="jToggleButton4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jToggleButton3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jFileChooser2" min="-2" pref="280" max="-2" attributes="0"/>
+                          <Component id="jFileChooser2" min="-2" pref="280" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jToggleButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jToggleButton4" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="36" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1065,7 +1054,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                          <Component id="jTextField6" pref="737" max="32767" attributes="0"/>
+                          <Component id="jTextField6" pref="679" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton11" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
@@ -1139,7 +1128,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane6" alignment="0" pref="903" max="32767" attributes="0"/>
+                      <Component id="jScrollPane6" alignment="0" pref="847" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -1164,7 +1153,7 @@
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="Version: 1.6&#xa;&#xa;Please submit bugs via github: https://github.com/rusher81572/s3 &#xa;&#xa;What is new in this release?&#xa;&#xa;1. Faster search. This program will only rescan objects from the Cloud provider upon making changes. &#xa;2. For quicker interaction, Settings is now the default startup tab so the user can quickly choose the S3 account to load.&#xa;3. Improved logging  window. For the most part, the window will stay at the latest log message.&#xa;4. Upon selecting a bucket. Object Explorer will automatically load and display the objects.&#xa;5. Improvment to accounts. Single click to load account and buckets.&#xa;6. Less dialog windows in the GUI.. &#xa;&#xa;* Special note for Background Sync users *&#xa;&#xa;If you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config&#xa;&#xa;"/>
+                        <Property name="text" type="java.lang.String" value="Version: 1.6&#xa;&#xa;Please submit bugs via github: https://github.com/rusher81572/s3 &#xa;&#xa;What is new in this release?&#xa;&#xa;1. Faster search. This program will only rescan objects from the Cloud provider upon making changes. &#xa;2. For quicker interaction, Settings is now the default startup tab so the user can quickly choose the S3 account to load.&#xa;3. Improved logging  window. For the most part, the window will stay at the latest log message.&#xa;4. Upon selecting a bucket. Object Explorer will automatically load and display the objects.&#xa;5. Improvment to accounts. Single click to load account and buckets.&#xa;6. Increased the size of the bucket list window.&#xa;7. Minor GUI changes for the sync tab.&#xa;&#xa;* Special note for Background Sync users *&#xa;&#xa;If you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config&#xa;&#xa;"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="null"/>
                         </Property>
