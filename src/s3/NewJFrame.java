@@ -747,7 +747,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 1.6\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Faster search. This program will only rescan objects from the Cloud provider upon making changes. \n2. For quicker interaction, Settings is now the default startup tab so the user can quickly choose the S3 account to load.\n3. Improved logging  window. For the most part, the window will stay at the latest log message.\n4. Upon selecting a bucket. Object Explorer will automatically load and display the objects.\n5. Improvment to accounts. Single click to load account and buckets.\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
+        jTextArea4.setText("Version: 1.6\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Faster search. This program will only rescan objects from the Cloud provider upon making changes. \n2. For quicker interaction, Settings is now the default startup tab so the user can quickly choose the S3 account to load.\n3. Improved logging  window. For the most part, the window will stay at the latest log message.\n4. Upon selecting a bucket. Object Explorer will automatically load and display the objects.\n5. Improvment to accounts. Single click to load account and buckets.\n6. Less dialog windows in the GUI.. \n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
@@ -951,24 +951,37 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //preload();
+        jTextArea1.setText("\n                                                                                 Please wait, loading Buckets.");
+        calibrateTextArea();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
+                    var();
+                    reloadBuckets();
+                } else {
+                    jTextArea1.append("\nError: Configuration not loaded\n");
+                }
+                calibrateTextArea();
+            }
+        });
 
-        if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
-            dialog("Please wait, loading Buckets.");
-            var();
-            reloadBuckets();
-        } else {
-            jTextArea1.append("\nError: Configuration not loaded\n");
-        }
-        dialog.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        try {
 
-            if (active_bucket > 0) {
+        /**
+         * java.awt.EventQueue.invokeLater(new Runnable() { public void run() {
+         *
+         * }
+         * });
+         *
+         */
+        if (active_bucket > 0) {
+            jTextArea1.setText("\nLoading Objects........");
+            calibrateTextArea();
+            reloadObjects();
 
-                reloadObjects();
-
+            try {
                 int found = 0;
                 jTabbedPane1.setSelectedIndex(1);
                 for (int i = 1; i != objectarray.length; i++) {
@@ -980,18 +993,21 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         } else {
                             d[i].setVisible(false);
                         }
-
                     }
                 }
 
                 if (found == 0) {
                     reloadObjects();
-                    jTextArea1.append("\nNo objects found for: " + jTextField10.getText().toLowerCase() + "\n");
+                    jTextArea1.append("\nNo objects found for search. \n");
+                } else {
+                    jTextArea1.append("\nDisplayed found objects.");
+                    calibrateTextArea();
                 }
-            } else {
-                jTextArea1.append("\nError: No bucket has been selected\n");
+            } catch (Exception searchBar) {
+
             }
-        } catch (Exception Download) {
+        } else {
+            jTextArea1.append("\nError: No bucket has been selected\n");
         }
 
         calibrateTextArea();
@@ -1023,7 +1039,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             clear_old_radio_buttons();
                             h = bucketarray.length;
                             objectarray = null;
-                            jButton6.doClick();
+                            jTextArea1.setText("\n                                                                                 Please wait, loading objects.");
+                            calibrateTextArea();
+                            java.awt.EventQueue.invokeLater(new Runnable() {
+                                public void run() {
+                                    jButton6.doClick();
+                                }
+                            });
                         }
                     }
                 }
@@ -1624,16 +1646,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
         if (active_bucket > 0) {
+            jTextArea1.append("\nPlease wait for the upload operation to complete.");
+            this.calibrateTextArea();
 
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    dialog("Please wait for the upload operation to complete.");
                     File file = jFileChooser1.getSelectedFile();
                     String upload = (file.getAbsolutePath());
                     String new_object_name = convertObject(file.getAbsolutePath().toString(), "upload");
                     jTextField7.setText(jTextField7.getText().replace("null", ""));
                     jTextArea1.append("\n" + put.put(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name) + "\n");
-                    dialog.setVisible(false);
                     objectarray = null;
                     calibrateTextArea();
                 }
@@ -1912,24 +1934,24 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         try {
 
             if (active_bucket > 0) {
+                calibrateTextArea();
+                jTextArea1.append("\nPlease wait, deleting selected file(s)");
                 for (int i = 1; i != previous_objectarray_length; i++) {
-                    dialog("Please wait, deleting file(s)");
                     if (d[i].isSelected()) {
-                        dialog("Please wait, deleting file(s)");
                         jTextArea1.append("\n" + delete.deleteFile(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint()) + "\n");
                         objectarray = null;
                     }
                 }
-
             } else {
                 jTextArea1.append("\nError: No bucked selected.");
             }
         } catch (Exception checkbox) {
         }
-        dialog.setVisible(false);
+
         jTextField10.setText("");
         jButton6.doClick();
         calibrateTextArea();
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
