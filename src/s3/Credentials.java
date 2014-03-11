@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
 
 public class Credentials {
 
@@ -100,7 +101,7 @@ public class Credentials {
             int h = 0;
             while ((read = bfr.readLine()) != null) {
                 data = data + read;
-                mainFrame.f[h] = new JCheckBox();
+                mainFrame.f[h] = new JRadioButton();
                 mainFrame.f[h].setText(read);
                 mainFrame.jPanel21.add(mainFrame.f[h]);
                 mainFrame.jPanel21.repaint();

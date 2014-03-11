@@ -44,7 +44,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     int total_accounts = 0;
     JRadioButton b[] = new JRadioButton[object_size];
     JRadioButton d[] = new JRadioButton[object_size];
-    JCheckBox f[] = new JCheckBox[account_array.length];
+    JRadioButton f[] = new JRadioButton[account_array.length];
     int active_bucket = 0;
     String object_acl_change = null;
     String temp_file = (Home + "/object.tmp");
@@ -747,7 +747,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 1.6\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Faster search. This program will only rescan objects from the Cloud provider upon making changes. \n2. For quicker interaction, Settings is now the default startup tab so the user can quickly choose the S3 account to load.\n3. Improved logging  window. For the most part, the window will stay at the latest log message.\n4. Upon selecting a bucket. Object Explorer will automatically load and display the objects.\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
+        jTextArea4.setText("Version: 1.6\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Faster search. This program will only rescan objects from the Cloud provider upon making changes. \n2. For quicker interaction, Settings is now the default startup tab so the user can quickly choose the S3 account to load.\n3. Improved logging  window. For the most part, the window will stay at the latest log message.\n4. Upon selecting a bucket. Object Explorer will automatically load and display the objects.\n5. Improvment to accounts. Single click to load account and buckets.\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
@@ -999,6 +999,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
 
     void clear_old_radio_buttons() {
+
         try {
             for (int c = 1; c != bucketarray.length; c++) {
                 if (c == active_bucket) {
@@ -1008,9 +1009,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         } catch (Exception clear_old_radio) {
         }
+
     }
 
-    public void itemStateChanged(ItemEvent e) {
+    public void itemStateChanged(ItemEvent event) {
         try {
             for (int h = 1; h != bucketarray.length; h++) {
                 if (b[h] != null) {
@@ -1027,6 +1029,36 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 }
             }
         } catch (Exception ItemStateChanged) {
+        }
+
+        try {
+            for (int h = 1; h != account_array.length; h++) {
+                if (f[h] != null) {
+                    if (f[h].isSelected()) {
+                        if (h != active_account) {
+                            active_account = h;
+                            changeAccountRadioButtons();
+                            h = account_array.length;
+                            objectarray = null;
+                            jButton9.doClick();
+                        }
+                    }
+                }
+            }
+        } catch (Exception ItemStateChanged) {
+        }
+
+    }
+
+    public void changeAccountRadioButtons() {
+        try {
+            for (int c = 1; c != account_array.length; c++) {
+                if (c == active_account) {
+                } else {
+                    f[c].setSelected(false);
+                }
+            }
+        } catch (Exception clear_old_radio) {
         }
     }
 
@@ -1067,9 +1099,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (account_array[h] != null) {
                 String[] foo = account_array[h].split("@");
                 jPanel21.setLayout(new BoxLayout(jPanel21, BoxLayout.Y_AXIS));
-                f[h] = new JCheckBox();
+                f[h] = new JRadioButton();
                 f[h].setText(foo[2]);
+                f[h].addItemListener(this);
                 jPanel21.add(f[h]);
+                jPanel21.revalidate();
+                validate();
             }
         }
 
@@ -1238,7 +1273,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception Download) {
             jTextArea1.append("\n" + Download.getMessage() + "\n");
         }
-      calibrateTextArea();
+        calibrateTextArea();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -1304,7 +1339,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                 jTextArea1.append("\n" + ObjectACL.getMessage() + "\n");
                             }
                         }
-                      calibrateTextArea();
+                        calibrateTextArea();
                     }
 
                 });
@@ -1346,7 +1381,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception Download) {
             jTextArea1.append("\n" + Download.getMessage());
         }
-       calibrateTextArea();
+        calibrateTextArea();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
     void deleteFle(String what) {
         try {
@@ -1397,7 +1432,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception imageLoading) {
             jTextArea1.append("\n" + imageLoading.getMessage());
         }
-       calibrateTextArea();
+        calibrateTextArea();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
@@ -1420,7 +1455,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } else {
             jTextArea1.append("\nError: no bucket selected.");
         }
-       calibrateTextArea();
+        calibrateTextArea();
     }//GEN-LAST:event_jButton11ActionPerformed
 
     void Sync(File dir) {
@@ -1771,7 +1806,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             for (int i = 0; i != account_array.length; i++) {
                 if (account_array[i] != null) {
                     if (f[i].isSelected()) {
-                        jTextArea1.append("\nDeleting Account:" + f[i].getText() + "\n");
+                        jTextArea1.append("\nDeleting Account: " + f[i].getText() + "\n");
                         account_array[i] = null;
                     } else {
                         account_array[i] = account_array[i];
