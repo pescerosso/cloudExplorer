@@ -190,6 +190,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
 
+        jButton6.setBackground(java.awt.SystemColor.text);
         jButton6.setText("Search");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -938,7 +939,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     public void loadBuckets() {
         //preload();
-        jTextArea1.setText("\n                                                                                 Please wait, loading Buckets.");
+        jTextArea1.append("\n                                                                                 Please wait, loading Buckets.");
         calibrateTextArea();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -962,7 +963,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
          *
          */
         if (active_bucket > 0) {
-            jTextArea1.setText("\nLoading Objects........");
+            jTextArea1.append("\nLoading Objects........");
             calibrateTextArea();
             reloadObjects();
 
@@ -1024,7 +1025,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             clear_old_radio_buttons();
                             h = bucketarray.length;
                             objectarray = null;
-                            jTextArea1.setText("\n                                                                                 Please wait, loading objects.");
+                            jTextArea1.append("\n                                                                                 Please wait, loading objects.");
                             calibrateTextArea();
                             java.awt.EventQueue.invokeLater(new Runnable() {
                                 public void run() {
@@ -1154,7 +1155,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 }
             }
 
-            jTextArea1.setText("\n                                                                                                 Loaded Buckets");
+            jTextArea1.append("\n                                                                                                                     Loaded Buckets");
 
         } else {
             jTextArea1.append("\nError: Configuration not loaded\n");
@@ -1613,7 +1614,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton9ActionPerformed
     void buckerLoader() {
         //preload();
-        jTextArea1.setText("\n                                                                                 Please wait, loading Buckets.");
+        jTextArea1.append("\n                                                                                                  Please wait, loading Buckets.");
         calibrateTextArea();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1872,7 +1873,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
         if (active_bucket > 0) {
 
             java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1902,6 +1902,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                 }
                                 dialog.setVisible(false);
                                 reloadObjects();
+                                jButton6.doClick();
                             } else {
                                 download.setVisible(false);
                                 jTextArea1.append("\nError: destination not specified.");
@@ -1929,7 +1930,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     }
                 }
             });
-
         } else {
             jTextArea1.append("\nError: No bucket has been selected");
         }
