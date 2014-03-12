@@ -179,15 +179,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addGap(42, 42, 42))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -275,7 +276,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         panel1.setBackground(java.awt.Color.white);
@@ -678,7 +679,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton3)
                     .addComponent(jToggleButton4))
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sync", jPanel4);
@@ -727,8 +728,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane1.addTab("Text Editor", jPanel6);
@@ -738,7 +738,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 1.6\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Faster search. This program will only rescan objects from the Cloud provider upon making changes. \n2. For quicker interaction, Settings is now the default startup tab so the user can quickly choose the S3 account to load.\n3. Improved logging  window. For the most part, the window will stay at the latest log message.\n4. Upon selecting a bucket. Object Explorer will automatically load and display the objects.\n5. Improvment to accounts. Single click to load account and buckets.\n6. Increased the size of the bucket list window.\n7. Minor GUI changes for the sync tab.\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
+        jTextArea4.setText("Version: 1.6\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release?\n\n1. Faster search. This program will only rescan objects from the Cloud provider upon making changes. \n2. For quicker interaction, Settings is now the default startup tab so the user can quickly choose the S3 account to load.\n3. Improved logging  window. For the most part, the window will stay at the latest log message.\n4. Upon selecting a bucket. Object Explorer will automatically load and display the objects.\n5. Improvment to accounts. Single click to load account and buckets.\n6. Increased the size of the bucket list window.\n7. Minor GUI changes for the sync tab.\n8. Fixed text editor window size.\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
@@ -770,7 +770,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
 
         jMenu1.setText("File");
