@@ -2,7 +2,7 @@ This is a simple,free, open-source S3 client made by me as a fun, side project. 
 
 ![Browsing Objects](http://www.linux-toys.com/objects.png)
 
-![Text Editor](http://www.linux-toys.com/wp-content/editor.png)
+![Text Editor](http://www.linux-toys.com/editor.png)
 
 [Background Sync]
 
