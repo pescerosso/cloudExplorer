@@ -1960,26 +1960,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         try {
-            final JFrame properties = new JFrame("Object Properties");
-            JPanel properties_panel = new JPanel();
-            properties.setPreferredSize(new Dimension(400, 80));
-            properties.setResizable(false);
-            properties_panel.setLayout(new BoxLayout(properties_panel, BoxLayout.PAGE_AXIS));
-            properties.add(properties_panel);
 
             if (active_bucket > 0) {
                 for (int i = 1; i != previous_objectarray_length; i++) {
                     try {
                         if (d[i].isSelected()) {
-                            JLabel name = new JLabel("File Name: " + d[i].getText());
-                            JLabel size = new JLabel("Size: " + bucket.getObjectInfo(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), b[active_bucket].getText(), cred.getEndpoint(), "objectsize") + " KB");
-                            JLabel date = new JLabel("Modified Date: " + bucket.getObjectInfo(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), b[active_bucket].getText(), cred.getEndpoint(), "objectdate"));
-                            properties_panel.add(name);
-                            properties_panel.add(size);
-                            properties_panel.add(date);
-                            properties_panel.repaint();
-                            properties_panel.revalidate();
-                            properties_panel.validate();
+                            jTextArea1.setText("\nFile Name: " + d[i].getText());
+                            jTextArea1.append("\nSize: " + bucket.getObjectInfo(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), b[active_bucket].getText(), cred.getEndpoint(), "objectsize") + " KB");
+                            jTextArea1.append("\nModified Date: " + bucket.getObjectInfo(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), b[active_bucket].getText(), cred.getEndpoint(), "objectdate"));
                             break;
                         }
 
@@ -1990,10 +1978,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             } else {
                 jTextArea1.append("\nError: No bucket has been selected\n");
             }
-
-            properties.setLocation(500, 500);
-            properties.pack();
-            properties.setVisible(true);
 
         } catch (Exception Download) {
             jTextArea1.append("\n" + Download.getMessage());
