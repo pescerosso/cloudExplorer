@@ -683,10 +683,13 @@
                                       <Component id="jButton13" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="jButton14" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="247" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jPanel11" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace pref="76" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -724,7 +727,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="731" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="758" max="32767" attributes="0"/>
                                   <Component id="jScrollPane5" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -739,10 +742,6 @@
                         <Container class="javax.swing.JScrollPane" name="jScrollPane5">
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                          <SubComponents>
-                            <Component class="javax.swing.JScrollBar" name="jScrollBar1">
-                            </Component>
-                          </SubComponents>
                         </Container>
                       </SubComponents>
                     </Container>
@@ -993,7 +992,7 @@
                           <Component id="jToggleButton3" min="-2" pref="126" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jFileChooser2" alignment="1" min="-2" pref="847" max="-2" attributes="0"/>
+                      <Component id="jFileChooser2" alignment="1" min="-2" pref="1003" max="-2" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
