@@ -1681,36 +1681,48 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if (active_bucket > 0) {
             objectarray = null;
             reloadObjects();
-            if (b[active_bucket].isSelected()) {
-                jTextArea1.append("\nStarting Sync:");
-                if (jFileChooser2.getSelectedFile() == null) {
-                    jTextArea1.append("\nError: please select a destination directroy.");
-                } else {
-                    dialog("Please wait for SYNC to complete");
-                    try {
-                        File[] foo = new File[100000000];
-                        for (int i = 1; i != objectarray.length; i++) {
-                            String Destination = jFileChooser2.getSelectedFile().toString();
-                            String new_object_name = convertObject(d[i].getText(), "download");
-                            foo[i] = new File(Destination + slash + new_object_name);
-                            if (foo[i].exists()) {
-                                jTextArea1.append("\n" + new_object_name + " already exists on this machine.");
+            if (objectarray.length > 1) {
+                jTextArea1.setText("\nPlease wait for SYNC to complete");
+                calibrateTextArea();
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        if (b[active_bucket].isSelected()) {
+                            if (jFileChooser2.getSelectedFile() == null) {
+                                jTextArea1.append("\nError: please select a destination directroy.");
                             } else {
-                                jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + slash + new_object_name) + "\n");
-                            }
-                        }
-                        dialog.setVisible(false);
-                    } catch (Exception SyncLocal) {
-                        jTextArea1.append("\n" + SyncLocal.getMessage());
-                    }
-                }
-            } else {
-                jTextArea1.append("\nError: No bucket selected.");
-            }
-        }
-        calibrateTextArea();
-    }//GEN-LAST:event_jToggleButton4ActionPerformed
 
+                                try {
+                                    File[] foo = new File[100000000];
+                                    for (int i = 1; i != objectarray.length; i++) {
+                                        String Destination = jFileChooser2.getSelectedFile().toString();
+                                        String new_object_name = convertObject(d[i].getText(), "download");
+                                        foo[i] = new File(Destination + slash + new_object_name);
+                                        if (foo[i].exists()) {
+                                            jTextArea1.append("\n" + new_object_name + " already exists on this machine.");
+                                        } else {
+                                            jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + slash + new_object_name) + "\n");
+                                        }
+                                        jTextArea1.setText("\nSync is complete");
+                                        calibrateTextArea();
+                                    }
+                                    dialog.setVisible(false);
+                                } catch (Exception SyncLocal) {
+                                    jTextArea1.append("\n" + SyncLocal.getMessage());
+                                }
+                            }
+                        } else {
+                            jTextArea1.append("\nError: No bucket selected.");
+                        }
+                    }
+
+                });
+            } else {
+                jTextArea1.append("\nError: Bucket has no objects to sync");
+                calibrateTextArea();
+            }
+            calibrateTextArea();
+    }//GEN-LAST:event_jToggleButton4ActionPerformed
+    }
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         try {
             if (!OScheck()) {
