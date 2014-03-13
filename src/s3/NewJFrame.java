@@ -1023,7 +1023,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             clear_old_radio_buttons();
                             h = bucketarray.length;
                             objectarray = null;
-                            jTextArea1.append("\n                                                                                 Please wait, loading objects.");
+                            jTextArea1.append("\n                                                                                                            Please wait, loading objects.");
                             calibrateTextArea();
                             java.awt.EventQueue.invokeLater(new Runnable() {
                                 public void run() {
@@ -1889,22 +1889,24 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (active_bucket > 0) {
 
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    final JFrame download = new JFrame("Please choose destination directory.");
-                    final JPanel downloadPanel = new JPanel();
-                    final JFileChooser downloadChooser = new JFileChooser();
-                    downloadChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                    final JButton downloadButton = new JButton("OK");
+            final JFrame download = new JFrame("Please choose destination directory.");
+            final JPanel downloadPanel = new JPanel();
+            final JFileChooser downloadChooser = new JFileChooser();
+            downloadChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            final JButton downloadButton = new JButton("OK");
 
-                    downloadButton.addActionListener(new ActionListener() {
+            downloadButton.addActionListener(new ActionListener() {
 
-                        public void actionPerformed(ActionEvent e) {
-                            dialog("Please wait for the download operation to complete.");
-                            if (downloadChooser.getSelectedFile().getAbsolutePath() != null) {
+                public void actionPerformed(ActionEvent e) {
+                    jTextArea1.append("\nPlease wait for the download operation to complete.");
+                    calibrateTextArea();
+                    if (downloadChooser.getSelectedFile().getAbsolutePath() != null) {
+                        java.awt.EventQueue.invokeLater(new Runnable() {
+                            public void run() {
                                 File File_Destination = new File(downloadChooser.getSelectedFile().getAbsolutePath());
                                 for (int i = 1; i != previous_objectarray_length; i++) {
                                     if (d[i] != null) {
+
                                         if (d[i].isSelected()) {
                                             download.setVisible(false);
                                             String new_object_name = convertObject(d[i].getText(), "download");
@@ -1914,36 +1916,39 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                         }
                                     }
                                 }
-                                dialog.setVisible(false);
+                                jTextArea1.append("\nDownload Complete");
+                                calibrateTextArea();
                                 reloadObjects();
                                 jButton6.doClick();
-                            } else {
-                                download.setVisible(false);
-                                jTextArea1.append("\nError: destination not specified.");
                             }
+                        });
 
-                            calibrateTextArea();
-                        }
-                    });
-
-                    downloadPanel.setLayout(new BoxLayout(downloadPanel, BoxLayout.PAGE_AXIS));
-                    downloadPanel.add(downloadChooser);
-                    downloadPanel.add(downloadButton);
-                    download.add(downloadPanel);
-                    download.setLocation(500, 500);
-                    download.pack();
-                    try {
-                        for (int i = 1; i != objectarray.length; i++) {
-                            if (d[i] != null) {
-                                if (d[i].isSelected()) {
-                                    download.setVisible(true);
-                                }
-                            }
-                        }
-                    } catch (Exception GetThreadRUN) {
+                    } else {
+                        download.setVisible(false);
+                        jTextArea1.append("\nError: destination not specified.");
                     }
+
+                    calibrateTextArea();
                 }
             });
+
+            downloadPanel.setLayout(new BoxLayout(downloadPanel, BoxLayout.PAGE_AXIS));
+            downloadPanel.add(downloadChooser);
+            downloadPanel.add(downloadButton);
+            download.add(downloadPanel);
+            download.setLocation(500, 500);
+            download.pack();
+            try {
+                for (int i = 1; i != objectarray.length; i++) {
+                    if (d[i] != null) {
+                        if (d[i].isSelected()) {
+                            download.setVisible(true);
+                        }
+                    }
+                }
+            } catch (Exception GetThreadRUN) {
+            }
+
         } else {
             jTextArea1.append("\nError: No bucket has been selected");
         }
