@@ -1129,7 +1129,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
             String bucketlist = bucket.listBuckets(cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint());
             bucketarray = bucketlist.split(" ");
-
             jPanel5.removeAll();
             jPanel5.revalidate();
             jPanel5.repaint();
@@ -1140,7 +1139,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
                     b[h] = new JRadioButton();
                     b[h].setText(bucketarray[h]);
-
                     b[h].addItemListener(this);
                     jPanel5.add(b[h]);
                     setLocation(h, 5);
@@ -1234,6 +1232,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             String response = JOptionPane.showInputDialog(null, "Bucket Name: ", "logo_cloudian.png", JOptionPane.OK_CANCEL_OPTION);
             jTextArea1.append("\n" + bucket.makeBucket(cred.getAccess_key(), cred.getSecret_key(), response.toLowerCase(), cred.getEndpoint(), cred.getRegion()));
             reloadBuckets();
+            active_bucket = 0;
         } else {
             jTextArea1.append("\nError: Configuration not loaded\n");
         }
@@ -1290,6 +1289,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
                     if (b[i].isSelected()) {
                         jTextArea1.append(bucket.deleteBucket(cred.access_key, cred.secret_key, b[i].getText(), cred.end_point, cred.region));
+                        b[i].setSelected(false);
+                        active_bucket = 0;
                     }
                 }
             }
@@ -1488,7 +1489,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 }
             }
         } catch (Exception Sync) {
-            jTextArea1.append("\n" + Sync.getMessage());
         }
     }
 
@@ -1519,9 +1519,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             Sync(jFileChooser2.getSelectedFile());
                             objectarray = null;
                         }
+                        jTextArea1.append("\nSyncs is complete.");
+                        calibrateTextArea();
+                    } else {
+                        jTextArea1.append("\nError, no bucket has been selected.");
+                        calibrateTextArea();
                     }
-                    jTextArea1.append("\nSyncs is complete.");
-                    calibrateTextArea();
                 }
             });
         } else {
