@@ -1517,13 +1517,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     if (b[active_bucket].isSelected()) {
-
                         if (jFileChooser2.getSelectedFile() == null) {
                             jTextArea1.append("\nError: please select a destination directory.");
                         } else {
-                            //dialog("Please wait for Sync to complete.");
                             Sync(jFileChooser2.getSelectedFile());
-                            dialog.setVisible(true);
                             objectarray = null;
                         }
                     }
@@ -1531,8 +1528,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     calibrateTextArea();
                 }
             });
-
-            //dialog.setVisible(false);
         } else {
             jTextArea1.append("\nError: No bucket selected.");
         }
