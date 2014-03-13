@@ -1150,7 +1150,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 }
             }
 
-            jTextArea1.append("\n                                                                                                          Loaded Buckets");
+            jTextArea1.append("\nLoaded Buckets");
 
         } else {
             jTextArea1.append("\nError: Configuration not loaded\n");
