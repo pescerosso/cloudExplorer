@@ -1511,19 +1511,28 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         if (active_bucket > 0) {
+            jTextArea1.setText("\nPlease wait for Sync to complete.");
+            calibrateTextArea();
 
-            if (b[active_bucket].isSelected()) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    if (b[active_bucket].isSelected()) {
 
-                if (jFileChooser2.getSelectedFile() == null) {
-                    jTextArea1.append("\nError: please select a destination directory.");
-                } else {
-                    dialog("Please wait for Sync to complete.");
-                    Sync(jFileChooser2.getSelectedFile());
-                    dialog.setVisible(true);
-                    objectarray = null;
+                        if (jFileChooser2.getSelectedFile() == null) {
+                            jTextArea1.append("\nError: please select a destination directory.");
+                        } else {
+                            //dialog("Please wait for Sync to complete.");
+                            Sync(jFileChooser2.getSelectedFile());
+                            dialog.setVisible(true);
+                            objectarray = null;
+                        }
+                    }
+                    jTextArea1.append("\nSyncs is complete.");
+                    calibrateTextArea();
                 }
-            }
-            dialog.setVisible(false);
+            });
+
+            //dialog.setVisible(false);
         } else {
             jTextArea1.append("\nError: No bucket selected.");
         }
