@@ -1145,6 +1145,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jPanel5.revalidate();
                     validate();
                 }
+                if (bucketarray.length == 2) {
+                    b[1].setSelected(true);
+                }
             }
 
             jTextArea1.append("\n                                                                                                          Loaded Buckets");
@@ -1606,14 +1609,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } else {
             reloadAccounts();
             if (active_account > 0) {
-                buckerLoader();
+                bucketLoader();
             } else {
                 jTextArea1.append("\nError: No account has been selected.");
             }
         }
 
     }//GEN-LAST:event_jButton9ActionPerformed
-    void buckerLoader() {
+    void bucketLoader() {
         //preload();
         jTextArea1.append("\n                                                                                                  Please wait, loading Buckets.");
         calibrateTextArea();
