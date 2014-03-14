@@ -54,7 +54,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     JFrame dialog = new JFrame();
     JLabel dialog_label = new JLabel("Please wait for operation to complete. This will close upon completion.");
     JPanel dialog_panel = new JPanel();
-    int object_display_counter = 0;
     int initial_display = 11;
     int account_counter = 0;
     int content_counter = 0;
@@ -1141,10 +1140,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 active_bucket = bucketarray.length - 1;
                 objectarray = null;
                 reloadObjects();
-               // if (bucketarray.length == 2) {
-                    active_bucket = 2;
-                    b[1].doClick();
-            //    } 
+                if (bucketarray.length > 1 && b[1] != null) {           
+                        active_bucket = 2;
+                        b[1].doClick();
+                }
             }
 
             jTextArea1.append("\nLoaded Buckets");
@@ -1165,7 +1164,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
 
             if (objectarray == null) {
-System.out.print("\n is null");
+
                 try {
                     for (int h = 1; h != bucketarray.length; h++) {
                         if (b[h] != null) {
@@ -1177,14 +1176,12 @@ System.out.print("\n is null");
                         }
                     }
 
-                    
                     jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
 
                     for (int h = 1; h != objectarray.length; h++) {
                         jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.Y_AXIS));
                         d[h] = new JRadioButton();
                         d[h].setText(objectarray[h]);
-                        object_display_counter = h;
                     }
 
                     jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
