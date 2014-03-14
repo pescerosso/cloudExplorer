@@ -1034,6 +1034,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             changeAccountRadioButtons();
                             h = account_array.length;
                             objectarray = null;
+                            active_bucket = 0;
                             jButton9.doClick();
                         }
                     }
@@ -1118,7 +1119,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             var();
             bucketarray = null;
-
+            active_bucket = 0;
             String bucketlist = bucket.listBuckets(cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint());
             bucketarray = bucketlist.split(" ");
             jPanel5.removeAll();
@@ -1137,7 +1138,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jPanel5.revalidate();
                     validate();
                 }
-                active_bucket = bucketarray.length - 1;
+
                 objectarray = null;
                 reloadObjects();
                 if (bucketarray.length > 1 && b[1] != null) {           
