@@ -949,13 +949,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
-        /**
-         * java.awt.EventQueue.invokeLater(new Runnable() { public void run() {
-         *
-         * }
-         * });
-         *
-         */
         if (active_bucket > 0) {
             jTextArea1.append("\nLoading Objects........");
             calibrateTextArea();
@@ -1145,9 +1138,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jPanel5.revalidate();
                     validate();
                 }
-                if (bucketarray.length == 2) {
-                    b[1].setSelected(true);
-                }
+                active_bucket = bucketarray.length - 1;
+                objectarray = null;
+                reloadObjects();
+               // if (bucketarray.length == 2) {
+                    active_bucket = 2;
+                    b[1].doClick();
+            //    } 
             }
 
             jTextArea1.append("\nLoaded Buckets");
@@ -1168,7 +1165,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
 
             if (objectarray == null) {
-
+System.out.print("\n is null");
                 try {
                     for (int h = 1; h != bucketarray.length; h++) {
                         if (b[h] != null) {
@@ -1180,6 +1177,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         }
                     }
 
+                    
                     jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
 
                     for (int h = 1; h != objectarray.length; h++) {
@@ -1232,7 +1230,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             var();
             reloadBuckets();
-            String response = JOptionPane.showInputDialog(null, "Bucket Name: ", "logo_cloudian.png", JOptionPane.OK_CANCEL_OPTION);
+            String response = JOptionPane.showInputDialog(null, "Bucket Name: ", "Create a bucket", JOptionPane.OK_CANCEL_OPTION);
             jTextArea1.append("\n" + bucket.makeBucket(cred.getAccess_key(), cred.getSecret_key(), response.toLowerCase(), cred.getEndpoint(), cred.getRegion()));
             reloadBuckets();
             active_bucket = 0;
