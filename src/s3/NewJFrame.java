@@ -1185,7 +1185,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
 
                 } catch (Exception listing) {
-                    jTextArea1.append("\n" + listing.getMessage() + "\n");
                 }
             }
 
