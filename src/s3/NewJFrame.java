@@ -598,20 +598,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 819, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(226, 226, 226)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jFileChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -947,7 +942,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         });
     }
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
         if (active_bucket > 0) {
             jTextArea1.append("\nLoading Objects........");
             calibrateTextArea();
@@ -1003,21 +997,23 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     public void itemStateChanged(ItemEvent event) {
         try {
             for (int h = 1; h != bucketarray.length; h++) {
-                if (b[h] != null) {
-                    if (b[h].isSelected()) {
-                        if (h != active_bucket) {
-                            active_bucket = h;
-                            cred.setBucket(b[h].getText());
-                            clear_old_radio_buttons();
-                            h = bucketarray.length;
-                            objectarray = null;
-                            jTextArea1.append("\n                                                                                                            Please wait, loading objects.");
-                            calibrateTextArea();
-                            java.awt.EventQueue.invokeLater(new Runnable() {
-                                public void run() {
-                                    jButton6.doClick();
-                                }
-                            });
+                if (bucketarray.length > 1) {
+                    if (b[h] != null) {
+                        if (b[h].isSelected()) {
+                            if (h != active_bucket) {
+                                active_bucket = h;
+                                cred.setBucket(b[h].getText());
+                                clear_old_radio_buttons();
+                                h = bucketarray.length;
+                                objectarray = null;
+                                jTextArea1.append("\n                                                                                                            Please wait, loading objects.");
+                                calibrateTextArea();
+                                java.awt.EventQueue.invokeLater(new Runnable() {
+                                    public void run() {
+                                        jButton6.doClick();
+                                    }
+                                });
+                            }
                         }
                     }
                 }
@@ -1141,9 +1137,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
                 objectarray = null;
                 reloadObjects();
-                if (bucketarray.length > 1 && b[1] != null) {           
-                        active_bucket = 2;
-                        b[1].doClick();
+
+                if (bucketarray.length > 1 && b[1] != null) {
+                    active_bucket = 2;
+                    b[1].doClick();
                 }
             }
 
@@ -1231,7 +1228,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             String response = JOptionPane.showInputDialog(null, "Bucket Name: ", "Create a bucket", JOptionPane.OK_CANCEL_OPTION);
             jTextArea1.append("\n" + bucket.makeBucket(cred.getAccess_key(), cred.getSecret_key(), response.toLowerCase(), cred.getEndpoint(), cred.getRegion()));
             reloadBuckets();
-            active_bucket = 0;
         } else {
             jTextArea1.append("\nError: Configuration not loaded\n");
         }
