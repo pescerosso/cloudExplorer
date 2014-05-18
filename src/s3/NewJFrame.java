@@ -1043,7 +1043,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     void loadConfig() {
         String data = null;
         account_array = new String[20];
-        config_file = (Home + "\\s3.config");
+        config_file = (Home + File.separator + "s3.config");
 
         try {
             for (int k = 0; k != account_array.length; k++) {
