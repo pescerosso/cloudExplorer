@@ -47,9 +47,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     JRadioButton f[] = new JRadioButton[account_array.length];
     int active_bucket = 0;
     String object_acl_change = null;
-    String temp_file = (Home + "/object.tmp");
-    String config_file = (Home + "/s3.config");
-    String slash = "/";
+    String temp_file = (Home + File.separator + "object.tmp");
+    String config_file = (Home + File.separator + "s3.config");
     String[] localdata = new String[object_size];
     JFrame dialog = new JFrame();
     JLabel dialog_label = new JLabel("Please wait for operation to complete. This will close upon completion.");
@@ -426,7 +425,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addGap(0, 758, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel11Layout.setVerticalGroup(
@@ -728,7 +727,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 1.6\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release? \n\n1. Faster search. This program will only rescan objects from the Cloud provider upon making changes. \n2. For quicker interaction, Settings is now the default startup tab so the user can quickly choose the S3 account to load.\n3. Improved logging  window. For the most part, the window will stay at the latest log message.\n4. Upon selecting a bucket. Object Explorer will automatically load and display the objects.\n5. Improvement to accounts. Single click to load account and buckets.\n6. Major GUI changes.\n7. Fixed text editor window size.\n\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
+        jTextArea4.setText("Version: 1.7 (Development)\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release? \n\n1.Code improvments.\n\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
@@ -885,25 +884,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }// </editor-fold>//GEN-END:initComponents
     String convertObject(String what, String operation) {
 
-        if (!OScheck()) {
-            if (what.contains("/")) {
-                what = what.replace("/", "\\");
-            }
-        }
-
-        if (OScheck()) {
-            if (what.contains("\\")) {
-                what = what.replace("\\", "/");
-            }
-        }
-
         int count = 0;
         int slash_counter = 0;
         String out_file = null;
         int another_counter = 0;
 
         for (int y = 0; y != what.length(); y++) {
-            if (what.substring(y, y + 1).contains(slash)) {
+            if (what.substring(y, y + 1).contains(File.separator)) {
                 slash_counter++;
                 another_counter = y;
             }
@@ -912,7 +899,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         for (int y = 0; y != what.length(); y++) {
             if (y == another_counter) {
                 if (operation.contains("download")) {
-                    if (what.contains(slash)) {
+                    if (what.contains(File.separator)) {
                         out_file = (what.substring(y, what.length()));
                     } else {
                         out_file = (what);
@@ -1056,10 +1043,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     void loadConfig() {
         String data = null;
         account_array = new String[20];
-
-        if (!OScheck()) {
-            config_file = (Home + "\\s3.config");
-        }
+        config_file = (Home + "\\s3.config");
 
         try {
             for (int k = 0; k != account_array.length; k++) {
@@ -1194,9 +1178,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton6ActionPerformed
     void preload() {
 
-        if (!OScheck()) {
-            config_file = (Home + "\\s3.config");
-        }
+        config_file = (Home + File.separator + "s3.config");
 
         File checkConfig = new File(config_file);
         if (checkConfig.exists()) {
@@ -1205,9 +1187,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
 
     void editorSync(String file) {
-        if (!OScheck()) {
-            temp_file = (Home + "\\object.tmp");
-        }
+
+        temp_file = (Home + File.separator + "object.tmp");
 
         File tmp = new File(temp_file);
 
@@ -1297,11 +1278,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         System.exit(-1);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
-    boolean OScheck() {
-        boolean result;
-        result = !((OS.contains("windows")) || OS.contains("Windows"));
-        return result;
-    }
+
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         try {
 
@@ -1396,10 +1373,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         try {
 
-            if (!OScheck()) {
-                temp_file = (Home + "\\object.tmp");
-            }
-
+            temp_file = (Home + File.separator + "object.tmp");
+         
             JLabel image[] = new JLabel[objectarray.length];
             ImageIcon[] photo = new ImageIcon[objectarray.length];
             JFrame image_frame = new JFrame();
@@ -1441,10 +1416,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         if (active_bucket > 0) {
-            if (!OScheck()) {
-                temp_file = (Home + "\\object.tmp");
-            }
 
+            temp_file = (Home + File.separator + "object.tmp");
             editorSync(jTextField6.getText());
             jTextArea1.append("\n" + delete.deleteFile(jTextField6.getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint()));
             jTextArea1.append("\n" + put.put(temp_file, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField6.getText()));
@@ -1689,11 +1662,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                     for (int i = 1; i != objectarray.length; i++) {
                                         String Destination = jFileChooser2.getSelectedFile().toString();
                                         String new_object_name = convertObject(d[i].getText(), "download");
-                                        foo[i] = new File(Destination + slash + new_object_name);
+                                        foo[i] = new File(Destination + File.separator + new_object_name);
                                         if (foo[i].exists()) {
                                             jTextArea1.append("\n" + new_object_name + " already exists on this machine.");
                                         } else {
-                                            jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + slash + new_object_name) + "\n");
+                                            jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + File.separator + new_object_name) + "\n");
                                         }
                                         jTextArea1.setText("\nSync is complete");
                                         calibrateTextArea();
@@ -1718,9 +1691,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         try {
-            if (!OScheck()) {
-                temp_file = (Home + "\\object.tmp");
-            }
+
+            temp_file = (Home + File.separator + "object.tmp");
 
             if (active_bucket > 0) {
                 final MP3Player mp3 = new MP3Player(new File(temp_file));
@@ -1807,7 +1779,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
                         File choice = new File(bg_choose.getSelectedFile().toString());
                         try {
-                            FileWriter fr = new FileWriter(Home + slash + "s3config.sync");
+                            FileWriter fr = new FileWriter(Home + File.separator + "s3config.sync");
                             BufferedWriter bfr = new BufferedWriter(fr);
                             bfr.write(bg_choose.getSelectedFile().toString() + " " + b[active_bucket].getText());
                             bfr.close();
@@ -1903,8 +1875,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                         if (d[i].isSelected()) {
                                             download.setVisible(false);
                                             String new_object_name = convertObject(d[i].getText(), "download");
-                                            OScheck();
-                                            jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + slash + new_object_name) + "\n");
+                                            jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name) + "\n");
                                             d[i].setSelected(false);
                                         }
                                     }
@@ -2001,10 +1972,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         try {
-
-            if (!OScheck()) {
-                temp_file = (Home + "\\object.tmp");
-            }
+            temp_file = (Home + File.separator + "object.tmp");
 
             for (int i = 1; i != previous_objectarray_length; i++) {
                 if (d[i].isSelected()) {
