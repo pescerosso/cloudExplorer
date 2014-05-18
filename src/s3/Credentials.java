@@ -2,6 +2,7 @@ package s3;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import javax.swing.JCheckBox;
@@ -18,7 +19,7 @@ public class Credentials {
     String userid = null;
     String groupid = null;
     String OS = System.getProperty("os.name");
-    String config_file = (Home + "/s3.config");
+    String config_file = (Home + File.separator + "s3.config");
 
     NewJFrame mainFrame;
 

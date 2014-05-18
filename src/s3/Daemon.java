@@ -11,10 +11,9 @@ public class Daemon {
     NewJFrame mainFrame;
     String Home = System.getProperty("user.home");
     String OS = System.getProperty("os.name");
-    String slash = "/";
-    String temp_file = (Home + "/object.tmp");
-    String sync_config_file = Home + slash + "s3config.sync";
-    String s3_config_file = Home + slash + "s3.config";
+    String temp_file = (Home + File.separator + "object.tmp");
+    String sync_config_file = Home + File.separator + "s3config.sync";
+    String s3_config_file = Home + File.separator + "s3.config";
     Credentials cred = new Credentials();
     BucketClass bucket = new BucketClass();
     Delete delete = new Delete();
@@ -37,12 +36,6 @@ public class Daemon {
         } else {
             System.out.print(message);
         }
-    }
-
-    boolean OScheck() {
-        boolean result;
-        result = !((OS.contains("windows")) || OS.contains("Windows"));
-        return result;
     }
 
     void mainmenu() {
@@ -97,11 +90,9 @@ public class Daemon {
     }
 
     void start() {
-        OScheck();
-        if (!OScheck()) {
-            //Needs testing on Windows
-            sync_config_file = (Home + slash + "s3config.sync");
-        }
+
+        sync_config_file = (Home + File.separator + "s3config.sync");
+
         mainmenu();
         if (!gui) {
             messageParser("\n\nCloudian Explorer will perform a bidirectional \nsync on the directory listed in the config file:\n\n" + sync_config_file);
@@ -167,25 +158,13 @@ public class Daemon {
 
     String convertObject(String what, String operation) {
 
-        if (!OScheck()) {
-            if (what.contains("/")) {
-                what = what.replace("/", "\\");
-            }
-        }
-
-        if (OScheck()) {
-            if (what.contains("\\")) {
-                what = what.replace("\\", "/");
-            }
-        }
-
         int count = 0;
         int slash_counter = 0;
         String out_file = null;
         int another_counter = 0;
 
         for (int y = 0; y != what.length(); y++) {
-            if (what.substring(y, y + 1).contains(slash)) {
+            if (what.substring(y, y + 1).contains(File.separator)) {
                 slash_counter++;
                 another_counter = y;
             }
@@ -194,7 +173,7 @@ public class Daemon {
         for (int y = 0; y != what.length(); y++) {
             if (y == another_counter) {
                 if (operation.contains("download")) {
-                    if (what.contains(slash)) {
+                    if (what.contains(File.separator)) {
                         out_file = (what.substring(y, what.length()));
                     } else {
                         out_file = (what);
@@ -241,11 +220,11 @@ public class Daemon {
             File[] foo = new File[objectarray.length];
             for (int i = 1; i != objectarray.length; i++) {
                 String new_object_name = convertObject(objectarray[i], "download");
-                foo[i] = new File(Destination + slash + new_object_name);
+                foo[i] = new File(Destination + File.separator + new_object_name);
                 if (foo[i].exists()) {
                     messageParser("\n" + new_object_name + " already exists on this machine.");
                 } else {
-                    get.get(objectarray[i], cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + slash + new_object_name);
+                    get.get(objectarray[i], cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + File.separator + new_object_name);
                 }
             }
         } catch (Exception SyncLocal) {
