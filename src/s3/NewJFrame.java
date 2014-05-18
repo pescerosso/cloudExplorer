@@ -882,9 +882,18 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+  
     String convertObject(String what, String operation) {
 
-        int count = 0;
+           if (what.contains("/")) {
+                what = what.replace("/", File.separator);
+            }
+       
+            if (what.contains("\\")) {
+                what = what.replace("\\", File.separator);
+            }
+       
+            int count = 0;
         int slash_counter = 0;
         String out_file = null;
         int another_counter = 0;
@@ -1151,7 +1160,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     for (int h = 1; h != bucketarray.length; h++) {
                         if (b[h] != null) {
                             if (b[h].isSelected()) {
-                                String objectlist = bucket.listBucketContents(cred.getAccess_key(), cred.getSecret_key(), b[h].getText(), cred.getEndpoint());
+                                BucketClass foo = new BucketClass();
+
+                                String objectlist = foo.listBucketContents(cred.getAccess_key(), cred.getSecret_key(), b[h].getText(), cred.getEndpoint());
                                 objectarray = objectlist.split("@");
                                 previous_objectarray_length = objectarray.length;
                             }
@@ -1374,7 +1385,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         try {
 
             temp_file = (Home + File.separator + "object.tmp");
-         
+
             JLabel image[] = new JLabel[objectarray.length];
             ImageIcon[] photo = new ImageIcon[objectarray.length];
             JFrame image_frame = new JFrame();
