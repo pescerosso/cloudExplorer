@@ -54,7 +54,6 @@ public class Get implements Runnable {
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
         message = ("Downloaded object: " + what);
-        System.out.print("\n1");
 
         try {
 
