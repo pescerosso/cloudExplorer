@@ -53,14 +53,13 @@ public class Get implements Runnable {
         File file = new File(what);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
-        message = ("Downloaded object: " + what);
-
+       
         try {
 
             S3Object s3object = s3Client.getObject(new GetObjectRequest(bucket, what));
             InputStream objectData = s3object.getObjectContent();
             this.writeFile(objectData, destination);
-            mainFrame.jTextArea1.setText("GET:" + what);
+            mainFrame.jTextArea1.setText("Downloaded: " + what);
             mainFrame.jTextArea1.setCaretPosition(0);
 
         } catch (Exception get) {
