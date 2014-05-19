@@ -20,8 +20,9 @@ public class SyncToS3 implements Runnable {
     Thread syncToS3;
     Put put;
 
-    SyncToS3(File location, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String[] objectarray) {
-
+    SyncToS3(File Alocation, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String[] Aobjectarray) {
+        objectarray = Aobjectarray;
+        location = Alocation;
         access_key = Aaccess_key;
         secret_key = Asecret_key;
         bucket = Abucket;
@@ -66,52 +67,48 @@ public class SyncToS3 implements Runnable {
         }
         System.out.print("\nDebug " + out_file);
         return out_file;
-    }
 
-    void Sync(File dir) {
-        try {
-            File[] files = dir.listFiles();
-            System.out.print("\nDebug " + dir.getAbsolutePath().toString());
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    Sync(file);
-                } else {
-                    String simple_what = convertObject(file.getAbsolutePath(), "upload");
-
-                    int found = 0;
-                    for (int y = 1; y != objectarray.length; y++) {
-                        if (objectarray[y].contains(simple_what)) {
-                            mainFrame.jTextArea1.append("\nObject already exists on S3: " + simple_what);
-                            found++;
-                        }
-                    }
-
-                    if (found == 0) {
-                        put = new Put(file.getAbsolutePath(), access_key, secret_key, bucket, endpoint, simple_what);
-                        put.startc(file.getAbsolutePath(), access_key, secret_key, bucket, endpoint, simple_what);
-                        found = 0;
-                    }
-                }
-            }
-        } catch (Exception Sync) {
-        }
     }
 
     public void run() {
-      
-            Sync(location);
+        File[] files = location.listFiles();
+        for (File file : files) {
+            System.out.print("\nDebug: " + files.length);
+            if (file.isDirectory()) {
 
-      
+            } else {
+                String simple_what = convertObject(file.getAbsolutePath(), "upload");
+
+                int found = 0;
+
+                for (int y = 1; y != objectarray.length; y++) {
+                    if (objectarray[y].contains(simple_what)) {
+                        mainFrame.jTextArea1.append("\nObject already exists on S3: " + simple_what);
+                        found++;
+                    }
+                }
+
+                if (found == 0) {
+                    if (Put.isRunning) {
+                        put = new Put(file.getAbsolutePath(), access_key, secret_key, bucket, endpoint, simple_what);
+                        put.startc(file.getAbsolutePath(), access_key, secret_key, bucket, endpoint, simple_what);
+                        System.out.print("\nIs Running");
+                    }
+                    found = 0;
+                }
+            }
+        }
+        //put.stop();
     }
 
-    void startc(File location, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String[] Aobjectarray) {
+    void startc(File location, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String[] Aobjectarray
+    ) {
         (new Thread(new SyncToS3(location, Aaccess_key, Asecret_key, Abucket, Aendpoint, Aobjectarray))).start();
     }
 
     void stop() {
-        Get.isRunning = false;
         syncToS3.isInterrupted();
-        mainFrame.jTextArea1.setText("\nAborted Download\n");
+        mainFrame.jTextArea1.setText("\nUpload complete or aborted.\n");
     }
 
 }

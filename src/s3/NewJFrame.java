@@ -977,7 +977,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if (active_bucket > 0) {
-            jTextArea1.append("\nLoading Objects........");
             calibrateTextArea();
             reloadObjects();
 
@@ -1504,15 +1503,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 if (jFileChooser2.getSelectedFile() == null) {
                     jTextArea1.append("\nError: please select a destination directory.");
                 } else {
-
-                    //Sync(jFileChooser2.getSelectedFile());
                     syncToS3 = new SyncToS3(jFileChooser2.getSelectedFile(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), objectarray);
-                    syncToS3.run();
-                  //  syncToS3.startc(jFileChooser2.getSelectedFile(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), objectarray);
-                    // objectarray = null;
+                    syncToS3.startc(jFileChooser2.getSelectedFile(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), objectarray);
+                    objectarray = null;
                 }
-               // jTextArea1.append("\nSyncs is complete.");
-                //   calibrateTextArea();
             } else {
                 jTextArea1.append("\nError, no bucket has been selected.");
                 calibrateTextArea();
@@ -2041,9 +2035,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        syncToS3.stop();
-        syncFromS3.stop();
-        isSyncingToS3 = false;
+        try {
+            syncToS3.stop();
+            syncFromS3.stop();
+            Put.isRunning = false;
+            isSyncingToS3 = false;
+        } catch (Exception stop) {
+        }
     }//GEN-LAST:event_jButton16ActionPerformed
 
     void var() {
