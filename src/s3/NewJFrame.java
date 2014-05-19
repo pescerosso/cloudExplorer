@@ -31,8 +31,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     BucketClass bucket = new BucketClass();
     Delete delete = new Delete();
     Acl objectacl = new Acl();
-    public Put put = new Put();
-    Get get = new Get();
     String Home = System.getProperty("user.home");
     String OS = System.getProperty("os.name");
     String[] bucketarray = null;
@@ -57,6 +55,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     int account_counter = 0;
     int content_counter = 0;
     int previous_objectarray_length = 0;
+    Put put;
+    Get get;
 
     public NewJFrame() {
         initComponents();
@@ -112,15 +112,18 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jFileChooser1 = new javax.swing.JFileChooser();
         jButton5 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
+        jButton15 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jFileChooser2 = new javax.swing.JFileChooser();
         jToggleButton3 = new javax.swing.JToggleButton();
         jToggleButton4 = new javax.swing.JToggleButton();
+        jButton16 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
@@ -425,7 +428,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 773, Short.MAX_VALUE)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel11Layout.setVerticalGroup(
@@ -511,6 +514,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jLabel1.setText("Bucket");
 
+        jButton1.setBackground(java.awt.SystemColor.text);
+        jButton1.setText("Abort download");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -537,10 +548,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addComponent(jButton13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton14)
-                        .addGap(247, 247, 247))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1))
+                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -552,7 +563,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -593,6 +605,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
 
+        jButton15.setBackground(java.awt.SystemColor.text);
+        jButton15.setText("Abort upload");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -604,19 +624,21 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton15)
+                .addContainerGap(121, Short.MAX_VALUE))
             .addComponent(jFileChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton5)
+                    .addComponent(jButton15))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Upload", jPanel2);
@@ -648,11 +670,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
 
+        jButton16.setBackground(java.awt.SystemColor.text);
+        jButton16.setText("Abort");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -666,7 +693,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton3)
-                    .addComponent(jToggleButton4))
+                    .addComponent(jToggleButton4)
+                    .addComponent(jButton16))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -727,7 +755,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 1.7 (Development)\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release? \n\n1.Code improvments.\n\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
+        jTextArea4.setText("Version: 1.7 (Development)\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release? \n\n1. Code improvments.\n2. Support for aborting Uploads and Downloads.\n3. PUT and GET operations are done in a seperate thread.\n4. Suport for aboring Sync operations ( In Development )\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
@@ -882,18 +910,18 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-  
+
     String convertObject(String what, String operation) {
 
-           if (what.contains("/")) {
-                what = what.replace("/", File.separator);
-            }
-       
-            if (what.contains("\\")) {
-                what = what.replace("\\", File.separator);
-            }
-       
-            int count = 0;
+        if (what.contains("/")) {
+            what = what.replace("/", File.separator);
+        }
+
+        if (what.contains("\\")) {
+            what = what.replace("\\", File.separator);
+        }
+
+        int count = 0;
         int slash_counter = 0;
         String out_file = null;
         int another_counter = 0;
@@ -1400,7 +1428,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     image_panel.setLayout(new BoxLayout(image_panel, BoxLayout.PAGE_AXIS));
                     String new_object_name = convertObject(d[i].getText(), "download");
                     dialog("Please wait, the image is loading.");
-                    jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file + i));
+                    get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file + i);
+                    get.startc(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file + i);
                     photo[i] = new ImageIcon(temp_file + i);
                     image[i] = new JLabel(photo[i]);
                     image_panel.add(image[i]);
@@ -1431,7 +1460,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             temp_file = (Home + File.separator + "object.tmp");
             editorSync(jTextField6.getText());
             jTextArea1.append("\n" + delete.deleteFile(jTextField6.getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint()));
-            jTextArea1.append("\n" + put.put(temp_file, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField6.getText()));
+            put = new Put(temp_file, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField6.getText());
+            put.startc(temp_file, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField6.getText());
             jTextArea1.append("\nSaved Object\n");
             objectarray = null;
             //reloadBuckets();
@@ -1461,7 +1491,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     }
 
                     if (found == 0) {
-                        jTextArea1.append("\n" + put.put(file.getAbsolutePath(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), simple_what));
+                        put = new Put(file.getAbsolutePath(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), simple_what);
+                        put.startc(file.getAbsolutePath(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), simple_what);
                         found = 0;
                     }
                 }
@@ -1631,20 +1662,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
         if (active_bucket > 0) {
-            jTextArea1.append("\nPlease wait for the upload operation to complete.");
-            this.calibrateTextArea();
-
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    File file = jFileChooser1.getSelectedFile();
-                    String upload = (file.getAbsolutePath());
-                    String new_object_name = convertObject(file.getAbsolutePath().toString(), "upload");
-                    jTextField7.setText(jTextField7.getText().replace("null", ""));
-                    jTextArea1.append("\n" + put.put(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name) + "\n");
-                    objectarray = null;
-                    calibrateTextArea();
-                }
-            });
+            jTextArea1.setText("\n\nPlease wait for the upload operation to complete.");
+            File file = jFileChooser1.getSelectedFile();
+            String upload = (file.getAbsolutePath());
+            String new_object_name = convertObject(file.getAbsolutePath().toString(), "upload");
+            jTextField7.setText(jTextField7.getText().replace("null", ""));
+            put = new Put(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name);
+            put.startc(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name);
+            objectarray = null;
         } else {
             jTextArea1.append("\nError: No bucket selected.");
         }
@@ -1677,7 +1702,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                         if (foo[i].exists()) {
                                             jTextArea1.append("\n" + new_object_name + " already exists on this machine.");
                                         } else {
-                                            jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + File.separator + new_object_name) + "\n");
+                                            get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + File.separator + new_object_name);
+                                            get.startc(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + File.separator + new_object_name);
                                         }
                                         jTextArea1.setText("\nSync is complete");
                                         calibrateTextArea();
@@ -1746,7 +1772,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         musicPanel.validate();
                         musicFrame.pack();
                         dialog("Please wait, the song is loading.");
-                        jTextArea1.append("\n" + get.get(d[h].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file));
+                        get = new Get(d[h].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file);
+                        get.startc(d[h].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file);
                         mp3.play();
                         dialog.setVisible(false);
                         musicFrame.setVisible(true);
@@ -1886,7 +1913,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                         if (d[i].isSelected()) {
                                             download.setVisible(false);
                                             String new_object_name = convertObject(d[i].getText(), "download");
-                                            jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name) + "\n");
+                                            get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name);
+                                            get.startc(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name);
                                             d[i].setSelected(false);
                                         }
                                     }
@@ -1988,8 +2016,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             for (int i = 1; i != previous_objectarray_length; i++) {
                 if (d[i].isSelected()) {
                     String new_object_name = convertObject(d[i].getText(), "download");
-                    jTextArea1.append("\n" + get.get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file));
-
+                    get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file);
+                    get.startc(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file);
                     try {
                         FileReader frr = new FileReader(temp_file);
                         BufferedReader bfrr = new BufferedReader(frr);
@@ -2034,6 +2062,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jButton14ActionPerformed
 
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // TODO add your handling code here:
+        put.stop();
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        get.stop();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     void var() {
         cred.setAccess_key(jTextField1.getText());
         cred.setSecret_key(jTextField2.getText());
@@ -2051,11 +2088,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

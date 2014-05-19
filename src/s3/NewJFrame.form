@@ -677,13 +677,12 @@
                                       <Component id="jButton13" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="jButton14" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="247" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jPanel11" max="32767" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace pref="86" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -698,6 +697,7 @@
                                   <Component id="jButton12" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
                                   <Component id="jButton7" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton1" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -721,7 +721,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="773" max="32767" attributes="0"/>
                                   <Component id="jScrollPane5" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -863,6 +863,17 @@
                         <Property name="text" type="java.lang.String" value="Bucket"/>
                       </Properties>
                     </Component>
+                    <Component class="javax.swing.JButton" name="jButton1">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" id="Text" palette="2" red="ff" type="palette"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Abort download"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>
@@ -891,7 +902,9 @@
                           <Component id="jTextField7" min="-2" pref="229" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton5" min="-2" pref="115" max="-2" attributes="0"/>
-                          <EmptySpace min="278" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jButton15" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="121" max="32767" attributes="0"/>
                       </Group>
                       <Component id="jFileChooser1" alignment="1" max="32767" attributes="0"/>
                   </Group>
@@ -900,13 +913,13 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jFileChooser1" min="-2" pref="282" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jTextField7" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton15" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="36" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -953,6 +966,17 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
+                <Component class="javax.swing.JButton" name="jButton15">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" id="Text" palette="2" red="ff" type="palette"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Abort upload"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton15ActionPerformed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel4">
@@ -973,6 +997,8 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
+                          <Component id="jButton16" min="-2" pref="122" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jToggleButton4" min="-2" pref="126" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jToggleButton3" min="-2" pref="126" max="-2" attributes="0"/>
@@ -989,6 +1015,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jToggleButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jToggleButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton16" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -1032,6 +1059,14 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton4ActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jButton16">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" id="Text" palette="2" red="ff" type="palette"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Abort"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -1157,7 +1192,7 @@
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="Version: 1.7 (Development)&#xa;&#xa;Please submit bugs via github: https://github.com/rusher81572/s3 &#xa;&#xa;What is new in this release? &#xa;&#xa;1.Code improvments.&#xa;&#xa;&#xa;* Special note for Background Sync users *&#xa;&#xa;If you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config&#xa;&#xa;"/>
+                        <Property name="text" type="java.lang.String" value="Version: 1.7 (Development)&#xa;&#xa;Please submit bugs via github: https://github.com/rusher81572/s3 &#xa;&#xa;What is new in this release? &#xa;&#xa;1. Code improvments.&#xa;2. Support for aborting Uploads and Downloads.&#xa;3. PUT and GET operations are done in a seperate thread.&#xa;4. Suport for aboring Sync operations ( In Development )&#xa;&#xa;* Special note for Background Sync users *&#xa;&#xa;If you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config&#xa;&#xa;"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="null"/>
                         </Property>

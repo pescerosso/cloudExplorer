@@ -18,7 +18,8 @@ public class Daemon {
     BucketClass bucket = new BucketClass();
     Delete delete = new Delete();
     Acl objectacl = new Acl();
-    Get get = new Get();
+    Get get;
+    Put put;
     String[] bucketarray = null;
     String[] locationarray = null;
     String[] objectarray = null;
@@ -27,8 +28,7 @@ public class Daemon {
     String[] saved_directory_to_sync = null;
     File dirToSync = new File("");
     boolean gui = false;
-
-    public Put put = new Put();
+ 
 
     void messageParser(String message) {
         if (gui) {
@@ -205,7 +205,8 @@ public class Daemon {
                     }
 
                     if (found == 0) {
-                        put.put(file.getAbsolutePath(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), simple_what);
+                        put = new Put(file.getAbsolutePath(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), simple_what);
+                        put.startc(file.getAbsolutePath(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), simple_what);
                         found = 0;
                     }
                 }
@@ -224,7 +225,8 @@ public class Daemon {
                 if (foo[i].exists()) {
                     messageParser("\n" + new_object_name + " already exists on this machine.");
                 } else {
-                    get.get(objectarray[i], cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + File.separator + new_object_name);
+                    get = new Get(objectarray[i], cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + File.separator + new_object_name);
+                    get.startc(objectarray[i], cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + File.separator + new_object_name);
                 }
             }
         } catch (Exception SyncLocal) {
