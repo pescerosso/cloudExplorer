@@ -36,6 +36,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String OS = System.getProperty("os.name");
     String[] bucketarray = null;
     String[] objectarray = null;
+    String[] syncarray = null;
     String[] account_array = new String[20];
     String[] simple_account_array = new String[account_array.length];
     int active_account = 0;
@@ -60,6 +61,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     Get get;
     SyncFromS3 syncFromS3;
     SyncToS3 syncToS3;
+    boolean isSyncingToS3 = true;
 
     public NewJFrame() {
         initComponents();
@@ -1480,36 +1482,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         calibrateTextArea();
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    void Sync(File dir) {
-//    while (isSyncingFromS)
-        try {
-            File[] files = dir.listFiles();
-
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    Sync(file);
-                } else {
-                    String simple_what = convertObject(file.getAbsolutePath(), "upload");
-
-                    int found = 0;
-                    for (int y = 1; y != objectarray.length; y++) {
-                        if (objectarray[y].contains(simple_what)) {
-                            jTextArea1.append("\nObject already exists on S3: " + simple_what);
-                            found++;
-                        }
-                    }
-
-                    if (found == 0) {
-                        put = new Put(file.getAbsolutePath(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), simple_what);
-                        put.startc(file.getAbsolutePath(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), simple_what);
-                        found = 0;
-                    }
-                }
-            }
-        } catch (Exception Sync) {
-        }
-    }
-
     void dialog(String what) {
         dialog.setTitle(what);
         dialog_panel.setLayout(new BoxLayout(dialog_panel, BoxLayout.PAGE_AXIS));
@@ -1533,11 +1505,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jTextArea1.append("\nError: please select a destination directory.");
                 } else {
 
-                    Sync(jFileChooser2.getSelectedFile());
-                    objectarray = null;
+                    //Sync(jFileChooser2.getSelectedFile());
+                    syncToS3 = new SyncToS3(jFileChooser2.getSelectedFile(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), objectarray);
+                    syncToS3.run();
+                  //  syncToS3.startc(jFileChooser2.getSelectedFile(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), objectarray);
+                    // objectarray = null;
                 }
-                jTextArea1.append("\nSyncs is complete.");
-                calibrateTextArea();
+               // jTextArea1.append("\nSyncs is complete.");
+                //   calibrateTextArea();
             } else {
                 jTextArea1.append("\nError, no bucket has been selected.");
                 calibrateTextArea();
@@ -2067,6 +2042,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         syncToS3.stop();
+        syncFromS3.stop();
+        isSyncingToS3 = false;
     }//GEN-LAST:event_jButton16ActionPerformed
 
     void var() {
