@@ -2,7 +2,7 @@ package s3;
 
 import java.io.File;
 
-public class SyncToS3 implements Runnable {
+public class SyncFromS3 implements Runnable {
 
     NewJFrame mainFrame;
     public static volatile boolean isRunning = true;
@@ -14,9 +14,9 @@ public class SyncToS3 implements Runnable {
     String secret_key = null;
     String destination = null;
     Get get;
-    Thread syncToS3;
+    Thread syncFromS3;
 
-    SyncToS3(String[] Aobjectarray, String[] AObjectsConverted, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adestination) {
+    SyncFromS3(String[] Aobjectarray, String[] AObjectsConverted, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adestination) {
         objectarray = Aobjectarray;
         ObjectsConverted = AObjectsConverted;
         access_key = Aaccess_key;
@@ -50,13 +50,13 @@ public class SyncToS3 implements Runnable {
     }
 
     void startc(String[] Aobjectarray, String[] AObjectsConverted, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adestination) {
-        syncToS3 = new Thread(new SyncToS3(Aobjectarray, AObjectsConverted, Aaccess_key, Asecret_key, Abucket, Aendpoint, Adestination));
-        syncToS3.start();
+        syncFromS3 = new Thread(new SyncFromS3(Aobjectarray, AObjectsConverted, Aaccess_key, Asecret_key, Abucket, Aendpoint, Adestination));
+        syncFromS3.start();
     }
 
     void stop() {
         Get.isRunning = false;
-        syncToS3.isInterrupted();
+        syncFromS3.isInterrupted();
         mainFrame.jTextArea1.setText("\nAborted Download\n");
     }
 }

@@ -58,6 +58,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     int previous_objectarray_length = 0;
     Put put;
     Get get;
+    SyncFromS3 syncFromS3;
     SyncToS3 syncToS3;
 
     public NewJFrame() {
@@ -1480,6 +1481,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     void Sync(File dir) {
+//    while (isSyncingFromS)
         try {
             File[] files = dir.listFiles();
 
@@ -1526,23 +1528,21 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jTextArea1.setText("\nPlease wait for Sync to complete.");
             calibrateTextArea();
 
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    if (b[active_bucket].isSelected()) {
-                        if (jFileChooser2.getSelectedFile() == null) {
-                            jTextArea1.append("\nError: please select a destination directory.");
-                        } else {
-                            Sync(jFileChooser2.getSelectedFile());
-                            objectarray = null;
-                        }
-                        jTextArea1.append("\nSyncs is complete.");
-                        calibrateTextArea();
-                    } else {
-                        jTextArea1.append("\nError, no bucket has been selected.");
-                        calibrateTextArea();
-                    }
+            if (b[active_bucket].isSelected()) {
+                if (jFileChooser2.getSelectedFile() == null) {
+                    jTextArea1.append("\nError: please select a destination directory.");
+                } else {
+
+                    Sync(jFileChooser2.getSelectedFile());
+                    objectarray = null;
                 }
-            });
+                jTextArea1.append("\nSyncs is complete.");
+                calibrateTextArea();
+            } else {
+                jTextArea1.append("\nError, no bucket has been selected.");
+                calibrateTextArea();
+            }
+
         } else {
             jTextArea1.append("\nError: No bucket selected.");
         }
@@ -1710,8 +1710,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             }
                         }
 
-                        syncToS3 = new SyncToS3(objectarray, ObjectsConverted, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination);
-                        syncToS3.startc(objectarray, ObjectsConverted, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination);
+                        syncFromS3 = new SyncFromS3(objectarray, ObjectsConverted, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination);
+                        syncFromS3.startc(objectarray, ObjectsConverted, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination);
                     }
 
                 } else {
