@@ -58,7 +58,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     int previous_objectarray_length = 0;
     Put put;
     Get get;
-    
+    Sync sync;
+
     public NewJFrame() {
         initComponents();
     }
@@ -673,6 +674,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton16.setBackground(java.awt.SystemColor.text);
         jButton16.setText("Abort");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -1687,39 +1693,31 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (objectarray.length > 1) {
                 jTextArea1.setText("\nPlease wait for SYNC to complete");
                 calibrateTextArea();
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        if (b[active_bucket].isSelected()) {
-                            if (jFileChooser2.getSelectedFile() == null) {
-                                jTextArea1.append("\nError: please select a destination directroy.");
-                            } else {
 
-                                try {
-                                    File[] foo = new File[100000000];
-                                    for (int i = 1; i != objectarray.length; i++) {
-                                        String Destination = jFileChooser2.getSelectedFile().toString();
-                                        String new_object_name = convertObject(d[i].getText(), "download");
-                                        foo[i] = new File(Destination + File.separator + new_object_name);
-                                        if (foo[i].exists()) {
-                                            jTextArea1.append("\n" + new_object_name + " already exists on this machine.");
-                                        } else {
-                                            get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + File.separator + new_object_name);
-                                            get.startc(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + File.separator + new_object_name);
-                                        }
-                                        jTextArea1.setText("\nSync is complete");
-                                        calibrateTextArea();
-                                    }
-                                    dialog.setVisible(false);
-                                } catch (Exception SyncLocal) {
-                                    jTextArea1.append("\n" + SyncLocal.getMessage());
-                                }
+                if (b[active_bucket].isSelected()) {
+
+                    if (jFileChooser2.getSelectedFile() == null) {
+                        jTextArea1.append("\nError: please select a destination directroy.");
+
+                    } else {
+
+                        String Destination = jFileChooser2.getSelectedFile().toString();
+                        String[] ObjectsConverted = new String[objectarray.length];
+
+                        for (int i = 1; i != objectarray.length; i++) {
+                            if (objectarray[i] != null) {
+                                ObjectsConverted[i] = convertObject(objectarray[i], "download");
                             }
-                        } else {
-                            jTextArea1.append("\nError: No bucket selected.");
                         }
+
+                        sync = new Sync(objectarray, ObjectsConverted, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination);
+                        sync.startc(objectarray, ObjectsConverted, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination);
                     }
 
-                });
+                } else {
+                    jTextArea1.append("\nError: No bucket selected.");
+                }
+
             } else {
                 jTextArea1.append("\nError: Bucket has no objects to sync");
                 calibrateTextArea();
@@ -1913,7 +1911,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                 if (d[i].isSelected()) {
                                     download.setVisible(false);
                                     String new_object_name = convertObject(d[i].getText(), "download");
-                                     Get.isRunning = true;
+                                    Get.isRunning = true;
                                     get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name);
                                     get.startc(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name);
                                     d[i].setSelected(false);
@@ -1922,7 +1920,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         }
 
                     } else {
-                        download.setVisible(false);
+                      
                         jTextArea1.append("\nError: destination not specified.");
                     }
 
@@ -2064,8 +2062,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      get.stop();
+        get.stop();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        sync.stop();
+    }//GEN-LAST:event_jButton16ActionPerformed
 
     void var() {
         cred.setAccess_key(jTextField1.getText());

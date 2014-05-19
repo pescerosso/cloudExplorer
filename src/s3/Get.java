@@ -53,27 +53,25 @@ public class Get implements Runnable {
         File file = new File(what);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
-       
+
         try {
 
             S3Object s3object = s3Client.getObject(new GetObjectRequest(bucket, what));
             InputStream objectData = s3object.getObjectContent();
             this.writeFile(objectData, destination);
-            mainFrame.jTextArea1.setText("Downloaded: " + what);
-            mainFrame.jTextArea1.setCaretPosition(0);
+            mainFrame.jTextArea1.append("\nDownloaded: " + what + "\n");
+            mainFrame.calibrateTextArea();
 
         } catch (Exception get) {
-            mainFrame.jTextArea1.append("\n\nAn error has occurred in GET.");
-            mainFrame.jTextArea1.append("\n\nError Message:    " + get.getMessage());
-            message = message + "\n" + get.getMessage();
+            //mainFrame.jTextArea1.append("\n\nAn error has occurred in GET.");
+            //mainFrame.jTextArea1.append("\n\nError Message: " + get.getMessage());
+            //message = message + "\n" + get.getMessage();
         }
 
-        message.replace("null", "");
     }
 
     void startc(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adestination) {
-        get = new Thread(new Get(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint, Adestination));
-        get.start();
+        (new Thread(new Get(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint, Adestination))).start();
     }
 
     void stop() {
