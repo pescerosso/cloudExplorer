@@ -24,6 +24,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import static org.apache.http.entity.ContentType.get;
 
 public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
@@ -57,7 +58,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     int previous_objectarray_length = 0;
     Put put;
     Get get;
-
+    
     public NewJFrame() {
         initComponents();
     }
@@ -1904,27 +1905,20 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jTextArea1.append("\nPlease wait for the download operation to complete.");
                     calibrateTextArea();
                     if (downloadChooser.getSelectedFile().getAbsolutePath() != null) {
-                        java.awt.EventQueue.invokeLater(new Runnable() {
-                            public void run() {
-                                File File_Destination = new File(downloadChooser.getSelectedFile().getAbsolutePath());
-                                for (int i = 1; i != previous_objectarray_length; i++) {
-                                    if (d[i] != null) {
 
-                                        if (d[i].isSelected()) {
-                                            download.setVisible(false);
-                                            String new_object_name = convertObject(d[i].getText(), "download");
-                                            get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name);
-                                            get.startc(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name);
-                                            d[i].setSelected(false);
-                                        }
-                                    }
+                        File File_Destination = new File(downloadChooser.getSelectedFile().getAbsolutePath());
+                        for (int i = 1; i != previous_objectarray_length; i++) {
+                            if (d[i] != null) {
+
+                                if (d[i].isSelected()) {
+                                    download.setVisible(false);
+                                    String new_object_name = convertObject(d[i].getText(), "download");
+                                    get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name);
+                                    get.startc(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name);
+                                    d[i].setSelected(false);
                                 }
-                                jTextArea1.append("\nDownload Complete");
-                                calibrateTextArea();
-                                reloadObjects();
-                                jButton6.doClick();
                             }
-                        });
+                        }
 
                     } else {
                         download.setVisible(false);
@@ -2068,7 +2062,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        get.stop();
+      get.stop();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     void var() {
