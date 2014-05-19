@@ -58,7 +58,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     int previous_objectarray_length = 0;
     Put put;
     Get get;
-    Sync sync;
+    SyncToS3 syncToS3;
 
     public NewJFrame() {
         initComponents();
@@ -1710,8 +1710,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             }
                         }
 
-                        sync = new Sync(objectarray, ObjectsConverted, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination);
-                        sync.startc(objectarray, ObjectsConverted, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination);
+                        syncToS3 = new SyncToS3(objectarray, ObjectsConverted, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination);
+                        syncToS3.startc(objectarray, ObjectsConverted, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination);
                     }
 
                 } else {
@@ -1920,7 +1920,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         }
 
                     } else {
-                      
+
                         jTextArea1.append("\nError: destination not specified.");
                     }
 
@@ -2066,7 +2066,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        sync.stop();
+        syncToS3.stop();
     }//GEN-LAST:event_jButton16ActionPerformed
 
     void var() {
