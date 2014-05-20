@@ -763,7 +763,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 1.7\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release? \n\n1. Code improvments.\n2. Support for aborting Uploads and Downloads.\n3. PUT and GET operations are done in a seperate thread.\n4. Support for aborting Sync operations\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
+        jTextArea4.setText("Version: 1.7\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release? \n\n1. Code improvements.\n2. Support for aborting Uploads and Downloads.\n3. PUT and GET operations are done in a seperate thread.\n4. Support for aborting Sync operations\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
