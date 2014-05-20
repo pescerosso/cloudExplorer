@@ -36,9 +36,13 @@ public class SyncFromS3 implements Runnable {
                     if (foo[i].exists()) {
                         mainFrame.jTextArea1.append("\n" + ObjectsConverted[i] + " already exists on this machine.");
                     } else {
-                       // Get.isRunning = true;
-                        get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, destination + File.separator + ObjectsConverted[i]);
-                        get.startc(objectarray[i], access_key, secret_key, bucket, endpoint, destination + File.separator + ObjectsConverted[i]);
+                        // Get.isRunning = true;
+                        if (isRunning) {
+                            get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, destination + File.separator + ObjectsConverted[i]);
+                            get.run();
+                        } else {
+                            System.out.print("\nNot RUnning");
+                        }
                     }
 
                 }
@@ -55,9 +59,10 @@ public class SyncFromS3 implements Runnable {
     }
 
     void stop() {
+        SyncFromS3.isRunning = false;
         syncFromS3.stop();
-        get.stop();
-        Get.isRunning = false;
+         Get.isRunning = false;
+       
         syncFromS3.isInterrupted();
         mainFrame.jTextArea1.setText("\nAborted Download\n");
     }

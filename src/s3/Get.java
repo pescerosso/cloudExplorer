@@ -48,6 +48,7 @@ public class Get implements Runnable {
     }
 
     public void run() {
+        if(isRunning){
         String message = null;
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
         File file = new File(what);
@@ -69,13 +70,14 @@ public class Get implements Runnable {
         }
 
     }
-
+    }
     void startc(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adestination) {
         get = new Thread(new Get(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint, Adestination));
         get.start();
     }
 
     void stop() {
+        isRunning = false;
         get.stop();
         mainFrame.jTextArea1.setText("\nDownload compelted or aborted.\n");
     }

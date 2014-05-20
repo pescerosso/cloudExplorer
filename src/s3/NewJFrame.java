@@ -2036,14 +2036,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        try {
-            syncToS3.stop();
-            syncFromS3.stop();
-            Get.isRunning = false;
-            Put.isRunning = false;
-            isSyncingToS3 = false;
-        } catch (Exception stop) {
-        }
+      
+          syncToS3.stop();
+          Get.isRunning = false;
+          Put.isRunning = false;
+         isSyncingToS3 = false;
+       
     }//GEN-LAST:event_jButton16ActionPerformed
 
     void var() {
