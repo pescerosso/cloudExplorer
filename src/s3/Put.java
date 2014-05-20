@@ -8,8 +8,6 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.activation.MimetypesFileTypeMap;
 
 public class Put implements Runnable {

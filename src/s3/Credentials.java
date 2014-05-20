@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 
 public class Credentials {

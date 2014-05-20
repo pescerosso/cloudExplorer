@@ -1,8 +1,6 @@
 package s3;
 
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SyncToS3 implements Runnable {
 
