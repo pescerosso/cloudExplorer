@@ -1195,7 +1195,7 @@
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="Version: 1.7&#xa;&#xa;Please submit bugs via github: https://github.com/rusher81572/s3 &#xa;&#xa;What is new in this release? &#xa;&#xa;1. Code improvements.&#xa;2. Support for aborting Uploads and Downloads.&#xa;3. PUT and GET operations are done in a seperate thread.&#xa;4. Support for aborting Sync operations&#xa;&#xa;* Special note for Background Sync users *&#xa;&#xa;If you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config&#xa;&#xa;"/>
+                        <Property name="text" type="java.lang.String" value="Version: 1.7&#xa;&#xa;Please submit bugs via github: https://github.com/rusher81572/s3 &#xa;&#xa;What is new in this release? &#xa;&#xa;1. Code improvements.&#xa;2. Support for aborting Uploads and Downloads.&#xa;3. PUT and GET operations are done in a separate thread.&#xa;4. Support for aborting Sync operations&#xa;&#xa;* Special note for Background Sync users *&#xa;&#xa;If you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config&#xa;"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="null"/>
                         </Property>
