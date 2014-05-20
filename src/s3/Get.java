@@ -71,12 +71,13 @@ public class Get implements Runnable {
     }
 
     void startc(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adestination) {
-        (new Thread(new Get(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint, Adestination))).start();
+        get = new Thread(new Get(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint, Adestination));
+        get.start();
     }
 
     void stop() {
-        Get.isRunning = false;
-        mainFrame.jTextArea1.setText("\nAborted Download\n");
+        get.stop();
+        mainFrame.jTextArea1.setText("\nDownload compelted or aborted.\n");
     }
 
 }

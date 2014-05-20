@@ -35,7 +35,6 @@ public class Put implements Runnable {
     }
 
     public void run() {
-
         File file = new File(what);
         MimetypesFileTypeMap mimeTypesMap = new MimetypesFileTypeMap();
         String mimeType = mimeTypesMap.getContentType(file);
@@ -60,27 +59,22 @@ public class Put implements Runnable {
             message = ("\nUploaded object: " + what);
             mainFrame.jTextArea1.append(message);
             mainFrame.objectarray = null;
-            mainFrame.objectarray = null;
-            this.isRunning = false;
+
         } catch (Exception put) {
-            // mainFrame.jTextArea1.append("\n\nAn error has occurred with PUT: " + put.getMessage());
+                // mainFrame.jTextArea1.append("\n\nAn error has occurred with PUT: " + put.getMessage());
             //message = message + put.getMessage();
         }
-        message.replace(
-                "null", "");
     }
 
     void startc(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String AObjectKey) {
 
-        Thread put = new Thread(new Put(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint, AObjectKey));
+        put = new Thread(new Put(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint, AObjectKey));
         put.start();
-        //(new Thread(new Put(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint, AObjectKey))).start();
     }
 
     void stop() {
-        put.interrupt();
-        Put.isRunning = false;
-        mainFrame.jTextArea1.append("\nDEBUG PUT STOPPED");
+        put.stop();
+        mainFrame.jTextArea1.append("\nUpload completed or aborted");
     }
 
 }

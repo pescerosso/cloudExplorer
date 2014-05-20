@@ -65,15 +65,12 @@ public class SyncToS3 implements Runnable {
                 }
             }
         }
-        System.out.print("\nDebug " + out_file);
         return out_file;
-
     }
 
     public void run() {
         File[] files = location.listFiles();
         for (File file : files) {
-            System.out.print("\nDebug: " + files.length);
             if (file.isDirectory()) {
 
             } else {
@@ -89,16 +86,14 @@ public class SyncToS3 implements Runnable {
                 }
 
                 if (found == 0) {
-                    if (Put.isRunning) {
+                    if (this.isRunning) {
                         put = new Put(file.getAbsolutePath(), access_key, secret_key, bucket, endpoint, simple_what);
-                        put.startc(file.getAbsolutePath(), access_key, secret_key, bucket, endpoint, simple_what);
-                        System.out.print("\nIs Running");
+                        put.run();
+                        found = 0;
                     }
-                    found = 0;
                 }
             }
         }
-        //put.stop();
     }
 
     void startc(File location, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String[] Aobjectarray
@@ -107,7 +102,7 @@ public class SyncToS3 implements Runnable {
     }
 
     void stop() {
-        syncToS3.isInterrupted();
+        this.isRunning = false;
         mainFrame.jTextArea1.setText("\nUpload complete or aborted.\n");
     }
 
