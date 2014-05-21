@@ -763,7 +763,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 1.7\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release? \n\n1. Code improvements.\n2. Support for aborting Uploads and Downloads.\n3. PUT and GET operations are done in a separate thread.\n4. Support for aborting Sync operations\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n");
+        jTextArea4.setText("Version: 1.8 (Development)\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release? \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n* Special note for Background Sync users *\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n");
         jTextArea4.setBorder(null);
         jScrollPane6.setViewportView(jTextArea4);
 
@@ -1434,9 +1434,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 if (d[i].isSelected()) {
                     image_panel.setLayout(new BoxLayout(image_panel, BoxLayout.PAGE_AXIS));
                     String new_object_name = convertObject(d[i].getText(), "download");
-                    dialog("Please wait, the image is loading.");
+                    jTextArea1.setText("Please wait, the image is loading.");
                     get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file + i);
-                    get.startc(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file + i);
+                    get.run();
                     photo[i] = new ImageIcon(temp_file + i);
                     image[i] = new JLabel(photo[i]);
                     image_panel.add(image[i]);
@@ -1479,19 +1479,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         calibrateTextArea();
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    void dialog(String what) {
-        dialog.setTitle(what);
-        dialog_panel.setLayout(new BoxLayout(dialog_panel, BoxLayout.PAGE_AXIS));
-        dialog_panel.add(dialog_label);
-        dialog.add(dialog_panel);
-        dialog.setLocation(500, 500);
-        dialog_panel.revalidate();
-        dialog_panel.repaint();
-        dialog_panel.validate();
-        dialog.pack();
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
-    }
+
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         if (active_bucket > 0) {
             jTextArea1.setText("\nPlease wait for Sync to complete.");
@@ -1738,9 +1726,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         musicPanel.revalidate();
                         musicPanel.validate();
                         musicFrame.pack();
-                        dialog("Please wait, the song is loading.");
+                        jTextArea1.setText("Please wait, the song is loading.");
                         get = new Get(d[h].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file);
-                        get.startc(d[h].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file);
+                        get.run();
                         mp3.play();
                         dialog.setVisible(false);
                         musicFrame.setVisible(true);
@@ -2034,12 +2022,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-      
-          syncToS3.stop();
-          Get.isRunning = false;
-          Put.isRunning = false;
-         isSyncingToS3 = false;
-       
+
+        syncToS3.stop();
+        Get.isRunning = false;
+        Put.isRunning = false;
+        isSyncingToS3 = false;
+
     }//GEN-LAST:event_jButton16ActionPerformed
 
     void var() {
