@@ -1968,7 +1968,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     String new_object_name = convertObject(d[i].getText(), "download");
                     Get.isRunning = true;
                     get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file);
-                    get.startc(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file);
+                    get.run();
                     try {
                         FileReader frr = new FileReader(temp_file);
                         BufferedReader bfrr = new BufferedReader(frr);
