@@ -27,7 +27,6 @@ public class Daemon {
     String[] saved_directory_to_sync = null;
     File dirToSync = new File("");
     boolean gui = false;
- 
 
     void messageParser(String message) {
         if (gui) {
@@ -191,7 +190,6 @@ public class Daemon {
 
             for (File file : files) {
                 if (file.isDirectory()) {
-                    SyncToS3(file);
                 } else {
                     String simple_what = convertObject(file.getAbsolutePath(), "upload");
 
