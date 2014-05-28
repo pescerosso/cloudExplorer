@@ -13,8 +13,7 @@ public class Daemon {
     String temp_file = (Home + File.separator + "object.tmp");
     String sync_config_file = Home + File.separator + "s3config.sync";
     String s3_config_file = Home + File.separator + "s3.config";
-    Credentials cred = new Credentials();
-    BucketClass bucket = new BucketClass();
+    BucketClass Bucket = new BucketClass();
     Delete delete = new Delete();
     Acl objectacl = new Acl();
     Get get;
@@ -26,6 +25,11 @@ public class Daemon {
     String[] saved_s3_configs = null;
     String[] saved_directory_to_sync = null;
     File dirToSync = new File("");
+    String secret_key = null;
+    String access_key = null;
+    String endpoint = null;
+    String bucket = null;
+    String region = null;
     boolean gui = false;
 
     void messageParser(String message) {
@@ -59,11 +63,11 @@ public class Daemon {
                     }
                 }
             }
-            cred.setAccess_key(saved_s3_configs[0]);
-            cred.setSecret_key(saved_s3_configs[1]);
-            String endpoint = (saved_s3_configs[2] + ":" + saved_s3_configs[3]);
-            cred.setEndpoint(endpoint);
-            cred.setRegion(saved_s3_configs[4]);
+
+            access_key = saved_s3_configs[0];
+            secret_key = saved_s3_configs[1];
+            endpoint = saved_s3_configs[2] + ":" + saved_s3_configs[3];
+            region = saved_s3_configs[4];
         } catch (Exception loadS3Credentials) {
             messageParser("\n" + loadS3Credentials.getMessage());
         }
@@ -114,19 +118,18 @@ public class Daemon {
                 }
             }
 
-            saved_s3_configs = cred.loadConfig().toString().split(" ");
-
+            saved_s3_configs = loadConfig(this.s3_config_file).toString().split(" ");
             loadS3credentials();
 
             saved_directory_to_sync = loadConfig(sync_config_file).toString().split(" ");
-            cred.setBucket(saved_directory_to_sync[1]);
+            bucket = saved_directory_to_sync[1];
 
             dirToSync = new File(saved_directory_to_sync[0]);
 
             File syncDIR = new File(saved_directory_to_sync[0]);
             if (syncDIR.exists()) {
 
-                messageParser("\n\nDirectroy to sync: " + dirToSync.toString() + "  Bucket: " + cred.getBucket());
+                messageParser("\n\nDirectroy to sync: " + dirToSync.toString() + "  Bucket: " + bucket);
 
                 new Thread(new Runnable() {
                     public void run() {
@@ -202,8 +205,8 @@ public class Daemon {
                     }
 
                     if (found == 0) {
-                        put = new Put(file.getAbsolutePath(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), simple_what);
-                        put.startc(file.getAbsolutePath(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), simple_what);
+                        put = new Put(file.getAbsolutePath(), access_key, secret_key, bucket, endpoint, simple_what);
+                        put.startc(file.getAbsolutePath(), access_key, secret_key, bucket, endpoint, simple_what);
                         found = 0;
                     }
                 }
@@ -222,8 +225,8 @@ public class Daemon {
                 if (foo[i].exists()) {
                     messageParser("\n" + new_object_name + " already exists on this machine.");
                 } else {
-                    get = new Get(objectarray[i], cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + File.separator + new_object_name);
-                    get.startc(objectarray[i], cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination + File.separator + new_object_name);
+                    get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, Destination + File.separator + new_object_name);
+                    get.startc(objectarray[i], access_key, secret_key, bucket, endpoint, Destination + File.separator + new_object_name);
                 }
             }
         } catch (Exception SyncLocal) {
@@ -233,7 +236,7 @@ public class Daemon {
 
     void reloadObjects() {
         try {
-            String objectlist = bucket.listBucketContents(cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
+            String objectlist = Bucket.listBucketContents(access_key, secret_key, bucket, endpoint);
             objectarray = objectlist.split("@");
         } catch (Exception reloadObjects) {
             messageParser("\n" + reloadObjects.getMessage());
