@@ -1,6 +1,7 @@
 package s3;
 
 import java.io.File;
+import static s3.NewJFrame.jTextArea1;
 
 public class SyncFromS3 implements Runnable {
 
@@ -26,6 +27,13 @@ public class SyncFromS3 implements Runnable {
         destination = Adestination;
     }
 
+    public void calibrate() {
+        try {
+            jTextArea1.setCaretPosition(jTextArea1.getLineStartOffset(jTextArea1.getLineCount() - 1));
+        } catch (Exception e) {
+        }
+    }
+
     public void run() {
         try {
             File[] foo = new File[objectarray.length];
@@ -35,6 +43,7 @@ public class SyncFromS3 implements Runnable {
                     foo[i] = new File(destination + File.separator + ObjectsConverted[i]);
                     if (foo[i].exists()) {
                         mainFrame.jTextArea1.append("\n" + ObjectsConverted[i] + " already exists on this machine.");
+                        calibrate();
                     } else {
                         // Get.isRunning = true;
                         if (isRunning) {
@@ -61,8 +70,8 @@ public class SyncFromS3 implements Runnable {
     void stop() {
         SyncFromS3.isRunning = false;
         syncFromS3.stop();
-         Get.isRunning = false;
-       
+        Get.isRunning = false;
+
         syncFromS3.isInterrupted();
         mainFrame.jTextArea1.setText("\nAborted Download\n");
     }

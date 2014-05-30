@@ -763,7 +763,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 1.7.2\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release? \n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
+        jTextArea4.setText("Version: 1.7.3\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release? \n\n1. Logging window scrolls automatically now.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.2\n\nWhat is new in this release? \n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
         jTextArea4.setBorder(null);
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
@@ -960,7 +960,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     public void loadBuckets() {
         //preload();
-        jTextArea1.append("\n                                                                                 Please wait, loading Buckets.");
+        jTextArea1.append("\nPlease wait, loading Buckets.");
         calibrateTextArea();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1038,7 +1038,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                 clear_old_radio_buttons();
                                 h = bucketarray.length;
                                 objectarray = null;
-                                jTextArea1.append("\n                                                                                                            Please wait, loading objects.");
+                                jTextArea1.append("\nPlease wait, loading objects.");
                                 calibrateTextArea();
                                 java.awt.EventQueue.invokeLater(new Runnable() {
                                     public void run() {
@@ -1528,7 +1528,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     void calibrateTextArea() {
         jTextArea1.append("\n");
-        jTextArea1.setCaretPosition(jTextArea1.getSelectionEnd());
+        try {
+            jTextArea1.setCaretPosition(jTextArea1.getLineStartOffset(jTextArea1.getLineCount() - 1));
+        } catch (Exception e) {
+
+        }
     }
 
     void reloadAccounts() {
@@ -1588,7 +1592,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton9ActionPerformed
     void bucketLoader() {
         //preload();
-        jTextArea1.append("\n                                                                                                  Please wait, loading Buckets.");
+        jTextArea1.append("\nPlease wait, loading Buckets.");
         calibrateTextArea();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

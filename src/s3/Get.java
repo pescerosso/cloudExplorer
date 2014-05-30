@@ -9,6 +9,7 @@ import com.amazonaws.services.s3.model.S3Object;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import static s3.NewJFrame.jTextArea1;
 
 public class Get implements Runnable {
 
@@ -21,6 +22,13 @@ public class Get implements Runnable {
     String secret_key = null;
     String destination = null;
     Thread get;
+
+    public void calibrate() {
+        try {
+            jTextArea1.setCaretPosition(jTextArea1.getLineStartOffset(jTextArea1.getLineCount() - 1));
+        } catch (Exception e) {
+        }
+    }
 
     Get(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adestination) {
         what = Awhat;
@@ -47,29 +55,30 @@ public class Get implements Runnable {
     }
 
     public void run() {
-        if(isRunning){
-        String message = null;
-        AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
-        File file = new File(what);
-        AmazonS3 s3Client = new AmazonS3Client(credentials);
-        s3Client.setEndpoint(endpoint);
+        if (isRunning) {
+            String message = null;
+            AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
+            File file = new File(what);
+            AmazonS3 s3Client = new AmazonS3Client(credentials);
+            s3Client.setEndpoint(endpoint);
 
-        try {
+            try {
 
-            S3Object s3object = s3Client.getObject(new GetObjectRequest(bucket, what));
-            InputStream objectData = s3object.getObjectContent();
-            this.writeFile(objectData, destination);
-            mainFrame.jTextArea1.append("\nDownloaded: " + what + "\n");
-            mainFrame.calibrateTextArea();
+                S3Object s3object = s3Client.getObject(new GetObjectRequest(bucket, what));
+                InputStream objectData = s3object.getObjectContent();
+                this.writeFile(objectData, destination);
+                mainFrame.jTextArea1.append("\nDownloaded: " + what + "\n");
+                mainFrame.calibrateTextArea();
 
-        } catch (Exception get) {
-            //mainFrame.jTextArea1.append("\n\nAn error has occurred in GET.");
-            //mainFrame.jTextArea1.append("\n\nError Message: " + get.getMessage());
-            //message = message + "\n" + get.getMessage();
+            } catch (Exception get) {
+                //mainFrame.jTextArea1.append("\n\nAn error has occurred in GET.");
+                //mainFrame.jTextArea1.append("\n\nError Message: " + get.getMessage());
+                //message = message + "\n" + get.getMessage();
+            }
+            calibrate();
         }
+    }
 
-    }
-    }
     void startc(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adestination) {
         get = new Thread(new Get(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint, Adestination));
         get.start();

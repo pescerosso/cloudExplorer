@@ -9,6 +9,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import java.io.File;
 import javax.activation.MimetypesFileTypeMap;
+import static s3.NewJFrame.jTextArea1;
 
 public class Put implements Runnable {
 
@@ -22,6 +23,13 @@ public class Put implements Runnable {
     String ObjectKey = null;
     String secret_key = null;
     Thread put;
+
+    public void calibrate() {
+        try {
+            jTextArea1.setCaretPosition(jTextArea1.getLineStartOffset(jTextArea1.getLineCount() - 1));
+        } catch (Exception e) {
+        }
+    }
 
     Put(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String AObjectKey) {
         what = Awhat;
@@ -52,16 +60,16 @@ public class Put implements Runnable {
         putRequest.setMetadata(objectMetadata);
 
         try {
-            mainFrame.jTextArea1.append("\nUploading: " + what);
             PutObjectResult response = s3Client.putObject(putRequest);
             message = ("\nUploaded object: " + what);
             mainFrame.jTextArea1.append(message);
+
             mainFrame.objectarray = null;
 
         } catch (Exception put) {
-                // mainFrame.jTextArea1.append("\n\nAn error has occurred with PUT: " + put.getMessage());
-            //message = message + put.getMessage();
         }
+
+        calibrate();
     }
 
     void startc(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String AObjectKey) {
