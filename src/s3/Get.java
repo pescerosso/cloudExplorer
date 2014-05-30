@@ -75,7 +75,9 @@ public class Get implements Runnable {
                 //mainFrame.jTextArea1.append("\n\nError Message: " + get.getMessage());
                 //message = message + "\n" + get.getMessage();
             }
-            calibrate();
+
+          calibrate();
+
         }
     }
 

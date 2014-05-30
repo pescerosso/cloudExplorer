@@ -5,11 +5,19 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
+import static s3.NewJFrame.jTextArea1;
 
 public class Delete {
 
     String message = null;
     NewJFrame mainFrame;
+
+    public void calibrate() {
+        try {
+            jTextArea1.setCaretPosition(jTextArea1.getLineStartOffset(jTextArea1.getLineCount() - 1));
+        } catch (Exception e) {
+        }
+    }
 
     String deleteFile(String what, String access_key, String secret_key, String bucket, String endpoint) {
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
@@ -25,6 +33,7 @@ public class Delete {
             message = message + "\n" + Delete.getMessage();
         }
         message.replace("null", "");
+        calibrate();
         return message;
     }
 }

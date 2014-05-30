@@ -84,7 +84,7 @@ public class BucketClass {
             do {
                 objectListing = s3Client.listObjects(listObjectsRequest);
                 for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
-                    objectlist = objectlist + "@" + objectSummary.getKey();
+                    objectlist = objectlist + "@@" + objectSummary.getKey();
                 }
                 listObjectsRequest.setMarker(objectListing.getNextMarker());
             } while (objectListing.isTruncated());

@@ -1,6 +1,7 @@
 package s3;
 
 import java.io.File;
+import static s3.NewJFrame.jTextArea1;
 
 public class SyncToS3 implements Runnable {
 
@@ -26,6 +27,13 @@ public class SyncToS3 implements Runnable {
         bucket = Abucket;
         endpoint = Aendpoint;
 
+    }
+
+    public void calibrate() {
+        try {
+            jTextArea1.setCaretPosition(jTextArea1.getLineStartOffset(jTextArea1.getLineCount() - 1));
+        } catch (Exception e) {
+        }
     }
 
     String convertObject(String what, String operation) {
@@ -79,6 +87,7 @@ public class SyncToS3 implements Runnable {
                 for (int y = 1; y != objectarray.length; y++) {
                     if (objectarray[y].contains(simple_what)) {
                         mainFrame.jTextArea1.append("\nObject already exists on S3: " + simple_what);
+                        calibrate();
                         found++;
                     }
                 }
