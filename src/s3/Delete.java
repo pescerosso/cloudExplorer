@@ -5,12 +5,20 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
+import static s3.Get.isRunning;
 import static s3.NewJFrame.jTextArea1;
 
-public class Delete {
+public class Delete implements Runnable {
 
     String message = null;
     NewJFrame mainFrame;
+    String what = null;
+    String access_key = null;
+    String bucket = null;
+    String endpoint = null;
+    String secret_key = null;
+    String destination = null;
+    Thread delete;
 
     public void calibrate() {
         try {
@@ -19,21 +27,43 @@ public class Delete {
         }
     }
 
-    String deleteFile(String what, String access_key, String secret_key, String bucket, String endpoint) {
+    Delete(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint) {
+        what = Awhat;
+        access_key = Aaccess_key;
+        secret_key = Asecret_key;
+        bucket = Abucket;
+        endpoint = Aendpoint;
+
+    }
+
+    public void run() {
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
 
         try {
             s3Client.deleteObject(new DeleteObjectRequest(bucket, what));
-            message = ("Deleting object: " + what);
+            jTextArea1.append("\nDeleting object: " + what);
+            calibrate();
         } catch (Exception Delete) {
             mainFrame.jTextArea1.append("\n\nAn error has occurred in DeleteFile.");
             mainFrame.jTextArea1.append("\n\nError Message:    " + Delete.getMessage());
             message = message + "\n" + Delete.getMessage();
+            calibrate();
         }
         message.replace("null", "");
         calibrate();
-        return message;
     }
+
+    void startc(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint) {
+        delete = new Thread(new Delete(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint));
+        delete.start();
+    }
+
+    void stop() {
+        isRunning = false;
+        delete.stop();
+        mainFrame.jTextArea1.setText("\nDownload compelted or aborted.\n");
+    }
+
 }

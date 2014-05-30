@@ -14,7 +14,6 @@ public class Daemon {
     String sync_config_file = Home + File.separator + "s3config.sync";
     String s3_config_file = Home + File.separator + "s3.config";
     BucketClass Bucket = new BucketClass();
-    Delete delete = new Delete();
     Acl objectacl = new Acl();
     Get get;
     Put put;
