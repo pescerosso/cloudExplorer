@@ -51,13 +51,11 @@ public class Delete implements Runnable {
             message = message + "\n" + Delete.getMessage();
             calibrate();
         }
-        message.replace("null", "");
         calibrate();
     }
 
     void startc(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint) {
-        delete = new Thread(new Delete(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint));
-        delete.start();
+        (new Thread(new Delete(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint))).start();
     }
 
     void stop() {
