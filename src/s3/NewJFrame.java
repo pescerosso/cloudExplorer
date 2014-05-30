@@ -1207,7 +1207,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
 
                     for (int h = 1; h != objectarray.length; h++) {
-                        System.out.print("\n" + objectarray[h]);
                         jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.Y_AXIS));
                         d[h] = new JRadioButton();
                         d[h].setText(objectarray[h]);
