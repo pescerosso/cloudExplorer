@@ -24,7 +24,12 @@ public class BucketClass {
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
         try {
-            s3Client.createBucket(new CreateBucketRequest(bucket, region));
+            if (endpoint.contains("amazon")) {
+                s3Client.createBucket(new CreateBucketRequest(bucket));
+            } else {
+                s3Client.createBucket(new CreateBucketRequest(bucket, region));
+            }
+
             message = ("\nMaking bucket: " + bucket);
         } catch (Exception makeBucket) {
             mainFrame.jTextArea1.append("\n\nAn error has occurred in makeBucket.");
