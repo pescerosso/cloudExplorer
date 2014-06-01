@@ -1963,6 +1963,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        int delcounter = 0;
         try {
 
             if (active_bucket > 0) {
@@ -1974,6 +1975,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     if (d[i].isSelected()) {
                         del = new Delete(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
                         del.startc(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
+                        delcounter++;
                     }
                 }
             } else {
@@ -1983,10 +1985,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
         objectarray = null;
         jTextField10.setText("");
-        jButton6.doClick();
+        if (delcounter < 5) {
+            jButton6.doClick();
+        } else {
+            jTextArea1.append("Multiple Delete operation finished. Click search to refresh.");
+        }
         calibrateTextArea();
 
-        calibrateTextArea();
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
