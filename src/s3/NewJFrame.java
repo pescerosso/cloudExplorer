@@ -50,7 +50,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     JFrame dialog = new JFrame();
     JLabel dialog_label = new JLabel("Please wait for operation to complete. This will close upon completion.");
     JPanel dialog_panel = new JPanel();
-    int initial_display = 11;
+    int initial_display = 1000;
     int account_counter = 0;
     int content_counter = 0;
     int previous_objectarray_length = 0;
@@ -60,6 +60,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     SyncFromS3 syncFromS3;
     SyncToS3 syncToS3;
     boolean isSyncingToS3 = true;
+    JButton more = new JButton("Show all Objects");
+    boolean limited = true;
+    boolean syncing_to_S3 = false;
 
     public NewJFrame() {
         initComponents();
@@ -787,7 +790,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 1.8\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release? \n\n1. Deletes are now threaded.\n2. Fixed a bug to allow multiple \"Sync to S3\" operations without reloading objects manually.\n3. Toolbar in \"Object Explorer\" is now persistent when scrolling.\n4. Secret key contains special characters for privacy reasons.\n5. Fixed a bug when creating buckets on AWS.\n6. Fixed a bug when deleting an object from the search results.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.3\n\n1. Logging window scrolls automatically now.\n2. Support for @ in the object name.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.2\n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n----------------------------------------------------------------------------------\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
+        jTextArea4.setText("Version: 1.9 (Development)\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release? \n\n1. Object Explorer will only show the first 1000 objects. Added a button \"Show all objects\" to display all the objects.\n2. Syncing now syncs subdirectories.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.8\n\n1. Deletes are now threaded.\n2. Fixed a bug to allow multiple \"Sync to S3\" operations without reloading objects manually.\n3. Toolbar in \"Object Explorer\" is now persistent when scrolling.\n4. Secret key contains special characters for privacy reasons.\n5. Fixed a bug when creating buckets on AWS.\n6. Fixed a bug when deleting an object from the search results.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.3\n\n1. Logging window scrolls automatically now.\n2. Support for @ in the object name.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.2\n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n----------------------------------------------------------------------------------\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
         jTextArea4.setBorder(null);
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
@@ -1000,13 +1003,30 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if (active_bucket > 0) {
-            calibrateTextArea();
+
+            more.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+                    limited = false;
+                    jButton6.doClick();
+                }
+            });
+
             reloadObjects();
 
             try {
                 int found = 0;
+                int display_counter = initial_display;
+
                 jTabbedPane1.setSelectedIndex(1);
-                for (int i = 1; i != objectarray.length; i++) {
+
+                if (limited) {
+                    jPanel11.add(more);
+                } else {
+                    display_counter = objectarray.length;
+                }
+
+                for (int i = 1; i != display_counter; i++) {
                     if (d[i] != null) {
                         if (d[i].getText().toLowerCase().contains(jTextField10.getText().toLowerCase())) {
                             jPanel11.add(d[i]);
@@ -1023,7 +1043,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jTextArea1.append("\nNo objects found for search. \n");
                 } else {
                     jTextArea1.append("\nDisplayed found objects.");
-                    calibrateTextArea();
+                    // calibrateTextArea();
                 }
             } catch (Exception searchBar) {
 
@@ -1207,7 +1227,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     void reloadObjects() {
 
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
-
             var();
             jPanel11.removeAll();
             jPanel11.revalidate();
@@ -1215,7 +1234,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
 
             if (objectarray == null) {
-
                 try {
                     for (int h = 1; h != bucketarray.length; h++) {
                         if (b[h] != null) {
@@ -1237,6 +1255,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     }
 
                     jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
+
+                    if (objectarray.length > initial_display) {
+                        limited = true;
+                    } else {
+                        limited = false;
+                    }
+
+                    syncing_to_S3 = false;
 
                 } catch (Exception listing) {
                 }
@@ -1505,13 +1531,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         if (active_bucket > 0) {
+            syncing_to_S3 = true;
             jTextArea1.setText("\nPlease wait for Sync to complete.");
             calibrateTextArea();
             reloadObjects();
-            
+
             if (b[active_bucket].isSelected()) {
                 if (jFileChooser2.getSelectedFile() == null) {
-                    jTextArea1.append("\nError: please select a destination directory.");
+                    jTextArea1.append("\nEFrror: please select a destination directory.");
                 } else {
                     syncToS3.isRunning = true;
                     syncToS3 = new SyncToS3(jFileChooser2.getSelectedFile(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), objectarray);
@@ -1672,7 +1699,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
         if (active_bucket > 0) {
-            objectarray = null;
+            // objectarray = null;
             reloadObjects();
             if (objectarray.length > 1) {
                 jTextArea1.setText("\nPlease wait for SYNC to complete");
@@ -1694,6 +1721,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             }
                         }
                         Get.isRunning = true;
+
                         syncFromS3 = new SyncFromS3(objectarray, ObjectsConverted, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination);
                         syncFromS3.startc(objectarray, ObjectsConverted, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination);
                     }
@@ -1958,6 +1986,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jButton6.doClick();
         calibrateTextArea();
 
+        calibrateTextArea();
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -2052,10 +2082,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
 
-        syncToS3.stop();
+        if (syncing_to_S3) {
+            syncToS3.stop();
+            isSyncingToS3 = false;
+        } else {
+            syncFromS3.stop();
+        }
+
         Get.isRunning = false;
         Put.isRunning = false;
-        isSyncingToS3 = false;
+
 
     }//GEN-LAST:event_jButton16ActionPerformed
 

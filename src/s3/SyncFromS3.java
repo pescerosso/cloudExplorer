@@ -34,23 +34,47 @@ public class SyncFromS3 implements Runnable {
         }
     }
 
+    void makeDirectory(String what) {
+
+        if (what.contains("/")) {
+            what = what.replace("/", File.separator);
+        }
+
+        if (what.contains("\\")) {
+            what = what.replace("\\", File.separator);
+        }
+
+        int slash_counter = 0;
+        int another_counter = 0;
+
+        for (int y = 0; y != what.length(); y++) {
+            if (what.substring(y, y + 1).contains(File.separator)) {
+                slash_counter++;
+                another_counter = y;
+            }
+        }
+
+        File dir = new File(what.substring(0, another_counter));
+        dir.mkdirs();
+    }
+
     public void run() {
         try {
             File[] foo = new File[objectarray.length];
             for (int i = 1; i != objectarray.length; i++) {
                 if (objectarray[i] != null) {
 
-                    foo[i] = new File(destination + File.separator + ObjectsConverted[i]);
+                    foo[i] = new File(destination + File.separator + objectarray[i]);
                     if (foo[i].exists()) {
-                        mainFrame.jTextArea1.append("\n" + ObjectsConverted[i] + " already exists on this machine.");
+                        mainFrame.jTextArea1.append("\n" + objectarray[i] + " already exists on this machine.");
                         calibrate();
                     } else {
                         // Get.isRunning = true;
                         if (isRunning) {
-                            get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, destination + File.separator + ObjectsConverted[i]);
+                            makeDirectory(destination + File.separator + objectarray[i]);
+                            get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, destination + File.separator + objectarray[i]);
                             get.run();
                         } else {
-                            System.out.print("\nNot RUnning");
                         }
                     }
 

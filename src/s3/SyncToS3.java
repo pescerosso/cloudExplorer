@@ -74,19 +74,38 @@ public class SyncToS3 implements Runnable {
         return out_file;
     }
 
+    
     public void run() {
         File[] files = location.listFiles();
         for (File file : files) {
             if (file.isDirectory()) {
+                File[] fileD = file.listFiles();
+                for (File files_in_directory : fileD) {
+                    int found = 0;
 
+                    for (int y = 1; y != objectarray.length; y++) {
+                        if (objectarray[y].contains(files_in_directory.getAbsolutePath().toString())) {
+                            mainFrame.jTextArea1.append("\nObject already exists on S3: " + file.getAbsolutePath());
+                            calibrate();
+                            found++;
+                        }
+                    }
+
+                    if (found == 0) {
+                        if (this.isRunning) {
+                            put = new Put(files_in_directory.getAbsolutePath(), access_key, secret_key, bucket, endpoint, files_in_directory.getAbsolutePath().toString());
+                            put.run();
+                            found = 0;
+                        }
+                    }
+                }
             } else {
-                String simple_what = convertObject(file.getAbsolutePath(), "upload");
 
                 int found = 0;
 
                 for (int y = 1; y != objectarray.length; y++) {
-                    if (objectarray[y].contains(simple_what)) {
-                        mainFrame.jTextArea1.append("\nObject already exists on S3: " + simple_what);
+                    if (objectarray[y].contains(file.getAbsolutePath())) {
+                        mainFrame.jTextArea1.append("\nObject already exists on S3: " + file.getAbsolutePath());
                         calibrate();
                         found++;
                     }
@@ -94,7 +113,7 @@ public class SyncToS3 implements Runnable {
 
                 if (found == 0) {
                     if (this.isRunning) {
-                        put = new Put(file.getAbsolutePath(), access_key, secret_key, bucket, endpoint, simple_what);
+                        put = new Put(file.getAbsolutePath(), access_key, secret_key, bucket, endpoint, file.getAbsolutePath().toString());
                         put.run();
                         found = 0;
                     }

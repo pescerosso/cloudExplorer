@@ -68,7 +68,6 @@ public class Daemon {
             endpoint = saved_s3_configs[2] + ":" + saved_s3_configs[3];
             region = saved_s3_configs[4];
         } catch (Exception loadS3Credentials) {
-            messageParser("\n" + loadS3Credentials.getMessage());
         }
     }
 
@@ -151,16 +150,21 @@ public class Daemon {
                 messageParser("\nError: " + syncDIR.toString() + " does not exist");
             }
         } catch (Exception Start) {
-            messageParser("\n" + Start.getMessage());
         }
 
     }
 
-    String convertObject(String what, String operation) {
+    void makeDirectory(String what) {
 
-        int count = 0;
+        if (what.contains("/")) {
+            what = what.replace("/", File.separator);
+        }
+
+        if (what.contains("\\")) {
+            what = what.replace("\\", File.separator);
+        }
+
         int slash_counter = 0;
-        String out_file = null;
         int another_counter = 0;
 
         for (int y = 0; y != what.length(); y++) {
@@ -170,20 +174,8 @@ public class Daemon {
             }
         }
 
-        for (int y = 0; y != what.length(); y++) {
-            if (y == another_counter) {
-                if (operation.contains("download")) {
-                    if (what.contains(File.separator)) {
-                        out_file = (what.substring(y, what.length()));
-                    } else {
-                        out_file = (what);
-                    }
-                } else {
-                    out_file = (what.substring(y + 1, what.length()));
-                }
-            }
-        }
-        return out_file;
+        File dir = new File(what.substring(0, another_counter));
+        dir.mkdirs();
     }
 
     void SyncToS3(File dir) {
@@ -192,27 +184,55 @@ public class Daemon {
 
             for (File file : files) {
                 if (file.isDirectory()) {
+                    File[] fileD = file.listFiles();
+                    for (File files_in_directory : fileD) {
+                        int found = 0;
+
+                        for (int y = 1; y != objectarray.length; y++) {
+                            if (objectarray[y].contains(files_in_directory.toString())) {
+                                messageParser("\nObject already exists on S3: " + files_in_directory.toString());
+                                found++;
+                            }
+                        }
+
+                        if (found == 0) {
+                            put = new Put(files_in_directory.getAbsolutePath(), access_key, secret_key, bucket, endpoint, files_in_directory.getAbsolutePath());
+                            put.run();
+                            found = 0;
+                        }
+                    }
                 } else {
-                    String simple_what = convertObject(file.getAbsolutePath(), "upload");
 
                     int found = 0;
                     for (int y = 1; y != objectarray.length; y++) {
-                        if (objectarray[y].contains(simple_what)) {
-                            messageParser("\nObject already exists on S3: " + simple_what);
+                        if (objectarray[y].contains(file.getAbsolutePath().toString())) {
+                            messageParser("\nObject already exists on S3: " + file.getAbsolutePath().toString());
                             found++;
                         }
                     }
 
                     if (found == 0) {
-                        put = new Put(file.getAbsolutePath(), access_key, secret_key, bucket, endpoint, simple_what);
-                        put.startc(file.getAbsolutePath(), access_key, secret_key, bucket, endpoint, simple_what);
+                        put = new Put(file.getAbsolutePath(), access_key, secret_key, bucket, endpoint, file.getAbsolutePath().toString());
+                        put.run();
+
                         found = 0;
                     }
                 }
             }
         } catch (Exception Sync) {
-            messageParser("\n" + Sync.getMessage());
         }
+    }
+
+    String convertObject(String what, String operation) {
+
+        if (what.contains("/")) {
+            what = what.replace("/", File.separator);
+        }
+
+        if (what.contains("\\")) {
+            what = what.replace("\\", File.separator);
+        }
+        return what;
     }
 
     void syncFromS3(String Destination) {
@@ -220,16 +240,16 @@ public class Daemon {
             File[] foo = new File[objectarray.length];
             for (int i = 1; i != objectarray.length; i++) {
                 String new_object_name = convertObject(objectarray[i], "download");
-                foo[i] = new File(Destination + File.separator + new_object_name);
+                foo[i] = new File(Destination + new_object_name);
                 if (foo[i].exists()) {
                     messageParser("\n" + new_object_name + " already exists on this machine.");
                 } else {
-                    get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, Destination + File.separator + new_object_name);
-                    get.startc(objectarray[i], access_key, secret_key, bucket, endpoint, Destination + File.separator + new_object_name);
+                    makeDirectory(Destination + File.separator + objectarray[i]);
+                    get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, Destination + new_object_name);
+                    get.run();
                 }
             }
         } catch (Exception SyncLocal) {
-            messageParser("\n" + SyncLocal.getMessage());
         }
     }
 
@@ -238,7 +258,6 @@ public class Daemon {
             String objectlist = Bucket.listBucketContents(access_key, secret_key, bucket, endpoint);
             objectarray = objectlist.split("@@");
         } catch (Exception reloadObjects) {
-            messageParser("\n" + reloadObjects.getMessage());
         }
     }
 }
