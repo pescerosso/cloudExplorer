@@ -113,7 +113,8 @@ public class SyncToS3 implements Runnable {
             what = what.substring(2, what.length());
         }
        
-       if (what.substring(0, 0).contains("/")) {
+       if (what.substring(0, 1).contains("/")) {
+           System.out.print("\n foo");
             what = what.substring(1, what.length());
         }
 
