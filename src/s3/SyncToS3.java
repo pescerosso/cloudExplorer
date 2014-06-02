@@ -67,8 +67,8 @@ public class SyncToS3 implements Runnable {
 
     String makeDirectory(String what) {
 
-        if (what.substring(1, 1).contains(":")) {
-            what = what.substring(2, what.length());
+        if (what.substring(0, 2).contains(":")) {
+            what = what.substring(3, what.length());
         }
 
         if (what.substring(0, 1).contains("/")) {
