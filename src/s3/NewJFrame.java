@@ -1297,7 +1297,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             var();
-            reloadBuckets();
+           // reloadBuckets();
             String response = JOptionPane.showInputDialog(null, "Bucket Name: ", "Create a bucket", JOptionPane.OK_CANCEL_OPTION);
             jTextArea1.append("\n" + bucket.makeBucket(cred.getAccess_key(), cred.getSecret_key(), response.toLowerCase(), cred.getEndpoint(), cred.getRegion()));
             reloadBuckets();
