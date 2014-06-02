@@ -189,7 +189,6 @@ public class Daemon {
 
             for (int y = 1; y != objectarray.length; y++) {
                 if (objectarray[y].contains(file_found.getAbsolutePath().toString())) {
-                    messageParser("\nObject already exists on S3: " + file_found.getAbsolutePath().toString());
                     found++;
                 }
             }
