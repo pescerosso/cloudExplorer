@@ -163,6 +163,10 @@ public class Daemon {
             what = what.substring(2, what.length());
         }
 
+        if (what.substring(0, 1).contains("/")) {
+            what = what.substring(1, what.length());
+        }
+
         if (what.contains("/")) {
             what = what.replace("/", File.separator);
         }
@@ -191,7 +195,6 @@ public class Daemon {
         List<File> files = (List<File>) FileUtils.listFiles(dir, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
         for (File file_found : files) {
             int found = 0;
-
             for (int y = 1; y != objectarray.length; y++) {
                 if (objectarray[y].contains(file_found.getAbsolutePath().toString())) {
                     found++;
