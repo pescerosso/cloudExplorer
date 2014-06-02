@@ -39,7 +39,9 @@ public class SyncFromS3 implements Runnable {
         if (what.substring(1, 1).contains(":")) {
             what = what.substring(2, what.length());
         }
-
+        if (what.substring(0, 0).contains("/")) {
+            what = what.substring(1, what.length());
+        }
         if (what.contains("/")) {
             what = what.replace("/", File.separator);
         }
@@ -79,6 +81,7 @@ public class SyncFromS3 implements Runnable {
                             makeDirectory(destination + File.separator + objectarray[i]);
                             String object = makeDirectory(objectarray[i]);
                             get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, destination + File.separator + object);
+                            System.out.print("\nDebug" + objectarray[i]);
                             get.run();
                         } else {
                         }
