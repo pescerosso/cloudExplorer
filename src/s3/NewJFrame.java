@@ -1983,15 +1983,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } catch (Exception checkbox) {
         }
         objectarray = null;
+        reloadObjects();
         jTextField10.setText("");
-        if (delcounter < 5) {
-            jButton6.doClick();
-        } else {
-            jTextArea1.append("Multiple Delete operation finished. Click search to refresh.");
-        }
+        jButton6.doClick();
+        jTextArea1.append("\nMultiple Delete operation finished. Click search to refresh.");
+
         calibrateTextArea();
-
-
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
