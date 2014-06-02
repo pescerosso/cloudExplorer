@@ -1697,7 +1697,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
         if (active_bucket > 0) {
-            // objectarray = null;
+            objectarray = null;
             reloadObjects();
             if (objectarray.length > 1) {
                 jTextArea1.setText("\nPlease wait for SYNC to complete");
