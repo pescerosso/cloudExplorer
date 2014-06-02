@@ -101,20 +101,16 @@ public class SyncToS3 implements Runnable {
             }
         }
     }
-        void startc
-        (File location, String Aaccess_key
-        , String Asecret_key, String Abucket
-        , String Aendpoint, String[] Aobjectarray
-    
-            ) {
+
+    void startc(File location, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String[] Aobjectarray
+    ) {
         (new Thread(new SyncToS3(location, Aaccess_key, Asecret_key, Abucket, Aendpoint, Aobjectarray))).start();
-        }
-
-        void stop
-        
-            () {
-        this.isRunning = false;
-            mainFrame.jTextArea1.setText("\nUpload complete or aborted.\n");
-        }
-
     }
+
+    void stop() {
+        syncToS3.stop();
+        this.isRunning = false;
+        mainFrame.jTextArea1.setText("\nUpload complete or aborted.\n");
+    }
+
+}
