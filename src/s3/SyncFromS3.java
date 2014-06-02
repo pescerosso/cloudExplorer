@@ -36,9 +36,10 @@ public class SyncFromS3 implements Runnable {
 
     String makeDirectory(String what) {
 
-        if (what.contains("C:")) {
-            what = what.replace("C:", "");
+        if (what.contains("C:\\")) {
+            what = what.replace("C:\\", "");
         }
+
         if (what.contains("/")) {
             what = what.replace("/", File.separator);
         }

@@ -40,7 +40,11 @@ public class SyncToS3 implements Runnable {
     }
 
     String convertObject(String what, String operation) {
-
+        
+        if (what.contains("C:\\")) {
+            what = what.replace("C:\\", "");
+        }
+        
         if (what.contains("/")) {
             what = what.replace("/", File.separator);
         }
