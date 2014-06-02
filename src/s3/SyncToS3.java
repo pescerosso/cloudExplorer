@@ -1,6 +1,9 @@
 package s3;
 
 import java.io.File;
+import java.util.List;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 import static s3.NewJFrame.jTextArea1;
 
 public class SyncToS3 implements Runnable {
@@ -74,62 +77,44 @@ public class SyncToS3 implements Runnable {
         return out_file;
     }
 
-    
     public void run() {
-        File[] files = location.listFiles();
-        for (File file : files) {
-            if (file.isDirectory()) {
-                File[] fileD = file.listFiles();
-                for (File files_in_directory : fileD) {
-                    int found = 0;
+        String[] extensions = new String[]{" "};
+        List<File> files = (List<File>) FileUtils.listFiles(location, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
+        for (File file_found : files) {
+            int found = 0;
 
-                    for (int y = 1; y != objectarray.length; y++) {
-                        if (objectarray[y].contains(files_in_directory.getAbsolutePath().toString())) {
-                            mainFrame.jTextArea1.append("\nObject already exists on S3: " + file.getAbsolutePath());
-                            calibrate();
-                            found++;
-                        }
-                    }
-
-                    if (found == 0) {
-                        if (this.isRunning) {
-                            put = new Put(files_in_directory.getAbsolutePath(), access_key, secret_key, bucket, endpoint, files_in_directory.getAbsolutePath().toString());
-                            put.run();
-                            found = 0;
-                        }
-                    }
+            for (int y = 1; y != objectarray.length; y++) {
+                if (objectarray[y].contains(file_found.getAbsolutePath().toString())) {
+                    mainFrame.jTextArea1.append("\nObject already exists on S3: " + file_found);
+                    calibrate();
+                    found++;
                 }
-            } else {
+            }
 
-                int found = 0;
+            if (found == 0) {
+                if (this.isRunning) {
+                    put = new Put(file_found.getAbsolutePath().toString(), access_key, secret_key, bucket, endpoint, file_found.getAbsolutePath().toString());
+                    put.run();
+                    found = 0;
 
-                for (int y = 1; y != objectarray.length; y++) {
-                    if (objectarray[y].contains(file.getAbsolutePath())) {
-                        mainFrame.jTextArea1.append("\nObject already exists on S3: " + file.getAbsolutePath());
-                        calibrate();
-                        found++;
-                    }
-                }
-
-                if (found == 0) {
-                    if (this.isRunning) {
-                        put = new Put(file.getAbsolutePath(), access_key, secret_key, bucket, endpoint, file.getAbsolutePath().toString());
-                        put.run();
-                        found = 0;
-                    }
                 }
             }
         }
     }
-
-    void startc(File location, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String[] Aobjectarray
-    ) {
+        void startc
+        (File location, String Aaccess_key
+        , String Asecret_key, String Abucket
+        , String Aendpoint, String[] Aobjectarray
+    
+            ) {
         (new Thread(new SyncToS3(location, Aaccess_key, Asecret_key, Abucket, Aendpoint, Aobjectarray))).start();
-    }
+        }
 
-    void stop() {
+        void stop
+        
+            () {
         this.isRunning = false;
-        mainFrame.jTextArea1.setText("\nUpload complete or aborted.\n");
-    }
+            mainFrame.jTextArea1.setText("\nUpload complete or aborted.\n");
+        }
 
-}
+    }

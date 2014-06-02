@@ -3,7 +3,10 @@ package s3;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 
 public class Daemon {
 
@@ -179,47 +182,23 @@ public class Daemon {
     }
 
     void SyncToS3(File dir) {
-        try {
-            File[] files = dir.listFiles();
+        String[] extensions = new String[]{" "};
+        List<File> files = (List<File>) FileUtils.listFiles(dir, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
+        for (File file_found : files) {
+            int found = 0;
 
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    File[] fileD = file.listFiles();
-                    for (File files_in_directory : fileD) {
-                        int found = 0;
-
-                        for (int y = 1; y != objectarray.length; y++) {
-                            if (objectarray[y].contains(files_in_directory.toString())) {
-                                messageParser("\nObject already exists on S3: " + files_in_directory.toString());
-                                found++;
-                            }
-                        }
-
-                        if (found == 0) {
-                            put = new Put(files_in_directory.getAbsolutePath(), access_key, secret_key, bucket, endpoint, files_in_directory.getAbsolutePath());
-                            put.run();
-                            found = 0;
-                        }
-                    }
-                } else {
-
-                    int found = 0;
-                    for (int y = 1; y != objectarray.length; y++) {
-                        if (objectarray[y].contains(file.getAbsolutePath().toString())) {
-                            messageParser("\nObject already exists on S3: " + file.getAbsolutePath().toString());
-                            found++;
-                        }
-                    }
-
-                    if (found == 0) {
-                        put = new Put(file.getAbsolutePath(), access_key, secret_key, bucket, endpoint, file.getAbsolutePath().toString());
-                        put.run();
-
-                        found = 0;
-                    }
+            for (int y = 1; y != objectarray.length; y++) {
+                if (objectarray[y].contains(file_found.getAbsolutePath().toString())) {
+                    messageParser("\nObject already exists on S3: " + file_found.getAbsolutePath().toString());
+                    found++;
                 }
             }
-        } catch (Exception Sync) {
+
+            if (found == 0) {
+                put = new Put(file_found.getAbsolutePath().toString(), access_key, secret_key, bucket, endpoint, file_found.getAbsolutePath().toString());
+                put.run();
+                found = 0;
+            }
         }
     }
 
