@@ -92,7 +92,7 @@ public class SyncToS3 implements Runnable {
             }
 
             if (found == 0) {
-                if (this.isRunning) {
+                if (isRunning) {
                     put = new Put(file_found.getAbsolutePath().toString(), access_key, secret_key, bucket, endpoint, file_found.getAbsolutePath().toString());
                     put.run();
                     found = 0;
@@ -108,8 +108,7 @@ public class SyncToS3 implements Runnable {
     }
 
     void stop() {
-        syncToS3.stop();
-        this.isRunning = false;
+        isRunning = false;
         mainFrame.jTextArea1.setText("\nUpload complete or aborted.\n");
     }
 
