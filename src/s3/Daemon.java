@@ -220,7 +220,6 @@ public class Daemon {
                 String new_object_name = convertObject(objectarray[i], "download");
                 foo[i] = new File(Destination + new_object_name);
                 if (foo[i].exists()) {
-                    messageParser("\n" + new_object_name + " already exists on this machine.");
                 } else {
                     makeDirectory(Destination + File.separator + objectarray[i]);
                     get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, Destination + new_object_name);
