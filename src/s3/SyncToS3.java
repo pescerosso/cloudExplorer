@@ -97,7 +97,8 @@ public class SyncToS3 implements Runnable {
 
             if (found == 0) {
                 if (isRunning) {
-                    put = new Put(file_found.getAbsolutePath().toString(), access_key, secret_key, bucket, endpoint, file_found.getAbsolutePath().toString());
+                    String object = makeDirectory(file_found.getAbsolutePath().toString());
+                    put = new Put(file_found.getAbsolutePath().toString(), access_key, secret_key, bucket, endpoint, object);
                     put.run();
                     found = 0;
 
@@ -106,6 +107,35 @@ public class SyncToS3 implements Runnable {
         }
     }
 
+     String makeDirectory(String what) {
+
+       if (what.substring(1, 1).contains(":")) {
+            what = what.substring(2, what.length());
+        }
+
+        if (what.contains("/")) {
+            what = what.replace("/", File.separator);
+        }
+
+        if (what.contains("\\")) {
+            what = what.replace("\\", File.separator);
+        }
+
+        int slash_counter = 0;
+        int another_counter = 0;
+
+        for (int y = 0; y != what.length(); y++) {
+            if (what.substring(y, y + 1).contains(File.separator)) {
+                slash_counter++;
+                another_counter = y;
+            }
+        }
+
+        File dir = new File(what.substring(0, another_counter));
+        dir.mkdirs();
+        return what;
+    }
+     
     void startc(File location, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String[] Aobjectarray
     ) {
         (new Thread(new SyncToS3(location, Aaccess_key, Asecret_key, Abucket, Aendpoint, Aobjectarray))).start();

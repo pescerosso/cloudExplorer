@@ -36,8 +36,8 @@ public class SyncFromS3 implements Runnable {
 
     String makeDirectory(String what) {
 
-        if (what.contains("C:\\")) {
-            what = what.replace("C:\\", "");
+        if (what.substring(1, 1).contains(":")) {
+            what = what.substring(2, what.length());
         }
 
         if (what.contains("/")) {
@@ -76,7 +76,7 @@ public class SyncFromS3 implements Runnable {
                     } else {
                         // Get.isRunning = true;
                         if (isRunning) {
-                            makeDirectory(destination + objectarray[i]);
+                            makeDirectory(destination + File.separator + objectarray[i]);
                             String object = makeDirectory(objectarray[i]);
                             get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, destination + File.separator + object);
                             get.run();
