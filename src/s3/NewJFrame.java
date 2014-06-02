@@ -1042,8 +1042,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     reloadObjects();
                     jTextArea1.append("\nNo objects found for search. \n");
                 } else {
-                    jTextArea1.append("\nDisplayed found objects.");
-                    // calibrateTextArea();
+                    jTextArea1.append("\nLoaded objects. Total number of objects in this bucket: " + objectarray.length + " objects.");
+                    calibrateTextArea();
                 }
             } catch (Exception searchBar) {
 
