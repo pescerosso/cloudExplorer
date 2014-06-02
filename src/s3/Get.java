@@ -40,6 +40,7 @@ public class Get implements Runnable {
     }
 
     void writeFile(InputStream is, String destination) {
+        System.out.print("\nDestination: " + destination);
         try {
             FileOutputStream fo = new FileOutputStream(destination);
             int read = 0;
@@ -49,7 +50,6 @@ public class Get implements Runnable {
             }
             fo.close();
         } catch (Exception add) {
-
         }
 
     }
