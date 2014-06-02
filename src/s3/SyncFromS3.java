@@ -60,7 +60,7 @@ public class SyncFromS3 implements Runnable {
             }
         }
 
-        File dir = new File(what.substring(0, another_counter));
+        File dir = new File(File.separator + what.substring(0, another_counter));
         dir.mkdirs();
         return what;
     }
@@ -82,6 +82,7 @@ public class SyncFromS3 implements Runnable {
                             String object = makeDirectory(objectarray[i]);
                             get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, destination + File.separator + object);
                             get.run();
+
                         } else {
                         }
                     }
