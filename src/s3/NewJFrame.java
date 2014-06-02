@@ -1042,7 +1042,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     reloadObjects();
                     jTextArea1.append("\nNo objects found for search. \n");
                 } else {
-                    jTextArea1.append("\nLoaded objects. Total number of objects in this bucket: " + objectarray.length + " objects.");
+                    jTextArea1.append("\nLoaded objects. Total number of objects in this bucket: " + objectarray.length + ". Displaying a maximum of: " + initial_display + " objects at a time.");
                     calibrateTextArea();
                 }
             } catch (Exception searchBar) {
@@ -1053,7 +1053,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
 
         calibrateTextArea();
-
     }
 
     void clear_old_radio_buttons() {
@@ -1965,16 +1964,18 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         try {
 
             if (active_bucket > 0) {
-                reloadObjects();
+                //reloadObjects();
                 calibrateTextArea();
                 jTextArea1.append("\nPlease wait, deleting selected file(s)");
                 calibrateTextArea();
                 for (int i = 1; i != previous_objectarray_length; i++) {
                     if (d[i].isSelected()) {
-                        del = new Delete(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
-                        del.startc(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
-                        delcounter++;
+                        if (delcounter < 500) {
+                            del = new Delete(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
+                            del.startc(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
+                        }
                     }
+                    delcounter++;
                 }
             } else {
                 jTextArea1.append("\nError: No bucked selected.");
