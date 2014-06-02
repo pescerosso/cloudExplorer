@@ -39,48 +39,6 @@ public class SyncToS3 implements Runnable {
         }
     }
 
-    String convertObject(String what, String operation) {
-
-        if (what.substring(1, 1).contains(":")) {
-            what = what.substring(2, what.length());
-        }
-
-        if (what.contains("/")) {
-            what = what.replace("/", File.separator);
-        }
-
-        if (what.contains("\\")) {
-            what = what.replace("\\", File.separator);
-        }
-
-        int count = 0;
-        int slash_counter = 0;
-        String out_file = null;
-        int another_counter = 0;
-
-        for (int y = 0; y != what.length(); y++) {
-            if (what.substring(y, y + 1).contains(File.separator)) {
-                slash_counter++;
-                another_counter = y;
-            }
-        }
-
-        for (int y = 0; y != what.length(); y++) {
-            if (y == another_counter) {
-                if (operation.contains("download")) {
-                    if (what.contains(File.separator)) {
-                        out_file = (what.substring(y, what.length()));
-                    } else {
-                        out_file = (what);
-                    }
-                } else {
-                    out_file = (what.substring(y + 1, what.length()));
-                }
-            }
-        }
-        return out_file;
-    }
-
     public void run() {
         String[] extensions = new String[]{" "};
         List<File> files = (List<File>) FileUtils.listFiles(location, TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
@@ -107,14 +65,13 @@ public class SyncToS3 implements Runnable {
         }
     }
 
-     String makeDirectory(String what) {
+    String makeDirectory(String what) {
 
-       if (what.substring(1, 1).contains(":")) {
+        if (what.substring(1, 1).contains(":")) {
             what = what.substring(2, what.length());
         }
-       
-       if (what.substring(0, 1).contains("/")) {
-           System.out.print("\n foo");
+
+        if (what.substring(0, 1).contains("/")) {
             what = what.substring(1, what.length());
         }
 
@@ -140,7 +97,7 @@ public class SyncToS3 implements Runnable {
         dir.mkdirs();
         return what;
     }
-     
+
     void startc(File location, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String[] Aobjectarray
     ) {
         (new Thread(new SyncToS3(location, Aaccess_key, Asecret_key, Abucket, Aendpoint, Aobjectarray))).start();

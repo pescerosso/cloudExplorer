@@ -159,10 +159,10 @@ public class Daemon {
 
     String makeDirectory(String what) {
 
-        if (what.contains("C:\\")) {
-            what = what.replace("C:\\", "");
+        if (what.substring(1, 1).contains(":")) {
+            what = what.substring(2, what.length());
         }
-        
+
         if (what.contains("/")) {
             what = what.replace("/", File.separator);
         }
@@ -181,7 +181,7 @@ public class Daemon {
             }
         }
 
-        File dir = new File(what.substring(0, another_counter));
+        File dir = new File(File.separator + what.substring(0, another_counter));
         dir.mkdirs();
         return what;
     }
@@ -199,7 +199,8 @@ public class Daemon {
             }
 
             if (found == 0) {
-                put = new Put(file_found.getAbsolutePath().toString(), access_key, secret_key, bucket, endpoint, file_found.getAbsolutePath().toString());
+                String object = makeDirectory(file_found.getAbsolutePath().toString());
+                put = new Put(file_found.getAbsolutePath().toString(), access_key, secret_key, bucket, endpoint, object);
                 put.run();
                 found = 0;
             }
@@ -226,9 +227,9 @@ public class Daemon {
                 foo[i] = new File(Destination + new_object_name);
                 if (foo[i].exists()) {
                 } else {
-                    makeDirectory(Destination + objectarray[i]);
+                    makeDirectory(Destination + File.separator + objectarray[i]);
                     String object = makeDirectory(objectarray[i]);
-                    get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, Destination + object);
+                    get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, Destination + File.separator + object);
                     get.run();
                 }
             }
