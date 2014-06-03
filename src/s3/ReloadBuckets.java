@@ -22,9 +22,11 @@ public class ReloadBuckets implements Runnable {
     }
 
     public void run() {
-        mainFrame.bucket_thread_status = true;
-        bucketlist = bucketObject.listBuckets(access_key, secret_key, endpoint);
-        mainFrame.bucket_thread_status = false;
+        NewJFrame.bucket_thread_status = true;
+        if (NewJFrame.bucket_thread_status) {
+            bucketlist = bucketObject.listBuckets(access_key, secret_key, endpoint);
+        }
+        NewJFrame.bucket_thread_status = false;
     }
 
     public void startc(String Aaccess_key, String Asecret_key, String Aendpoint) {

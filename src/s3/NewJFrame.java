@@ -64,6 +64,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     boolean limited = true;
     public static boolean object_thread_status;
     public static boolean bucket_thread_status;
+    ReloadBuckets buckets = null;
 
     public NewJFrame() {
         initComponents();
@@ -105,6 +106,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jScrollPane28 = new javax.swing.JScrollPane();
         jButton9 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
         scrollPane1 = new java.awt.ScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -335,6 +337,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
 
+        jButton17.setBackground(java.awt.SystemColor.text);
+        jButton17.setText("Abort");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -378,11 +388,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane27, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 144, Short.MAX_VALUE)
+                        .addGap(0, 114, Short.MAX_VALUE)
                         .addComponent(jButton9)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
-                        .addGap(71, 71, 71))))
+                        .addGap(56, 56, 56))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -424,8 +436,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addComponent(jButton10))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton2)
+                        .addComponent(jButton17)
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
 
         jTabbedPane1.addTab("Settings", jPanel3);
@@ -1043,7 +1056,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     reloadObjects();
                     jTextArea1.append("\nNo objects found for search. \n");
                 } else {
-                    jTextArea1.append("\nLoaded objects. Total number of objects in this bucket: " + objectarray.length + ". Displaying a maximum of: " + initial_display + " objects at a time.");
+                    int display = objectarray.length - 1;
+                    jTextArea1.append("\nLoaded objects. Total number of objects in this bucket: " + display + ". Displaying a maximum of: " + initial_display + " objects at a time.");
                     calibrateTextArea();
                 }
             } catch (Exception searchBar) {
@@ -1220,10 +1234,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             ReloadBuckets buckets = new ReloadBuckets(cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint());
             buckets.run();
             active_bucket = 0;
+
+            while (bucket_thread_status) {
+                System.out.print("\nWaiting");
+            }
+
             String bucketlist = buckets.bucketlist;
             bucketarray = bucketlist.split(" ");
-            while (bucket_thread_status) {
-            }
+            System.out.print("\nDebug");
             drawBuckets();
         } else {
             jTextArea1.append("\nError: Configuration not loaded\n");
@@ -2105,6 +2123,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jButton16ActionPerformed
 
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        buckets.stop();
+    }//GEN-LAST:event_jButton17ActionPerformed
+
     void var() {
         cred.setAccess_key(jTextField1.getText());
         cred.setSecret_key(jTextField2.getText());
@@ -2130,6 +2152,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
