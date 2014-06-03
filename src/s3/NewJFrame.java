@@ -1252,28 +1252,26 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jPanel11.repaint();
             jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
 
-            if (objectarray == null) {
-                try {
-                    for (int h = 1; h != bucketarray.length; h++) {
-                        if (b[h] != null) {
-                            if (b[h].isSelected()) {
-                                ReloadObjects object = new ReloadObjects(cred.getAccess_key(), cred.getSecret_key(), b[h].getText(), cred.getEndpoint());
-                                object.run();
-                                String objectlist = object.objectlist;
-                                objectarray = objectlist.split("@@");
-                                previous_objectarray_length = objectarray.length;
-                            }
+            try {
+                for (int h = 1; h != bucketarray.length; h++) {
+                    if (b[h] != null) {
+                        if (b[h].isSelected()) {
+                            ReloadObjects object = new ReloadObjects(cred.getAccess_key(), cred.getSecret_key(), b[h].getText(), cred.getEndpoint());
+                            object.run();
+                            String objectlist = object.objectlist;
+                            objectarray = objectlist.split("@@");
+                            previous_objectarray_length = objectarray.length;
                         }
                     }
-
-                    while (object_thread_status) {
-                        System.out.print("\nWaiting");
-                    }
-
-                    redrawObjects();
-
-                } catch (Exception listing) {
                 }
+
+                while (object_thread_status) {
+                    System.out.print("\nWaiting");
+                }
+
+                redrawObjects();
+
+            } catch (Exception listing) {
             }
 
         } else {
@@ -1695,10 +1693,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jTextField7.setText(jTextField7.getText().replace("null", ""));
             put = new Put(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name);
             put.startc(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name);
-            objectarray = null;
+
         } else {
             jTextArea1.append("\nError: No bucket selected.");
         }
+        objectarray = null;
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
@@ -2082,7 +2081,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        // TODO add your handling code here:
         put.stop();
     }//GEN-LAST:event_jButton15ActionPerformed
 

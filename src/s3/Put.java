@@ -8,6 +8,8 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.activation.MimetypesFileTypeMap;
 import static s3.NewJFrame.jTextArea1;
 
@@ -62,11 +64,7 @@ public class Put implements Runnable {
 
         try {
             PutObjectResult response = s3Client.putObject(putRequest);
-            message = ("\nUploaded object: " + what);
-            mainFrame.jTextArea1.append(message);
-
-            mainFrame.objectarray = null;
-
+            mainFrame.jTextArea1.append("\nUploaded object: " + what);
         } catch (Exception put) {
         }
 
@@ -77,6 +75,10 @@ public class Put implements Runnable {
 
         put = new Thread(new Put(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint, AObjectKey));
         put.start();
+        try {
+            put.wait();
+        } catch (InterruptedException ex) {
+        }
     }
 
     void stop() {
