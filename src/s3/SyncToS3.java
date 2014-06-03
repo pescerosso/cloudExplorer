@@ -18,6 +18,7 @@ public class SyncToS3 implements Runnable {
     String endpoint = null;
     String secret_key = null;
     String destination = null;
+    public static Boolean running = false;
     File location;
     Get get;
     Thread syncToS3;
@@ -56,8 +57,10 @@ public class SyncToS3 implements Runnable {
 
             if (found == 0) {
                 String object = makeDirectory(file_found.getAbsolutePath().toString());
+              if (SyncToS3.running) {
                 put = new Put(file_found.getAbsolutePath().toString(), access_key, secret_key, bucket, endpoint, object);
                 put.run();
+              }
                 found = 0;
             }
         }
@@ -98,15 +101,15 @@ public class SyncToS3 implements Runnable {
 
     void startc(File location, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String[] Aobjectarray
     ) {
-        syncToS3 = new Thread(new SyncToS3(location, Aaccess_key, Asecret_key, Abucket, Aendpoint, Aobjectarray));
-        syncToS3.start();
-        try {
-            syncToS3.wait();
-        } catch (InterruptedException ex) {
+        if (SyncToS3.running) {
+            syncToS3 = new Thread(new SyncToS3(location, Aaccess_key, Asecret_key, Abucket, Aendpoint, Aobjectarray));
+            syncToS3.start();
+
         }
     }
 
     void stop() {
+        SyncToS3.running = false;
         syncToS3.stop();
         syncToS3.isInterrupted();
         mainFrame.jTextArea1.setText("\nUpload complete or aborted.\n");

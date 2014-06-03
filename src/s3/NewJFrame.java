@@ -62,8 +62,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     boolean isSyncingToS3 = true;
     JButton more = new JButton("Show all Objects");
     boolean limited = true;
-    public static boolean syncing_to_S3 = false;
-    public static boolean syncing_from_S3 = false;
+
     public static boolean object_thread_status;
 
     public NewJFrame() {
@@ -1239,8 +1238,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             limited = false;
         }
 
-        syncing_to_S3 = false;
-        syncing_from_S3 = false;
     }
 
     void reloadObjects() {
@@ -1537,7 +1534,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         if (active_bucket > 0) {
-            syncing_to_S3 = true;
+            //syncing_to_S3 = true;
+            SyncToS3.running = true;
             jTextArea1.setText("\nPlease wait for Sync to complete.");
             calibrateTextArea();
             reloadObjects();
@@ -1548,7 +1546,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 } else {
                     syncToS3 = new SyncToS3(jFileChooser2.getSelectedFile(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), objectarray);
                     syncToS3.startc(jFileChooser2.getSelectedFile(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), objectarray);
-                    // syncToS3.startc(jFileChooser2.getSelectedFile(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), objectarray);
                     objectarray = null;
                 }
             } else {
@@ -1708,7 +1705,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if (active_bucket > 0) {
             objectarray = null;
             reloadObjects();
-            syncing_from_S3 = true;
+            SyncFromS3.running = true;
             if (objectarray.length > 1) {
                 jTextArea1.setText("\nPlease wait for SYNC to complete");
                 calibrateTextArea();
@@ -2090,13 +2087,19 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
 
-        if (syncing_to_S3) {
-            syncToS3.stop();
+        if (SyncToS3.running) {
+            Abort foo = new Abort("To");
+            foo.run();
         }
 
-        if (syncing_from_S3) {
-            syncFromS3.stop();
+        if (SyncFromS3.running) {
+            Abort foo = new Abort("From");
+            foo.run();
         }
+
+//        if (syncing_from_S3) {
+        //          syncFromS3.stop();
+        //    }
     }//GEN-LAST:event_jButton16ActionPerformed
 
     void var() {

@@ -15,6 +15,7 @@ public class SyncFromS3 implements Runnable {
     String endpoint = null;
     String secret_key = null;
     String destination = null;
+    public static Boolean running = false;
     Get get;
     Thread syncFromS3;
 
@@ -80,8 +81,10 @@ public class SyncFromS3 implements Runnable {
 
                         makeDirectory(destination + File.separator + objectarray[i]);
                         String object = makeDirectory(objectarray[i]);
-                        get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, destination + File.separator + object);
-                        get.run();
+                        if (SyncFromS3.running) {
+                            get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, destination + File.separator + object);
+                            get.run();
+                        }
                     }
 
                 }
@@ -93,16 +96,15 @@ public class SyncFromS3 implements Runnable {
     }
 
     void startc(String[] Aobjectarray, String[] AObjectsConverted, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adestination) {
-        syncFromS3 = new Thread(new SyncFromS3(Aobjectarray, AObjectsConverted, Aaccess_key, Asecret_key, Abucket, Aendpoint, Adestination));
-        syncFromS3.start();
-        try {
-            syncFromS3.wait();
-        } catch (InterruptedException ex) {
 
+        if (SyncFromS3.running) {
+            syncFromS3 = new Thread(new SyncFromS3(Aobjectarray, AObjectsConverted, Aaccess_key, Asecret_key, Abucket, Aendpoint, Adestination));
+            syncFromS3.start();
         }
     }
 
     void stop() {
+        SyncFromS3.running = false;
         syncFromS3.stop();
         syncFromS3.isInterrupted();
         mainFrame.jTextArea1.setText("\nAborted Download\n");
