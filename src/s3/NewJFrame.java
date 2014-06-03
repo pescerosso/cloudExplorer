@@ -2096,10 +2096,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             Abort foo = new Abort("From");
             foo.run();
         }
-
-//        if (syncing_from_S3) {
-        //          syncFromS3.stop();
-        //    }
     }//GEN-LAST:event_jButton16ActionPerformed
 
     void var() {
