@@ -892,6 +892,9 @@
                               <Color blue="ff" green="ff" id="text" palette="3" red="ff" type="palette"/>
                             </Property>
                           </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
 
                           <Layout>
                             <DimensionLayout dim="0">

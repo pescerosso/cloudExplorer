@@ -62,7 +62,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     boolean isSyncingToS3 = true;
     JButton more = new JButton("Show all Objects");
     boolean limited = true;
-    boolean syncing_to_S3 = false;
+    public static boolean syncing_to_S3 = false;
+    public static boolean syncing_from_S3 = false;
+    public static boolean object_thread_status;
 
     public NewJFrame() {
         initComponents();
@@ -1221,6 +1223,26 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }
 
+    void redrawObjects() {
+        jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
+
+        for (int h = 1; h != objectarray.length; h++) {
+            jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.Y_AXIS));
+            d[h] = new JRadioButton();
+            d[h].setText(objectarray[h]);
+        }
+        jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
+
+        if (objectarray.length > initial_display) {
+            limited = true;
+        } else {
+            limited = false;
+        }
+
+        syncing_to_S3 = false;
+        syncing_from_S3 = false;
+    }
+
     void reloadObjects() {
 
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
@@ -1235,30 +1257,20 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     for (int h = 1; h != bucketarray.length; h++) {
                         if (b[h] != null) {
                             if (b[h].isSelected()) {
-                                String objectlist = bucket.listBucketContents(cred.getAccess_key(), cred.getSecret_key(), b[h].getText(), cred.getEndpoint());
+                                ReloadObjects object = new ReloadObjects(cred.getAccess_key(), cred.getSecret_key(), b[h].getText(), cred.getEndpoint());
+                                object.run();
+                                String objectlist = object.objectlist;
                                 objectarray = objectlist.split("@@");
                                 previous_objectarray_length = objectarray.length;
                             }
                         }
                     }
 
-                    jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
-
-                    for (int h = 1; h != objectarray.length; h++) {
-                        jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.Y_AXIS));
-                        d[h] = new JRadioButton();
-                        d[h].setText(objectarray[h]);
+                    while (object_thread_status) {
+                        System.out.print("\nWaiting");
                     }
 
-                    jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
-
-                    if (objectarray.length > initial_display) {
-                        limited = true;
-                    } else {
-                        limited = false;
-                    }
-
-                    syncing_to_S3 = false;
+                    redrawObjects();
 
                 } catch (Exception listing) {
                 }
@@ -1536,9 +1548,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 if (jFileChooser2.getSelectedFile() == null) {
                     jTextArea1.append("\nEFrror: please select a destination directory.");
                 } else {
-                    syncToS3.isRunning = true;
                     syncToS3 = new SyncToS3(jFileChooser2.getSelectedFile(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), objectarray);
                     syncToS3.startc(jFileChooser2.getSelectedFile(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), objectarray);
+                    // syncToS3.startc(jFileChooser2.getSelectedFile(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), objectarray);
                     objectarray = null;
                 }
             } else {
@@ -1697,6 +1709,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if (active_bucket > 0) {
             objectarray = null;
             reloadObjects();
+            syncing_from_S3 = true;
             if (objectarray.length > 1) {
                 jTextArea1.setText("\nPlease wait for SYNC to complete");
                 calibrateTextArea();
@@ -1717,7 +1730,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             }
                         }
 
-                        SyncFromS3.isRunning = true;
                         syncFromS3 = new SyncFromS3(objectarray, ObjectsConverted, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination);
                         syncFromS3.startc(objectarray, ObjectsConverted, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), Destination);
                     }
@@ -1919,7 +1931,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                 if (d[i].isSelected()) {
                                     download.setVisible(false);
                                     String new_object_name = convertObject(d[i].getText(), "download");
-                                    Get.isRunning = true;
                                     get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name);
                                     get.startc(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name);
                                     d[i].setSelected(false);
@@ -2024,7 +2035,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             for (int i = 1; i != previous_objectarray_length; i++) {
                 if (d[i].isSelected()) {
                     String new_object_name = convertObject(d[i].getText(), "download");
-                    Get.isRunning = true;
                     get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file);
                     get.run();
                     try {
@@ -2084,12 +2094,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         if (syncing_to_S3) {
             syncToS3.stop();
-            isSyncingToS3 = false;
-        } else {
+        }
+
+        if (syncing_from_S3) {
             syncFromS3.stop();
         }
-        Put.isRunning = false;
-
     }//GEN-LAST:event_jButton16ActionPerformed
 
     void var() {
@@ -2156,7 +2165,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenuItem jMenuItem9;
     public static javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
+    public javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     public javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;

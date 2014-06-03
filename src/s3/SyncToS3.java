@@ -2,6 +2,8 @@ package s3;
 
 import java.io.File;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import static s3.NewJFrame.jTextArea1;
@@ -9,7 +11,6 @@ import static s3.NewJFrame.jTextArea1;
 public class SyncToS3 implements Runnable {
 
     NewJFrame mainFrame;
-    public static volatile boolean isRunning = true;
     String[] objectarray;
     String[] ObjectsConverted;
     String access_key = null;
@@ -54,13 +55,10 @@ public class SyncToS3 implements Runnable {
             }
 
             if (found == 0) {
-                if (isRunning) {
-                    String object = makeDirectory(file_found.getAbsolutePath().toString());
-                    put = new Put(file_found.getAbsolutePath().toString(), access_key, secret_key, bucket, endpoint, object);
-                    put.run();
-                    found = 0;
-
-                }
+                String object = makeDirectory(file_found.getAbsolutePath().toString());
+                put = new Put(file_found.getAbsolutePath().toString(), access_key, secret_key, bucket, endpoint, object);
+                put.run();
+                found = 0;
             }
         }
     }
@@ -100,11 +98,17 @@ public class SyncToS3 implements Runnable {
 
     void startc(File location, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String[] Aobjectarray
     ) {
-        (new Thread(new SyncToS3(location, Aaccess_key, Asecret_key, Abucket, Aendpoint, Aobjectarray))).start();
+        syncToS3 = new Thread(new SyncToS3(location, Aaccess_key, Asecret_key, Abucket, Aendpoint, Aobjectarray));
+        syncToS3.start();
+        try {
+            syncToS3.wait();
+        } catch (InterruptedException ex) {
+        }
     }
 
     void stop() {
-        isRunning = false;
+        syncToS3.stop();
+        syncToS3.isInterrupted();
         mainFrame.jTextArea1.setText("\nUpload complete or aborted.\n");
     }
 

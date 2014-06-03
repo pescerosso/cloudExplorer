@@ -23,6 +23,7 @@ public class Put implements Runnable {
     String ObjectKey = null;
     String secret_key = null;
     Thread put;
+    public static Boolean running = true;
 
     public void calibrate() {
         try {

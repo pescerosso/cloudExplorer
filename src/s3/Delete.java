@@ -5,7 +5,6 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
-import static s3.Get.isRunning;
 import static s3.NewJFrame.jTextArea1;
 
 public class Delete implements Runnable {
@@ -59,7 +58,6 @@ public class Delete implements Runnable {
     }
 
     void stop() {
-        isRunning = false;
         delete.stop();
         mainFrame.jTextArea1.setText("\nDownload compelted or aborted.\n");
     }

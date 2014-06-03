@@ -1,12 +1,13 @@
 package s3;
 
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static s3.NewJFrame.jTextArea1;
 
 public class SyncFromS3 implements Runnable {
 
     NewJFrame mainFrame;
-    public static volatile boolean isRunning = true;
     String[] objectarray;
     String[] ObjectsConverted;
     String access_key = null;
@@ -76,15 +77,11 @@ public class SyncFromS3 implements Runnable {
                         mainFrame.jTextArea1.append("\n" + objectarray[i] + " already exists on this machine.");
                         calibrate();
                     } else {
-                        // Get.isRunning = true;
-                        if (isRunning) {
-                            makeDirectory(destination + File.separator + objectarray[i]);
-                            String object = makeDirectory(objectarray[i]);
-                            get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, destination + File.separator + object);
-                            get.run();
 
-                        } else {
-                        }
+                        makeDirectory(destination + File.separator + objectarray[i]);
+                        String object = makeDirectory(objectarray[i]);
+                        get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, destination + File.separator + object);
+                        get.run();
                     }
 
                 }
@@ -98,10 +95,14 @@ public class SyncFromS3 implements Runnable {
     void startc(String[] Aobjectarray, String[] AObjectsConverted, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adestination) {
         syncFromS3 = new Thread(new SyncFromS3(Aobjectarray, AObjectsConverted, Aaccess_key, Asecret_key, Abucket, Aendpoint, Adestination));
         syncFromS3.start();
+        try {
+            syncFromS3.wait();
+        } catch (InterruptedException ex) {
+
+        }
     }
 
     void stop() {
-        SyncFromS3.isRunning = false;
         syncFromS3.stop();
         syncFromS3.isInterrupted();
         mainFrame.jTextArea1.setText("\nAborted Download\n");
