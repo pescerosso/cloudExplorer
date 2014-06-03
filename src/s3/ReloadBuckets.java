@@ -7,13 +7,11 @@ public class ReloadBuckets implements Runnable {
     BucketClass bucketObject = new BucketClass();
     String what = null;
     String access_key = null;
-    String bucket = null;
     String endpoint = null;
-    String ObjectKey = null;
     String secret_key = null;
     String bucketlist = null;
 
-    public String objectlist() {
+    public String bucketlist() {
         return bucketlist;
     }
 
@@ -24,7 +22,9 @@ public class ReloadBuckets implements Runnable {
     }
 
     public void run() {
+        mainFrame.bucket_thread_status = true;
         bucketlist = bucketObject.listBuckets(access_key, secret_key, endpoint);
+        mainFrame.bucket_thread_status = false;
     }
 
     public void startc(String Aaccess_key, String Asecret_key, String Aendpoint) {

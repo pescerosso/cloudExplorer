@@ -62,8 +62,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     boolean isSyncingToS3 = true;
     JButton more = new JButton("Show all Objects");
     boolean limited = true;
-
     public static boolean object_thread_status;
+    public static boolean bucket_thread_status;
 
     public NewJFrame() {
         initComponents();
@@ -1184,39 +1184,47 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         calibrateTextArea();
     }
 
+    void drawBuckets() {
+        jPanel5.removeAll();
+        jPanel5.revalidate();
+        jPanel5.repaint();
+        jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.PAGE_AXIS));
+
+        if (bucketarray != null) {
+            for (int h = 1; h != bucketarray.length; h++) {
+                jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
+                b[h] = new JRadioButton();
+                b[h].setText(bucketarray[h]);
+                b[h].addItemListener(this);
+                jPanel5.add(b[h]);
+                setLocation(h, 5);
+                jPanel5.revalidate();
+                validate();
+            }
+
+            objectarray = null;
+            reloadObjects();
+
+            if (bucketarray.length > 1 && b[1] != null) {
+                active_bucket = 2;
+                b[1].doClick();
+            }
+        }
+
+    }
+
     void reloadBuckets() {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             var();
             bucketarray = null;
+            ReloadBuckets buckets = new ReloadBuckets(cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint());
+            buckets.run();
             active_bucket = 0;
-            String bucketlist = bucket.listBuckets(cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint());
+            String bucketlist = buckets.bucketlist;
             bucketarray = bucketlist.split(" ");
-            jPanel5.removeAll();
-            jPanel5.revalidate();
-            jPanel5.repaint();
-            jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.PAGE_AXIS));
-
-            if (bucketarray != null) {
-                for (int h = 1; h != bucketarray.length; h++) {
-                    jPanel5.setLayout(new BoxLayout(jPanel5, BoxLayout.Y_AXIS));
-                    b[h] = new JRadioButton();
-                    b[h].setText(bucketarray[h]);
-                    b[h].addItemListener(this);
-                    jPanel5.add(b[h]);
-                    setLocation(h, 5);
-                    jPanel5.revalidate();
-                    validate();
-                }
-
-                objectarray = null;
-                reloadObjects();
-
-                if (bucketarray.length > 1 && b[1] != null) {
-                    active_bucket = 2;
-                    b[1].doClick();
-                }
+            while (bucket_thread_status) {
             }
-
+            drawBuckets();
         } else {
             jTextArea1.append("\nError: Configuration not loaded\n");
         }
@@ -1263,7 +1271,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 }
 
                 while (object_thread_status) {
-                    System.out.print("\nWaiting");
                 }
 
                 redrawObjects();
