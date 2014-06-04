@@ -11,6 +11,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -65,6 +68,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     public static boolean object_thread_status;
     public static boolean bucket_thread_status;
     ReloadBuckets buckets = null;
+    boolean host_alive = false;
 
     public NewJFrame() {
         initComponents();
@@ -1227,25 +1231,52 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     }
 
+    Boolean ping(String address) {
+        host_alive = true;
+        try {
+            InetAddress s3address = InetAddress.getByName(address);
+            jTextArea1.append("\nLooking up: " + s3address.isReachable(3000));
+            calibrateTextArea();
+        } catch (UnknownHostException e) {
+            host_alive = false;
+        } catch (IOException e) {
+            host_alive = false;
+        }
+        return host_alive;
+    }
+
     void reloadBuckets() {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             var();
+            String host = null;
             bucketarray = null;
-            ReloadBuckets buckets = new ReloadBuckets(cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint());
-            buckets.run();
-            active_bucket = 0;
-
-            while (bucket_thread_status) {
-                System.out.print("\nWaiting");
+            if (jTextField3.getText().contains("http") || jTextField3.getText().contains("https")) {
+                if (jTextField3.getText().contains("http")) {
+                    host = jTextField3.getText().replace("http://", "");
+                } else {
+                    host = jTextField3.getText().replace("https://", "");
+                }
             }
+            if (ping(host)) {
+                ReloadBuckets buckets = new ReloadBuckets(cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint());
+                buckets.run();
+                active_bucket = 0;
 
-            String bucketlist = buckets.bucketlist;
-            bucketarray = bucketlist.split(" ");
-            System.out.print("\nDebug");
-            drawBuckets();
+                while (bucket_thread_status) {
+                    System.out.print("\nWaiting");
+                }
+
+                String bucketlist = buckets.bucketlist;
+                bucketarray = bucketlist.split(" ");
+                System.out.print("\nDebug");
+                drawBuckets();
+            } else {
+                jTextArea1.append("\nError: host not found");
+            }
         } else {
             jTextArea1.append("\nError: Configuration not loaded\n");
         }
+        calibrateTextArea();
     }
 
     void redrawObjects() {
