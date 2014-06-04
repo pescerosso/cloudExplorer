@@ -39,7 +39,7 @@ public class HostChecker implements Runnable {
             host = host.replace("http://", "");
         }
 
-        if (ping(host)) {
+        if (ping(host) || host.contains("amazon")) {
             mainFrame.reloadBuckets();
         } else {
             NewJFrame.jTextArea1.append("\nError: host not found");
