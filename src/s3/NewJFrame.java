@@ -110,7 +110,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jScrollPane28 = new javax.swing.JScrollPane();
         jButton9 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
         scrollPane1 = new java.awt.ScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -341,14 +340,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
 
-        jButton17.setBackground(java.awt.SystemColor.text);
-        jButton17.setText("Abort");
-        jButton17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -392,13 +383,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane27, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 114, Short.MAX_VALUE)
+                        .addGap(0, 105, Short.MAX_VALUE)
                         .addComponent(jButton9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
-                        .addGap(56, 56, 56))))
+                        .addGap(90, 90, 90))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,9 +428,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addComponent(jButton8)
                         .addComponent(jButton10))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
-                        .addComponent(jButton17)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2)))
                 .addGap(18, 18, 18))
         );
 
@@ -1231,48 +1219,23 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     }
 
-    Boolean ping(String address) {
-        host_alive = true;
-        try {
-            InetAddress s3address = InetAddress.getByName(address);
-            jTextArea1.append("\nLooking up: " + s3address.isReachable(3000));
-            calibrateTextArea();
-        } catch (UnknownHostException e) {
-            host_alive = false;
-        } catch (IOException e) {
-            host_alive = false;
-        }
-        return host_alive;
-    }
-
     void reloadBuckets() {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             var();
-            String host = null;
             bucketarray = null;
-            if (jTextField3.getText().contains("http") || jTextField3.getText().contains("https")) {
-                if (jTextField3.getText().contains("http")) {
-                    host = jTextField3.getText().replace("http://", "");
-                } else {
-                    host = jTextField3.getText().replace("https://", "");
-                }
-            }
-            if (ping(host)) {
-                ReloadBuckets buckets = new ReloadBuckets(cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint());
-                buckets.run();
-                active_bucket = 0;
 
-                while (bucket_thread_status) {
-                    System.out.print("\nWaiting");
-                }
+            ReloadBuckets buckets = new ReloadBuckets(cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint());
+            buckets.run();
+            active_bucket = 0;
 
-                String bucketlist = buckets.bucketlist;
-                bucketarray = bucketlist.split(" ");
-                System.out.print("\nDebug");
-                drawBuckets();
-            } else {
-                jTextArea1.append("\nError: host not found");
+            while (bucket_thread_status) {
+                System.out.print("\nWaiting");
             }
+
+            String bucketlist = buckets.bucketlist;
+            bucketarray = bucketlist.split(" ");
+            drawBuckets();
+
         } else {
             jTextArea1.append("\nError: Configuration not loaded\n");
         }
@@ -1692,14 +1655,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         } else {
             reloadAccounts();
             if (active_account > 0) {
-                bucketLoader();
+                HostChecker hostchecker = new HostChecker(jTextField3.getText(), this);
+                hostchecker.run();
             } else {
                 jTextArea1.append("\nError: No account has been selected.");
             }
         }
 
     }//GEN-LAST:event_jButton9ActionPerformed
-    void bucketLoader() {
+    public void bucketLoader() {
         //preload();
         jTextArea1.append("\nPlease wait, loading Buckets.");
         calibrateTextArea();
@@ -2154,10 +2118,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jButton16ActionPerformed
 
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        buckets.stop();
-    }//GEN-LAST:event_jButton17ActionPerformed
-
     void var() {
         cred.setAccess_key(jTextField1.getText());
         cred.setSecret_key(jTextField2.getText());
@@ -2183,7 +2143,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -2249,7 +2208,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    public static javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
