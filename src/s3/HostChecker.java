@@ -31,12 +31,10 @@ public class HostChecker implements Runnable {
 
     public void run() {
 
-        if (host.contains("http") || host.contains("https")) {
-            if (host.contains("http")) {
-                host = host.replace("http://", "");
-            } else {
-                host = host.replace("https://", "");
-            }
+        if (host.contains("https")) {
+            host = host.replace("https://", "");
+        } else {
+            host = host.replace("http://", "");
         }
 
         if (ping(host)) {
