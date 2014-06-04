@@ -1936,7 +1936,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         reloadObjects();
         jTextField10.setText("");
         jButton6.doClick();
-        jTextArea1.append("\nMultiple Delete operation finished.");
+        jTextArea1.append("\n Delete operation finished.");
 
         calibrateTextArea();
     }//GEN-LAST:event_jButton4ActionPerformed
