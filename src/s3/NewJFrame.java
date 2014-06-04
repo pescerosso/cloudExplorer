@@ -1176,12 +1176,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
 
             objectarray = null;
-           // reloadObjects();
-
-            if (bucketarray.length > 1 && b[1] != null) {
-                active_bucket = 2;
-           //     b[1].doClick();
-            }
+        
         }
 
     }

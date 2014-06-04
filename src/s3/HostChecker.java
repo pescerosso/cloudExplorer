@@ -16,7 +16,7 @@ public class HostChecker implements Runnable {
         host_alive = true;
         try {
             InetAddress s3address = InetAddress.getByName(address);
-            System.out.print("\nLooking up: " + s3address.isReachable(10));
+            System.out.print("\nS3 Host Found = " + s3address.isReachable(10));
         } catch (UnknownHostException e) {
             host_alive = false;
         } catch (IOException e) {
