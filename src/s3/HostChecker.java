@@ -10,16 +10,18 @@ public class HostChecker implements Runnable {
     public static String host;
     NewJFrame mainFrame;
 
-    Boolean ping(String address) {
+    boolean ping(String address) {
         Boolean host_alive = true;
         try {
             InetAddress s3address = InetAddress.getByName(address);
-            System.out.print("\nS3 Host Found = " + s3address.isReachable(100));
-        } catch (UnknownHostException e) {
-            host_alive = false;
-        } catch (IOException e) {
-            host_alive = false;
+            if (s3address.isReachable(100)) {
+                host_alive = true;
+            } else {
+                host_alive = false;
+            }
+        } catch (Exception ping) {
         }
+
         return host_alive;
     }
 
@@ -38,7 +40,6 @@ public class HostChecker implements Runnable {
         }
 
         if (ping(host)) {
-            System.out.print("\nLoading Buckets foo!");
             mainFrame.reloadBuckets();
         } else {
             NewJFrame.jTextArea1.append("\nError: host not found");
