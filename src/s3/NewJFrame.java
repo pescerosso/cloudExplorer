@@ -1224,11 +1224,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 for (int h = 1; h != bucketarray.length; h++) {
                     if (b[h] != null) {
                         if (b[h].isSelected()) {
-                            ReloadObjects object = new ReloadObjects(cred.getAccess_key(), cred.getSecret_key(), b[h].getText(), cred.getEndpoint());
+                            ReloadObjects object = new ReloadObjects(cred.getAccess_key(), cred.getSecret_key(), b[h].getText(), cred.getEndpoint(), this);
                             object.run();
-                            String objectlist = object.objectlist;
-                            objectarray = objectlist.split("@@");
-                            previous_objectarray_length = objectarray.length;
                         }
                     }
                 }

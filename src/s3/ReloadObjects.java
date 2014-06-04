@@ -13,25 +13,23 @@ public class ReloadObjects implements Runnable {
     String secret_key = null;
     String objectlist = null;
 
-    public String objectlist() {
-        return objectlist;
-    }
-
-    public ReloadObjects(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint) {
+    public ReloadObjects(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, NewJFrame Frame) {
         access_key = Aaccess_key;
         secret_key = Asecret_key;
         bucket = Abucket;
         endpoint = Aendpoint;
+        mainFrame = Frame;
     }
 
     public void run() {
-        mainFrame.object_thread_status = true;
+
         objectlist = bucketObject.listBucketContents(access_key, secret_key, bucket, endpoint);
-        mainFrame.object_thread_status = false;
+        mainFrame.objectarray = objectlist.split("@@");
+        mainFrame.previous_objectarray_length = mainFrame.objectarray.length;
     }
 
     public void startc(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint) {
-        reloadObjects = new Thread(new ReloadObjects(Aaccess_key, Asecret_key, Abucket, Aendpoint));
+        reloadObjects = new Thread(new ReloadObjects(Aaccess_key, Asecret_key, Abucket, Aendpoint, mainFrame));
         reloadObjects.start();
     }
 
