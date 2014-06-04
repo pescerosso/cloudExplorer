@@ -11,9 +11,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -64,9 +61,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     SyncToS3 syncToS3;
     boolean isSyncingToS3 = true;
     JButton more = new JButton("Show all Objects");
-    boolean limited = true;
     public static boolean object_thread_status;
-    public static boolean bucket_thread_status;
     ReloadBuckets buckets = null;
     boolean host_alive = false;
 
@@ -991,32 +986,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         return out_file;
     }
 
-    public void loadBuckets() {
-        //preload();
-        jTextArea1.append("\nPlease wait, loading Buckets.");
-        calibrateTextArea();
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
-                    var();
-                    reloadBuckets();
-                } else {
-                    jTextArea1.append("\nError: Configuration not loaded\n");
-                }
-                calibrateTextArea();
-            }
-        });
-    }
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if (active_bucket > 0) {
-
-            more.addActionListener(new ActionListener() {
-
-                public void actionPerformed(ActionEvent e) {
-                    limited = false;
-                    jButton6.doClick();
-                }
-            });
 
             reloadObjects();
 
@@ -1026,11 +997,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
                 jTabbedPane1.setSelectedIndex(1);
 
-                if (limited) {
-                    jPanel11.add(more);
-                } else {
-                    display_counter = objectarray.length;
-                }
+                display_counter = objectarray.length;
 
                 for (int i = 1; i != display_counter; i++) {
                     if (d[i] != null) {
@@ -1223,19 +1190,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             var();
             bucketarray = null;
-
-            ReloadBuckets buckets = new ReloadBuckets(cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint());
+            ReloadBuckets buckets = new ReloadBuckets(cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), this);
             buckets.run();
             active_bucket = 0;
-
-            while (bucket_thread_status) {
-                System.out.print("\nWaiting");
-            }
-
-            String bucketlist = buckets.bucketlist;
-            bucketarray = bucketlist.split(" ");
-            drawBuckets();
-
         } else {
             jTextArea1.append("\nError: Configuration not loaded\n");
         }
@@ -1251,12 +1208,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             d[h].setText(objectarray[h]);
         }
         jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
-
-        if (objectarray.length > initial_display) {
-            limited = true;
-        } else {
-            limited = false;
-        }
 
     }
 
@@ -1322,7 +1273,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
             var();
-            // reloadBuckets();
             String response = JOptionPane.showInputDialog(null, "Bucket Name: ", "Create a bucket", JOptionPane.OK_CANCEL_OPTION);
             jTextArea1.append("\n" + bucket.makeBucket(cred.getAccess_key(), cred.getSecret_key(), response.toLowerCase(), cred.getEndpoint(), cred.getRegion()));
             reloadBuckets();
@@ -1542,7 +1492,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             put.startc(temp_file, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField6.getText());
             jTextArea1.append("\nSaved Object\n");
             objectarray = null;
-            //reloadBuckets();
             b[active_bucket].setSelected(true);
         } else {
             jTextArea1.append("\nError: no bucket selected.");
@@ -1663,24 +1612,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
 
     }//GEN-LAST:event_jButton9ActionPerformed
-    public void bucketLoader() {
-        //preload();
-        jTextArea1.append("\nPlease wait, loading Buckets.");
-        calibrateTextArea();
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                if ((jTextField1.getText().length() > 1 || jTextField2.getText().length() > 1)) {
-                    var();
-                    reloadBuckets();
-                    jTabbedPane1.setSelectedIndex(1);
-                } else {
-                    jTextArea1.append("\nError: Configuration not loaded\n");
-                }
-                calibrateTextArea();
-            }
-        });
 
-    }
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         String save = cred.writeConfig(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), jTextField8.getText(), jTextField9.getText());
         jTextArea1.append(save);
@@ -2201,7 +2133,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    public static javax.swing.JTabbedPane jTabbedPane1;
     public static javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea4;

@@ -42,7 +42,7 @@ public class HostChecker implements Runnable {
         }
 
         if (ping(host)) {
-            mainFrame.bucketLoader();
+            mainFrame.reloadBuckets();
         } else {
             NewJFrame.jTextArea1.append("\nError: host not found");
         }

@@ -15,22 +15,22 @@ public class ReloadBuckets implements Runnable {
         return bucketlist;
     }
 
-    public ReloadBuckets(String Aaccess_key, String Asecret_key, String Aendpoint) {
+    public ReloadBuckets(String Aaccess_key, String Asecret_key, String Aendpoint, NewJFrame Frame) {
         access_key = Aaccess_key;
         secret_key = Asecret_key;
         endpoint = Aendpoint;
+        mainFrame = Frame;
     }
 
     public void run() {
-        NewJFrame.bucket_thread_status = true;
-        if (NewJFrame.bucket_thread_status) {
-            bucketlist = bucketObject.listBuckets(access_key, secret_key, endpoint);
-        }
-        NewJFrame.bucket_thread_status = false;
+        bucketlist = bucketObject.listBuckets(access_key, secret_key, endpoint);
+        mainFrame.bucketarray = bucketlist.split(" ");
+        mainFrame.drawBuckets();
+        mainFrame.jTabbedPane1.setSelectedIndex(1);
     }
 
-    public void startc(String Aaccess_key, String Asecret_key, String Aendpoint) {
-        reloadBuckets = new Thread(new ReloadBuckets(Aaccess_key, Asecret_key, Aendpoint));
+    public void startc(String Aaccess_key, String Asecret_key, String Aendpoint, NewJFrame mainFrame) {
+        reloadBuckets = new Thread(new ReloadBuckets(Aaccess_key, Asecret_key, Aendpoint, mainFrame));
         reloadBuckets.start();
     }
 
