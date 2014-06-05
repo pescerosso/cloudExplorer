@@ -33,7 +33,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     String Home = System.getProperty("user.home");
     String OS = System.getProperty("os.name");
     String[] bucketarray = null;
-    String[] objectarray = null;
+    public String[] objectarray = null;
     String[] syncarray = null;
     String[] account_array = new String[20];
     String[] simple_account_array = new String[account_array.length];
@@ -41,7 +41,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     int object_size = 500000;
     int total_accounts = 0;
     JRadioButton b[] = new JRadioButton[object_size];
-    JRadioButton d[] = new JRadioButton[object_size];
+    public JRadioButton d[] = new JRadioButton[object_size];
     JRadioButton f[] = new JRadioButton[account_array.length];
     int active_bucket = 0;
     String object_acl_change = null;
@@ -68,6 +68,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     public ArrayList<String> versioning_date;
     public ArrayList<String> versioning_name;
     public Boolean versionDownload = false;
+    ShowVersions showVersions;
 
     public NewJFrame() {
         initComponents();
@@ -2083,39 +2084,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         if (active_bucket > 0) {
-            String foo = null;
-            versioning_id = new ArrayList<>();
-            versioning_name = new ArrayList<>();
-            versioning_date = new ArrayList<>();
 
             for (int i = 1; i != objectarray.length; i++) {
                 if (d[i].isSelected()) {
-                    Versioning version = new Versioning(this);
-                    version.getVersions(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
+                    showVersions = new ShowVersions(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), this);
+                    showVersions.run();
                     break;
                 }
             }
-
-            jPanel11.removeAll();
-            jPanel11.revalidate();
-            jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
-            jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.Y_AXIS));
-            int i = 0;
-
-            for (String what : versioning_id) {
-                if (what != null) {
-                    d[i] = new JRadioButton();
-                    d[i].setText(versioning_name.get(i) + "     " + versioning_date.get(i));
-                    jPanel11.add(d[i]);
-                    versionDownload = true;
-                }
-                i++;
-            }
-
-            jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.Y_AXIS));
-            jPanel11.repaint();
-            jPanel11.revalidate();
-            jPanel11.validate();
 
         } else {
             jTextArea1.append("\nError: No bucket has been selected");
