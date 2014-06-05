@@ -64,6 +64,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     public static boolean object_thread_status;
     ReloadBuckets buckets = null;
     boolean host_alive = false;
+    public String[] versioning_array = new String[20];
 
     public NewJFrame() {
         initComponents();
@@ -148,11 +149,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
@@ -858,6 +861,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         });
         jMenu3.add(jMenuItem2);
 
+        jMenuItem11.setText("Enable Versioning");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem11);
+
         jMenuItem3.setText("Delete");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -893,6 +904,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
         jMenu2.add(jMenuItem14);
+
+        jMenuItem10.setText("Show Versions");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem10);
 
         jMenuItem8.setText("View in Image Viewer");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
@@ -1016,7 +1035,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jTextArea1.append("\nNo objects found for search. \n");
                 } else {
                     int display = objectarray.length - 1;
-                    jTextArea1.append("\nLoaded objects. Total number of objects in this bucket: " + display + ". Displaying a maximum of: " + initial_display + " objects at a time.");
+                    jTextArea1.append("\nLoaded objects. Total number of objects in this bucket: " + display);
                     calibrateTextArea();
                 }
             } catch (Exception searchBar) {
@@ -1176,7 +1195,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
 
             objectarray = null;
-        
+
         }
 
     }
@@ -2042,6 +2061,41 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jButton16ActionPerformed
 
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        String foo = null;
+
+        for (int i = 1; i != objectarray.length; i++) {
+            if (d[i].isSelected()) {
+                Versioning version = new Versioning(this);
+                version.getVersions(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
+                break;
+            }
+        }
+
+        jPanel11.removeAll();
+        jPanel11.revalidate();
+        jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
+        jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.Y_AXIS));
+        for (int i = 0; i != versioning_array.length; i++) {
+            if (versioning_array[i] != null) {
+                d[i] = new JRadioButton();
+                d[i].setText(versioning_array[i]);
+                jPanel11.add(d[i]);
+            }
+        }
+        jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.Y_AXIS));
+        jPanel11.repaint();
+        jPanel11.revalidate();
+        jPanel11.validate();
+
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        jTextArea1.append(bucket.enableVersioning(cred.getAccess_key(), cred.getSecret_key(), b[active_bucket].getText(), cred.getEndpoint(), cred.getRegion()));
+        calibrateTextArea();
+
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
     void var() {
         cred.setAccess_key(jTextField1.getText());
         cred.setSecret_key(jTextField2.getText());
@@ -2094,6 +2148,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
