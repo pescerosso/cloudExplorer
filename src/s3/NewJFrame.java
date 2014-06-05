@@ -2105,7 +2105,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             for (String what : versioning_id) {
                 if (what != null) {
                     d[i] = new JRadioButton();
-                    d[i].setText(versioning_date.get(i) + " " + what);
+                    d[i].setText(versioning_name.get(i) + "     " + versioning_date.get(i));
                     jPanel11.add(d[i]);
                     versionDownload = true;
                 }
