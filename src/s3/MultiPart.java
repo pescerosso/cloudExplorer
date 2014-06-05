@@ -21,7 +21,7 @@ public class MultiPart implements Runnable {
 
     String message = null;
     NewJFrame mainFrame;
-    public static boolean isRunning = true;
+    public static boolean Running = true;
     String what = null;
     String access_key = null;
     String bucket = null;
@@ -29,7 +29,6 @@ public class MultiPart implements Runnable {
     String ObjectKey = null;
     String secret_key = null;
     Thread multipart;
-    public static Boolean running = true;
 
     public void calibrate() {
         try {
@@ -72,35 +71,37 @@ public class MultiPart implements Runnable {
         long partSize = 5 * 1024 * 1024; // Set part size to 5 MB.
 
         try {
-            // Step 2: Upload parts.
-            long filePosition = 0;
-            for (int i = 1; filePosition < contentLength; i++) {
-                // Last part can be less than 5 MB. Adjust part size.
-                partSize = Math.min(partSize, (contentLength - filePosition));
+            while (Running) {
+                // Step 2: Upload parts.
+                long filePosition = 0;
+                for (int i = 1; filePosition < contentLength; i++) {
+                    // Last part can be less than 5 MB. Adjust part size.
+                    partSize = Math.min(partSize, (contentLength - filePosition));
 
-                // Create request to upload a part.
-                UploadPartRequest uploadRequest = new UploadPartRequest()
-                        .withBucketName(bucket).withKey(ObjectKey)
-                        .withUploadId(initResponse.getUploadId()).withPartNumber(i)
-                        .withFileOffset(filePosition)
-                        .withFile(file)
-                        .withPartSize(partSize);
+                    // Create request to upload a part.
+                    UploadPartRequest uploadRequest = new UploadPartRequest()
+                            .withBucketName(bucket).withKey(ObjectKey)
+                            .withUploadId(initResponse.getUploadId()).withPartNumber(i)
+                            .withFileOffset(filePosition)
+                            .withFile(file)
+                            .withPartSize(partSize);
 
-                // Upload part and add response to our list.
-                mainFrame.jTextArea1.append("\nUploading part " + uploadRequest.getPartNumber() + " of: " + ObjectKey);
-                calibrate();
-                partETags.add(s3Client.uploadPart(uploadRequest).getPartETag());
-                filePosition += partSize;
+                    // Upload part and add response to our list.
+                    mainFrame.jTextArea1.append("\nUploading part " + uploadRequest.getPartNumber() + " of: " + ObjectKey);
+                    calibrate();
+                    partETags.add(s3Client.uploadPart(uploadRequest).getPartETag());
+                    filePosition += partSize;
+                }
+
+                // Step 3: Complete.
+                CompleteMultipartUploadRequest compRequest = new CompleteMultipartUploadRequest(bucket,
+                        ObjectKey,
+                        initResponse.getUploadId(),
+                        partETags);
+
+                s3Client.completeMultipartUpload(compRequest);
+                mainFrame.jTextArea1.append("\nUploaded object: " + what);
             }
-
-            // Step 3: Complete.
-            CompleteMultipartUploadRequest compRequest = new CompleteMultipartUploadRequest(bucket,
-                    ObjectKey,
-                    initResponse.getUploadId(),
-                    partETags);
-
-            s3Client.completeMultipartUpload(compRequest);
-            mainFrame.jTextArea1.append("\nUploaded object: " + what);
         } catch (Exception e) {
             s3Client.abortMultipartUpload(new AbortMultipartUploadRequest(
                     bucket, ObjectKey, initResponse.getUploadId()));
@@ -118,8 +119,10 @@ public class MultiPart implements Runnable {
     }
 
     void stop() {
+        Running = false;
         multipart.stop();
         mainFrame.jTextArea1.append("\nUpload completed or aborted");
+        calibrate();
     }
 
 }

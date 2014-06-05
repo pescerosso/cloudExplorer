@@ -80,6 +80,7 @@ public class Put implements Runnable {
     void stop() {
         put.stop();
         mainFrame.jTextArea1.append("\nUpload completed or aborted");
+        calibrate();
     }
 
 }

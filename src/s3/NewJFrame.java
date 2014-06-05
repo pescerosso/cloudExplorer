@@ -1672,6 +1672,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             String new_object_name = convertObject(file.getAbsolutePath().toString(), "upload");
             jTextField7.setText(jTextField7.getText().replace("null", ""));
             if (jCheckBox1.isSelected()) {
+                MultiPart.Running = true;
                 multipart = new MultiPart(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name);
                 multipart.startc(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name);
             } else {
