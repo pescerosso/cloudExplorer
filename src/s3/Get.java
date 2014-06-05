@@ -82,10 +82,6 @@ public class Get implements Runnable {
     void startc(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adestination, String Aversion) {
         get = new Thread(new Get(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint, Adestination, Aversion));
         get.start();
-        try {
-            get.wait();
-        } catch (InterruptedException ex) {
-        }
     }
 
     void stop() {

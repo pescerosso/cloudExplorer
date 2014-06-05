@@ -75,10 +75,6 @@ public class Put implements Runnable {
 
         put = new Thread(new Put(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint, AObjectKey));
         put.start();
-        try {
-            put.wait();
-        } catch (InterruptedException ex) {
-        }
     }
 
     void stop() {
