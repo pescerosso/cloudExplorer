@@ -11,7 +11,7 @@ public class HostChecker implements Runnable {
     NewJFrame mainFrame;
 
     boolean ping(String address) {
-        Boolean host_alive = true;
+        Boolean host_alive = false;
         try {
             InetAddress s3address = InetAddress.getByName(address);
             if (s3address.isReachable(3000)) {
