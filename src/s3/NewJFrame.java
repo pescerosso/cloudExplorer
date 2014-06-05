@@ -1812,6 +1812,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         } catch (Exception writeConfig) {
                             jTextArea1.append("\n" + writeConfig.getMessage());
                         }
+                        jTextArea1.append("\nWritten config: " + Home + File.separator + "s3config.sync");
+                        calibrateTextArea();
                         bg_frame.setVisible(false);
                     }
                 });
