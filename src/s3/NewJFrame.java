@@ -1011,7 +1011,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if (active_bucket > 0) {
-
+            jButton4.setEnabled(true);
+            jButton7.setEnabled(true);
+            jButton12.setEnabled(true);
+            jButton13.setEnabled(true);
+            jButton14.setEnabled(true);
+            jButton1.setEnabled(true);
             reloadObjects();
             versionDownload = false;
 
@@ -1946,7 +1951,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 } catch (Exception GetThreadRUN) {
                 }
             }
-            
+
             if (versionDownload) {
                 try {
                     int i = 0;
@@ -2104,6 +2109,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
             for (int i = 1; i != objectarray.length; i++) {
                 if (d[i].isSelected()) {
+                    jButton4.setEnabled(false);
+                    jButton7.setEnabled(false);
+                    jButton12.setEnabled(false);
+                    jButton13.setEnabled(false);
+                    jButton14.setEnabled(false);
+                    jButton1.setEnabled(false);
                     showVersions = new ShowVersions(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), this);
                     showVersions.run();
                     break;
