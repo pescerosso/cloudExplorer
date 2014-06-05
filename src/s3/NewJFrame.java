@@ -1946,6 +1946,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 } catch (Exception GetThreadRUN) {
                 }
             }
+            
             if (versionDownload) {
                 try {
                     int i = 0;
