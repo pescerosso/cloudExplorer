@@ -1933,17 +1933,33 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             download.add(downloadPanel);
             download.setLocation(500, 500);
             download.pack();
-            try {
-                for (int i = 1; i != objectarray.length; i++) {
-                    if (d[i] != null) {
-                        if (d[i].isSelected()) {
-                            download.setVisible(true);
+
+            if (!versionDownload) {
+                try {
+                    for (int i = 1; i != objectarray.length; i++) {
+                        if (d[i] != null) {
+                            if (d[i].isSelected()) {
+                                download.setVisible(true);
+                            }
                         }
                     }
+                } catch (Exception GetThreadRUN) {
                 }
-            } catch (Exception GetThreadRUN) {
             }
-
+            if (versionDownload) {
+                try {
+                    int i = 0;
+                    for (String what : versioning_name) {
+                        if (d[i] != null) {
+                            if (d[i].isSelected()) {
+                                download.setVisible(true);
+                            }
+                        }
+                        i++;
+                    }
+                } catch (Exception GetThreadRUN) {
+                }
+            }
         } else {
             jTextArea1.append("\nError: No bucket has been selected");
         }
