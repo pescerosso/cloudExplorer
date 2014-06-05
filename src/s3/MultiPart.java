@@ -101,6 +101,7 @@ public class MultiPart implements Runnable {
 
                 s3Client.completeMultipartUpload(compRequest);
                 mainFrame.jTextArea1.append("\nUploaded object: " + what);
+                MultiPart.Running = false;
             }
         } catch (Exception e) {
             s3Client.abortMultipartUpload(new AbortMultipartUploadRequest(
@@ -108,7 +109,6 @@ public class MultiPart implements Runnable {
             jTextArea1.append("\nAn error has occured in MultiPart:");
             mainFrame.calibrateTextArea();
         }
-
         calibrate();
     }
 
