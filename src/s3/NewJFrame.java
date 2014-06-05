@@ -11,6 +11,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -60,11 +61,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     SyncFromS3 syncFromS3;
     SyncToS3 syncToS3;
     boolean isSyncingToS3 = true;
-    JButton more = new JButton("Show all Objects");
     public static boolean object_thread_status;
     ReloadBuckets buckets = null;
     boolean host_alive = false;
-    public String[] versioning_array = new String[20];
+    public ArrayList<String> versioning_id;
+    public ArrayList<String> versioning_date;
+    public ArrayList<String> versioning_name;
+    public Boolean versionDownload = false;
 
     public NewJFrame() {
         initComponents();
@@ -794,7 +797,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 2.0\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\nWhat is new in this release? \n\n1. Threaded Bucket and Object listing.\n2. Syncing now syncs subdirectories.\n3. For stability, delete operations are limited to 500.\n4. Object explorer displays the total number of objects in the bucket.\n5. Fixed bug that makes sync work again after aborting a sync.\n6. A check is done to ensure the S3 host is alive before loading the buckets and objects for stability.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.8\n\n1. Deletes are now threaded.\n2. Fixed a bug to allow multiple \"Sync to S3\" operations without reloading objects manually.\n3. Toolbar in \"Object Explorer\" is now persistent when scrolling.\n4. Secret key contains special characters for privacy reasons.\n5. Fixed a bug when creating buckets on AWS.\n6. Fixed a bug when deleting an object from the search results.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.3\n\n1. Logging window scrolls automatically now.\n2. Support for @ in the object name.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.2\n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n----------------------------------------------------------------------------------\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
+        jTextArea4.setText("Version: 2.1\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\n1. Support for enabling versioning on a bucket.\n2. Support for downloading versioned objects.\n3. Increased timeout for connecting to an S3 host.\n4. Other fixes.\n\n\nWhat is new in this release? \n\n----------------------------------------------------------------------------------\nVersion: 2.0\n\n1. Threaded Bucket and Object listing.\n2. Syncing now syncs subdirectories.\n3. For stability, delete operations are limited to 500.\n4. Object explorer displays the total number of objects in the bucket.\n5. Fixed bug that makes sync work again after aborting a sync.\n6. A check is done to ensure the S3 host is alive before loading the buckets and objects for stability.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.8\n\n1. Deletes are now threaded.\n2. Fixed a bug to allow multiple \"Sync to S3\" operations without reloading objects manually.\n3. Toolbar in \"Object Explorer\" is now persistent when scrolling.\n4. Secret key contains special characters for privacy reasons.\n5. Fixed a bug when creating buckets on AWS.\n6. Fixed a bug when deleting an object from the search results.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.3\n\n1. Logging window scrolls automatically now.\n2. Support for @ in the object name.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.2\n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n----------------------------------------------------------------------------------\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
         jTextArea4.setBorder(null);
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
@@ -1009,6 +1012,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if (active_bucket > 0) {
 
             reloadObjects();
+            versionDownload = false;
 
             try {
                 int found = 0;
@@ -1468,7 +1472,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     image_panel.setLayout(new BoxLayout(image_panel, BoxLayout.PAGE_AXIS));
                     String new_object_name = convertObject(d[i].getText(), "download");
                     jTextArea1.setText("Please wait, the image is loading.");
-                    get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file + i);
+                    get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file + i, null);
                     get.run();
                     photo[i] = new ImageIcon(temp_file + i);
                     image[i] = new JLabel(photo[i]);
@@ -1750,7 +1754,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         musicPanel.validate();
                         musicFrame.pack();
                         jTextArea1.setText("Please wait, the song is loading.");
-                        get = new Get(d[h].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file);
+                        get = new Get(d[h].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file, null);
                         get.run();
                         mp3.play();
                         dialog.setVisible(false);
@@ -1884,15 +1888,31 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     if (downloadChooser.getSelectedFile().getAbsolutePath() != null) {
 
                         File File_Destination = new File(downloadChooser.getSelectedFile().getAbsolutePath());
-                        for (int i = 1; i != previous_objectarray_length; i++) {
-                            if (d[i] != null) {
 
+                        if (versionDownload) {
+                            int i = 0;
+                            for (String what : versioning_name) {
                                 if (d[i].isSelected()) {
                                     download.setVisible(false);
-                                    String new_object_name = convertObject(d[i].getText(), "download");
-                                    get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name);
-                                    get.startc(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name);
+                                    String new_object_name = convertObject(versioning_name.get(i), "download");
+                                    get = new Get(versioning_name.get(i), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name, versioning_id.get(i));
+                                    get.startc(versioning_name.get(i), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name, versioning_id.get(i));
                                     d[i].setSelected(false);
+                                    versionDownload = false;
+                                }
+                                i++;
+                            }
+                        } else {
+                            for (int i = 1; i != previous_objectarray_length; i++) {
+                                if (d[i] != null) {
+
+                                    if (d[i].isSelected()) {
+                                        download.setVisible(false);
+                                        String new_object_name = convertObject(d[i].getText(), "download");
+                                        get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name, null);
+                                        get.startc(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name, null);
+                                        d[i].setSelected(false);
+                                    }
                                 }
                             }
                         }
@@ -1994,7 +2014,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             for (int i = 1; i != previous_objectarray_length; i++) {
                 if (d[i].isSelected()) {
                     String new_object_name = convertObject(d[i].getText(), "download");
-                    get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file);
+                    get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file, null);
                     get.run();
                     try {
                         FileReader frr = new FileReader(temp_file);
@@ -2062,38 +2082,53 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        String foo = null;
+        if (active_bucket > 0) {
+            String foo = null;
+            versioning_id = new ArrayList<>();
+            versioning_name = new ArrayList<>();
+            versioning_date = new ArrayList<>();
 
-        for (int i = 1; i != objectarray.length; i++) {
-            if (d[i].isSelected()) {
-                Versioning version = new Versioning(this);
-                version.getVersions(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
-                break;
+            for (int i = 1; i != objectarray.length; i++) {
+                if (d[i].isSelected()) {
+                    Versioning version = new Versioning(this);
+                    version.getVersions(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
+                    break;
+                }
             }
-        }
 
-        jPanel11.removeAll();
-        jPanel11.revalidate();
-        jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
-        jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.Y_AXIS));
-        for (int i = 0; i != versioning_array.length; i++) {
-            if (versioning_array[i] != null) {
-                d[i] = new JRadioButton();
-                d[i].setText(versioning_array[i]);
-                jPanel11.add(d[i]);
+            jPanel11.removeAll();
+            jPanel11.revalidate();
+            jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
+            jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.Y_AXIS));
+            int i = 0;
+
+            for (String what : versioning_id) {
+                if (what != null) {
+                    d[i] = new JRadioButton();
+                    d[i].setText(versioning_date.get(i) + " " + what);
+                    jPanel11.add(d[i]);
+                    versionDownload = true;
+                }
+                i++;
             }
-        }
-        jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.Y_AXIS));
-        jPanel11.repaint();
-        jPanel11.revalidate();
-        jPanel11.validate();
 
+            jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.Y_AXIS));
+            jPanel11.repaint();
+            jPanel11.revalidate();
+            jPanel11.validate();
+
+        } else {
+            jTextArea1.append("\nError: No bucket has been selected");
+        }
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        jTextArea1.append(bucket.enableVersioning(cred.getAccess_key(), cred.getSecret_key(), b[active_bucket].getText(), cred.getEndpoint(), cred.getRegion()));
-        calibrateTextArea();
-
+        if (active_bucket > 0) {
+            jTextArea1.append(bucket.enableVersioning(cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), cred.getRegion()));
+            calibrateTextArea();
+        } else {
+            jTextArea1.append("\nError: No bucket has been selected");
+        }
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     void var() {

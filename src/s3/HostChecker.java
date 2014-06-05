@@ -14,7 +14,7 @@ public class HostChecker implements Runnable {
         Boolean host_alive = true;
         try {
             InetAddress s3address = InetAddress.getByName(address);
-            if (s3address.isReachable(1000)) {
+            if (s3address.isReachable(3000)) {
                 host_alive = true;
             } else {
                 host_alive = false;
@@ -39,7 +39,7 @@ public class HostChecker implements Runnable {
             host = host.replace("http://", "");
         }
 
-        if (ping(host) || host.contains("amazon")) {
+        if (ping(host) || host.contains("amazon") || host.contains("gemini")) {
             mainFrame.reloadBuckets();
         } else {
             NewJFrame.jTextArea1.append("\nError: host not found");

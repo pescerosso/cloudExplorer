@@ -28,6 +28,7 @@ public class BucketClass {
         try {
             SetBucketVersioningConfigurationRequest request = new SetBucketVersioningConfigurationRequest(bucket, new BucketVersioningConfiguration(BucketVersioningConfiguration.ENABLED));
             s3Client.setBucketVersioningConfiguration(request);
+            mainFrame.jTextArea1.append("\nBucket Versioning is:" + request.getVersioningConfiguration().getStatus());
         } catch (Exception versioning) {
             mainFrame.jTextArea1.append("\n\nAn error has occurred in versioning.");
             mainFrame.jTextArea1.append("\n\nError Message:    " + versioning.getMessage());

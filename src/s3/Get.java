@@ -22,6 +22,7 @@ public class Get implements Runnable {
     String endpoint = null;
     String secret_key = null;
     String destination = null;
+    String version = null;
     Thread get;
 
     public void calibrate() {
@@ -31,13 +32,14 @@ public class Get implements Runnable {
         }
     }
 
-    Get(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adestination) {
+    Get(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adestination, String Aversion) {
         what = Awhat;
         access_key = Aaccess_key;
         secret_key = Asecret_key;
         bucket = Abucket;
         endpoint = Aendpoint;
         destination = Adestination;
+        version = Aversion;
     }
 
     void writeFile(InputStream is, String destination) {
@@ -62,8 +64,7 @@ public class Get implements Runnable {
         s3Client.setEndpoint(endpoint);
 
         try {
-
-            S3Object s3object = s3Client.getObject(new GetObjectRequest(bucket, what));
+            S3Object s3object = s3Client.getObject(new GetObjectRequest(bucket, what, version));
             InputStream objectData = s3object.getObjectContent();
             this.writeFile(objectData, destination);
             mainFrame.jTextArea1.append("\nDownloaded: " + what + "\n");
@@ -78,8 +79,8 @@ public class Get implements Runnable {
         calibrate();
     }
 
-    void startc(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adestination) {
-        get = new Thread(new Get(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint, Adestination));
+    void startc(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adestination, String Aversion) {
+        get = new Thread(new Get(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint, Adestination, Aversion));
         get.start();
         try {
             get.wait();

@@ -24,31 +24,22 @@ public class Versioning {
             AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
             AmazonS3 s3Client = new AmazonS3Client(credentials);
             s3Client.setEndpoint(endpoint);
-            VersionListing vListing = s3Client.listVersions(bucket, key);
-            int i = 0;
-            do {
-                System.out.print("\n" + vListing.getVersionIdMarker());
-                List<S3VersionSummary> summary = vListing.getVersionSummaries();
 
+            int i = 0;
+            VersionListing vListing = s3Client.listVersions(bucket, key);
+            List<S3VersionSummary> summary;
+            do {
+                summary = vListing.getVersionSummaries();
+
+                for (S3VersionSummary foo : summary) {
+                    mainFrame.versioning_date.add(foo.getLastModified().toString());
+                    mainFrame.versioning_id.add(foo.getVersionId());
+                    mainFrame.versioning_name.add(foo.getKey());
+                }
+
+                i++;
             } while (vListing.isTruncated());
-            /**
-             * for (S3VersionSummary foo : summary) {
-             * mainFrame.versioning_array[i] = (foo.getKey() + ". Modified on: "
-             * + foo.getLastModified() + " key=" + foo.getVersionId());
-             * System.out.print("\n" + foo.getKey() + ". Modified on: " +
-             * foo.getLastModified() + " key=" + foo.getVersionId()); results =
-             * results.replace("null", ""); i++; }
-                *
-             */
-            /**
-             * do { objectListing = s3Client.listObjects(listObjectsRequest);
-             * for (S3ObjectSummary objectSummary :
-             * objectListing.getObjectSummaries()) { objectlist = objectlist +
-             * "@@" + objectSummary.getKey(); }
-             * listObjectsRequest.setMarker(objectListing.getNextMarker()); }
-             * while (objectListing.isTruncated());
-             *
-             */
+
         } catch (Exception getVersions) {
 
         }

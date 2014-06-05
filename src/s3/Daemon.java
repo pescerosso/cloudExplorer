@@ -232,7 +232,7 @@ public class Daemon {
                 } else {
                     makeDirectory(Destination + File.separator + objectarray[i]);
                     String object = makeDirectory(objectarray[i]);
-                    get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, Destination + File.separator + object);
+                    get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, Destination + File.separator + object, null);
                     get.run();
                 }
             }

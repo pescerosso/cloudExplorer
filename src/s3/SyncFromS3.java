@@ -82,7 +82,7 @@ public class SyncFromS3 implements Runnable {
                         makeDirectory(destination + File.separator + objectarray[i]);
                         String object = makeDirectory(objectarray[i]);
                         if (SyncFromS3.running) {
-                            get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, destination + File.separator + object);
+                            get = new Get(objectarray[i], access_key, secret_key, bucket, endpoint, destination + File.separator + object, null);
                             get.run();
                         }
                     }
