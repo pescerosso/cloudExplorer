@@ -201,7 +201,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/logo_cloudian.png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/Cloudian-Explorer.png"))); // NOI18N
         jLabel10.setOpaque(true);
 
         jTextField10.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -234,14 +234,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addGap(266, 266, 266))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel10)
-                        .addGap(395, 395, 395))))
+                        .addGap(244, 244, 244))))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6))
@@ -790,10 +790,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         jTabbedPane1.addTab("Sync", jPanel4);
@@ -856,7 +857,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 2.2\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\n1. Improved look and feel.\n\n----------------------------------------------------------------------------------\nVersion: 2.1\n\n1. Support for enabling versioning on a bucket.\n2. Support for downloading versioned objects.\n3. Increased timeout for connecting to an S3 host.\n4. Other fixes.\n5. Multipart upload support.\n\n----------------------------------------------------------------------------------\nVersion: 2.0\n\n1. Threaded Bucket and Object listing.\n2. Syncing now syncs subdirectories.\n3. For stability, delete operations are limited to 500.\n4. Object explorer displays the total number of objects in the bucket.\n5. Fixed bug that makes sync work again after aborting a sync.\n6. A check is done to ensure the S3 host is alive before loading the buckets and objects for stability.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.8\n\n1. Deletes are now threaded.\n2. Fixed a bug to allow multiple \"Sync to S3\" operations without reloading objects manually.\n3. Toolbar in \"Object Explorer\" is now persistent when scrolling.\n4. Secret key contains special characters for privacy reasons.\n5. Fixed a bug when creating buckets on AWS.\n6. Fixed a bug when deleting an object from the search results.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.3\n\n1. Logging window scrolls automatically now.\n2. Support for @ in the object name.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.2\n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n----------------------------------------------------------------------------------\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
+        jTextArea4.setText("Version: 2.3\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\n1. New Logo by Simone Morellato.\n\n----------------------------------------------------------------------------------\n\nVersion: 2.2\n\n1. Improved look and feel.\n\n----------------------------------------------------------------------------------\nVersion: 2.1\n\n1. Support for enabling versioning on a bucket.\n2. Support for downloading versioned objects.\n3. Increased timeout for connecting to an S3 host.\n4. Other fixes.\n5. Multipart upload support.\n\n----------------------------------------------------------------------------------\nVersion: 2.0\n\n1. Threaded Bucket and Object listing.\n2. Syncing now syncs subdirectories.\n3. For stability, delete operations are limited to 500.\n4. Object explorer displays the total number of objects in the bucket.\n5. Fixed bug that makes sync work again after aborting a sync.\n6. A check is done to ensure the S3 host is alive before loading the buckets and objects for stability.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.8\n\n1. Deletes are now threaded.\n2. Fixed a bug to allow multiple \"Sync to S3\" operations without reloading objects manually.\n3. Toolbar in \"Object Explorer\" is now persistent when scrolling.\n4. Secret key contains special characters for privacy reasons.\n5. Fixed a bug when creating buckets on AWS.\n6. Fixed a bug when deleting an object from the search results.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.3\n\n1. Logging window scrolls automatically now.\n2. Support for @ in the object name.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.2\n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n----------------------------------------------------------------------------------\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
         jTextArea4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
