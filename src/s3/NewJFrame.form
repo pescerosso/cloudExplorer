@@ -428,15 +428,18 @@
                                   <Component id="jTextField9" min="-2" pref="328" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane27" min="-2" pref="360" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="0" pref="63" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane27" min="-2" pref="360" max="-2" attributes="0"/>
+                                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jButton9" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -485,12 +488,10 @@
                               </Group>
                               <Component id="jScrollPane27" alignment="1" min="-2" pref="258" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton10" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton10" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="3" groupAlignment="3" attributes="0">
                                   <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
