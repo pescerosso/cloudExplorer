@@ -106,8 +106,7 @@ public class MultiPart implements Runnable {
         } catch (Exception e) {
             s3Client.abortMultipartUpload(new AbortMultipartUploadRequest(
                     bucket, ObjectKey, initResponse.getUploadId()));
-            jTextArea1.append("\nAn error has occured in MultiPart:");
-            mainFrame.calibrateTextArea();
+            calibrate();
         }
         calibrate();
     }
