@@ -110,6 +110,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jScrollPane27 = new javax.swing.JScrollPane();
         jPanel21 = new javax.swing.JPanel();
         jScrollPane28 = new javax.swing.JScrollPane();
+        jPanel12 = new javax.swing.JPanel();
         jButton9 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         scrollPane1 = new java.awt.ScrollPane();
@@ -117,6 +118,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
+        jPanel13 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
@@ -328,6 +330,21 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jScrollPane28.setBackground(java.awt.SystemColor.text);
         jScrollPane28.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        jPanel12.setBackground(java.awt.SystemColor.text);
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 340, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 240, Short.MAX_VALUE)
+        );
+
+        jScrollPane28.setViewportView(jPanel12);
+
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
@@ -409,7 +426,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addComponent(jScrollPane27, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(35, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
@@ -449,12 +465,13 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             .addComponent(jLabel12)
                             .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8)
-                    .addComponent(jButton10)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton9)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton8)
+                        .addComponent(jButton10)))
                 .addGap(18, 18, 18))
         );
 
@@ -473,6 +490,21 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jScrollPane3.setBackground(java.awt.SystemColor.text);
         jScrollPane3.setBorder(null);
+
+        jPanel13.setBackground(java.awt.SystemColor.text);
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 148, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 287, Short.MAX_VALUE)
+        );
+
+        jScrollPane3.setViewportView(jPanel13);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -2281,6 +2313,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     public static javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     public javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     public javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;
