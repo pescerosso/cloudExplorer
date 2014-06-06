@@ -696,7 +696,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton5.setBackground(java.awt.SystemColor.text);
         jButton5.setText("Upload");
-        jButton5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jButton5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -714,7 +714,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton15.setBackground(java.awt.SystemColor.text);
         jButton15.setText("Abort upload");
-        jButton15.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jButton15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton15ActionPerformed(evt);
@@ -775,7 +775,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jToggleButton3.setBackground(java.awt.SystemColor.text);
         jToggleButton3.setText("Sync to S3");
-        jToggleButton3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jToggleButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton3ActionPerformed(evt);
@@ -784,7 +784,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jToggleButton4.setBackground(java.awt.SystemColor.text);
         jToggleButton4.setText("Sync from S3");
-        jToggleButton4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jToggleButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton4ActionPerformed(evt);
@@ -793,7 +793,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton16.setBackground(java.awt.SystemColor.text);
         jButton16.setText("Abort");
-        jButton16.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jButton16.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton16ActionPerformed(evt);
