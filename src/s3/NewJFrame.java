@@ -1,6 +1,7 @@
 package s3;
 
 import jaco.mp3.player.MP3Player;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -119,12 +120,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jLabel1 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -176,8 +177,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
         jTextArea1.setColumns(20);
+        jTextArea1.setForeground(java.awt.Color.red);
         jTextArea1.setRows(5);
-        jTextArea1.setBorder(null);
+        jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -202,7 +204,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/logo_cloudian.png"))); // NOI18N
         jLabel10.setOpaque(true);
 
-        jTextField10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextField10.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextField10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField10ActionPerformed(evt);
@@ -211,6 +213,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton6.setBackground(java.awt.SystemColor.text);
         jButton6.setText("Search");
+        jButton6.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -231,7 +234,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addGap(266, 266, 266))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel10)
-                        .addGap(420, 420, 420))))
+                        .addGap(395, 395, 395))))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,12 +250,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         panel1.setBackground(java.awt.Color.white);
 
-        jTabbedPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jTabbedPane1.setBackground(java.awt.SystemColor.text);
+        jTabbedPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setText("Access Key");
 
+        jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -262,9 +267,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jLabel4.setText("Secret Key");
 
         jTextField2.setFont(new java.awt.Font("OpenSymbol", 0, 15)); // NOI18N
+        jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel5.setText("Host URL");
 
+        jTextField3.setBorder(new javax.swing.border.MatteBorder(null));
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -273,10 +280,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jLabel6.setText("Port");
 
+        jTextField4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
         jLabel7.setText("Region");
+
+        jTextField5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jButton8.setBackground(java.awt.SystemColor.text);
         jButton8.setText("Save");
+        jButton8.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -285,6 +297,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton10.setBackground(java.awt.SystemColor.text);
         jButton10.setText("Clear");
+        jButton10.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -295,20 +308,25 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jLabel12.setText("GroupID (optional)");
 
+        jTextField8.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextField8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField8ActionPerformed(evt);
             }
         });
 
+        jTextField9.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        jScrollPane27.setBackground(java.awt.Color.white);
+
         jPanel21.setBackground(java.awt.SystemColor.text);
+        jPanel21.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel21.setAlignmentX(0.0F);
         jPanel21.setAlignmentY(0.0F);
         jPanel21.setAutoscrolls(true);
-        jPanel21.setOpaque(false);
 
-        jScrollPane28.setBorder(null);
-        jScrollPane28.setOpaque(false);
+        jScrollPane28.setBackground(java.awt.SystemColor.text);
+        jScrollPane28.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
@@ -320,16 +338,17 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane28, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane28, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         jScrollPane27.setViewportView(jPanel21);
 
         jButton9.setBackground(java.awt.SystemColor.text);
-        jButton9.setText("Load");
+        jButton9.setText("Load Account");
+        jButton9.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -338,6 +357,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton2.setBackground(java.awt.SystemColor.text);
         jButton2.setText("Delete Account");
+        jButton2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -387,7 +407,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane27, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 105, Short.MAX_VALUE)
+                        .addGap(0, 63, Short.MAX_VALUE)
                         .addComponent(jButton9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
@@ -432,7 +452,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addComponent(jButton8)
                         .addComponent(jButton10))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton9)
                         .addComponent(jButton2)))
                 .addGap(18, 18, 18))
         );
@@ -443,14 +463,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jPanel1.setBackground(java.awt.SystemColor.text);
 
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
         jPanel5.setBackground(java.awt.SystemColor.text);
         jPanel5.setAlignmentX(0.0F);
         jPanel5.setAlignmentY(0.0F);
         jPanel5.setAutoscrolls(true);
-        jPanel5.setOpaque(false);
 
+        jScrollPane3.setBackground(java.awt.SystemColor.text);
         jScrollPane3.setBorder(null);
-        jScrollPane3.setOpaque(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -477,22 +498,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton3.setBackground(java.awt.SystemColor.text);
         jButton3.setText("Download");
+        jButton3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(java.awt.SystemColor.text);
-        jButton1.setText("Abort download");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton4.setBackground(java.awt.SystemColor.text);
         jButton4.setText("Delete");
+        jButton4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -501,6 +516,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton7.setBackground(java.awt.SystemColor.text);
         jButton7.setText("Properties");
+        jButton7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -509,6 +525,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton12.setBackground(java.awt.SystemColor.text);
         jButton12.setText("Edit");
+        jButton12.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton12ActionPerformed(evt);
@@ -517,6 +534,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton13.setBackground(java.awt.SystemColor.text);
         jButton13.setText("Select All");
+        jButton13.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton13ActionPerformed(evt);
@@ -525,9 +543,19 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton14.setBackground(java.awt.SystemColor.text);
         jButton14.setText("Deselect All");
+        jButton14.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton14ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(java.awt.SystemColor.text);
+        jButton1.setText("Abort download");
+        jButton1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -535,21 +563,22 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(78, Short.MAX_VALUE)
                 .addComponent(jButton3)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton7)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton12)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton13)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton14)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addGap(0, 0, 0))
+                .addGap(21, 21, 21))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -566,6 +595,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         );
 
         jPanel11.setBackground(javax.swing.UIManager.getDefaults().getColor("text"));
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -602,6 +632,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -619,10 +650,11 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jFileChooser1.setBackground(new java.awt.Color(255, 255, 255));
+        jFileChooser1.setControlButtonsAreShown(false);
         jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
+        jFileChooser1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jFileChooser1.setDragEnabled(true);
         jFileChooser1.setMultiSelectionEnabled(true);
-        jFileChooser1.setOpaque(true);
         jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFileChooser1ActionPerformed(evt);
@@ -631,6 +663,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton5.setBackground(java.awt.SystemColor.text);
         jButton5.setText("Upload");
+        jButton5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -639,6 +672,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jLabel9.setText("Destination in Bucket:");
 
+        jTextField7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField7ActionPerformed(evt);
@@ -647,6 +681,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton15.setBackground(java.awt.SystemColor.text);
         jButton15.setText("Abort upload");
+        jButton15.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton15ActionPerformed(evt);
@@ -660,32 +695,33 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jFileChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(226, 226, 226)
+            .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton15)))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addComponent(jButton15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox1)
+                .addGap(93, 93, 93))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(jCheckBox1)
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBox1))
                 .addContainerGap())
         );
 
@@ -694,7 +730,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jFileChooser2.setBackground(new java.awt.Color(255, 255, 255));
+        jFileChooser2.setControlButtonsAreShown(false);
         jFileChooser2.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
+        jFileChooser2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jFileChooser2.setDragEnabled(true);
         jFileChooser2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -704,6 +742,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jToggleButton3.setBackground(java.awt.SystemColor.text);
         jToggleButton3.setText("Sync to S3");
+        jToggleButton3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton3ActionPerformed(evt);
@@ -712,6 +751,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jToggleButton4.setBackground(java.awt.SystemColor.text);
         jToggleButton4.setText("Sync from S3");
+        jToggleButton4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton4ActionPerformed(evt);
@@ -720,6 +760,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton16.setBackground(java.awt.SystemColor.text);
         jButton16.setText("Abort");
+        jButton16.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton16ActionPerformed(evt);
@@ -730,25 +771,29 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addComponent(jFileChooser2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1003, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(322, 322, 322)
+                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
+                        .addComponent(jToggleButton4)
+                        .addGap(49, 49, 49)
+                        .addComponent(jToggleButton3))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 978, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(25, 25, 25))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton3)
-                    .addComponent(jToggleButton4)
-                    .addComponent(jButton16))
-                .addGap(0, 0, 0))
+                .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jTabbedPane1.addTab("Sync", jPanel4);
@@ -757,16 +802,19 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
+        jTextArea2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jScrollPane4.setViewportView(jTextArea2);
 
         jButton11.setBackground(java.awt.SystemColor.text);
         jButton11.setText("Save");
+        jButton11.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
             }
         });
 
+        jTextField6.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
@@ -783,7 +831,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addGap(1, 1, 1)
-                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE)
+                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton11)
                 .addGap(14, 14, 14))
@@ -798,7 +846,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane1.addTab("Text Editor", jPanel6);
@@ -808,8 +856,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 2.1\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\n1. Support for enabling versioning on a bucket.\n2. Support for downloading versioned objects.\n3. Increased timeout for connecting to an S3 host.\n4. Other fixes.\n5. Multipart upload support.\n\n\nWhat is new in this release? \n\n----------------------------------------------------------------------------------\nVersion: 2.0\n\n1. Threaded Bucket and Object listing.\n2. Syncing now syncs subdirectories.\n3. For stability, delete operations are limited to 500.\n4. Object explorer displays the total number of objects in the bucket.\n5. Fixed bug that makes sync work again after aborting a sync.\n6. A check is done to ensure the S3 host is alive before loading the buckets and objects for stability.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.8\n\n1. Deletes are now threaded.\n2. Fixed a bug to allow multiple \"Sync to S3\" operations without reloading objects manually.\n3. Toolbar in \"Object Explorer\" is now persistent when scrolling.\n4. Secret key contains special characters for privacy reasons.\n5. Fixed a bug when creating buckets on AWS.\n6. Fixed a bug when deleting an object from the search results.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.3\n\n1. Logging window scrolls automatically now.\n2. Support for @ in the object name.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.2\n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n----------------------------------------------------------------------------------\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
-        jTextArea4.setBorder(null);
+        jTextArea4.setText("Version: 2.2\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\n1. Improved look and feel.\n\n----------------------------------------------------------------------------------\nVersion: 2.1\n\n1. Support for enabling versioning on a bucket.\n2. Support for downloading versioned objects.\n3. Increased timeout for connecting to an S3 host.\n4. Other fixes.\n5. Multipart upload support.\n\n----------------------------------------------------------------------------------\nVersion: 2.0\n\n1. Threaded Bucket and Object listing.\n2. Syncing now syncs subdirectories.\n3. For stability, delete operations are limited to 500.\n4. Object explorer displays the total number of objects in the bucket.\n5. Fixed bug that makes sync work again after aborting a sync.\n6. A check is done to ensure the S3 host is alive before loading the buckets and objects for stability.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.8\n\n1. Deletes are now threaded.\n2. Fixed a bug to allow multiple \"Sync to S3\" operations without reloading objects manually.\n3. Toolbar in \"Object Explorer\" is now persistent when scrolling.\n4. Secret key contains special characters for privacy reasons.\n5. Fixed a bug when creating buckets on AWS.\n6. Fixed a bug when deleting an object from the search results.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.3\n\n1. Logging window scrolls automatically now.\n2. Support for @ in the object name.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.2\n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n----------------------------------------------------------------------------------\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
+        jTextArea4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
 
@@ -823,7 +871,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane1.addTab("About", jPanel7);
@@ -1178,6 +1226,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 f[h] = new JRadioButton();
                 f[h].setText(foo[2]);
                 f[h].addItemListener(this);
+                f[h].setBackground(Color.white);
+                f[h].setForeground(Color.blue);
                 jPanel21.add(f[h]);
                 jPanel21.revalidate();
                 validate();
@@ -1208,6 +1258,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 b[h] = new JRadioButton();
                 b[h].setText(bucketarray[h]);
                 b[h].addItemListener(this);
+                b[h].setBackground(Color.white);
+                b[h].setForeground(Color.blue);
                 jPanel5.add(b[h]);
                 setLocation(h, 5);
                 jPanel5.revalidate();
@@ -1240,6 +1292,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.Y_AXIS));
             d[h] = new JRadioButton();
             d[h].setText(objectarray[h]);
+            d[h].setBackground(Color.white);
+            d[h].setForeground(Color.blue);
         }
         jPanel11.setLayout(new BoxLayout(jPanel11, BoxLayout.PAGE_AXIS));
 
@@ -1900,6 +1954,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             final JFrame download = new JFrame("Please choose destination directory.");
             final JPanel downloadPanel = new JPanel();
             final JFileChooser downloadChooser = new JFileChooser();
+            downloadChooser.setControlButtonsAreShown(false);
             downloadChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             final JButton downloadButton = new JButton("OK");
 
