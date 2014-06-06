@@ -177,7 +177,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
         jTextArea1.setColumns(20);
-        jTextArea1.setForeground(java.awt.Color.red);
+        jTextArea1.setForeground(java.awt.Color.black);
         jTextArea1.setRows(5);
         jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jScrollPane1.setViewportView(jTextArea1);
