@@ -48,6 +48,7 @@ public class ShowVersions implements Runnable {
                 mainFrame.d[i] = new JRadioButton();
                 mainFrame.d[i].setText(mainFrame.versioning_name.get(i) + "     " + mainFrame.versioning_date.get(i));
                 mainFrame.d[i].setBackground(Color.white);
+                mainFrame.d[i].setForeground(Color.blue);
                 mainFrame.jPanel11.add(mainFrame.d[i]);
                 mainFrame.versionDownload = true;
             }
