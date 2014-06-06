@@ -1899,6 +1899,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             if (active_bucket > 0) {
                 final JFrame bg_frame = new JFrame("Directory to Sync:");
                 final JFileChooser bg_choose = new JFileChooser();
+                bg_choose.setControlButtonsAreShown(false);
                 bg_choose.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 final JButton bg_button = new JButton("Save");
 
