@@ -52,7 +52,7 @@ public class Put implements Runnable {
             AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
             AmazonS3 s3Client = new AmazonS3Client(credentials);
             s3Client.setEndpoint(endpoint);
-            TransferManager tx = new TransferManager(credentials);
+            TransferManager tx = new TransferManager(s3Client);
             File file = new File(what);
             PutObjectRequest putRequest = new PutObjectRequest(bucket, ObjectKey, file);
 
