@@ -57,7 +57,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     int content_counter = 0;
     int previous_objectarray_length = 0;
     Put put;
-    MultiPart multipart;
     Get get;
     Delete del;
     SyncFromS3 syncFromS3;
@@ -137,7 +136,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jLabel9 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jButton15 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jFileChooser2 = new javax.swing.JFileChooser();
         jToggleButton3 = new javax.swing.JToggleButton();
@@ -721,9 +719,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
 
-        jCheckBox1.setBackground(java.awt.SystemColor.text);
-        jCheckBox1.setText("Multipart Upload");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -738,14 +733,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox1)
-                .addGap(93, 93, 93))
+                .addGap(253, 253, 253))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -753,8 +746,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox1))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -890,7 +882,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 2.3\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\n1. New Logo by Simone Morellato.\n2. Small dialog tweaks.\n3. Minor bug fixes.\n----------------------------------------------------------------------------------\n\nVersion: 2.2\n\n1. Improved look and feel.\n\n----------------------------------------------------------------------------------\nVersion: 2.1\n\n1. Support for enabling versioning on a bucket.\n2. Support for downloading versioned objects.\n3. Increased timeout for connecting to an S3 host.\n4. Other fixes.\n5. Multipart upload support.\n\n----------------------------------------------------------------------------------\nVersion: 2.0\n\n1. Threaded Bucket and Object listing.\n2. Syncing now syncs subdirectories.\n3. For stability, delete operations are limited to 500.\n4. Object explorer displays the total number of objects in the bucket.\n5. Fixed bug that makes sync work again after aborting a sync.\n6. A check is done to ensure the S3 host is alive before loading the buckets and objects for stability.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.8\n\n1. Deletes are now threaded.\n2. Fixed a bug to allow multiple \"Sync to S3\" operations without reloading objects manually.\n3. Toolbar in \"Object Explorer\" is now persistent when scrolling.\n4. Secret key contains special characters for privacy reasons.\n5. Fixed a bug when creating buckets on AWS.\n6. Fixed a bug when deleting an object from the search results.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.3\n\n1. Logging window scrolls automatically now.\n2. Support for @ in the object name.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.2\n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n----------------------------------------------------------------------------------\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
+        jTextArea4.setText("Version: 2.3\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\n1. New Logo by Simone Morellato.\n2. Small dialog tweaks.\n3. Minor bug fixes.\n4. All Put's are now managed by ThreadManager to handle parallel multi-part downloads.\n----------------------------------------------------------------------------------\n\nVersion: 2.2\n\n1. Improved look and feel.\n\n----------------------------------------------------------------------------------\nVersion: 2.1\n\n1. Support for enabling versioning on a bucket.\n2. Support for downloading versioned objects.\n3. Increased timeout for connecting to an S3 host.\n4. Other fixes.\n5. Multipart upload support.\n\n----------------------------------------------------------------------------------\nVersion: 2.0\n\n1. Threaded Bucket and Object listing.\n2. Syncing now syncs subdirectories.\n3. For stability, delete operations are limited to 500.\n4. Object explorer displays the total number of objects in the bucket.\n5. Fixed bug that makes sync work again after aborting a sync.\n6. A check is done to ensure the S3 host is alive before loading the buckets and objects for stability.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.8\n\n1. Deletes are now threaded.\n2. Fixed a bug to allow multiple \"Sync to S3\" operations without reloading objects manually.\n3. Toolbar in \"Object Explorer\" is now persistent when scrolling.\n4. Secret key contains special characters for privacy reasons.\n5. Fixed a bug when creating buckets on AWS.\n6. Fixed a bug when deleting an object from the search results.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.3\n\n1. Logging window scrolls automatically now.\n2. Support for @ in the object name.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.2\n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n----------------------------------------------------------------------------------\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
         jTextArea4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
@@ -1686,7 +1678,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     if (f[i].isSelected()) {
                         active_account = i;
                         account = account_array[i].split("@");
-                        jTextArea1.append("\nLoading configuration for: " + f[i].getText() + "\n");
                         jTextField1.setText(account[0]);
                         jTextField2.setText(account[1]);
                         jTextField3.setText(account[2]);
@@ -1724,7 +1715,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             reloadAccounts();
             if (active_account > 0) {
                 HostChecker hostchecker = new HostChecker(jTextField3.getText(), this);
-                hostchecker.run();
+                hostchecker.startc();
             } else {
                 jTextArea1.append("\nError: No account has been selected.");
             }
@@ -1759,14 +1750,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             String upload = (file.getAbsolutePath());
             String new_object_name = convertObject(file.getAbsolutePath().toString(), "upload");
             jTextField7.setText(jTextField7.getText().replace("null", ""));
-            if (jCheckBox1.isSelected()) {
-                MultiPart.Running = true;
-                multipart = new MultiPart(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name);
-                multipart.startc(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name);
-            } else {
-                put = new Put(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name);
-                put.startc(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name);
-            }
+            put = new Put(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name);
+            put.startc(upload, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), jTextField7.getText() + new_object_name);
         } else {
             jTextArea1.append("\nError: No bucket selected.");
         }
@@ -2191,11 +2176,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        if (jCheckBox1.isSelected()) {
-            multipart.stop();
-        } else {
-            put.stop();
-        }
+        put.stop();
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -2279,7 +2260,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JCheckBox jCheckBox1;
     public javax.swing.JFileChooser jFileChooser1;
     public static javax.swing.JFileChooser jFileChooser2;
     private javax.swing.JLabel jLabel1;

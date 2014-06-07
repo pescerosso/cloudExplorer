@@ -2,11 +2,15 @@ package s3;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.ProgressListener;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
+import com.amazonaws.services.s3.transfer.TransferManager;
+import com.amazonaws.services.s3.transfer.Upload;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,28 +48,32 @@ public class Put implements Runnable {
     }
 
     public void run() {
-        File file = new File(what);
-        MimetypesFileTypeMap mimeTypesMap = new MimetypesFileTypeMap();
-        String mimeType = mimeTypesMap.getContentType(file);
-        mimeType = mimeTypesMap.getContentType(file);
-        ObjectMetadata objectMetadata = new ObjectMetadata();
-
-        if ((ObjectKey.contains(".html")) || ObjectKey.contains(".txt")) {
-            objectMetadata.setContentType("text/html");
-        } else {
-            objectMetadata.setContentType(mimeType);
-        }
-
-        AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
-        AmazonS3 s3Client = new AmazonS3Client(credentials);
-        s3Client.setEndpoint(endpoint);
-        PutObjectRequest putRequest = new PutObjectRequest(bucket, ObjectKey, file);
-        putRequest.setMetadata(objectMetadata);
-
         try {
-            PutObjectResult response = s3Client.putObject(putRequest);
+            AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
+            AmazonS3 s3Client = new AmazonS3Client(credentials);
+            s3Client.setEndpoint(endpoint);
+            TransferManager tx = new TransferManager(credentials);
+            File file = new File(what);
+            PutObjectRequest putRequest = new PutObjectRequest(bucket, ObjectKey, file);
+
+            MimetypesFileTypeMap mimeTypesMap = new MimetypesFileTypeMap();
+            String mimeType = mimeTypesMap.getContentType(file);
+            mimeType = mimeTypesMap.getContentType(file);
+            ObjectMetadata objectMetadata = new ObjectMetadata();
+
+            if ((ObjectKey.contains(".html")) || ObjectKey.contains(".txt")) {
+                objectMetadata.setContentType("text/html");
+            } else {
+                objectMetadata.setContentType(mimeType);
+            }
+
+            putRequest.setMetadata(objectMetadata);
+            Upload myUpload = tx.upload(putRequest);
+            myUpload.waitForCompletion();
+            tx.shutdownNow();
             mainFrame.jTextArea1.append("\nUploaded object: " + what);
-        } catch (Exception put) {
+        } catch (Exception manager) {
+            jTextArea1.append("\nError: " + manager.getMessage());
         }
 
         calibrate();
