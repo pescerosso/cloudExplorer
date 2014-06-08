@@ -986,7 +986,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         });
         jMenu2.add(jMenuItem7);
 
-        jMenuItem14.setText("Play Music File");
+        jMenuItem14.setText("Play Music File(s)");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem14ActionPerformed(evt);
@@ -1804,90 +1804,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jToggleButton4ActionPerformed
     }
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        try {
-
-            // temp_file = (Home + File.separator + "object.tmp");
-            URL music_url = null;
-
-            if (active_bucket > 0) {
-                final MP3Player mp3 = new MP3Player();
-                final JFrame musicFrame = new JFrame("Music Player");
-                final JPanel musicPanel = new JPanel();
-                final JButton stopMusic = new JButton("Stop Music");
-                final JButton replayMusic = new JButton("Play/Replay");
-                final JButton forwardMusic = new JButton("Forward");
-                final JButton backwardMusic = new JButton("Backward");
-                final JButton closeMusic = new JButton("Close");
-
-                forwardMusic.addActionListener(new ActionListener() {
-
-                    public void actionPerformed(ActionEvent e) {
-                        mp3.skipForward();
-                    }
-                });
-
-                backwardMusic.addActionListener(new ActionListener() {
-
-                    public void actionPerformed(ActionEvent e) {
-                        mp3.skipBackward();
-                    }
-                });
-
-                stopMusic.addActionListener(new ActionListener() {
-
-                    public void actionPerformed(ActionEvent e) {
-                        mp3.stop();
-                    }
-                });
-                replayMusic.addActionListener(new ActionListener() {
-
-                    public void actionPerformed(ActionEvent e) {
-                        mp3.stop();
-                        mp3.play();
-                    }
-                });
-                closeMusic.addActionListener(new ActionListener() {
-
-                    public void actionPerformed(ActionEvent e) {
-                        mp3.stop();
-                        musicFrame.setVisible(false);
-                    }
-                });
-                for (int h = 1; h != previous_objectarray_length; h++) {
-                    if (d[h].isSelected()) {
-                        musicFrame.setResizable(false);
-                        musicFrame.add(musicPanel);
-                        musicPanel.add(stopMusic);
-                        musicPanel.add(replayMusic);
-                        musicPanel.add(forwardMusic);
-                        musicPanel.add(backwardMusic);
-                        musicPanel.add(closeMusic);
-                        musicFrame.setLocation(500, 200);
-                        musicPanel.repaint();
-                        musicPanel.revalidate();
-                        musicPanel.validate();
-                        musicFrame.pack();
-                        objectacl.setACLpublic(d[h].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
-                        String url = objectacl.setACLurl(d[h].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
-                        url = url.replace("Pre-Signed URL = ", "");
-                        String test1[] = url.split("Expires=");
-                        test1[0] = test1[0].replace("?", "");
-                        jTextArea1.setText("Please wait, the song is loading.");
-                        music_url = (new URL(test1[0]));
-                        mp3.addToPlayList(music_url);
-                        musicFrame.setVisible(true);
-                        musicFrame.setAlwaysOnTop(true);
-                    }
-                }
-
-            } else {
-                jTextArea1.append("\nError: No bucket has been selected");
-            }
-        } catch (Exception mp3player) {
-            jTextArea1.append("\n" + mp3player.getMessage());
+        if (active_bucket > 0) {
+            MusicPlayer musicplayer = new MusicPlayer(this);
+            musicplayer.startc();
+        } else {
+            jTextArea1.append("\nError: No bucket has been selected");
         }
-        calibrateTextArea();
-
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
