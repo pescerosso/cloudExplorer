@@ -1844,7 +1844,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     public void actionPerformed(ActionEvent e) {
                         mp3.stop();
                         mp3.play();
-                        System.out.print("\n" + mp3.getPlayList());
                     }
                 });
                 closeMusic.addActionListener(new ActionListener() {
