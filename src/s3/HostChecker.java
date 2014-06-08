@@ -14,7 +14,7 @@ public class HostChecker implements Runnable {
         Boolean host_alive = false;
         try {
             InetAddress s3address = InetAddress.getByName(address);
-            if (s3address.isReachable(1200)) {
+            if (s3address.isReachable(3000)) {
                 host_alive = true;
             } else {
                 host_alive = false;
