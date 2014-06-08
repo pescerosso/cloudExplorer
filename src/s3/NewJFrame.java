@@ -158,6 +158,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -883,7 +884,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 2.3\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\n1. New Logo by Simone Morellato.\n2. Small dialog tweaks.\n3. Minor bug fixes.\n4. All Put's are now managed by ThreadManager to handle parallel multi-part downloads.\n5. MP3 player now streams the song rather than downloading it.\n\n----------------------------------------------------------------------------------\n\nVersion: 2.2\n\n1. Improved look and feel.\n\n----------------------------------------------------------------------------------\nVersion: 2.1\n\n1. Support for enabling versioning on a bucket.\n2. Support for downloading versioned objects.\n3. Increased timeout for connecting to an S3 host.\n4. Other fixes.\n5. Multipart upload support.\n\n----------------------------------------------------------------------------------\nVersion: 2.0\n\n1. Threaded Bucket and Object listing.\n2. Syncing now syncs subdirectories.\n3. For stability, delete operations are limited to 500.\n4. Object explorer displays the total number of objects in the bucket.\n5. Fixed bug that makes sync work again after aborting a sync.\n6. A check is done to ensure the S3 host is alive before loading the buckets and objects for stability.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.8\n\n1. Deletes are now threaded.\n2. Fixed a bug to allow multiple \"Sync to S3\" operations without reloading objects manually.\n3. Toolbar in \"Object Explorer\" is now persistent when scrolling.\n4. Secret key contains special characters for privacy reasons.\n5. Fixed a bug when creating buckets on AWS.\n6. Fixed a bug when deleting an object from the search results.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.3\n\n1. Logging window scrolls automatically now.\n2. Support for @ in the object name.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.2\n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n----------------------------------------------------------------------------------\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
+        jTextArea4.setText("Version: 2.3\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\n1. New Logo by Simone Morellato.\n2. Small dialog tweaks.\n3. Minor bug fixes.\n4. All Put's are now managed by ThreadManager to handle parallel multi-part downloads.\n5. MP3 player now streams the song rather than downloading it.\n6. A playlist will be created of all the selected music files when clicking \"Play Music File(s).\n7. MP3 player now has \"Skip Forward\" and \"Skip backward\" buttons.\n8. Added option to suspend Bucket versioning.\n\n----------------------------------------------------------------------------------\n\nVersion: 2.2\n\n1. Improved look and feel.\n\n----------------------------------------------------------------------------------\nVersion: 2.1\n\n1. Support for enabling versioning on a bucket.\n2. Support for downloading versioned objects.\n3. Increased timeout for connecting to an S3 host.\n4. Other fixes.\n5. Multipart upload support.\n\n----------------------------------------------------------------------------------\nVersion: 2.0\n\n1. Threaded Bucket and Object listing.\n2. Syncing now syncs subdirectories.\n3. For stability, delete operations are limited to 500.\n4. Object explorer displays the total number of objects in the bucket.\n5. Fixed bug that makes sync work again after aborting a sync.\n6. A check is done to ensure the S3 host is alive before loading the buckets and objects for stability.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.8\n\n1. Deletes are now threaded.\n2. Fixed a bug to allow multiple \"Sync to S3\" operations without reloading objects manually.\n3. Toolbar in \"Object Explorer\" is now persistent when scrolling.\n4. Secret key contains special characters for privacy reasons.\n5. Fixed a bug when creating buckets on AWS.\n6. Fixed a bug when deleting an object from the search results.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.3\n\n1. Logging window scrolls automatically now.\n2. Support for @ in the object name.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.2\n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n----------------------------------------------------------------------------------\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
         jTextArea4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
@@ -957,6 +958,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
         jMenu3.add(jMenuItem11);
+
+        jMenuItem12.setText("Suspend Versioning");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem12);
 
         jMenuItem3.setText("Delete");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -2171,6 +2180,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        if (active_bucket > 0) {
+            jTextArea1.append(bucket.disableVersioning(cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), cred.getRegion()));
+            calibrateTextArea();
+        } else {
+            jTextArea1.append("\nError: No bucket has been selected");
+        }
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
     void var() {
         cred.setAccess_key(jTextField1.getText());
         cred.setSecret_key(jTextField2.getText());
@@ -2225,6 +2243,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
