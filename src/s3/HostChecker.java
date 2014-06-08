@@ -43,6 +43,7 @@ public class HostChecker implements Runnable {
             mainFrame.reloadBuckets();
         } else {
             NewJFrame.jTextArea1.append("\nError: host not found");
+            mainFrame.calibrateTextArea();
         }
     }
 
