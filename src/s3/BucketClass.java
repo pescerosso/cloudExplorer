@@ -19,14 +19,19 @@ public class BucketClass {
 
     NewJFrame mainFrame;
 
-    String enableVersioning(String access_key, String secret_key, String bucket, String endpoint, String region) {
+    String controlVersioning(String access_key, String secret_key, String bucket, String endpoint, String region, Boolean enable) {
 
         String message = null;
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
         try {
-            SetBucketVersioningConfigurationRequest request = new SetBucketVersioningConfigurationRequest(bucket, new BucketVersioningConfiguration(BucketVersioningConfiguration.ENABLED));
+            SetBucketVersioningConfigurationRequest request;
+            if (enable) {
+                request = new SetBucketVersioningConfigurationRequest(bucket, new BucketVersioningConfiguration(BucketVersioningConfiguration.ENABLED));
+            } else {
+                request = new SetBucketVersioningConfigurationRequest(bucket, new BucketVersioningConfiguration(BucketVersioningConfiguration.SUSPENDED));
+            }
             s3Client.setBucketVersioningConfiguration(request);
             mainFrame.jTextArea1.append("\nBucket Versioning is:" + request.getVersioningConfiguration().getStatus());
         } catch (Exception versioning) {
@@ -35,28 +40,6 @@ public class BucketClass {
             message = message + "\n" + versioning.getMessage();
         }
 
-        // message.replace("null", "");
-        return message;
-
-    }
-    
-      String disableVersioning(String access_key, String secret_key, String bucket, String endpoint, String region) {
-
-        String message = null;
-        AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
-        AmazonS3 s3Client = new AmazonS3Client(credentials);
-        s3Client.setEndpoint(endpoint);
-        try {
-            SetBucketVersioningConfigurationRequest request = new SetBucketVersioningConfigurationRequest(bucket, new BucketVersioningConfiguration(BucketVersioningConfiguration.SUSPENDED));
-            s3Client.setBucketVersioningConfiguration(request);
-            mainFrame.jTextArea1.append("\nBucket Versioning is:" + request.getVersioningConfiguration().getStatus());
-        } catch (Exception versioning) {
-            mainFrame.jTextArea1.append("\n\nAn error has occurred in versioning.");
-            mainFrame.jTextArea1.append("\n\nError Message:    " + versioning.getMessage());
-            message = message + "\n" + versioning.getMessage();
-        }
-
-        // message.replace("null", "");
         return message;
 
     }

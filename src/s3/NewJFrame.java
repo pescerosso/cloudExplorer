@@ -956,7 +956,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenuBar1.setBackground(java.awt.SystemColor.text);
         jMenuBar1.setBorder(null);
 
-        jMenu1.setBackground(java.awt.SystemColor.text);
         jMenu1.setText("File");
 
         jMenuItem4.setText("Exit");
@@ -969,8 +968,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu3.setBackground(java.awt.SystemColor.text);
-        jMenu3.setBorder(null);
         jMenu3.setText("Bucket");
 
         jMenuItem1.setText("Create Bucket");
@@ -1036,7 +1033,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu5.setBackground(java.awt.SystemColor.text);
         jMenu5.setText("Background Syncing");
 
         jMenuItem15.setText("Run");
@@ -2110,7 +2106,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         if (active_bucket > 0) {
-            jTextArea1.append(bucket.enableVersioning(cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), cred.getRegion()));
+            jTextArea1.append(bucket.controlVersioning(cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), cred.getRegion(),true));
             calibrateTextArea();
         } else {
             jTextArea1.append("\nError: No bucket has been selected");
@@ -2119,7 +2115,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         if (active_bucket > 0) {
-            jTextArea1.append(bucket.disableVersioning(cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), cred.getRegion()));
+            jTextArea1.append(bucket.controlVersioning(cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), cred.getRegion(),false));
             calibrateTextArea();
         } else {
             jTextArea1.append("\nError: No bucket has been selected");
