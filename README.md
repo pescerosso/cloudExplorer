@@ -4,6 +4,9 @@ This is a simple, free, and open-source S3 client made by me as a fun, side proj
 
 ![Text Editor](http://www.linux-toys.com/editor-new.png)
 
+![Streaming Music Player](http://www.linux-toys.com/music.png)
+
+
 [Background Sync]
 
 Background Sync allows Cloudian Explorer to function like Dropbox. It will sync to and from the S3 server. Please note that no files will be deleted. 
