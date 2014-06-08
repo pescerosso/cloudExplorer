@@ -13,7 +13,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
@@ -22,8 +21,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 
 public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
@@ -1387,16 +1384,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jTextArea1.append("\nError: Configuration not loaded\n");
         }
     }//GEN-LAST:event_jButton6ActionPerformed
-    void preload() {
-
-        config_file = (Home + File.separator + "s3.config");
-
-        File checkConfig = new File(config_file);
-        if (checkConfig.exists()) {
-            jButton9.doClick();
-        }
-    }
-
+    
     void editorSync(String file) {
 
         temp_file = (Home + File.separator + "object.tmp");
