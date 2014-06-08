@@ -72,30 +72,32 @@ public class MusicPlayer implements Runnable {
             });
             for (int h = 1; h != mainFrame.previous_objectarray_length; h++) {
                 if (mainFrame.d[h].isSelected()) {
-                    musicFrame.setResizable(false);
-                    musicFrame.add(musicPanel);
-                    musicPanel.add(stopMusic);
-                    musicPanel.add(replayMusic);
-                    musicPanel.add(forwardMusic);
-                    musicPanel.add(backwardMusic);
-                    musicPanel.add(closeMusic);
-                    musicFrame.setLocation(500, 200);
-                    musicPanel.repaint();
-                    musicPanel.revalidate();
-                    musicPanel.validate();
-                    musicFrame.pack();
-                    mainFrame.objectacl.setACLpublic(mainFrame.d[h].getText(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
-                    String url = mainFrame.objectacl.setACLurl(mainFrame.d[h].getText(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
-                    url = url.replace("Pre-Signed URL = ", "");
-                    String test1[] = url.split("Expires=");
-                    test1[0] = test1[0].replace("?", "");
-                    jTextArea1.setText("Please wait, the song is loading.");
-                    music_url = (new URL(test1[0]));
-                    mp3.addToPlayList(music_url);
-                    musicFrame.setVisible(true);
-                    musicFrame.setAlwaysOnTop(true);
+                    if (mainFrame.d[h].getText().contains(".mp3")) {
+                        musicFrame.setResizable(false);
+                        musicFrame.add(musicPanel);
+                        musicPanel.add(stopMusic);
+                        musicPanel.add(replayMusic);
+                        musicPanel.add(forwardMusic);
+                        musicPanel.add(backwardMusic);
+                        musicPanel.add(closeMusic);
+                        musicFrame.setLocation(500, 200);
+                        musicPanel.repaint();
+                        musicPanel.revalidate();
+                        musicPanel.validate();
+                        musicFrame.pack();
+                        mainFrame.objectacl.setACLpublic(mainFrame.d[h].getText(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
+                        String url = mainFrame.objectacl.setACLurl(mainFrame.d[h].getText(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
+                        url = url.replace("Pre-Signed URL = ", "");
+                        String test1[] = url.split("Expires=");
+                        test1[0] = test1[0].replace("?", "");
+                        jTextArea1.setText("Please wait, the song is loading.");
+                        music_url = (new URL(test1[0]));
+                        mp3.addToPlayList(music_url);
+                    }
                 }
             }
+            musicFrame.setVisible(true);
+            musicFrame.setAlwaysOnTop(true);
 
         } catch (Exception mp3player) {
             jTextArea1.append("\n" + mp3player.getMessage());
