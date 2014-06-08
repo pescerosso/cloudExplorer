@@ -1,15 +1,12 @@
 package s3;
 
 import jaco.mp3.player.MP3Player;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.InetAddress;
 import java.net.URL;
-import java.net.UnknownHostException;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import static s3.NewJFrame.jTextArea1;
 
 public class MusicPlayer implements Runnable {
@@ -28,14 +25,25 @@ public class MusicPlayer implements Runnable {
             URL music_url = null;
 
             final MP3Player mp3 = new MP3Player();
-            final JFrame musicFrame = new JFrame("Music Player");
-            final JPanel musicPanel = new JPanel();
             final JButton stopMusic = new JButton("Stop Music");
             final JButton replayMusic = new JButton("Play/Replay");
             final JButton forwardMusic = new JButton("Forward");
             final JButton backwardMusic = new JButton("Backward");
             final JButton closeMusic = new JButton("Close");
 
+            stopMusic.setBackground(Color.white);
+            stopMusic.setForeground(Color.blue);
+            stopMusic.setBorder(null);
+            replayMusic.setBackground(Color.white);
+            replayMusic.setBorder(null);
+            replayMusic.setForeground(Color.blue);
+            backwardMusic.setBackground(Color.white);
+            backwardMusic.setBorder(null);
+            backwardMusic.setForeground(Color.blue);
+            forwardMusic.setBackground(Color.white);
+            forwardMusic.setBorder(null);
+            forwardMusic.setForeground(Color.blue);
+            
             forwardMusic.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e) {
@@ -67,7 +75,6 @@ public class MusicPlayer implements Runnable {
 
                 public void actionPerformed(ActionEvent e) {
                     mp3.stop();
-                    musicFrame.setVisible(false);
                 }
             });
 
@@ -75,18 +82,6 @@ public class MusicPlayer implements Runnable {
             for (int h = 1; h != mainFrame.previous_objectarray_length; h++) {
                 if (mainFrame.d[h].isSelected()) {
                     if (mainFrame.d[h].getText().contains(".mp3")) {
-                        musicFrame.setResizable(false);
-                        musicFrame.add(musicPanel);
-                        musicPanel.add(stopMusic);
-                        musicPanel.add(replayMusic);
-                        musicPanel.add(forwardMusic);
-                        musicPanel.add(backwardMusic);
-                        musicPanel.add(closeMusic);
-                        musicFrame.setLocation(500, 200);
-                        musicPanel.repaint();
-                        musicPanel.revalidate();
-                        musicPanel.validate();
-                        musicFrame.pack();
                         mainFrame.objectacl.setACLpublic(mainFrame.d[h].getText(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
                         String url = mainFrame.objectacl.setACLurl(mainFrame.d[h].getText(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
                         url = url.replace("Pre-Signed URL = ", "");
@@ -99,8 +94,15 @@ public class MusicPlayer implements Runnable {
                 }
             }
             if (count > 0) {
-                musicFrame.setVisible(true);
-                musicFrame.setAlwaysOnTop(true);
+                mainFrame.jPanel14.setLayout(new BoxLayout(mainFrame.jPanel14, BoxLayout.Y_AXIS));
+                mainFrame.jPanel14.add(replayMusic);
+                mainFrame.jPanel14.add(forwardMusic);
+                mainFrame.jPanel14.add(backwardMusic);
+                mainFrame.jPanel14.add(stopMusic);
+                mainFrame.jPanel14.repaint();
+                mainFrame.jPanel14.revalidate();
+                mainFrame.jPanel14.validate();
+                mp3.play();
             }
 
         } catch (Exception mp3player) {
