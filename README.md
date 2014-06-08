@@ -2,8 +2,6 @@ This is a simple, free, and open-source S3 client made by me as a fun, side proj
 
 ![Browsing Objects](http://www.linux-toys.com/objects.png)
 
-![Text Editor](http://www.linux-toys.com/editor.png)
-
 ![Music](http://www.linux-toys.com/music.png)
 
 
