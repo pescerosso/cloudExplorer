@@ -1117,6 +1117,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jButton13.setEnabled(true);
             jButton14.setEnabled(true);
             jButton1.setEnabled(true);
+            jButton17.setEnabled(true);
+            jButton18.setEnabled(true);
             reloadObjects();
             versionDownload = false;
 
@@ -2186,6 +2188,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jButton13.setEnabled(false);
                     jButton14.setEnabled(false);
                     jButton1.setEnabled(false);
+                    jButton17.setEnabled(false);
+                    jButton18.setEnabled(false);
                     showVersions = new ShowVersions(d[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), this);
                     showVersions.run();
                     break;
@@ -2222,8 +2226,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
+    public static javax.swing.JButton jButton17;
+    public static javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

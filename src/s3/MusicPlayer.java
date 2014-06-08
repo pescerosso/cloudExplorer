@@ -61,6 +61,7 @@ public class MusicPlayer implements Runnable {
 
                 public void actionPerformed(ActionEvent e) {
                     mp3.stop();
+                    mainFrame.jButton17.setEnabled(true);
                 }
             });
             replayMusic.addActionListener(new ActionListener() {
@@ -70,28 +71,11 @@ public class MusicPlayer implements Runnable {
                     mp3.play();
                 }
             });
-            closeMusic.addActionListener(new ActionListener() {
-
-                public void actionPerformed(ActionEvent e) {
-                    mp3.stop();
-                }
-            });
 
             int count = 0;
             for (int h = 1; h != mainFrame.previous_objectarray_length; h++) {
                 if (mainFrame.d[h].isSelected()) {
                     if (mainFrame.d[h].getText().contains(".mp3")) {
-                        if (count == 1) {
-                            mainFrame.jPanel14.setLayout(new BoxLayout(mainFrame.jPanel14, BoxLayout.Y_AXIS));
-                            mainFrame.jPanel14.add(replayMusic);
-                            mainFrame.jPanel14.add(forwardMusic);
-                            mainFrame.jPanel14.add(backwardMusic);
-                            mainFrame.jPanel14.add(stopMusic);
-                            mainFrame.jPanel14.repaint();
-                            mainFrame.jPanel14.revalidate();
-                            mainFrame.jPanel14.validate();
-                            mp3.play();
-                        }
                         mainFrame.objectacl.setACLpublic(mainFrame.d[h].getText(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
                         String url = mainFrame.objectacl.setACLurl(mainFrame.d[h].getText(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
                         url = url.replace("Pre-Signed URL = ", "");
@@ -100,6 +84,19 @@ public class MusicPlayer implements Runnable {
                         music_url = (new URL(test1[0]));
                         mp3.addToPlayList(music_url);
                         count++;
+                    }
+                    if (count == 1) {
+                        mainFrame.jPanel14.removeAll();
+                        mainFrame.jPanel14.setLayout(new BoxLayout(mainFrame.jPanel14, BoxLayout.Y_AXIS));
+                        mainFrame.jPanel14.add(replayMusic);
+                        mainFrame.jPanel14.add(forwardMusic);
+                        mainFrame.jPanel14.add(backwardMusic);
+                        mainFrame.jPanel14.add(stopMusic);
+                        mainFrame.jPanel14.repaint();
+                        mainFrame.jPanel14.revalidate();
+                        mainFrame.jPanel14.validate();
+                        mainFrame.jButton17.setEnabled(false);
+                        mp3.play();
                     }
                 }
             }
