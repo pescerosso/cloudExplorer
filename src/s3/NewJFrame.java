@@ -956,6 +956,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addComponent(jTabbedPane1))
         );
 
+        jMenuBar1.setBackground(java.awt.SystemColor.text);
+        jMenuBar1.setBorder(null);
+
+        jMenu1.setBackground(java.awt.SystemColor.text);
         jMenu1.setText("File");
 
         jMenuItem4.setText("Exit");
@@ -968,6 +972,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu3.setBackground(java.awt.SystemColor.text);
+        jMenu3.setBorder(null);
         jMenu3.setText("Bucket");
 
         jMenuItem1.setText("Create Bucket");
@@ -1033,6 +1039,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu5.setBackground(java.awt.SystemColor.text);
         jMenu5.setText("Background Syncing");
 
         jMenuItem15.setText("Run");
