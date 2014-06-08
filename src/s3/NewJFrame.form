@@ -355,9 +355,7 @@
               <Color blue="ff" green="ff" id="Text" palette="2" red="ff" type="palette"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -432,7 +430,7 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                                   <Component id="jScrollPane27" min="-2" pref="360" max="-2" attributes="0"/>
-                                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                                  <EmptySpace pref="25" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jButton9" min="-2" max="-2" attributes="0"/>
@@ -1152,7 +1150,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jFileChooser1" pref="988" max="32767" attributes="0"/>
+                      <Component id="jFileChooser1" pref="990" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
@@ -1407,7 +1405,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                          <Component id="jTextField6" pref="832" max="32767" attributes="0"/>
+                          <Component id="jTextField6" pref="816" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton11" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
@@ -1500,7 +1498,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane6" alignment="0" pref="988" max="32767" attributes="0"/>
+                      <Component id="jScrollPane6" alignment="0" pref="990" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -1525,7 +1523,7 @@
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="Version: 2.3&#xa;&#xa;Please submit bugs via github: https://github.com/rusher81572/s3 &#xa;&#xa;1. New Logo by Simone Morellato.&#xa;2. Small dialog tweaks.&#xa;3. Minor bug fixes.&#xa;4. All Put&apos;s are now managed by ThreadManager to handle parallel multi-part downloads.&#xa;----------------------------------------------------------------------------------&#xa;&#xa;Version: 2.2&#xa;&#xa;1. Improved look and feel.&#xa;&#xa;----------------------------------------------------------------------------------&#xa;Version: 2.1&#xa;&#xa;1. Support for enabling versioning on a bucket.&#xa;2. Support for downloading versioned objects.&#xa;3. Increased timeout for connecting to an S3 host.&#xa;4. Other fixes.&#xa;5. Multipart upload support.&#xa;&#xa;----------------------------------------------------------------------------------&#xa;Version: 2.0&#xa;&#xa;1. Threaded Bucket and Object listing.&#xa;2. Syncing now syncs subdirectories.&#xa;3. For stability, delete operations are limited to 500.&#xa;4. Object explorer displays the total number of objects in the bucket.&#xa;5. Fixed bug that makes sync work again after aborting a sync.&#xa;6. A check is done to ensure the S3 host is alive before loading the buckets and objects for stability.&#xa;&#xa;----------------------------------------------------------------------------------&#xa;&#xa;Version: 1.8&#xa;&#xa;1. Deletes are now threaded.&#xa;2. Fixed a bug to allow multiple &quot;Sync to S3&quot; operations without reloading objects manually.&#xa;3. Toolbar in &quot;Object Explorer&quot; is now persistent when scrolling.&#xa;4. Secret key contains special characters for privacy reasons.&#xa;5. Fixed a bug when creating buckets on AWS.&#xa;6. Fixed a bug when deleting an object from the search results.&#xa;&#xa;* Special note for Background Sync users *&#xa;&#xa;Background Sync will not recursively sync directories.&#xa;&#xa;----------------------------------------------------------------------------------&#xa;Version: 1.7.3&#xa;&#xa;1. Logging window scrolls automatically now.&#xa;2. Support for @ in the object name.&#xa;&#xa;----------------------------------------------------------------------------------&#xa;Version: 1.7.2&#xa;&#xa;1. Fixed a bug with background sync.&#xa;2. Background Sync is now working properly.&#xa;&#xa;----------------------------------------------------------------------------------&#xa;&#xa;Version: 1.7.1 &#xa;&#xa;1. Code improvements.&#xa;2. Fixed bug with displaying images.&#xa;3. Fixed bug with playing music.&#xa;&#xa;&#xa;If you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config&#xa;&#xa;----------------------------------------------------------------------------------&#xa;&#xa;Version: 1.7&#xa;&#xa;Code improvements.&#xa;Support for aborting Uploads and Downloads.&#xa;PUT and GET operations are done in a separate thread.&#xa;&#xa;----------------------------------------------------------------------------------&#xa;Version: 1.6&#xa;&#xa;Faster search. &#xa;Settings is now the default startup tab so the user can quickly choose the S3 account to load.&#xa;Upon selecting a bucket. Object Explorer will automatically load and display the objects.&#xa;Improvement to accounts. Single click to load account and buckets.&#xa;Major GUI changes.&#xa;Fixed text editor window size."/>
+                        <Property name="text" type="java.lang.String" value="Version: 2.3&#xa;&#xa;Please submit bugs via github: https://github.com/rusher81572/s3 &#xa;&#xa;1. New Logo by Simone Morellato.&#xa;2. Small dialog tweaks.&#xa;3. Minor bug fixes.&#xa;4. All Put&apos;s are now managed by ThreadManager to handle parallel multi-part downloads.&#xa;5. MP3 player now streams the song rather than downloading it.&#xa;&#xa;----------------------------------------------------------------------------------&#xa;&#xa;Version: 2.2&#xa;&#xa;1. Improved look and feel.&#xa;&#xa;----------------------------------------------------------------------------------&#xa;Version: 2.1&#xa;&#xa;1. Support for enabling versioning on a bucket.&#xa;2. Support for downloading versioned objects.&#xa;3. Increased timeout for connecting to an S3 host.&#xa;4. Other fixes.&#xa;5. Multipart upload support.&#xa;&#xa;----------------------------------------------------------------------------------&#xa;Version: 2.0&#xa;&#xa;1. Threaded Bucket and Object listing.&#xa;2. Syncing now syncs subdirectories.&#xa;3. For stability, delete operations are limited to 500.&#xa;4. Object explorer displays the total number of objects in the bucket.&#xa;5. Fixed bug that makes sync work again after aborting a sync.&#xa;6. A check is done to ensure the S3 host is alive before loading the buckets and objects for stability.&#xa;&#xa;----------------------------------------------------------------------------------&#xa;&#xa;Version: 1.8&#xa;&#xa;1. Deletes are now threaded.&#xa;2. Fixed a bug to allow multiple &quot;Sync to S3&quot; operations without reloading objects manually.&#xa;3. Toolbar in &quot;Object Explorer&quot; is now persistent when scrolling.&#xa;4. Secret key contains special characters for privacy reasons.&#xa;5. Fixed a bug when creating buckets on AWS.&#xa;6. Fixed a bug when deleting an object from the search results.&#xa;&#xa;* Special note for Background Sync users *&#xa;&#xa;Background Sync will not recursively sync directories.&#xa;&#xa;----------------------------------------------------------------------------------&#xa;Version: 1.7.3&#xa;&#xa;1. Logging window scrolls automatically now.&#xa;2. Support for @ in the object name.&#xa;&#xa;----------------------------------------------------------------------------------&#xa;Version: 1.7.2&#xa;&#xa;1. Fixed a bug with background sync.&#xa;2. Background Sync is now working properly.&#xa;&#xa;----------------------------------------------------------------------------------&#xa;&#xa;Version: 1.7.1 &#xa;&#xa;1. Code improvements.&#xa;2. Fixed bug with displaying images.&#xa;3. Fixed bug with playing music.&#xa;&#xa;&#xa;If you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config&#xa;&#xa;----------------------------------------------------------------------------------&#xa;&#xa;Version: 1.7&#xa;&#xa;Code improvements.&#xa;Support for aborting Uploads and Downloads.&#xa;PUT and GET operations are done in a separate thread.&#xa;&#xa;----------------------------------------------------------------------------------&#xa;Version: 1.6&#xa;&#xa;Faster search. &#xa;Settings is now the default startup tab so the user can quickly choose the S3 account to load.&#xa;Upon selecting a bucket. Object Explorer will automatically load and display the objects.&#xa;Improvement to accounts. Single click to load account and buckets.&#xa;Major GUI changes.&#xa;Fixed text editor window size."/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                             <TitledBorder/>

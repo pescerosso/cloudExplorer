@@ -12,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -251,7 +252,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         panel1.setBackground(java.awt.Color.white);
 
         jTabbedPane1.setBackground(java.awt.SystemColor.text);
-        jTabbedPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jTabbedPane1.setBorder(null);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -422,7 +423,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addComponent(jScrollPane27, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(35, Short.MAX_VALUE))
+                        .addContainerGap(25, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -723,7 +724,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+            .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 990, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9)
@@ -857,7 +858,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addGap(1, 1, 1)
-                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 832, Short.MAX_VALUE)
+                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 816, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton11)
                 .addGap(14, 14, 14))
@@ -882,7 +883,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 2.3\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\n1. New Logo by Simone Morellato.\n2. Small dialog tweaks.\n3. Minor bug fixes.\n4. All Put's are now managed by ThreadManager to handle parallel multi-part downloads.\n----------------------------------------------------------------------------------\n\nVersion: 2.2\n\n1. Improved look and feel.\n\n----------------------------------------------------------------------------------\nVersion: 2.1\n\n1. Support for enabling versioning on a bucket.\n2. Support for downloading versioned objects.\n3. Increased timeout for connecting to an S3 host.\n4. Other fixes.\n5. Multipart upload support.\n\n----------------------------------------------------------------------------------\nVersion: 2.0\n\n1. Threaded Bucket and Object listing.\n2. Syncing now syncs subdirectories.\n3. For stability, delete operations are limited to 500.\n4. Object explorer displays the total number of objects in the bucket.\n5. Fixed bug that makes sync work again after aborting a sync.\n6. A check is done to ensure the S3 host is alive before loading the buckets and objects for stability.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.8\n\n1. Deletes are now threaded.\n2. Fixed a bug to allow multiple \"Sync to S3\" operations without reloading objects manually.\n3. Toolbar in \"Object Explorer\" is now persistent when scrolling.\n4. Secret key contains special characters for privacy reasons.\n5. Fixed a bug when creating buckets on AWS.\n6. Fixed a bug when deleting an object from the search results.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.3\n\n1. Logging window scrolls automatically now.\n2. Support for @ in the object name.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.2\n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n----------------------------------------------------------------------------------\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
+        jTextArea4.setText("Version: 2.3\n\nPlease submit bugs via github: https://github.com/rusher81572/s3 \n\n1. New Logo by Simone Morellato.\n2. Small dialog tweaks.\n3. Minor bug fixes.\n4. All Put's are now managed by ThreadManager to handle parallel multi-part downloads.\n5. MP3 player now streams the song rather than downloading it.\n\n----------------------------------------------------------------------------------\n\nVersion: 2.2\n\n1. Improved look and feel.\n\n----------------------------------------------------------------------------------\nVersion: 2.1\n\n1. Support for enabling versioning on a bucket.\n2. Support for downloading versioned objects.\n3. Increased timeout for connecting to an S3 host.\n4. Other fixes.\n5. Multipart upload support.\n\n----------------------------------------------------------------------------------\nVersion: 2.0\n\n1. Threaded Bucket and Object listing.\n2. Syncing now syncs subdirectories.\n3. For stability, delete operations are limited to 500.\n4. Object explorer displays the total number of objects in the bucket.\n5. Fixed bug that makes sync work again after aborting a sync.\n6. A check is done to ensure the S3 host is alive before loading the buckets and objects for stability.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.8\n\n1. Deletes are now threaded.\n2. Fixed a bug to allow multiple \"Sync to S3\" operations without reloading objects manually.\n3. Toolbar in \"Object Explorer\" is now persistent when scrolling.\n4. Secret key contains special characters for privacy reasons.\n5. Fixed a bug when creating buckets on AWS.\n6. Fixed a bug when deleting an object from the search results.\n\n* Special note for Background Sync users *\n\nBackground Sync will not recursively sync directories.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.3\n\n1. Logging window scrolls automatically now.\n2. Support for @ in the object name.\n\n----------------------------------------------------------------------------------\nVersion: 1.7.2\n\n1. Fixed a bug with background sync.\n2. Background Sync is now working properly.\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7.1 \n\n1. Code improvements.\n2. Fixed bug with displaying images.\n3. Fixed bug with playing music.\n\n\nIf you plan on using this feature, background sync will automatically use the first account entry in ~/s3.config\n\n----------------------------------------------------------------------------------\n\nVersion: 1.7\n\nCode improvements.\nSupport for aborting Uploads and Downloads.\nPUT and GET operations are done in a separate thread.\n\n----------------------------------------------------------------------------------\nVersion: 1.6\n\nFaster search. \nSettings is now the default startup tab so the user can quickly choose the S3 account to load.\nUpon selecting a bucket. Object Explorer will automatically load and display the objects.\nImprovement to accounts. Single click to load account and buckets.\nMajor GUI changes.\nFixed text editor window size.");
         jTextArea4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
@@ -891,7 +892,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 990, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1805,15 +1806,32 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         try {
 
-            temp_file = (Home + File.separator + "object.tmp");
+            // temp_file = (Home + File.separator + "object.tmp");
+            URL music_url = null;
 
             if (active_bucket > 0) {
-                final MP3Player mp3 = new MP3Player(new File(temp_file));
+                final MP3Player mp3 = new MP3Player();
                 final JFrame musicFrame = new JFrame("Music Player");
                 final JPanel musicPanel = new JPanel();
                 final JButton stopMusic = new JButton("Stop Music");
-                final JButton replayMusic = new JButton("Replay");
+                final JButton replayMusic = new JButton("Play/Replay");
+                final JButton forwardMusic = new JButton("Forward");
+                final JButton backwardMusic = new JButton("Backward");
                 final JButton closeMusic = new JButton("Close");
+
+                forwardMusic.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e) {
+                        mp3.skipForward();
+                    }
+                });
+
+                backwardMusic.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e) {
+                        mp3.skipBackward();
+                    }
+                });
 
                 stopMusic.addActionListener(new ActionListener() {
 
@@ -1826,6 +1844,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     public void actionPerformed(ActionEvent e) {
                         mp3.stop();
                         mp3.play();
+                        System.out.print("\n" + mp3.getPlayList());
                     }
                 });
                 closeMusic.addActionListener(new ActionListener() {
@@ -1841,20 +1860,24 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         musicFrame.add(musicPanel);
                         musicPanel.add(stopMusic);
                         musicPanel.add(replayMusic);
+                        musicPanel.add(forwardMusic);
+                        musicPanel.add(backwardMusic);
                         musicPanel.add(closeMusic);
                         musicFrame.setLocation(500, 200);
                         musicPanel.repaint();
                         musicPanel.revalidate();
                         musicPanel.validate();
                         musicFrame.pack();
+                        objectacl.setACLpublic(d[h].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
+                        String url = objectacl.setACLurl(d[h].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
+                        url = url.replace("Pre-Signed URL = ", "");
+                        String test1[] = url.split("Expires=");
+                        test1[0] = test1[0].replace("?", "");
                         jTextArea1.setText("Please wait, the song is loading.");
-                        get = new Get(d[h].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file, null);
-                        get.run();
-                        mp3.play();
-                        dialog.setVisible(false);
+                        music_url = (new URL(test1[0]));
+                        mp3.addToPlayList(music_url);
                         musicFrame.setVisible(true);
                         musicFrame.setAlwaysOnTop(true);
-                        break;
                     }
                 }
 
