@@ -69,6 +69,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     public ArrayList<String> versioning_name;
     public Boolean versionDownload = false;
     ShowVersions showVersions;
+    ImageViewer imageviewer;
 
     public NewJFrame() {
         initComponents();
@@ -131,6 +132,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jButton1 = new javax.swing.JButton();
         jButton17 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
+        jButton19 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jFileChooser1 = new javax.swing.JFileChooser();
         jButton5 = new javax.swing.JButton();
@@ -163,7 +165,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -635,6 +636,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
 
+        jButton19.setBackground(java.awt.SystemColor.text);
+        jButton19.setText("View Image");
+        jButton19.setToolTipText("");
+        jButton19.setBorder(null);
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -669,7 +680,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton18))
+                        .addComponent(jButton18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton19))
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(600, 600, 600))
         );
@@ -687,7 +700,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -906,7 +920,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 2.3\n\nPlease submit bugs via github: https://github.com/rusher81572/s3\n\nNew Logo by Simone Morellato.\nSmall dialog tweaks.\nMinor bug fixes.\nAll Put's are now managed by ThreadManager to handle parallel multi-part downloads.\nMP3 player now streams the song rather than downloading it.\nA playlist will be created of all the selected music files when clicking \"Play Music File(s).\nMP3 player now has \"Skip Forward\" and \"Skip backward\" buttons.\nAdded option to suspend Bucket versioning.\n\nVersion: 2.2\n\nImproved look and feel.\n\nVersion: 2.1\n\nSupport for enabling versioning on a bucket.\nSupport for downloading versioned objects.\nIncreased timeout for connecting to an S3 host.\nOther fixes.\nMultipart upload support.\n\nVersion: 2.0\n\nThreaded Bucket and Object listing.\nSyncing now syncs subdirectories.\nFor stability, delete operations are limited to 500.\nObject explorer displays the total number of objects in the bucket.\nFixed bug that makes sync work again after aborting a sync.\nA check is done to ensure the S3 host is alive before loading the buckets and objects for stability.");
+        jTextArea4.setText("Version: 2.4\n\nPlease submit bugs via github: https://github.com/rusher81572/s3\n\nImage viewer is now threaded\n\n\nVersion: 2.3\n\nNew Logo by Simone Morellato.\nSmall dialog tweaks.\nMinor bug fixes.\nAll Put's are now managed by ThreadManager to handle parallel multi-part downloads.\nMP3 player now streams the song rather than downloading it.\nA playlist will be created of all the selected music files when clicking \"Play Music File(s).\nMP3 player now has \"Skip Forward\" and \"Skip backward\" buttons.\nAdded option to suspend Bucket versioning.\n\nVersion: 2.2\n\nImproved look and feel.\n\nVersion: 2.1\n\nSupport for enabling versioning on a bucket.\nSupport for downloading versioned objects.\nIncreased timeout for connecting to an S3 host.\nOther fixes.\nMultipart upload support.\n\nVersion: 2.0\n\nThreaded Bucket and Object listing.\nSyncing now syncs subdirectories.\nFor stability, delete operations are limited to 500.\nObject explorer displays the total number of objects in the bucket.\nFixed bug that makes sync work again after aborting a sync.\nA check is done to ensure the S3 host is alive before loading the buckets and objects for stability.");
         jTextArea4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
@@ -1016,14 +1030,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
         jMenu2.add(jMenuItem7);
-
-        jMenuItem8.setText("View in Image Viewer");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
 
@@ -1567,47 +1573,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jTextArea1.append("\n" + deleteFIle.getMessage());
         }
     }
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        try {
-
-            temp_file = (Home + File.separator + "object.tmp");
-
-            JLabel image[] = new JLabel[objectarray.length];
-            ImageIcon[] photo = new ImageIcon[objectarray.length];
-            JFrame image_frame = new JFrame();
-            JScrollBar bar = new JScrollBar(JScrollBar.VERTICAL);
-            JPanel image_panel = new JPanel();
-            JScrollPane scrolling_pane = new JScrollPane(image_panel);
-            image_frame.setSize(new Dimension(2000, 1000));
-            image_frame.add(scrolling_pane);
-
-            for (int i = 1; i != previous_objectarray_length; i++) {
-                if (d[i].isSelected()) {
-                    image_panel.setLayout(new BoxLayout(image_panel, BoxLayout.PAGE_AXIS));
-                    String new_object_name = convertObject(d[i].getText(), "download");
-                    jTextArea1.setText("Please wait, the image is loading.");
-                    get = new Get(d[i].getText(), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), temp_file + i, null);
-                    get.run();
-                    photo[i] = new ImageIcon(temp_file + i);
-                    image[i] = new JLabel(photo[i]);
-                    image_panel.add(image[i]);
-                    image_frame.repaint();
-                    image_frame.revalidate();
-                    image_frame.validate();
-                    deleteFle(temp_file + i);
-                    break;
-                }
-
-            }
-            image_frame.setVisible(true);
-            image_frame.setAlwaysOnTop(true);
-            dialog.setVisible(false);
-        } catch (Exception imageLoading) {
-            jTextArea1.append("\n" + imageLoading.getMessage());
-        }
-        calibrateTextArea();
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
 
     }//GEN-LAST:event_jTextField6ActionPerformed
@@ -2201,6 +2166,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jButton18ActionPerformed
 
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        if (active_bucket > 0) {
+            imageviewer = new ImageViewer(this);
+            imageviewer.startc();
+        } else {
+            jTextArea1.append("\nError: No bucket has been selected");
+        }
+    }//GEN-LAST:event_jButton19ActionPerformed
+
     void var() {
         cred.setAccess_key(jTextField1.getText());
         cred.setSecret_key(jTextField2.getText());
@@ -2228,6 +2202,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JButton jButton16;
     public static javax.swing.JButton jButton17;
     public static javax.swing.JButton jButton18;
+    public static javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -2264,7 +2239,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     public static javax.swing.JPanel jPanel1;
     public javax.swing.JPanel jPanel11;
