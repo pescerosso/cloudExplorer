@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
@@ -70,6 +71,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     public NewJFrame() {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass()
+                .getResource("CloudianExplorerLogo.png")).getImage());
     }
 
     @SuppressWarnings("unchecked")
@@ -917,7 +920,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 2.4\n\nPlease submit bugs via github: https://github.com/rusher81572/s3\n\nImage viewer is now threaded\n\n\nVersion: 2.3\n\nNew Logo by Simone Morellato.\nSmall dialog tweaks.\nMinor bug fixes.\nAll Put's are now managed by ThreadManager to handle parallel multi-part downloads.\nMP3 player now streams the song rather than downloading it.\nA playlist will be created of all the selected music files when clicking \"Play Music File(s).\nMP3 player now has \"Skip Forward\" and \"Skip backward\" buttons.\nAdded option to suspend Bucket versioning.\n\nVersion: 2.2\n\nImproved look and feel.\n\nVersion: 2.1\n\nSupport for enabling versioning on a bucket.\nSupport for downloading versioned objects.\nIncreased timeout for connecting to an S3 host.\nOther fixes.\nMultipart upload support.\n\nVersion: 2.0\n\nThreaded Bucket and Object listing.\nSyncing now syncs subdirectories.\nFor stability, delete operations are limited to 500.\nObject explorer displays the total number of objects in the bucket.\nFixed bug that makes sync work again after aborting a sync.\nA check is done to ensure the S3 host is alive before loading the buckets and objects for stability.");
+        jTextArea4.setText("Version: 2.4\n\nPlease submit bugs via github: https://github.com/rusher81572/s3\n\nImage viewer is now threaded.\nNew Taskbar icon by Simone Morellato.\n\n\nVersion: 2.3\n\nNew Logo by Simone Morellato.\nSmall dialog tweaks.\nMinor bug fixes.\nAll Put's are now managed by ThreadManager to handle parallel multi-part downloads.\nMP3 player now streams the song rather than downloading it.\nA playlist will be created of all the selected music files when clicking \"Play Music File(s).\nMP3 player now has \"Skip Forward\" and \"Skip backward\" buttons.\nAdded option to suspend Bucket versioning.\n\nVersion: 2.2\n\nImproved look and feel.\n\nVersion: 2.1\n\nSupport for enabling versioning on a bucket.\nSupport for downloading versioned objects.\nIncreased timeout for connecting to an S3 host.\nOther fixes.\nMultipart upload support.\n\nVersion: 2.0\n\nThreaded Bucket and Object listing.\nSyncing now syncs subdirectories.\nFor stability, delete operations are limited to 500.\nObject explorer displays the total number of objects in the bucket.\nFixed bug that makes sync work again after aborting a sync.\nA check is done to ensure the S3 host is alive before loading the buckets and objects for stability.");
         jTextArea4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
@@ -1380,7 +1383,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jTextArea1.append("\nError: Configuration not loaded\n");
         }
     }//GEN-LAST:event_jButton6ActionPerformed
-    
+
     void editorSync(String file) {
 
         temp_file = (Home + File.separator + "object.tmp");
@@ -2106,7 +2109,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         if (active_bucket > 0) {
-            jTextArea1.append(bucket.controlVersioning(cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), cred.getRegion(),true));
+            jTextArea1.append(bucket.controlVersioning(cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), cred.getRegion(), true));
             calibrateTextArea();
         } else {
             jTextArea1.append("\nError: No bucket has been selected");
@@ -2115,7 +2118,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         if (active_bucket > 0) {
-            jTextArea1.append(bucket.controlVersioning(cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), cred.getRegion(),false));
+            jTextArea1.append(bucket.controlVersioning(cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), cred.getRegion(), false));
             calibrateTextArea();
         } else {
             jTextArea1.append("\nError: No bucket has been selected");
