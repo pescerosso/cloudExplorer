@@ -3,7 +3,7 @@ This is a simple, free, and open-source S3 client made by me as a fun, side proj
 
 
 ![Music Player](http://www.linux-toys.com/music-new.png)
-![Editor](http://www.linux-toys.com/editor-new.png)
+![Editor](https://linux-toys.com/editor-new.png)
 
 [Background Sync]
 
