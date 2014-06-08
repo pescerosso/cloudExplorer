@@ -732,7 +732,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton5.setBackground(java.awt.SystemColor.text);
         jButton5.setText("Upload");
-        jButton5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton5.setBorder(null);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -750,7 +750,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton15.setBackground(java.awt.SystemColor.text);
         jButton15.setText("Abort upload");
-        jButton15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton15.setBorder(null);
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton15ActionPerformed(evt);
@@ -805,7 +805,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jToggleButton3.setBackground(java.awt.SystemColor.text);
         jToggleButton3.setText("Sync to S3");
-        jToggleButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jToggleButton3.setBorder(null);
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton3ActionPerformed(evt);
@@ -814,7 +814,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jToggleButton4.setBackground(java.awt.SystemColor.text);
         jToggleButton4.setText("Sync from S3");
-        jToggleButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jToggleButton4.setBorder(null);
         jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton4ActionPerformed(evt);
@@ -823,7 +823,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton16.setBackground(java.awt.SystemColor.text);
         jButton16.setText("Abort");
-        jButton16.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton16.setBorder(null);
         jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton16ActionPerformed(evt);
@@ -871,7 +871,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton11.setBackground(java.awt.SystemColor.text);
         jButton11.setText("Save");
-        jButton11.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jButton11.setBorder(null);
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
@@ -895,7 +895,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addGap(1, 1, 1)
-                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 816, Short.MAX_VALUE)
+                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton11)
                 .addGap(14, 14, 14))
