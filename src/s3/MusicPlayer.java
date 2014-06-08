@@ -69,6 +69,7 @@ public class MusicPlayer implements Runnable {
                 public void actionPerformed(ActionEvent e) {
                     mp3.stop();
                     mp3.play();
+                    mainFrame.jButton17.setEnabled(false);
                 }
             });
 
