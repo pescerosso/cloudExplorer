@@ -1814,6 +1814,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         if (active_bucket > 0) {
+            jTextArea1.append("\nPlease wait, loading MP3 player.");
+            calibrateTextArea();
             MusicPlayer musicplayer = new MusicPlayer(this);
             musicplayer.startc();
         } else {

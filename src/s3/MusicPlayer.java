@@ -70,6 +70,8 @@ public class MusicPlayer implements Runnable {
                     musicFrame.setVisible(false);
                 }
             });
+
+            int count = 0;
             for (int h = 1; h != mainFrame.previous_objectarray_length; h++) {
                 if (mainFrame.d[h].isSelected()) {
                     if (mainFrame.d[h].getText().contains(".mp3")) {
@@ -90,14 +92,16 @@ public class MusicPlayer implements Runnable {
                         url = url.replace("Pre-Signed URL = ", "");
                         String test1[] = url.split("Expires=");
                         test1[0] = test1[0].replace("?", "");
-                        jTextArea1.setText("Please wait, the song is loading.");
                         music_url = (new URL(test1[0]));
                         mp3.addToPlayList(music_url);
+                        count++;
                     }
                 }
             }
-            musicFrame.setVisible(true);
-            musicFrame.setAlwaysOnTop(true);
+            if (count > 0) {
+                musicFrame.setVisible(true);
+                musicFrame.setAlwaysOnTop(true);
+            }
 
         } catch (Exception mp3player) {
             jTextArea1.append("\n" + mp3player.getMessage());
