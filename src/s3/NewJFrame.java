@@ -1408,45 +1408,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        try {
-            if (active_bucket > 0) {
-                final JFrame bucketACL = new JFrame("Bucket ACL Settings");
-                final JCheckBox static_website = new JCheckBox("Static Website");
-                final JButton bucketACLbutton = new JButton("Commit");
 
-                bucketACLbutton.addActionListener(new ActionListener() {
-
-                    public void actionPerformed(ActionEvent e) {
-                        if (static_website.isSelected()) {
-                            objectacl.setBUCKETwebsite(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
-                            jTextArea1.append("\nWebsite access enabled.\n");
-                            bucketACL.setVisible(false);
-                        } else {
-                            objectacl.removeBUCKETwebsite(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
-                            jTextArea1.append("\nBucket is no longer serving a website.\n");
-                            bucketACL.setVisible(false);
-                        }
-                    }
-                });
-
-                JPanel aclPanel = new JPanel();
-                bucketACL.setPreferredSize(new Dimension(225, 75));
-                bucketACL.setResizable(false);
-                aclPanel.setLayout(new BoxLayout(aclPanel, BoxLayout.PAGE_AXIS));
-                bucketACL.add(aclPanel);
-                aclPanel.add(static_website);
-                aclPanel.add(bucketACLbutton);
-                bucketACL.setLocation(500, 500);
-                bucketACL.pack();
-                bucketACL.setVisible(true);
-
-            } else {
-                jTextArea1.append("\nError: No bucket has been selected\n");
-            }
-        } catch (Exception Download) {
-            jTextArea1.append("\n" + Download.getMessage() + "\n");
+        if (active_bucket > 0) {
+            BucketACL bucketACL = new BucketACL(this);
+            bucketACL.startc();
+        } else {
+            jTextArea1.append("\nError: No bucket has been selected\n");
         }
-        calibrateTextArea();
+
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
