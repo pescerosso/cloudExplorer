@@ -608,7 +608,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         });
 
         jButton1.setBackground(java.awt.SystemColor.text);
-        jButton1.setText("Abort ");
+        jButton1.setText("Abort Download");
         jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -665,22 +665,22 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(12, 12, 12)
                         .addComponent(jButton19))
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(600, 600, 600))
@@ -919,7 +919,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version: 2.4\n\nPlease submit bugs via github: https://github.com/rusher81572/s3\n\nImage viewer is now threaded.\nNew Taskbar icon by Simone Morellato.\nImproved Memory management. \nCreating a bucket is handled in Object Explorer, no more pop ups.\nModifying an Object ACL is handled in Object Explorer, no more pop ups.\n\nVersion: 2.3\n\nNew Logo by Simone Morellato.\nSmall dialog tweaks.\nMinor bug fixes.\nAll Put's are now managed by ThreadManager to handle parallel multi-part downloads.\nMP3 player now streams the song rather than downloading it.\nA playlist will be created of all the selected music files when clicking \"Play Music File(s).\nMP3 player now has \"Skip Forward\" and \"Skip backward\" buttons.\nAdded option to suspend Bucket versioning.\n\nVersion: 2.2\n\nImproved look and feel.\n\nVersion: 2.1\n\nSupport for enabling versioning on a bucket.\nSupport for downloading versioned objects.\nIncreased timeout for connecting to an S3 host.\nOther fixes.\nMultipart upload support.\n\nVersion: 2.0\n\nThreaded Bucket and Object listing.\nSyncing now syncs subdirectories.\nFor stability, delete operations are limited to 500.\nObject explorer displays the total number of objects in the bucket.\nFixed bug that makes sync work again after aborting a sync.\nA check is done to ensure the S3 host is alive before loading the buckets and objects for stability.");
+        jTextArea4.setText("Version: 2.4\n\nPlease submit bugs via github: https://github.com/rusher81572/s3\n\nImage viewer is now threaded.\nNew Taskbar icon by Simone Morellato.\nImproved Memory management. \nCreating a bucket is handled in Object Explorer, no more pop ups.\nModifying an Object ACL is handled in Object Explorer, no more pop ups.\nObject Properties is now threaded..\n\nVersion: 2.3\n\nNew Logo by Simone Morellato.\nSmall dialog tweaks.\nMinor bug fixes.\nAll Put's are now managed by ThreadManager to handle parallel multi-part downloads.\nMP3 player now streams the song rather than downloading it.\nA playlist will be created of all the selected music files when clicking \"Play Music File(s).\nMP3 player now has \"Skip Forward\" and \"Skip backward\" buttons.\nAdded option to suspend Bucket versioning.\n\nVersion: 2.2\n\nImproved look and feel.\n\nVersion: 2.1\n\nSupport for enabling versioning on a bucket.\nSupport for downloading versioned objects.\nIncreased timeout for connecting to an S3 host.\nOther fixes.\nMultipart upload support.\n\nVersion: 2.0\n\nThreaded Bucket and Object listing.\nSyncing now syncs subdirectories.\nFor stability, delete operations are limited to 500.\nObject explorer displays the total number of objects in the bucket.\nFixed bug that makes sync work again after aborting a sync.\nA check is done to ensure the S3 host is alive before loading the buckets and objects for stability.");
         jTextArea4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
@@ -1953,28 +1953,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        try {
 
-            if (active_bucket > 0) {
-                for (int i = 1; i != previous_objectarray_length; i++) {
-                    try {
-                        if (object_item[i].isSelected()) {
-                            jTextArea1.setText("\nFile Name: " + object_item[i].getText());
-                            jTextArea1.append("\nSize: " + bucket.getObjectInfo(object_item[i].getText(), cred.getAccess_key(), cred.getSecret_key(), bucket_item[active_bucket].getText(), cred.getEndpoint(), "objectsize") + " KB");
-                            jTextArea1.append("\nModified Date: " + bucket.getObjectInfo(object_item[i].getText(), cred.getAccess_key(), cred.getSecret_key(), bucket_item[active_bucket].getText(), cred.getEndpoint(), "objectdate"));
-                            break;
-                        }
-
-                    } catch (Exception ObjectACL) {
-                        jTextArea1.append("\n" + ObjectACL.getMessage() + "\n");
-                    }
-                }
-            } else {
-                jTextArea1.append("\nError: No bucket has been selected\n");
-            }
-
-        } catch (Exception Download) {
-            jTextArea1.append("\n" + Download.getMessage());
+        if (active_bucket > 0) {
+            ObjectProperties properties = new ObjectProperties(this);
+            properties.startc();
+        } else {
+            jTextArea1.append("\nError: No bucket has been selected\n");
         }
 
     }//GEN-LAST:event_jButton7ActionPerformed
