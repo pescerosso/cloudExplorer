@@ -1474,65 +1474,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        try {
 
-            if (active_bucket > 0) {
-                final JFrame parent = new JFrame("Object ACL Settings");
-                final JCheckBox public_box = new JCheckBox("Public");
-                final JCheckBox url_box = new JCheckBox("URL Access");
-                final JCheckBox private_box = new JCheckBox("Private Access");
-                final JButton acl = new JButton("Commit");
-
-                acl.addActionListener(new ActionListener() {
-
-                    public void actionPerformed(ActionEvent e) {
-                        for (int i = 1; i != previous_objectarray_length; i++) {
-                            try {
-                                if (object_item[i].isSelected()) {
-                                    object_acl_change = object_item[i].getText();
-                                    if (public_box.isSelected()) {
-                                        objectacl.setACLpublic(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
-                                        jTextArea1.append("\nPublic set for object: " + object_acl_change + "\n");
-                                        parent.setVisible(false);
-                                    }
-
-                                    if (url_box.isSelected()) {
-                                        jTextArea1.append("\n" + objectacl.setACLurl(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket()));
-                                        parent.setVisible(false);
-                                    }
-                                    if (private_box.isSelected()) {
-                                        objectacl.setACLprivate(object_acl_change, cred.getAccess_key(), cred.getSecret_key(), cred.getEndpoint(), cred.getBucket());
-                                        jTextArea1.append("\nPrivate access set for object: " + object_acl_change + "\n");
-                                        parent.setVisible(false);
-                                    }
-                                }
-                            } catch (Exception ObjectACL) {
-                                jTextArea1.append("\n" + ObjectACL.getMessage() + "\n");
-                            }
-                        }
-                        calibrateTextArea();
-                    }
-
-                });
-
-                JPanel objectACLpanel = new JPanel();
-                parent.setPreferredSize(new Dimension(225, 120));
-                parent.setResizable(false);
-                objectACLpanel.setLayout(new BoxLayout(objectACLpanel, BoxLayout.PAGE_AXIS));
-                parent.add(objectACLpanel);
-                objectACLpanel.add(public_box);
-                objectACLpanel.add(url_box);
-                objectACLpanel.add(private_box);
-                objectACLpanel.add(acl);
-                parent.setLocation(500, 500);
-                parent.pack();
-                parent.setVisible(true);
-            } else {
-                jTextArea1.append("\nError: No bucket has been selected");
-            }
-        } catch (Exception Download) {
-            jTextArea1.append("\n" + Download.getMessage());
+        if (active_bucket > 0) {
+            ObjectACL acl = new ObjectACL(this);
+            acl.startc();
+        } else {
+            jTextArea1.append("\nError: No bucket has been selected");
+            calibrateTextArea();
         }
+
 
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
