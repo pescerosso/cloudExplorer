@@ -45,11 +45,11 @@ public class ShowVersions implements Runnable {
 
         for (String what : mainFrame.versioning_id) {
             if (what != null) {
-                mainFrame.d[i] = new JRadioButton();
-                mainFrame.d[i].setText(mainFrame.versioning_name.get(i) + "     " + mainFrame.versioning_date.get(i));
-                mainFrame.d[i].setBackground(Color.white);
-                mainFrame.d[i].setForeground(Color.blue);
-                mainFrame.jPanel11.add(mainFrame.d[i]);
+                mainFrame.object_item[i] = new JRadioButton();
+                mainFrame.object_item[i].setText(mainFrame.versioning_name.get(i) + "     " + mainFrame.versioning_date.get(i));
+                mainFrame.object_item[i].setBackground(Color.white);
+                mainFrame.object_item[i].setForeground(Color.blue);
+                mainFrame.jPanel11.add(mainFrame.object_item[i]);
                 mainFrame.versionDownload = true;
             }
             i++;

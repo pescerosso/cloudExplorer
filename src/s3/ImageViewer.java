@@ -35,12 +35,12 @@ public class ImageViewer implements Runnable {
             image_frame.add(scrolling_pane);
 
             for (int i = 1; i != mainFrame.previous_objectarray_length; i++) {
-                if (mainFrame.d[i].isSelected()) {
+                if (mainFrame.object_item[i].isSelected()) {
                     image_panel.setLayout(new BoxLayout(image_panel, BoxLayout.PAGE_AXIS));
-                    String new_object_name = mainFrame.convertObject(mainFrame.d[i].getText(), "download");
+                    String new_object_name = mainFrame.convertObject(mainFrame.object_item[i].getText(), "download");
                     jTextArea1.setText("\nPlease wait, the image is loading.");
                     mainFrame.calibrateTextArea();
-                    mainFrame.get = new Get(mainFrame.d[i].getText(), mainFrame.cred.access_key, mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), temp_file + i, null);
+                    mainFrame.get = new Get(mainFrame.object_item[i].getText(), mainFrame.cred.access_key, mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), temp_file + i, null);
                     mainFrame.get.run();
                     photo[i] = new ImageIcon(temp_file + i);
                     image[i] = new JLabel(photo[i]);

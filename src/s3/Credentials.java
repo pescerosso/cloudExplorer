@@ -101,9 +101,9 @@ public class Credentials {
             int h = 0;
             while ((read = bfr.readLine()) != null) {
                 data = data + read;
-                mainFrame.f[h] = new JRadioButton();
-                mainFrame.f[h].setText(read);
-                mainFrame.jPanel21.add(mainFrame.f[h]);
+                mainFrame.account_item[h] = new JRadioButton();
+                mainFrame.account_item[h].setText(read);
+                mainFrame.jPanel21.add(mainFrame.account_item[h]);
                 mainFrame.jPanel21.repaint();
                 mainFrame.jPanel21.revalidate();
                 mainFrame.jPanel21.validate();

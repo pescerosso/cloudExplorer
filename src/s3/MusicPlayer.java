@@ -75,10 +75,10 @@ public class MusicPlayer implements Runnable {
 
             int count = 0;
             for (int h = 1; h != mainFrame.previous_objectarray_length; h++) {
-                if (mainFrame.d[h].isSelected()) {
-                    if (mainFrame.d[h].getText().contains(".mp3")) {
-                        mainFrame.objectacl.setACLpublic(mainFrame.d[h].getText(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
-                        String url = mainFrame.objectacl.setACLurl(mainFrame.d[h].getText(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
+                if (mainFrame.object_item[h].isSelected()) {
+                    if (mainFrame.object_item[h].getText().contains(".mp3")) {
+                        mainFrame.objectacl.setACLpublic(mainFrame.object_item[h].getText(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
+                        String url = mainFrame.objectacl.setACLurl(mainFrame.object_item[h].getText(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
                         url = url.replace("Pre-Signed URL = ", "");
                         String test1[] = url.split("Expires=");
                         test1[0] = test1[0].replace("?", "");
