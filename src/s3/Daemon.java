@@ -224,11 +224,11 @@ public class Daemon {
 
     void syncFromS3(String Destination) {
         try {
-            File[] foo = new File[objectarray.length];
+            File[] fromS3File = new File[objectarray.length];
             for (int i = 1; i != objectarray.length; i++) {
                 String new_object_name = convertObject(objectarray[i], "download");
-                foo[i] = new File(Destination + new_object_name);
-                if (foo[i].exists()) {
+                fromS3File[i] = new File(Destination + new_object_name);
+                if (fromS3File[i].exists()) {
                 } else {
                     makeDirectory(Destination + File.separator + objectarray[i]);
                     String object = makeDirectory(objectarray[i]);
