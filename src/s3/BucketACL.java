@@ -52,6 +52,7 @@ public class BucketACL implements Runnable {
                         jTextArea1.append("\n" + ObjectACL.getMessage() + "\n");
                     }
 
+                    mainFrame.calibrateTextArea();
                     mainFrame.jPanel14.removeAll();
                     mainFrame.jPanel14.repaint();
                     mainFrame.jPanel14.revalidate();
