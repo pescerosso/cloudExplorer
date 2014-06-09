@@ -2000,8 +2000,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         objectarray = null;
         reloadObjects();
         jTextField10.setText("");
+        jTextArea1.append("\nDelete operation finished.");
         jButton6.doClick();
-        jTextArea1.append("\n Delete operation finished.");
 
         calibrateTextArea();
     }//GEN-LAST:event_jButton4ActionPerformed
