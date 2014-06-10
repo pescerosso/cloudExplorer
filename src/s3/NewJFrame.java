@@ -534,7 +534,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
         );
 
         jScrollPane7.setViewportView(jPanel11);
@@ -555,7 +555,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton3.setBackground(java.awt.SystemColor.text);
         jButton3.setText("Download");
-        jButton3.setBorder(null);
+        jButton3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -564,7 +564,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton4.setBackground(java.awt.SystemColor.text);
         jButton4.setText("Delete");
-        jButton4.setBorder(null);
+        jButton4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -573,7 +573,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton7.setBackground(java.awt.SystemColor.text);
         jButton7.setText("Properties");
-        jButton7.setBorder(null);
+        jButton7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -582,7 +582,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton12.setBackground(java.awt.SystemColor.text);
         jButton12.setText("Edit");
-        jButton12.setBorder(null);
+        jButton12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton12ActionPerformed(evt);
@@ -591,7 +591,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton13.setBackground(java.awt.SystemColor.text);
         jButton13.setText("Select All");
-        jButton13.setBorder(null);
+        jButton13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton13ActionPerformed(evt);
@@ -600,7 +600,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton14.setBackground(java.awt.SystemColor.text);
         jButton14.setText("Deselect All");
-        jButton14.setBorder(null);
+        jButton14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton14ActionPerformed(evt);
@@ -608,8 +608,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         });
 
         jButton1.setBackground(java.awt.SystemColor.text);
-        jButton1.setText("Abort Download");
-        jButton1.setBorder(null);
+        jButton1.setText("Abort");
+        jButton1.setToolTipText("");
+        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -618,7 +619,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
         jButton17.setBackground(java.awt.SystemColor.text);
         jButton17.setText("Play");
-        jButton17.setBorder(null);
+        jButton17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton17ActionPerformed(evt);
@@ -628,7 +629,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jButton18.setBackground(java.awt.SystemColor.text);
         jButton18.setText("Versions");
         jButton18.setToolTipText("");
-        jButton18.setBorder(null);
+        jButton18.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton18ActionPerformed(evt);
@@ -638,7 +639,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jButton19.setBackground(java.awt.SystemColor.text);
         jButton19.setText("View Image");
         jButton19.setToolTipText("");
-        jButton19.setBorder(null);
+        jButton19.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton19ActionPerformed(evt);
@@ -1127,6 +1128,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jButton1.setEnabled(true);
             jButton17.setEnabled(true);
             jButton18.setEnabled(true);
+            jButton19.setEnabled(true);
             reloadObjects();
             versionDownload = false;
 
@@ -2049,6 +2051,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jButton1.setEnabled(false);
                     jButton17.setEnabled(false);
                     jButton18.setEnabled(false);
+                    jButton19.setEnabled(false);
                     showVersions = new ShowVersions(object_item[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), this);
                     showVersions.run();
                     break;
