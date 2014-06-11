@@ -47,20 +47,24 @@ public class SyncToS3 implements Runnable {
         for (File file_found : files) {
             int found = 0;
 
-            for (int y = 1; y != objectarray.length; y++) {
-                if (objectarray[y].contains(file_found.getAbsolutePath().toString())) {
-                    mainFrame.jTextArea1.append("\nObject already exists on S3: " + file_found);
-                    calibrate();
-                    found++;
+            if (mainFrame.jRadioButton1.isSelected()) {
+
+            } else {
+                for (int y = 1; y != objectarray.length; y++) {
+                    if (objectarray[y].contains(makeDirectory(file_found.getAbsolutePath().toString()))) {
+                        //mainFrame.jTextArea1.append("\nObject already exists on S3: " + file_found);
+                        calibrate();
+                        found++;
+                    }
                 }
             }
 
             if (found == 0) {
                 String object = makeDirectory(file_found.getAbsolutePath().toString());
-              if (SyncToS3.running) {
-                put = new Put(file_found.getAbsolutePath().toString(), access_key, secret_key, bucket, endpoint, object);
-                put.run();
-              }
+                if (SyncToS3.running) {
+                    put = new Put(file_found.getAbsolutePath().toString(), access_key, secret_key, bucket, endpoint, object);
+                    put.run();
+                }
                 found = 0;
             }
         }

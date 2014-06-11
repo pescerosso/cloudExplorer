@@ -196,7 +196,7 @@ public class Daemon {
         for (File file_found : files) {
             int found = 0;
             for (int y = 1; y != objectarray.length; y++) {
-                if (objectarray[y].contains(file_found.getAbsolutePath().toString())) {
+                if (objectarray[y].contains(makeDirectory(file_found.getAbsolutePath().toString()))) {
                     found++;
                 }
             }
