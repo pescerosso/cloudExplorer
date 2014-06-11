@@ -73,7 +73,6 @@ public class Put implements Runnable {
             tx.shutdownNow();
             mainFrame.jTextArea1.append("\nUploaded object: " + what);
         } catch (Exception manager) {
-            jTextArea1.append("\nError: " + manager.getMessage());
         }
 
         calibrate();
