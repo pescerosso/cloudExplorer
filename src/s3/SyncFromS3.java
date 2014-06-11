@@ -75,7 +75,7 @@ public class SyncFromS3 implements Runnable {
                     foo[i] = new File(destination + File.separator + objectarray[i]);
 
                     if (foo[i].exists() && !mainFrame.jRadioButton1.isSelected()) {
-                        mainFrame.jTextArea1.append("\n" + objectarray[i] + " already exists on this machine.");
+                        //mainFrame.jTextArea1.append("\n" + objectarray[i] + " already exists on this machine.");
                         calibrate();
                     } else {
 
