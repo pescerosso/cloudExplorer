@@ -1523,7 +1523,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if (active_bucket > 0) {
             //syncing_to_S3 = true;
             SyncToS3.running = true;
-            jTextArea1.setText("\nPlease wait for Sync to complete.");
+            jTextArea1.setText("\nStarted Sync.");
             calibrateTextArea();
             reloadObjects();
 
@@ -1676,7 +1676,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             reloadObjects();
             SyncFromS3.running = true;
             if (objectarray.length > 1) {
-                jTextArea1.setText("\nPlease wait for SYNC to complete");
+                jTextArea1.setText("\nStarted Sync.");
                 calibrateTextArea();
 
                 if (bucket_item[active_bucket].isSelected()) {
