@@ -1917,8 +1917,10 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 calibrateTextArea();
                 if (versionDownload) {
                     for (int i = 1; i != versioning_name.size(); i++) {
-                        del = new Delete(versioning_name.get(i), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), versioning_id.get(i));
-                        del.startc(versioning_name.get(i), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), versioning_id.get(i));
+                        if (object_item[i].isSelected()) {
+                            del = new Delete(versioning_name.get(i), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), versioning_id.get(i));
+                            del.startc(versioning_name.get(i), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), versioning_id.get(i));
+                        }
                     }
                 } else {
                     for (int i = 1; i != previous_objectarray_length; i++) {
