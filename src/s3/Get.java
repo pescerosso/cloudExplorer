@@ -64,10 +64,13 @@ public class Get implements Runnable {
         s3Client.setEndpoint(endpoint);
 
         try {
+            long t1 = System.currentTimeMillis();
             S3Object s3object = s3Client.getObject(new GetObjectRequest(bucket, what, version));
             InputStream objectData = s3object.getObjectContent();
             this.writeFile(objectData, destination);
-            mainFrame.jTextArea1.append("\nDownloaded: " + what + "\n");
+            long t2 = System.currentTimeMillis();
+            long diff = t2 - t1;
+            mainFrame.jTextArea1.append("\nDownloaded: " + what + " in " + diff / 100 + " second(s).");
             mainFrame.calibrateTextArea();
 
         } catch (Exception get) {

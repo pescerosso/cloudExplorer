@@ -66,12 +66,14 @@ public class Put implements Runnable {
             } else {
                 objectMetadata.setContentType(mimeType);
             }
-
+            long t1 = System.currentTimeMillis();
             putRequest.setMetadata(objectMetadata);
             Upload myUpload = tx.upload(putRequest);
             myUpload.waitForCompletion();
             tx.shutdownNow();
-            mainFrame.jTextArea1.append("\nUploaded object: " + what);
+            long t2 = System.currentTimeMillis();
+            long diff = t2 - t1;
+            mainFrame.jTextArea1.append("\nUploaded object: " + what + " in " + diff / 100 + " second(s).");
         } catch (Exception manager) {
         }
 
