@@ -70,7 +70,7 @@ public class Get implements Runnable {
             this.writeFile(objectData, destination);
             long t2 = System.currentTimeMillis();
             long diff = t2 - t1;
-            mainFrame.jTextArea1.append("\nDownloaded: " + what + " in " + diff / 100 + " second(s).");
+            mainFrame.jTextArea1.append("\nDownloaded: " + what + " in " + diff / 1000 + " second(s).");
             mainFrame.calibrateTextArea();
 
         } catch (Exception get) {

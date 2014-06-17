@@ -73,7 +73,7 @@ public class Put implements Runnable {
             tx.shutdownNow();
             long t2 = System.currentTimeMillis();
             long diff = t2 - t1;
-            mainFrame.jTextArea1.append("\nUploaded object: " + what + " in " + diff / 100 + " second(s).");
+            mainFrame.jTextArea1.append("\nUploaded object: " + what + " in " + diff / 1000 + " second(s).");
         } catch (Exception manager) {
         }
 
