@@ -932,7 +932,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version 2.6\n\nPlease submit bugs via github: https://github.com/rusher81572/s3\n\nObject Explorer fits the window properly.\nPUT and GET displays the transfer time in seconds.\n\nVersion 2.5\n\nAdded option to Sync to choose to overwrite existing objects already stored in S3.\nFixed a bug with Sync to not automatically overwrite existing files.\nFixed a bug with BackgroundSync to not automatically overwrite existing files.\n\n\n\nVersion: 2.4\n\nImage viewer is now threaded.\nNew Taskbar icon by Simone Morellato.\nImproved Memory management. \nCreating a bucket is handled in Object Explorer, no more pop ups.\nModifying an Object ACL is handled in Object Explorer, no more pop ups.\nObject Properties is now threaded.\nGenerating a public URL for an object only shows the URL.\nIf a config file already exists, it will be loaded upon startup.\n\n\nVersion: 2.3\n\nNew Logo by Simone Morellato.\nSmall dialog tweaks.\nMinor bug fixes.\nAll Put's are now managed by ThreadManager to handle parallel multi-part downloads.\nMP3 player now streams the song rather than downloading it.\nA playlist will be created of all the selected music files when clicking \"Play Music File(s).\nMP3 player now has \"Skip Forward\" and \"Skip backward\" buttons.\nAdded option to suspend Bucket versioning.\n\nVersion: 2.2\n\nImproved look and feel.\n\nVersion: 2.1\n\nSupport for enabling versioning on a bucket.\nSupport for downloading versioned objects.\nIncreased timeout for connecting to an S3 host.\nOther fixes.\nMultipart upload support.\n\nVersion: 2.0\n\nThreaded Bucket and Object listing.\nSyncing now syncs subdirectories.\nFor stability, delete operations are limited to 500.\nObject explorer displays the total number of objects in the bucket.\nFixed bug that makes sync work again after aborting a sync.\nA check is done to ensure the S3 host is alive before loading the buckets and objects for stability.");
+        jTextArea4.setText("Version 2.6\n\nPlease submit bugs via github: https://github.com/rusher81572/s3\n\nObject Explorer fits the window properly.\nPUT and GET displays the transfer time in seconds.\nSupport for deleting versioned objects.\n\nVersion 2.5\n\nAdded option to Sync to choose to overwrite existing objects already stored in S3.\nFixed a bug with Sync to not automatically overwrite existing files.\nFixed a bug with BackgroundSync to not automatically overwrite existing files.\n\n\n\nVersion: 2.4\n\nImage viewer is now threaded.\nNew Taskbar icon by Simone Morellato.\nImproved Memory management. \nCreating a bucket is handled in Object Explorer, no more pop ups.\nModifying an Object ACL is handled in Object Explorer, no more pop ups.\nObject Properties is now threaded.\nGenerating a public URL for an object only shows the URL.\nIf a config file already exists, it will be loaded upon startup.\n\n\nVersion: 2.3\n\nNew Logo by Simone Morellato.\nSmall dialog tweaks.\nMinor bug fixes.\nAll Put's are now managed by ThreadManager to handle parallel multi-part downloads.\nMP3 player now streams the song rather than downloading it.\nA playlist will be created of all the selected music files when clicking \"Play Music File(s).\nMP3 player now has \"Skip Forward\" and \"Skip backward\" buttons.\nAdded option to suspend Bucket versioning.\n\nVersion: 2.2\n\nImproved look and feel.\n\nVersion: 2.1\n\nSupport for enabling versioning on a bucket.\nSupport for downloading versioned objects.\nIncreased timeout for connecting to an S3 host.\nOther fixes.\nMultipart upload support.\n\nVersion: 2.0\n\nThreaded Bucket and Object listing.\nSyncing now syncs subdirectories.\nFor stability, delete operations are limited to 500.\nObject explorer displays the total number of objects in the bucket.\nFixed bug that makes sync work again after aborting a sync.\nA check is done to ensure the S3 host is alive before loading the buckets and objects for stability.");
         jTextArea4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
@@ -1839,6 +1839,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                                     get.startc(versioning_name.get(i), cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), File_Destination.toString() + File.separator + new_object_name, versioning_id.get(i));
                                     object_item[i].setSelected(false);
                                     versionDownload = false;
+                                    break;
                                 }
                                 i++;
                             }
@@ -1914,11 +1915,18 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 calibrateTextArea();
                 jTextArea1.append("\nPlease wait, deleting selected file(s)");
                 calibrateTextArea();
-                for (int i = 1; i != previous_objectarray_length; i++) {
-                    if (object_item[i].isSelected()) {
-                        if (delcounter < 500) {
-                            del = new Delete(object_item[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
-                            del.startc(object_item[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint());
+                if (versionDownload) {
+                    for (int i = 1; i != versioning_name.size(); i++) {
+                        del = new Delete(versioning_name.get(i), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), versioning_id.get(i));
+                        del.startc(versioning_name.get(i), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), versioning_id.get(i));
+                    }
+                } else {
+                    for (int i = 1; i != previous_objectarray_length; i++) {
+                        if (object_item[i].isSelected()) {
+                            if (delcounter < 500) {
+                                del = new Delete(object_item[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), null);
+                                del.startc(object_item[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), null);
+                            }
                         }
                     }
                     delcounter++;
@@ -1928,6 +1936,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         } catch (Exception checkbox) {
         }
+        versionDownload = false;
         objectarray = null;
         reloadObjects();
         jTextField10.setText("");
@@ -1980,9 +1989,17 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         try {
-            for (int i = 1; i != previous_objectarray_length; i++) {
-                if (object_item[i].isVisible()) {
-                    object_item[i].setSelected(true);
+            if (versionDownload) {
+                for (int i = 1; i != versioning_id.size(); i++) {
+                    if (object_item[i].isVisible()) {
+                        object_item[i].setSelected(true);
+                    }
+                }
+            } else {
+                for (int i = 1; i != previous_objectarray_length; i++) {
+                    if (object_item[i].isVisible()) {
+                        object_item[i].setSelected(true);
+                    }
                 }
             }
         } catch (Exception SelectALL) {
@@ -1991,9 +2008,17 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         try {
-            for (int i = 1; i != previous_objectarray_length; i++) {
-                if (object_item[i].isVisible()) {
-                    object_item[i].setSelected(false);
+            if (versionDownload) {
+                for (int i = 1; i != versioning_id.size(); i++) {
+                    if (object_item[i].isVisible()) {
+                        object_item[i].setSelected(false);
+                    }
+                }
+            } else {
+                for (int i = 1; i != previous_objectarray_length; i++) {
+                    if (object_item[i].isVisible()) {
+                        object_item[i].setSelected(false);
+                    }
                 }
             }
         } catch (Exception SelectALL) {
@@ -2055,11 +2080,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
             for (int i = 1; i != objectarray.length; i++) {
                 if (object_item[i].isSelected()) {
-                    jButton4.setEnabled(false);
                     jButton7.setEnabled(false);
                     jButton12.setEnabled(false);
-                    jButton13.setEnabled(false);
-                    jButton14.setEnabled(false);
                     jButton1.setEnabled(false);
                     jButton17.setEnabled(false);
                     jButton18.setEnabled(false);

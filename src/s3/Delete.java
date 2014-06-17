@@ -5,6 +5,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
+import com.amazonaws.services.s3.model.DeleteVersionRequest;
 import static s3.NewJFrame.jTextArea1;
 
 public class Delete implements Runnable {
@@ -18,6 +19,7 @@ public class Delete implements Runnable {
     String secret_key = null;
     String destination = null;
     Thread delete;
+    String version = null;
 
     public void calibrate() {
         try {
@@ -26,23 +28,29 @@ public class Delete implements Runnable {
         }
     }
 
-    Delete(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint) {
+    Delete(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Aversion) {
         what = Awhat;
         access_key = Aaccess_key;
         secret_key = Asecret_key;
         bucket = Abucket;
         endpoint = Aendpoint;
-
+        version = Aversion;
     }
 
     public void run() {
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
-        AmazonS3 s3Client = new AmazonS3Client(credentials);
+        AmazonS3 s3Client;
+        s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
 
         try {
-            s3Client.deleteObject(new DeleteObjectRequest(bucket, what));
-            jTextArea1.append("\nDeleting object: " + what);
+
+            if (version != null) {
+                s3Client.deleteVersion(new DeleteVersionRequest(bucket, what, version));
+            } else {
+                s3Client.deleteObject(new DeleteObjectRequest(bucket, what));
+            }
+            jTextArea1.append("\nDeleted object: " + what);
             calibrate();
         } catch (Exception Delete) {
             mainFrame.jTextArea1.append("\n\nAn error has occurred in DeleteFile.");
@@ -53,8 +61,8 @@ public class Delete implements Runnable {
         calibrate();
     }
 
-    void startc(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint) {
-        (new Thread(new Delete(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint))).start();
+    void startc(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Aversion) {
+        (new Thread(new Delete(Awhat, Aaccess_key, Asecret_key, Abucket, Aendpoint, Aversion))).start();
     }
 
     void stop() {
