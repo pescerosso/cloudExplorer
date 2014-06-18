@@ -1916,7 +1916,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 jTextArea1.append("\nPlease wait, deleting selected file(s)");
                 calibrateTextArea();
                 if (versionDownload) {
-                    for (int i = 1; i != versioning_name.size(); i++) {
+                    for (int i = 0; i != versioning_name.size(); i++) {
                         if (object_item[i].isSelected()) {
                             del = new Delete(versioning_name.get(i), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), versioning_id.get(i));
                             del.startc(versioning_name.get(i), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), versioning_id.get(i));
@@ -1992,7 +1992,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         try {
             if (versionDownload) {
-                for (int i = 1; i != versioning_id.size(); i++) {
+                for (int i = 0; i != versioning_id.size(); i++) {
                     if (object_item[i].isVisible()) {
                         object_item[i].setSelected(true);
                     }
@@ -2011,7 +2011,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         try {
             if (versionDownload) {
-                for (int i = 1; i != versioning_id.size(); i++) {
+                for (int i = 0; i != versioning_id.size(); i++) {
                     if (object_item[i].isVisible()) {
                         object_item[i].setSelected(false);
                     }
@@ -2079,7 +2079,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         if (active_bucket > 0) {
-
+            boolean countSelected = false;
             for (int i = 1; i != objectarray.length; i++) {
                 if (object_item[i].isSelected()) {
                     jButton7.setEnabled(false);
@@ -2088,10 +2088,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                     jButton17.setEnabled(false);
                     jButton18.setEnabled(false);
                     jButton19.setEnabled(false);
+                    countSelected = true;
                     showVersions = new ShowVersions(object_item[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), this);
                     showVersions.run();
                     break;
                 }
+            }
+
+            if (!countSelected) {
+                showVersions = new ShowVersions(null, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), this);
+                showVersions.run();
             }
 
         } else {

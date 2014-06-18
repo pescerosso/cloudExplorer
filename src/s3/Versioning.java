@@ -4,7 +4,6 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.amazonaws.services.s3.model.S3VersionSummary;
 import com.amazonaws.services.s3.model.VersionListing;
 import java.util.List;
@@ -25,8 +24,13 @@ public class Versioning {
             AmazonS3 s3Client = new AmazonS3Client(credentials);
             s3Client.setEndpoint(endpoint);
 
-            int i = 0;
-            VersionListing vListing = s3Client.listVersions(bucket, key);
+            VersionListing vListing;
+            if (key == null) {
+                vListing = s3Client.listVersions(bucket, null);
+            } else {
+                vListing = s3Client.listVersions(bucket, key);
+            }
+
             List<S3VersionSummary> summary;
             do {
                 summary = vListing.getVersionSummaries();
@@ -37,7 +41,6 @@ public class Versioning {
                     mainFrame.versioning_name.add(foo.getKey());
                 }
 
-                i++;
             } while (vListing.isTruncated());
 
         } catch (Exception getVersions) {
