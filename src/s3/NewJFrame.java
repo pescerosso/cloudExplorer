@@ -71,7 +71,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     public NewJFrame() {
         initComponents();
         this.setIconImage(new ImageIcon(getClass()
-                .getResource("CloudianExplorerLogo3.png")).getImage());
+                .getResource("CloudianExplorerLogo4.png")).getImage());
 
         File config = new File(config_file);
         if (config.exists()) {
