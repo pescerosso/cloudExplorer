@@ -23,7 +23,7 @@ public class ConfigureObjectTransition implements Runnable {
 
     public void run() {
         try {
-            final JLabel label = new JLabel("Autoexpire objects after:");
+            final JLabel label = new JLabel("Expire after # days:");
             final JTextField days = new JTextField("");
             final JButton commitTransition = new JButton("        Commit");
 
