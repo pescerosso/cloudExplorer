@@ -22,6 +22,7 @@ public class BucketTransition implements Runnable {
     String version = null;
     Thread transition;
     String days;
+    String prefix = null;
 
     public void calibrate() {
         try {
@@ -30,13 +31,14 @@ public class BucketTransition implements Runnable {
         }
     }
 
-    BucketTransition(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adays) {
+    BucketTransition(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adays, String Aprefix) {
 
         access_key = Aaccess_key;
         secret_key = Asecret_key;
         bucket = Abucket;
         endpoint = Aendpoint;
         days = Adays;
+        prefix = Aprefix;
     }
 
     public void run() {
@@ -45,6 +47,7 @@ public class BucketTransition implements Runnable {
         s3Client.setEndpoint(endpoint);
         int converted_days = Integer.parseInt(days);
         BucketLifecycleConfiguration.Rule ruleArchiveAndExpire = new BucketLifecycleConfiguration.Rule()
+                .withPrefix(prefix)
                 .withExpirationInDays(converted_days)
                 .withStatus(BucketLifecycleConfiguration.ENABLED.toString());
         List<BucketLifecycleConfiguration.Rule> rules = new ArrayList<BucketLifecycleConfiguration.Rule>();
@@ -61,8 +64,8 @@ public class BucketTransition implements Runnable {
         calibrate();
     }
 
-    void startc(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adays) {
-        transition = new Thread(new BucketTransition(Aaccess_key, Asecret_key, Abucket, Aendpoint, Adays));
+    void startc(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adays, String Aprefix) {
+        transition = new Thread(new BucketTransition(Aaccess_key, Asecret_key, Abucket, Aendpoint, Adays, Aprefix));
         transition.start();
     }
 
