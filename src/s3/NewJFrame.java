@@ -84,6 +84,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void initComponents() {
 
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -173,8 +175,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenu5 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         jMenuItem5.setText("jMenuItem5");
+
+        jMenu4.setText("jMenu4");
+
+        jMenuItem10.setText("jMenuItem10");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -932,7 +940,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version 2.6\n\nPlease submit bugs via github: https://github.com/rusher81572/s3\n\nObject Explorer fits the window properly.\nPUT and GET displays the transfer time in seconds.\nSupport for deleting versioned objects.\nNew Taskbar Logo by Simone Morellato.\n\nVersion 2.5\n\nAdded option to Sync to choose to overwrite existing objects already stored in S3.\nFixed a bug with Sync to not automatically overwrite existing files.\nFixed a bug with BackgroundSync to not automatically overwrite existing files.\n\n\n\nVersion: 2.4\n\nImage viewer is now threaded.\nNew Taskbar icon by Simone Morellato.\nImproved Memory management. \nCreating a bucket is handled in Object Explorer, no more pop ups.\nModifying an Object ACL is handled in Object Explorer, no more pop ups.\nObject Properties is now threaded.\nGenerating a public URL for an object only shows the URL.\nIf a config file already exists, it will be loaded upon startup.\n\n\nVersion: 2.3\n\nNew Logo by Simone Morellato.\nSmall dialog tweaks.\nMinor bug fixes.\nAll Put's are now managed by ThreadManager to handle parallel multi-part downloads.\nMP3 player now streams the song rather than downloading it.\nA playlist will be created of all the selected music files when clicking \"Play Music File(s).\nMP3 player now has \"Skip Forward\" and \"Skip backward\" buttons.\nAdded option to suspend Bucket versioning.\n\nVersion: 2.2\n\nImproved look and feel.\n\nVersion: 2.1\n\nSupport for enabling versioning on a bucket.\nSupport for downloading versioned objects.\nIncreased timeout for connecting to an S3 host.\nOther fixes.\nMultipart upload support.\n\nVersion: 2.0\n\nThreaded Bucket and Object listing.\nSyncing now syncs subdirectories.\nFor stability, delete operations are limited to 500.\nObject explorer displays the total number of objects in the bucket.\nFixed bug that makes sync work again after aborting a sync.\nA check is done to ensure the S3 host is alive before loading the buckets and objects for stability.");
+        jTextArea4.setText("Version 2.7\n\nAdded new menu item \"Admin\" with ability to delete all objects and their versions.\n\nVersion 2.6\n\nObject Explorer fits the window properly.\nPUT and GET displays the transfer time in seconds.\nSupport for deleting versioned objects.\nNew Taskbar Logo by Simone Morellato.\n\nVersion 2.5\n\nAdded option to Sync to choose to overwrite existing objects already stored in S3.\nFixed a bug with Sync to not automatically overwrite existing files.\nFixed a bug with BackgroundSync to not automatically overwrite existing files.\n\nVersion: 2.4\n\nImage viewer is now threaded.\nNew Taskbar icon by Simone Morellato.\nImproved Memory management. \nCreating a bucket is handled in Object Explorer, no more pop ups.\nModifying an Object ACL is handled in Object Explorer, no more pop ups.\nObject Properties is now threaded.\nGenerating a public URL for an object only shows the URL.\nIf a config file already exists, it will be loaded upon startup.\n\n\nVersion: 2.3\n\nNew Logo by Simone Morellato.\nSmall dialog tweaks.\nMinor bug fixes.\nAll Put's are now managed by ThreadManager to handle parallel multi-part downloads.\nMP3 player now streams the song rather than downloading it.\nA playlist will be created of all the selected music files when clicking \"Play Music File(s).\nMP3 player now has \"Skip Forward\" and \"Skip backward\" buttons.\nAdded option to suspend Bucket versioning.\n\nVersion: 2.2\n\nImproved look and feel.\n\nVersion: 2.1\n\nSupport for enabling versioning on a bucket.\nSupport for downloading versioned objects.\nIncreased timeout for connecting to an S3 host.\nOther fixes.\nMultipart upload support.\n\nVersion: 2.0\n\nThreaded Bucket and Object listing.\nSyncing now syncs subdirectories.\nFor stability, delete operations are limited to 500.\nObject explorer displays the total number of objects in the bucket.\nFixed bug that makes sync work again after aborting a sync.\nA check is done to ensure the S3 host is alive before loading the buckets and objects for stability.");
         jTextArea4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
@@ -1067,6 +1075,18 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenu5.add(jMenuItem9);
 
         jMenuBar1.add(jMenu5);
+
+        jMenu6.setText("Admin");
+
+        jMenuItem8.setText("Delete every object and version");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem8);
+
+        jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
 
@@ -2080,14 +2100,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         if (active_bucket > 0) {
             boolean countSelected = false;
+            jButton7.setEnabled(false);
+            jButton12.setEnabled(false);
+            jButton1.setEnabled(false);
+            jButton17.setEnabled(false);
+            jButton18.setEnabled(false);
+            jButton19.setEnabled(false);
+            
             for (int i = 1; i != objectarray.length; i++) {
                 if (object_item[i].isSelected()) {
-                    jButton7.setEnabled(false);
-                    jButton12.setEnabled(false);
-                    jButton1.setEnabled(false);
-                    jButton17.setEnabled(false);
-                    jButton18.setEnabled(false);
-                    jButton19.setEnabled(false);
                     countSelected = true;
                     showVersions = new ShowVersions(object_item[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), this);
                     showVersions.run();
@@ -2113,6 +2134,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jTextArea1.append("\nError: No bucket has been selected");
         }
     }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        if (active_bucket > 0) {
+            DeleteEverything delEverything = new DeleteEverything(this);
+            Versioning.delete = true;
+            delEverything.startc(this);
+        } else {
+            jTextArea1.append("\nError: No bucket has been selected");
+        }
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     void var() {
         cred.setAccess_key(jTextField1.getText());
@@ -2166,9 +2197,12 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem15;
@@ -2178,6 +2212,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     public static javax.swing.JPanel jPanel1;
     public javax.swing.JPanel jPanel11;
