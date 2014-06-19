@@ -54,12 +54,13 @@ public class ImageViewer implements Runnable {
                     image_frame.revalidate();
                     image_frame.validate();
                     mainFrame.deleteFle(temp_file + i);
+                    image_frame.setVisible(true);
+                    image_frame.setAlwaysOnTop(true);
                     break;
                 }
 
             }
-            image_frame.setVisible(true);
-            image_frame.setAlwaysOnTop(true);
+
             mainFrame.dialog.setVisible(false);
         } catch (Exception imageLoading) {
             jTextArea1.append("\n" + imageLoading.getMessage());
