@@ -2106,19 +2106,19 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             jButton17.setEnabled(false);
             jButton18.setEnabled(false);
             jButton19.setEnabled(false);
-            
+
             for (int i = 1; i != objectarray.length; i++) {
                 if (object_item[i].isSelected()) {
                     countSelected = true;
                     showVersions = new ShowVersions(object_item[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), this);
-                    showVersions.run();
+                    showVersions.startc(object_item[i].getText(), cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), this);;
                     break;
                 }
             }
 
             if (!countSelected) {
                 showVersions = new ShowVersions(null, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), this);
-                showVersions.run();
+                showVersions.startc(null, cred.getAccess_key(), cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(), this);
             }
 
         } else {
