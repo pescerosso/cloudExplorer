@@ -44,7 +44,6 @@ public class BucketTransition implements Runnable {
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
         int converted_days = Integer.parseInt(days);
-       // Transition transToArchive = new Transition().withDays(converted_days);
         BucketLifecycleConfiguration.Rule ruleArchiveAndExpire = new BucketLifecycleConfiguration.Rule()
                 .withExpirationInDays(converted_days)
                 .withStatus(BucketLifecycleConfiguration.ENABLED.toString());
