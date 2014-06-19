@@ -43,9 +43,11 @@ public class Versioning {
                         del = new Delete(foo.getKey(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), foo.getVersionId());
                         del.startc(foo.getKey(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), foo.getVersionId());
                     }
-                    mainFrame.versioning_date.add(foo.getLastModified().toString());
-                    mainFrame.versioning_id.add(foo.getVersionId());
-                    mainFrame.versioning_name.add(foo.getKey());
+                    if (!Versioning.delete) {
+                        mainFrame.versioning_date.add(foo.getLastModified().toString());
+                        mainFrame.versioning_id.add(foo.getVersionId());
+                        mainFrame.versioning_name.add(foo.getKey());
+                    }
                     System.gc();
                 }
 
