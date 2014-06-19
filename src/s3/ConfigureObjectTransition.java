@@ -42,7 +42,6 @@ public class ConfigureObjectTransition implements Runnable {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         if (days.getText().contains("# of days") || days.getText().isEmpty()) {
-                            System.out.print("\nerror");
                         } else {
                             BucketTransition bucketTransition = new BucketTransition(mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), days.getText());
                             bucketTransition.startc(mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), days.getText());

@@ -55,8 +55,6 @@ public class BucketTransition implements Runnable {
                     .withRules(rules);
             s3Client.setBucketLifecycleConfiguration(bucket, configuration);
         } catch (Exception get) {
-            //mainFrame.jTextArea1.append("\n\nAn error has occurred in GET.");
-            //mainFrame.jTextArea1.append("\n\nError Message: " + get.getMessage());
             mainFrame.jTextArea1.append("\n" + get.getMessage());
         }
         mainFrame.jTextArea1.append("\nSent request to change bucket life cycle to " + converted_days + " day(s).");
