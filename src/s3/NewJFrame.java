@@ -1011,7 +1011,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         });
         jMenu3.add(jMenuItem2);
 
-        jMenuItem13.setText("Autoexpire objects in bucket");
+        jMenuItem13.setText("Bucket Life Cycle");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem13ActionPerformed(evt);
