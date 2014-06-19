@@ -1152,9 +1152,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if (active_bucket > 0) {
-            versioning_date = null;
-            versioning_id = null;
-            versioning_name = null;
             jButton4.setEnabled(true);
             jButton7.setEnabled(true);
             jButton12.setEnabled(true);
