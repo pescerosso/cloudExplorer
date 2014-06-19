@@ -44,7 +44,7 @@ public class BucketTransition implements Runnable {
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
         int converted_days = Integer.parseInt(days);
-        Transition transToArchive = new Transition().withDays(converted_days);
+       // Transition transToArchive = new Transition().withDays(converted_days);
         BucketLifecycleConfiguration.Rule ruleArchiveAndExpire = new BucketLifecycleConfiguration.Rule()
                 .withExpirationInDays(converted_days)
                 .withStatus(BucketLifecycleConfiguration.ENABLED.toString());
@@ -60,7 +60,7 @@ public class BucketTransition implements Runnable {
             //mainFrame.jTextArea1.append("\n\nError Message: " + get.getMessage());
             mainFrame.jTextArea1.append("\n" + get.getMessage());
         }
-        mainFrame.jTextArea1.append("\nSent request to change bucket life cycle to " + converted_days + " days");
+        mainFrame.jTextArea1.append("\nSent request to change bucket life cycle to " + converted_days + " day(s).");
         calibrate();
     }
 
