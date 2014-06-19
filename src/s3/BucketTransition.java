@@ -23,6 +23,7 @@ public class BucketTransition implements Runnable {
     Thread transition;
     String days;
     String prefix = null;
+    Boolean disabled = false;
 
     public void calibrate() {
         try {
@@ -31,7 +32,7 @@ public class BucketTransition implements Runnable {
         }
     }
 
-    BucketTransition(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adays, String Aprefix) {
+    BucketTransition(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adays, String Aprefix, Boolean Adisabled) {
 
         access_key = Aaccess_key;
         secret_key = Asecret_key;
@@ -39,17 +40,29 @@ public class BucketTransition implements Runnable {
         endpoint = Aendpoint;
         days = Adays;
         prefix = Aprefix;
+        disabled = Adisabled;
     }
 
     public void run() {
         AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_key);
         AmazonS3 s3Client = new AmazonS3Client(credentials);
         s3Client.setEndpoint(endpoint);
-        int converted_days = Integer.parseInt(days);
-        BucketLifecycleConfiguration.Rule ruleArchiveAndExpire = new BucketLifecycleConfiguration.Rule()
-                .withPrefix(prefix)
-                .withExpirationInDays(converted_days)
-                .withStatus(BucketLifecycleConfiguration.ENABLED.toString());
+        int converted_days = 0;
+        if (!disabled) {
+            converted_days = Integer.parseInt(days);
+        }
+        BucketLifecycleConfiguration.Rule ruleArchiveAndExpire = null;
+        if (!disabled) {
+            ruleArchiveAndExpire = new BucketLifecycleConfiguration.Rule()
+                    .withPrefix(prefix)
+                    .withExpirationInDays(converted_days)
+                    .withStatus(BucketLifecycleConfiguration.ENABLED.toString());
+        } else {
+            ruleArchiveAndExpire = new BucketLifecycleConfiguration.Rule()
+                    .withPrefix(prefix)
+                    .withExpirationInDays(100)
+                    .withStatus(BucketLifecycleConfiguration.DISABLED.toString());
+        }
         List<BucketLifecycleConfiguration.Rule> rules = new ArrayList<BucketLifecycleConfiguration.Rule>();
         rules.add(ruleArchiveAndExpire);
 
@@ -60,12 +73,16 @@ public class BucketTransition implements Runnable {
         } catch (Exception get) {
             mainFrame.jTextArea1.append("\n" + get.getMessage());
         }
-        mainFrame.jTextArea1.append("\nSent request to change bucket life cycle to " + converted_days + " day(s).");
+        if (!disabled) {
+            mainFrame.jTextArea1.append("\nSent request to change bucket life cycle to " + converted_days + " day(s).");
+        } else {
+            mainFrame.jTextArea1.append("\nSent request to disable the bucket life");
+        }
         calibrate();
     }
 
-    void startc(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adays, String Aprefix) {
-        transition = new Thread(new BucketTransition(Aaccess_key, Asecret_key, Abucket, Aendpoint, Adays, Aprefix));
+    void startc(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, String Adays, String Aprefix, Boolean Adisabled) {
+        transition = new Thread(new BucketTransition(Aaccess_key, Asecret_key, Abucket, Aendpoint, Adays, Aprefix, Adisabled));
         transition.start();
     }
 

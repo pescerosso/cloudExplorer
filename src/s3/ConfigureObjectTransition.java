@@ -28,6 +28,7 @@ public class ConfigureObjectTransition implements Runnable {
             final JTextField days = new JTextField("");
             final JTextField prefix_field = new JTextField("");
             final JButton commitTransition = new JButton("        Commit");
+            final JButton disableRules = new JButton("        Disable Rules");
 
             days.setBackground(Color.white);
             days.setForeground(Color.blue);
@@ -42,15 +43,39 @@ public class ConfigureObjectTransition implements Runnable {
             commitTransition.setBorder(null);
             commitTransition.setForeground(Color.blue);
 
+            disableRules.setBackground(Color.white);
+            disableRules.setBorder(null);
+            disableRules.setForeground(Color.blue);
+
             commitTransition.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e) {
                     try {
                         if (days.getText().contains("# of days") || days.getText().isEmpty()) {
                         } else {
-                            BucketTransition bucketTransition = new BucketTransition(mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), days.getText(), prefix_field.getText());
-                            bucketTransition.startc(mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), days.getText(), prefix_field.getText());
+                            BucketTransition bucketTransition = new BucketTransition(mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), days.getText(), prefix_field.getText(), false);
+                            bucketTransition.startc(mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), days.getText(), prefix_field.getText(), false);
                         }
+
+                    } catch (Exception Transition) {
+                        jTextArea1.append("\n" + Transition.getMessage() + "\n");
+                    }
+
+                    mainFrame.calibrateTextArea();
+                    mainFrame.jPanel14.removeAll();
+                    mainFrame.jPanel14.repaint();
+                    mainFrame.jPanel14.revalidate();
+                    mainFrame.jPanel14.validate();
+
+                }
+            });
+
+            disableRules.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        BucketTransition bucketTransition = new BucketTransition(mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), days.getText(), prefix_field.getText(), true);
+                        bucketTransition.startc(mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), days.getText(), prefix_field.getText(), true);
 
                     } catch (Exception Transition) {
                         jTextArea1.append("\n" + Transition.getMessage() + "\n");
@@ -72,6 +97,7 @@ public class ConfigureObjectTransition implements Runnable {
             mainFrame.jPanel14.add(prefix);
             mainFrame.jPanel14.add(prefix_field);
             mainFrame.jPanel14.add(commitTransition);
+            mainFrame.jPanel14.add(disableRules);
             mainFrame.jPanel14.repaint();
             mainFrame.jPanel14.revalidate();
             mainFrame.jPanel14.validate();
