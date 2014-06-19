@@ -59,6 +59,7 @@ public class ShowVersions implements Runnable {
         mainFrame.jPanel11.repaint();
         mainFrame.jPanel11.revalidate();
         mainFrame.jPanel11.validate();
+        System.gc();
     }
 
     void startc(String Awhat, String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, NewJFrame Frame) {
