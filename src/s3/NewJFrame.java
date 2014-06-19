@@ -166,6 +166,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -940,7 +941,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version 2.7\n\nAdded new menu item \"Admin\" with ability to delete all objects and their versions.\nImproved memory management for object versions.\n\nVersion 2.6\n\nObject Explorer fits the window properly.\nPUT and GET displays the transfer time in seconds.\nSupport for deleting versioned objects.\nNew Taskbar Logo by Simone Morellato.\n\nVersion 2.5\n\nAdded option to Sync to choose to overwrite existing objects already stored in S3.\nFixed a bug with Sync to not automatically overwrite existing files.\nFixed a bug with BackgroundSync to not automatically overwrite existing files.\n\nVersion: 2.4\n\nImage viewer is now threaded.\nNew Taskbar icon by Simone Morellato.\nImproved Memory management. \nCreating a bucket is handled in Object Explorer, no more pop ups.\nModifying an Object ACL is handled in Object Explorer, no more pop ups.\nObject Properties is now threaded.\nGenerating a public URL for an object only shows the URL.\nIf a config file already exists, it will be loaded upon startup.\n\n\nVersion: 2.3\n\nNew Logo by Simone Morellato.\nSmall dialog tweaks.\nMinor bug fixes.\nAll Put's are now managed by ThreadManager to handle parallel multi-part downloads.\nMP3 player now streams the song rather than downloading it.\nA playlist will be created of all the selected music files when clicking \"Play Music File(s).\nMP3 player now has \"Skip Forward\" and \"Skip backward\" buttons.\nAdded option to suspend Bucket versioning.\n\nVersion: 2.2\n\nImproved look and feel.\n\nVersion: 2.1\n\nSupport for enabling versioning on a bucket.\nSupport for downloading versioned objects.\nIncreased timeout for connecting to an S3 host.\nOther fixes.\nMultipart upload support.\n\nVersion: 2.0\n\nThreaded Bucket and Object listing.\nSyncing now syncs subdirectories.\nFor stability, delete operations are limited to 500.\nObject explorer displays the total number of objects in the bucket.\nFixed bug that makes sync work again after aborting a sync.\nA check is done to ensure the S3 host is alive before loading the buckets and objects for stability.");
+        jTextArea4.setText("Version 2.7\n\nAdded new menu item \"Admin\" with ability to delete all objects and their versions.\nImproved memory management for object versions.\nAdded new feature: \"Autoexpire objects in bucket\"\n\nVersion 2.6\n\nObject Explorer fits the window properly.\nPUT and GET displays the transfer time in seconds.\nSupport for deleting versioned objects.\nNew Taskbar Logo by Simone Morellato.\n\nVersion 2.5\n\nAdded option to Sync to choose to overwrite existing objects already stored in S3.\nFixed a bug with Sync to not automatically overwrite existing files.\nFixed a bug with BackgroundSync to not automatically overwrite existing files.\n\nVersion: 2.4\n\nImage viewer is now threaded.\nNew Taskbar icon by Simone Morellato.\nImproved Memory management. \nCreating a bucket is handled in Object Explorer, no more pop ups.\nModifying an Object ACL is handled in Object Explorer, no more pop ups.\nObject Properties is now threaded.\nGenerating a public URL for an object only shows the URL.\nIf a config file already exists, it will be loaded upon startup.\n\n\nVersion: 2.3\n\nNew Logo by Simone Morellato.\nSmall dialog tweaks.\nMinor bug fixes.\nAll Put's are now managed by ThreadManager to handle parallel multi-part downloads.\nMP3 player now streams the song rather than downloading it.\nA playlist will be created of all the selected music files when clicking \"Play Music File(s).\nMP3 player now has \"Skip Forward\" and \"Skip backward\" buttons.\nAdded option to suspend Bucket versioning.\n\nVersion: 2.2\n\nImproved look and feel.\n\nVersion: 2.1\n\nSupport for enabling versioning on a bucket.\nSupport for downloading versioned objects.\nIncreased timeout for connecting to an S3 host.\nOther fixes.\nMultipart upload support.\n\nVersion: 2.0\n\nThreaded Bucket and Object listing.\nSyncing now syncs subdirectories.\nFor stability, delete operations are limited to 500.\nObject explorer displays the total number of objects in the bucket.\nFixed bug that makes sync work again after aborting a sync.\nA check is done to ensure the S3 host is alive before loading the buckets and objects for stability.");
         jTextArea4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
@@ -1009,6 +1010,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
         jMenu3.add(jMenuItem2);
+
+        jMenuItem13.setText("Autoexpire objects in bucket");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem13);
 
         jMenuItem11.setText("Enable Versioning");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
@@ -2145,6 +2154,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        if (active_bucket > 0) {
+            ConfigureObjectTransition trans = new ConfigureObjectTransition(this);
+            trans.startc();
+        } else {
+            jTextArea1.append("\nError: No bucket has been selected");
+        }
+
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
     void var() {
         cred.setAccess_key(jTextField1.getText());
         cred.setSecret_key(jTextField2.getText());
@@ -2205,6 +2224,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
