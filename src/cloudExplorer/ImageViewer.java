@@ -31,7 +31,7 @@ public class ImageViewer implements Runnable {
             JFrame image_frame = new JFrame();
             image_frame.setTitle("Cloud Explorer Image Viewer");
             image_frame.setIconImage(new ImageIcon(getClass()
-                    .getResource("CloudExplorerLogo5.png")).getImage());
+                    .getResource("cloud.jpg")).getImage());
             JScrollBar bar = new JScrollBar(JScrollBar.VERTICAL);
             JPanel image_panel = new JPanel();
             image_panel.setBackground(Color.white);
