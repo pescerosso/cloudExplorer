@@ -117,7 +117,7 @@ public class Credentials {
 
     }
 
-    String writeConfig(String access_key, String secret_key, String host, String port, String region, String userid, String groupid) {
+    String writeConfig(String access_key, String secret_key, String host, String port, String region) {
         try {
 
             if (!OScheck()) {
@@ -126,7 +126,7 @@ public class Credentials {
 
             FileWriter fr = new FileWriter(config_file, true);
             BufferedWriter bfr = new BufferedWriter(fr);
-            bfr.write("\n" + access_key + "@" + secret_key + "@" + host + "@" + port + "@" + region + "@" + userid + "@" + groupid);
+            bfr.write("\n" + access_key + "@" + secret_key + "@" + host + "@" + port + "@" + region);
             bfr.close();
         } catch (Exception writeConfig) {
         }
