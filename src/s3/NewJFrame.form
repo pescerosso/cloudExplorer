@@ -293,7 +293,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="249" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -321,7 +321,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/s3/Cloudian-Explorer.png"/>
+              <Image iconType="3" name="/s3/cloudExplorerLogo.png"/>
             </Property>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>

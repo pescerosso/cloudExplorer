@@ -71,7 +71,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     public NewJFrame() {
         initComponents();
         this.setIconImage(new ImageIcon(getClass()
-                .getResource("CloudianExplorerLogo4.png")).getImage());
+                .getResource("cloud.jpg")).getImage());
 
         File config = new File(config_file);
         if (config.exists()) {
@@ -218,7 +218,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/Cloudian-Explorer.png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/cloudExplorerLogo.png"))); // NOI18N
         jLabel10.setOpaque(true);
 
         jTextField10.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -251,7 +251,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addGap(266, 266, 266))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel10)
-                        .addGap(244, 244, 244))))
+                        .addGap(249, 249, 249))))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

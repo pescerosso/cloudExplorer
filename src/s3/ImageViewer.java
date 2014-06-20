@@ -29,9 +29,9 @@ public class ImageViewer implements Runnable {
             JLabel image[] = new JLabel[mainFrame.objectarray.length];
             ImageIcon[] photo = new ImageIcon[mainFrame.objectarray.length];
             JFrame image_frame = new JFrame();
-            image_frame.setTitle("Cloudian Explorer Image Viewer");
+            image_frame.setTitle("Cloud Explorer Image Viewer");
             image_frame.setIconImage(new ImageIcon(getClass()
-                    .getResource("CloudianExplorerLogo4.png")).getImage());
+                    .getResource("cloud.jpg")).getImage());
             JScrollBar bar = new JScrollBar(JScrollBar.VERTICAL);
             JPanel image_panel = new JPanel();
             image_panel.setBackground(Color.white);
