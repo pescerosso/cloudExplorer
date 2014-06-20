@@ -318,6 +318,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         });
 
         jScrollPane27.setBackground(java.awt.Color.white);
+        jScrollPane27.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jPanel21.setBackground(java.awt.SystemColor.text);
         jPanel21.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
