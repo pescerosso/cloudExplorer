@@ -321,7 +321,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/s3/cloudExplorerLogo.png"/>
+              <Image iconType="3" name="/cloudExplorer/cloudExplorerLogo.png"/>
             </Property>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>

@@ -218,7 +218,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/s3/cloudExplorerLogo.png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cloudExplorer/cloudExplorerLogo.png"))); // NOI18N
         jLabel10.setOpaque(true);
 
         jTextField10.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
