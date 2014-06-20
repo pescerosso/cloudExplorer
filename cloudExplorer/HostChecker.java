@@ -1,9 +1,9 @@
-package s3;
+package cloudExplorer;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import static s3.NewJFrame.jTextArea1;
+import static cloudExplorer.NewJFrame.jTextArea1;
 
 public class HostChecker implements Runnable {
 

@@ -1,4 +1,4 @@
-package s3;
+package cloudExplorer;
 
 import java.io.File;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
-import static s3.NewJFrame.jTextArea1;
+import static cloudExplorer.NewJFrame.jTextArea1;
 
 public class SyncToS3 implements Runnable {
 

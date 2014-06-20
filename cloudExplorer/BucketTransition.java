@@ -1,4 +1,4 @@
-package s3;
+package cloudExplorer;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -8,7 +8,7 @@ import com.amazonaws.services.s3.model.BucketLifecycleConfiguration;
 import com.amazonaws.services.s3.model.BucketLifecycleConfiguration.Transition;
 import java.util.ArrayList;
 import java.util.List;
-import static s3.NewJFrame.jTextArea1;
+import static cloudExplorer.NewJFrame.jTextArea1;
 
 public class BucketTransition implements Runnable {
 

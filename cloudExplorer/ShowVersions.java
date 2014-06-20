@@ -1,11 +1,11 @@
-package s3;
+package cloudExplorer;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JRadioButton;
-import s3.Get;
-import s3.NewJFrame;
+import cloudExplorer.Get;
+import cloudExplorer.NewJFrame;
 
 public class ShowVersions implements Runnable {
 

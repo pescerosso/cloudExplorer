@@ -1,4 +1,4 @@
-package s3;
+package cloudExplorer;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.activation.MimetypesFileTypeMap;
-import static s3.NewJFrame.jTextArea1;
+import static cloudExplorer.NewJFrame.jTextArea1;
 
 public class Put implements Runnable {
 

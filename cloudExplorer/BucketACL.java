@@ -1,4 +1,4 @@
-package s3;
+package cloudExplorer;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -7,7 +7,7 @@ import java.net.URL;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import static s3.NewJFrame.jTextArea1;
+import static cloudExplorer.NewJFrame.jTextArea1;
 
 public class BucketACL implements Runnable {
 

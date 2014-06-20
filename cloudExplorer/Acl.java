@@ -1,4 +1,4 @@
-package s3;
+package cloudExplorer;
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.auth.AWSCredentials;

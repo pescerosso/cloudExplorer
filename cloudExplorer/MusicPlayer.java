@@ -1,4 +1,4 @@
-package s3;
+package cloudExplorer;
 
 import jaco.mp3.player.MP3Player;
 import java.awt.Color;
@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import static s3.NewJFrame.jTextArea1;
+import static cloudExplorer.NewJFrame.jTextArea1;
 
 public class MusicPlayer implements Runnable {
 

@@ -1,4 +1,4 @@
-package s3;
+package cloudExplorer;
 
 public class DeleteEverything implements Runnable {
 

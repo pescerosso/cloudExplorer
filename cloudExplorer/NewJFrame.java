@@ -1,4 +1,4 @@
-package s3;
+package cloudExplorer;
 
 import java.awt.Color;
 import java.awt.Dimension;

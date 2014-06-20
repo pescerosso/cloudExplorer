@@ -1,4 +1,4 @@
-package s3;
+package cloudExplorer;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import static s3.NewJFrame.jTextArea1;
+import static cloudExplorer.NewJFrame.jTextArea1;
 
 public class ImageViewer implements Runnable {
 

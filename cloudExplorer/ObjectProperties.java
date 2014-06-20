@@ -1,6 +1,6 @@
-package s3;
+package cloudExplorer;
 
-import static s3.NewJFrame.jTextArea1;
+import static cloudExplorer.NewJFrame.jTextArea1;
 
 public class ObjectProperties implements Runnable {
 

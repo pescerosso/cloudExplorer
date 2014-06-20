@@ -1,9 +1,9 @@
-package s3;
+package cloudExplorer;
 
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static s3.NewJFrame.jTextArea1;
+import static cloudExplorer.NewJFrame.jTextArea1;
 
 public class SyncFromS3 implements Runnable {
 
