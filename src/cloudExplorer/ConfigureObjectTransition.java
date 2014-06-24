@@ -27,8 +27,8 @@ public class ConfigureObjectTransition implements Runnable {
             final JLabel prefix = new JLabel("Prefix (Optional):");
             final JTextField days = new JTextField("");
             final JTextField prefix_field = new JTextField("");
-            final JButton commitTransition = new JButton("        Commit");
-            final JButton disableRules = new JButton("        Disable Rules");
+            final JButton commitTransition = new JButton("Commit");
+            final JButton disableRules = new JButton("Disable Rules");
 
             days.setBackground(Color.white);
             days.setForeground(Color.blue);
