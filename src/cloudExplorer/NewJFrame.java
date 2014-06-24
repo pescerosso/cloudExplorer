@@ -141,12 +141,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jLabel9 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jButton15 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jFileChooser2 = new javax.swing.JFileChooser();
         jToggleButton3 = new javax.swing.JToggleButton();
         jToggleButton4 = new javax.swing.JToggleButton();
         jButton16 = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
+        jLabel13 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
@@ -413,7 +415,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addComponent(jButton9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -669,7 +671,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addGap(12, 12, 12)
                         .addComponent(jButton19))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -742,13 +744,16 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
 
+        jLabel11.setText("Bucket Selected:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 990, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 1015, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel11)
+                .addGap(132, 132, 132)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -756,21 +761,28 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton15)
-                .addGap(253, 253, 253))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)))
+                        .addGap(6, 6, 6))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Upload", jPanel2);
@@ -818,33 +830,37 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jRadioButton1.setBackground(java.awt.SystemColor.text);
         jRadioButton1.setText("Overwrite Existing");
 
+        jLabel13.setText("Bucket Selected:");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(0, 0, 0)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(322, 322, 322)
+                        .addComponent(jLabel13)
+                        .addGap(132, 132, 132)
                         .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addComponent(jToggleButton4)
                         .addGap(49, 49, 49)
                         .addComponent(jToggleButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jRadioButton1))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 978, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(43, 43, 43)
+                        .addComponent(jRadioButton1)
+                        .addGap(68, 68, 68))
+                    .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 978, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -886,7 +902,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addGap(1, 1, 1)
-                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
+                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton11)
                 .addGap(14, 14, 14))
@@ -911,7 +927,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version 2.8\n\nNew Feature: Screenshot to S3.\n\n\nVersion 2.7\n\nAdded new menu item \"Admin\" with ability to delete all objects and their versions.\nImproved memory management for object versions.\nAdded new feature: Bucket Life Cycle.\nUsers can now autoexpire objects and disable the life cycle rule.\nAdjusted color for image viewer.\nAdded title to image viewer.\n\nVersion 2.6\n\nObject Explorer fits the window properly.\nPUT and GET displays the transfer time in seconds.\nSupport for deleting versioned objects.\nNew Taskbar Logo by Simone Morellato.\n\nVersion 2.5\n\nAdded option to Sync to choose to overwrite existing objects already stored in S3.\nFixed a bug with Sync to not automatically overwrite existing files.\nFixed a bug with BackgroundSync to not automatically overwrite existing files.\n\nVersion: 2.4\n\nImage viewer is now threaded.\nNew Taskbar icon by Simone Morellato.\nImproved Memory management. \nCreating a bucket is handled in Object Explorer, no more pop ups.\nModifying an Object ACL is handled in Object Explorer, no more pop ups.\nObject Properties is now threaded.\nGenerating a public URL for an object only shows the URL.\nIf a config file already exists, it will be loaded upon startup.\n\n\nVersion: 2.3\n\nNew Logo by Simone Morellato.\nSmall dialog tweaks.\nMinor bug fixes.\nAll Put's are now managed by ThreadManager to handle parallel multi-part downloads.\nMP3 player now streams the song rather than downloading it.\nA playlist will be created of all the selected music files when clicking \"Play Music File(s).\nMP3 player now has \"Skip Forward\" and \"Skip backward\" buttons.\nAdded option to suspend Bucket versioning.\n\nVersion: 2.2\n\nImproved look and feel.\n\nVersion: 2.1\n\nSupport for enabling versioning on a bucket.\nSupport for downloading versioned objects.\nIncreased timeout for connecting to an S3 host.\nOther fixes.\nMultipart upload support.\n\nVersion: 2.0\n\nThreaded Bucket and Object listing.\nSyncing now syncs subdirectories.\nFor stability, delete operations are limited to 500.\nObject explorer displays the total number of objects in the bucket.\nFixed bug that makes sync work again after aborting a sync.\nA check is done to ensure the S3 host is alive before loading the buckets and objects for stability.");
+        jTextArea4.setText("Version 2.8\n\nNew Feature: Screenshot to S3.\nSync and Upload tabs display the selected bucket.\n\n\nVersion 2.7\n\nAdded new menu item \"Admin\" with ability to delete all objects and their versions.\nImproved memory management for object versions.\nAdded new feature: Bucket Life Cycle.\nUsers can now autoexpire objects and disable the life cycle rule.\nAdjusted color for image viewer.\nAdded title to image viewer.\n\nVersion 2.6\n\nObject Explorer fits the window properly.\nPUT and GET displays the transfer time in seconds.\nSupport for deleting versioned objects.\nNew Taskbar Logo by Simone Morellato.\n\nVersion 2.5\n\nAdded option to Sync to choose to overwrite existing objects already stored in S3.\nFixed a bug with Sync to not automatically overwrite existing files.\nFixed a bug with BackgroundSync to not automatically overwrite existing files.\n\nVersion: 2.4\n\nImage viewer is now threaded.\nNew Taskbar icon by Simone Morellato.\nImproved Memory management. \nCreating a bucket is handled in Object Explorer, no more pop ups.\nModifying an Object ACL is handled in Object Explorer, no more pop ups.\nObject Properties is now threaded.\nGenerating a public URL for an object only shows the URL.\nIf a config file already exists, it will be loaded upon startup.\n\n\nVersion: 2.3\n\nNew Logo by Simone Morellato.\nSmall dialog tweaks.\nMinor bug fixes.\nAll Put's are now managed by ThreadManager to handle parallel multi-part downloads.\nMP3 player now streams the song rather than downloading it.\nA playlist will be created of all the selected music files when clicking \"Play Music File(s).\nMP3 player now has \"Skip Forward\" and \"Skip backward\" buttons.\nAdded option to suspend Bucket versioning.\n\nVersion: 2.2\n\nImproved look and feel.\n\nVersion: 2.1\n\nSupport for enabling versioning on a bucket.\nSupport for downloading versioned objects.\nIncreased timeout for connecting to an S3 host.\nOther fixes.\nMultipart upload support.\n\nVersion: 2.0\n\nThreaded Bucket and Object listing.\nSyncing now syncs subdirectories.\nFor stability, delete operations are limited to 500.\nObject explorer displays the total number of objects in the bucket.\nFixed bug that makes sync work again after aborting a sync.\nA check is done to ensure the S3 host is alive before loading the buckets and objects for stability.");
         jTextArea4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
@@ -920,7 +936,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 990, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1015, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1210,6 +1226,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         if (bucket_item[h].isSelected()) {
                             if (h != active_bucket) {
                                 active_bucket = h;
+                                jLabel11.setText("Bucket Selected: " + bucket_item[h].getText());
+                                jLabel13.setText("Bucket Selected: " + bucket_item[h].getText());
                                 cred.setBucket(bucket_item[h].getText());
                                 clear_old_radio_buttons();
                                 h = bucketarray.length;
@@ -2184,6 +2202,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     public static javax.swing.JFileChooser jFileChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
