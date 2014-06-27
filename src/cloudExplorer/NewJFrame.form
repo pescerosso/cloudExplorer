@@ -1358,7 +1358,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
                                   <Component id="jButton16" min="-2" pref="122" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                                   <Component id="jToggleButton4" min="-2" max="-2" attributes="0"/>
@@ -1378,14 +1378,14 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jFileChooser2" min="-2" pref="344" max="-2" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel13" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                              <Group type="103" alignment="3" groupAlignment="3" attributes="0">
                                   <Component id="jToggleButton3" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                                   <Component id="jToggleButton4" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                                   <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton16" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jLabel13" min="-2" pref="43" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
