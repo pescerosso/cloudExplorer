@@ -1487,7 +1487,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                          <Component id="jTextField6" pref="861" max="32767" attributes="0"/>
+                          <Component id="jTextField6" pref="836" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton11" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
@@ -1505,7 +1505,7 @@
                               <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" min="-2" pref="355" max="-2" attributes="0"/>
+                          <Component id="jScrollPane4" min="-2" pref="384" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
