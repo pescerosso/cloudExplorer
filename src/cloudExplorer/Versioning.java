@@ -36,22 +36,26 @@ public class Versioning {
             }
 
             List<S3VersionSummary> summary;
-            do {
-                summary = vListing.getVersionSummaries();
-                for (S3VersionSummary foo : summary) {
-                    if (Versioning.delete) {
+
+            if (Versioning.delete) {
+                do {
+                    summary = vListing.getVersionSummaries();
+                    for (S3VersionSummary foo : summary) {
                         del = new Delete(foo.getKey(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), foo.getVersionId());
                         del.startc(foo.getKey(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), foo.getVersionId());
+                        System.gc();
                     }
-                    if (!Versioning.delete) {
-                        mainFrame.versioning_date.add(foo.getLastModified().toString());
-                        mainFrame.versioning_id.add(foo.getVersionId());
-                        mainFrame.versioning_name.add(foo.getKey());
-                    }
+                } while (vListing.isTruncated());
+            } else {
+
+                summary = vListing.getVersionSummaries();
+                for (S3VersionSummary foo : summary) {
+                    mainFrame.versioning_date.add(foo.getLastModified().toString());
+                    mainFrame.versioning_id.add(foo.getVersionId());
+                    mainFrame.versioning_name.add(foo.getKey());
                     System.gc();
                 }
-
-            } while (vListing.isTruncated());
+            }
 
         } catch (Exception getVersions) {
 
