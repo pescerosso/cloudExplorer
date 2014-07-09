@@ -55,8 +55,10 @@ public class Versioning {
                     mainFrame.versioning_name.add(foo.getKey());
                     System.gc();
                 }
-            }
 
+            }
+            mainFrame.jTextArea1.append("\n\nDone gathering Versions.");
+            mainFrame.calibrateTextArea();
         } catch (Exception getVersions) {
 
         }
