@@ -2089,6 +2089,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             calibrateTextArea();
             MusicPlayer musicplayer = new MusicPlayer(this);
             musicplayer.startc();
+            jTextArea1.append("\nMusic player has been started. Please observe for any errors.");
+            calibrateTextArea();
         } else {
             jTextArea1.append("\nError: No bucket has been selected");
         }
