@@ -74,9 +74,9 @@ public class BucketTransition implements Runnable {
             mainFrame.jTextArea1.append("\n" + get.getMessage());
         }
         if (!disabled) {
-            mainFrame.jTextArea1.append("\nSent request to change bucket life cycle to " + converted_days + " day(s).");
+            mainFrame.jTextArea1.append("\nSent request to change bucket life cycle to " + converted_days + " day(s). Please observe for any errors.");
         } else {
-            mainFrame.jTextArea1.append("\nSent request to disable the bucket life cycle.");
+            mainFrame.jTextArea1.append("\nSent request to disable the bucket life cycle. Please observe for any errors.");
         }
         calibrate();
     }
