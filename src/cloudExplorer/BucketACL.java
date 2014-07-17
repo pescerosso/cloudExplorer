@@ -8,6 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import static cloudExplorer.NewJFrame.jTextArea1;
+import javax.swing.JLabel;
 
 public class BucketACL implements Runnable {
 
@@ -26,6 +27,7 @@ public class BucketACL implements Runnable {
 
             final JCheckBox static_website = new JCheckBox("Static Website");
             final JButton bucketACLbutton = new JButton("        Commit");
+            final JLabel blank_label = new JLabel(" ");
 
             static_website.setBackground(Color.white);
             static_website.setBorder(null);
@@ -64,6 +66,7 @@ public class BucketACL implements Runnable {
             mainFrame.jPanel14.removeAll();
             mainFrame.jPanel14.setLayout(new BoxLayout(mainFrame.jPanel14, BoxLayout.Y_AXIS));
             mainFrame.jPanel14.add(static_website);
+            mainFrame.jPanel14.add(blank_label);
             mainFrame.jPanel14.add(bucketACLbutton);
             mainFrame.jPanel14.repaint();
             mainFrame.jPanel14.revalidate();
