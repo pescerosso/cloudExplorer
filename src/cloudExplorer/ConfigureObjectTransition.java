@@ -3,7 +3,6 @@ package cloudExplorer;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -25,13 +24,18 @@ public class ConfigureObjectTransition implements Runnable {
         try {
             final JLabel label = new JLabel("Expire after # days:");
             final JLabel prefix = new JLabel("Prefix (Optional):");
+            final JLabel blank = new JLabel(" ");
             final JTextField days = new JTextField("");
             final JTextField prefix_field = new JTextField("");
             final JButton commitTransition = new JButton("Commit");
             final JButton disableRules = new JButton("Disable Rules");
+            final JCheckBox glacier = new JCheckBox("Tier to Glacier");
 
             days.setBackground(Color.white);
             days.setForeground(Color.blue);
+
+            glacier.setBackground(Color.white);
+            glacier.setForeground(Color.blue);
 
             label.setBackground(Color.white);
             label.setForeground(Color.blue);
@@ -53,8 +57,14 @@ public class ConfigureObjectTransition implements Runnable {
                     try {
                         if (days.getText().contains("# of days") || days.getText().isEmpty()) {
                         } else {
-                            BucketTransition bucketTransition = new BucketTransition(mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), days.getText(), prefix_field.getText(), false);
-                            bucketTransition.startc(mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), days.getText(), prefix_field.getText(), false);
+                            if (glacier.isSelected()) {
+                                BucketTransitionGlacier bucketTransition = new BucketTransitionGlacier(mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), days.getText(), prefix_field.getText(), false);
+                                bucketTransition.startc(mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), days.getText(), prefix_field.getText(), false);
+
+                            } else {
+                                BucketTransition bucketTransition = new BucketTransition(mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), days.getText(), prefix_field.getText(), false);
+                                bucketTransition.startc(mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), days.getText(), prefix_field.getText(), false);
+                            }
                         }
 
                     } catch (Exception Transition) {
@@ -96,6 +106,8 @@ public class ConfigureObjectTransition implements Runnable {
             mainFrame.jPanel14.add(days);
             mainFrame.jPanel14.add(prefix);
             mainFrame.jPanel14.add(prefix_field);
+            mainFrame.jPanel14.add(blank);
+            mainFrame.jPanel14.add(glacier);
             mainFrame.jPanel14.add(commitTransition);
             mainFrame.jPanel14.add(disableRules);
             mainFrame.jPanel14.repaint();
