@@ -80,9 +80,7 @@ public class MusicPlayer implements Runnable {
                         mainFrame.objectacl.setACLpublic(mainFrame.object_item[h].getText(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
                         String url = mainFrame.objectacl.setACLurl(mainFrame.object_item[h].getText(), mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
                         url = url.replace("Pre-Signed URL = ", "");
-                        String test1[] = url.split("Expires=");
-                        test1[0] = test1[0].replace("?", "");
-                        music_url = (new URL(test1[0]));
+                        music_url = (new URL(url));
                         mp3.addToPlayList(music_url);
                         count++;
                     }
