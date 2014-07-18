@@ -47,7 +47,7 @@ public class RestoreObject implements Runnable {
             ObjectMetadata response = s3Client.getObjectMetadata(request);
             response.getOngoingRestore();
 
-            mainFrame.jTextArea1.append("\nRestored Object: " + what);
+            mainFrame.jTextArea1.append("\nRestored operation ran for Object: " + what + ". Please examiene this window for any errors.");
             mainFrame.calibrateTextArea();
 
         } catch (Exception get) {
