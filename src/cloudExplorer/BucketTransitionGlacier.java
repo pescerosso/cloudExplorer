@@ -54,7 +54,7 @@ public class BucketTransitionGlacier implements Runnable {
         }
 
         Transition transToArchive = new Transition()
-                .withDays(converted_days)
+                .withDays(converted_days) 
                 .withStorageClass(StorageClass.Glacier);
 
         BucketLifecycleConfiguration.Rule ruleArchiveAndExpire = null;
@@ -62,13 +62,13 @@ public class BucketTransitionGlacier implements Runnable {
             ruleArchiveAndExpire = new BucketLifecycleConfiguration.Rule()
                     .withPrefix(prefix)
                     .withTransition(transToArchive)
-                    .withExpirationInDays(converted_days + 1)
+                  // .withExpirationInDays(converted_days + 1)
                     .withStatus(BucketLifecycleConfiguration.ENABLED.toString());
         } else {
             ruleArchiveAndExpire = new BucketLifecycleConfiguration.Rule()
                     .withPrefix(prefix)
                     .withTransition(transToArchive)
-                    .withExpirationInDays(100)
+                    //.withExpirationInDays(100)
                     .withStatus(BucketLifecycleConfiguration.DISABLED.toString());
         }
         List<BucketLifecycleConfiguration.Rule> rules = new ArrayList<BucketLifecycleConfiguration.Rule>();
