@@ -65,6 +65,7 @@ public class ObjectACL implements Runnable {
                                     String url = mainFrame.objectacl.setACLurl(object_acl_change, mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
                                     url = url.replace("Pre-Signed URL = ", "");
                                     jTextArea1.append("\n" + url);
+                                     mainFrame.calibrateTextArea();
                                 }
                                 if (private_box.isSelected()) {
                                     mainFrame.objectacl.setACLprivate(object_acl_change, mainFrame.cred.getAccess_key(), mainFrame.cred.getSecret_key(), mainFrame.cred.getEndpoint(), mainFrame.cred.getBucket());
