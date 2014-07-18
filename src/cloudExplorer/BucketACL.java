@@ -26,6 +26,7 @@ public class BucketACL implements Runnable {
             URL music_url = null;
 
             final JCheckBox static_website = new JCheckBox("Static Website");
+            final JLabel blank = new JLabel(" ");
             final JButton bucketACLbutton = new JButton("        Commit");
             final JLabel blank_label = new JLabel(" ");
 

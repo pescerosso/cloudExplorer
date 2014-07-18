@@ -28,9 +28,12 @@ public class MakeBucket implements Runnable {
 
             final JButton createBucket = new JButton("Create Bucket");
             final JButton close = new JButton("Close");
+            final JLabel blank = new JLabel(" ");
             final JTextField bucketName = new JTextField();
             final JTextField regionName = new JTextField(mainFrame.cred.getRegion());
             final JLabel name = new JLabel("Bucket Name:");
+            name.setBackground(Color.white);
+            name.setForeground(Color.blue);
             createBucket.setBackground(Color.white);
             createBucket.setForeground(Color.blue);
             createBucket.setBorder(null);
@@ -66,6 +69,7 @@ public class MakeBucket implements Runnable {
             mainFrame.jPanel14.add(name);
             mainFrame.jPanel14.add(bucketName);
             mainFrame.jPanel14.add(regionName);
+            mainFrame.jPanel14.add(blank);
             mainFrame.jPanel14.add(createBucket);
             mainFrame.jPanel14.add(close);
             mainFrame.jPanel14.repaint();
