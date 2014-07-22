@@ -943,7 +943,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version 3.0\n\nConsole message clean up for better understanding.\nTier buckets to Amazon Glacier with desired lifecycle via the \"Bucket\" menu.\nRestore objects back from Amazon Glacier via the \"Objects\" menu.\nUpgraded AWS S3 API to v1.8.5\nSmall tweaks to make GUI better.\nFixed a bug with displaying an objects Public URL\nFixed a bug with the MP3 player to play the URL correctly.\n\nFeatures:\n\n1. Tier buckets to and from Amazon Glacier.\n2. Sync files to and from S3 storage.\n3. Stream music from Amazon S3.\n4. Text editor.\n5. Modify Bucket and Object ACL's.\n6. Take screen shots and upload them to Amazon S3.\n7. Bucket versioning and lifecycles.\n8. Graphical and console based background syncing.\n9. Store multiple Amazon S3 accounts.\n10. Image viewer.\n11. Migrate data between S3 accounts.\n\nHow to migrate data between S3 accounts:\n\n1. Load the destination account and click \"Set as migration Account\" under Settings.\n2. Create the destination bucket with the same name as the origin bucket name.\n3. Load the origin S3 account and select the bucket to transfer to the new S3 account.\n4. Under the \"Tools\" menu, select \"Migrate bucket to another S3 account\".\n5. Wait for transfers to complete.");
+        jTextArea4.setText("Version 3.0\n\nConsole message clean up for better understanding.\nTier buckets to Amazon Glacier with desired lifecycle via the \"Bucket\" menu.\nRestore objects back from Amazon Glacier via the \"Objects\" menu.\nUpgraded AWS S3 API to v1.8.5\nSmall tweaks to make GUI better.\nFixed a bug with displaying an objects Public URL\nFixed a bug with the MP3 player to play the URL correctly.\n\nFeatures:\n\n1. Tier buckets to and from Amazon Glacier.\n2. Sync files to and from S3 storage.\n3. Stream music from Amazon S3.\n4. Text editor.\n5. Modify Bucket and Object ACL's.\n6. Take screen shots and upload them to Amazon S3.\n7. Bucket versioning and lifecycles.\n8. Graphical and console based background syncing.\n9. Store multiple Amazon S3 accounts.\n10. Image viewer.\n11. Migrate data between S3 accounts.\n\nHow to migrate data between S3 accounts:\n\n1. Load the destination account and click \"Set as migration Account\" under Settings.\n2. Create the destination bucket with the same name as the origin bucket name.\n3. Load the origin S3 account and select the bucket to transfer to the new S3 account.\n4. Under the \"Tools\" menu, select \"Migrate bucket to another S3 account\".\n5. Type in the destination bucket name and click \"Start Bucket Migration\".\n6. Wait for transfers to complete.");
         jTextArea4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
@@ -2214,8 +2214,9 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
         if (active_bucket > 0) {
-            BucketMigration migrate = new BucketMigration(cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(),this);
-            migrate.startc(cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(),this);
+
+            MakeDestinationBucket makeDestbucket = new MakeDestinationBucket(this);
+            makeDestbucket.startc();
         } else {
             jTextArea1.append("\nError: No bucket has been selected");
         }

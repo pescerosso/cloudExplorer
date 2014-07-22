@@ -42,15 +42,15 @@ public class BucketMigration implements Runnable {
         }
     }
 
-    BucketMigration(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, NewJFrame AmainFrame) {
+    BucketMigration(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, NewJFrame AmainFrame, String Anew_bucket) {
         access_key = Aaccess_key;
         secret_key = Asecret_key;
         bucket = Abucket;
         endpoint = Aendpoint;
         mainFrame = AmainFrame;
+        new_bucket = Anew_bucket;
     }
 
-   
     String loadMigrationConfig() {
         String data = null;
 
@@ -75,7 +75,7 @@ public class BucketMigration implements Runnable {
             if (mainFrame.objectarray[i] != null) {
                 get = new Get(mainFrame.objectarray[i], access_key, secret_key, bucket, endpoint, temp_file, null);
                 get.run();
-                put = new Put(temp_file, new_access_key, new_secret_key, bucket, new_endpoint, mainFrame.objectarray[i]);
+                put = new Put(temp_file, new_access_key, new_secret_key, new_bucket, new_endpoint, mainFrame.objectarray[i]);
                 put.run();
             }
         }
@@ -142,7 +142,7 @@ public class BucketMigration implements Runnable {
         if (config.exists()) {
             loadDestinationAccount();
             checkBucket();
-            if (bucketlist.contains(bucket)) {
+            if (bucketlist.contains(new_bucket)) {
                 migrate();
             } else {
                 jTextArea1.append("\nError: Destination S3 account does not have the same bucket name as the origin bucket: " + bucket + ".");
@@ -156,8 +156,8 @@ public class BucketMigration implements Runnable {
 
     }
 
-    void startc(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, NewJFrame AmainFrame) {
-        bucketMigration = new Thread(new BucketMigration(Aaccess_key, Asecret_key, Abucket, Aendpoint, AmainFrame));
+    void startc(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, NewJFrame AmainFrame, String Anew_bucket) {
+        bucketMigration = new Thread(new BucketMigration(Aaccess_key, Asecret_key, Abucket, Aendpoint, AmainFrame, Anew_bucket));
         bucketMigration.start();
     }
 
