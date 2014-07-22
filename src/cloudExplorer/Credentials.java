@@ -122,7 +122,7 @@ public class Credentials {
             config_file = (Home + File.separator + "s3Migrate.config");
             FileWriter fr = new FileWriter(config_file);
             BufferedWriter bfr = new BufferedWriter(fr);
-            bfr.write("\n" + access_key + "@" + secret_key + "@" + host + "@" + port + "@" + region);
+            bfr.write(access_key + "@" + secret_key + "@" + host + "@" + port + "@" + region);
             bfr.close();
         } catch (Exception writeConfig) {
         }
