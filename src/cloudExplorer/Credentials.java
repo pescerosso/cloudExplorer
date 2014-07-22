@@ -120,7 +120,7 @@ public class Credentials {
     String writeMigrateConfig(String access_key, String secret_key, String host, String port, String region) {
         try {
             config_file = (Home + File.separator + "s3Migrate.config");
-            FileWriter fr = new FileWriter(config_file, true);
+            FileWriter fr = new FileWriter(config_file);
             BufferedWriter bfr = new BufferedWriter(fr);
             bfr.write("\n" + access_key + "@" + secret_key + "@" + host + "@" + port + "@" + region);
             bfr.close();
