@@ -47,6 +47,7 @@ public class MakeDestinationBucket implements Runnable {
                     } else {
                         BucketMigration migrate = new BucketMigration(mainFrame.cred.access_key, mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), mainFrame, bucketName.getText());
                         migrate.startc(mainFrame.cred.access_key, mainFrame.cred.getSecret_key(), mainFrame.cred.getBucket(), mainFrame.cred.getEndpoint(), mainFrame, bucketName.getText());
+                        close.doClick();
                     }
                 }
             });
