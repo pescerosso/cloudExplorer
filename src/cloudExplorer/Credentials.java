@@ -19,18 +19,7 @@ public class Credentials {
     String groupid = null;
     String OS = System.getProperty("os.name");
     String config_file = (Home + File.separator + "s3.config");
-
     NewJFrame mainFrame;
-
-    boolean OScheck() {
-        boolean result;
-        if ((OS.contains("windows")) || OS.contains("Windows")) {
-            result = false;
-        } else {
-            result = true;
-        }
-        return result;
-    }
 
     public String getRegion() {
         return region;
@@ -91,9 +80,8 @@ public class Credentials {
     String loadConfig() {
         String data = null;
 
-        if (!OScheck()) {
-            config_file = (Home + "\\s3.config");
-        }
+        config_file = (Home + File.separator + "s3.config");
+
         try {
             FileReader fr = new FileReader(config_file);
             BufferedReader bfr = new BufferedReader(fr);
@@ -119,11 +107,19 @@ public class Credentials {
 
     String writeConfig(String access_key, String secret_key, String host, String port, String region) {
         try {
+            config_file = (Home + File.separator + "s3.config");
+            FileWriter fr = new FileWriter(config_file, true);
+            BufferedWriter bfr = new BufferedWriter(fr);
+            bfr.write("\n" + access_key + "@" + secret_key + "@" + host + "@" + port + "@" + region);
+            bfr.close();
+        } catch (Exception writeConfig) {
+        }
+        return "\nSaved Config";
+    }
 
-            if (!OScheck()) {
-                config_file = (Home + "\\s3.config");
-            }
-
+    String writeMigrateConfig(String access_key, String secret_key, String host, String port, String region) {
+        try {
+            config_file = (Home + File.separator + "s3Migrate.config");
             FileWriter fr = new FileWriter(config_file, true);
             BufferedWriter bfr = new BufferedWriter(fr);
             bfr.write("\n" + access_key + "@" + secret_key + "@" + host + "@" + port + "@" + region);

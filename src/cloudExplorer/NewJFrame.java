@@ -112,6 +112,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jPanel12 = new javax.swing.JPanel();
         jButton9 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton20 = new javax.swing.JButton();
         scrollPane1 = new java.awt.ScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -175,6 +176,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
 
         jMenuItem5.setText("jMenuItem5");
@@ -382,6 +384,15 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
 
+        jButton20.setBackground(java.awt.SystemColor.text);
+        jButton20.setText("Set as migration account");
+        jButton20.setBorder(null);
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -404,6 +415,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton8)))
@@ -414,7 +427,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addComponent(jButton9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -444,13 +457,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton8)
-                            .addComponent(jButton10))
+                            .addComponent(jButton10)
+                            .addComponent(jButton20))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addComponent(jScrollPane27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton9)
                     .addComponent(jButton2))
-                .addGap(18, 18, 18))
+                .addGap(121, 121, 121))
         );
 
         jTabbedPane1.addTab("Settings", jPanel3);
@@ -929,7 +943,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         jTextArea4.setEditable(false);
         jTextArea4.setColumns(20);
         jTextArea4.setRows(5);
-        jTextArea4.setText("Version 3.0\n\nConsole message clean up for better understanding.\nTier buckets to Amazon Glacier with desired lifecycle via the \"Bucket\" menu.\nRestore objects back from Amazon Glacier via the \"Objects\" menu.\nUpgraded AWS S3 API to v1.8.5\nSmall tweaks to make GUI better.\nFixed a bug with displaying an objects Public URL\nFixed a bug with the MP3 player to play the URL correctly.\n\nFeatures:\n\n1. Tier buckets to and from Amazon Glacier.\n2. Sync files to and from S3 storage.\n3. Stream music from Amazon S3.\n4. Text editor.\n5. Modify Bucket and Object ACL's.\n6. Take screen shots and upload them to Amazon S3.\n7. Bucket versioning and lifecycles.\n8. Graphical and console based background syncing.\n9. Store multiple Amazon S3 accounts.\n10. Image viewer.");
+        jTextArea4.setText("Version 3.0\n\nConsole message clean up for better understanding.\nTier buckets to Amazon Glacier with desired lifecycle via the \"Bucket\" menu.\nRestore objects back from Amazon Glacier via the \"Objects\" menu.\nUpgraded AWS S3 API to v1.8.5\nSmall tweaks to make GUI better.\nFixed a bug with displaying an objects Public URL\nFixed a bug with the MP3 player to play the URL correctly.\n\nFeatures:\n\n1. Tier buckets to and from Amazon Glacier.\n2. Sync files to and from S3 storage.\n3. Stream music from Amazon S3.\n4. Text editor.\n5. Modify Bucket and Object ACL's.\n6. Take screen shots and upload them to Amazon S3.\n7. Bucket versioning and lifecycles.\n8. Graphical and console based background syncing.\n9. Store multiple Amazon S3 accounts.\n10. Image viewer.\n11. Migrate data between S3 accounts.\n\nHow to migrate data between S3 accounts:\n\n1. Load the destination account and click \"Set as migration Account\" under Settings.\n2. Create the destination bucket with the same name as the origin bucket name.\n3. Load the origin S3 account and select the bucket to transfer to the new S3 account.\n4. Under the \"Tools\" menu, select \"Migrate bucket to another S3 account\".\n5. Wait for transfers to complete.");
         jTextArea4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTextArea4.setCaretPosition(0);
         jScrollPane6.setViewportView(jTextArea4);
@@ -1090,6 +1104,14 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
             }
         });
         jMenu6.add(jMenuItem14);
+
+        jMenuItem17.setText("Migrate bucket to another S3 account.");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem17);
 
         jMenuItem8.setText("Delete every object and version");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
@@ -2190,6 +2212,24 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         }
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+        if (active_bucket > 0) {
+            BucketMigration migrate = new BucketMigration(cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(),this);
+            migrate.startc(cred.access_key, cred.getSecret_key(), cred.getBucket(), cred.getEndpoint(),this);
+        } else {
+            jTextArea1.append("\nError: No bucket has been selected");
+        }
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        if (active_account > 0) {
+            String save = cred.writeMigrateConfig(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jTextField5.getText());
+            jTextArea1.append(save);
+        } else {
+            jTextArea1.append("\nError: No account has been selected.");
+        }
+    }//GEN-LAST:event_jButton20ActionPerformed
+
     void var() {
         cred.setAccess_key(jTextField1.getText());
         cred.setSecret_key(jTextField2.getText());
@@ -2219,6 +2259,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     public static javax.swing.JButton jButton18;
     public static javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -2254,6 +2295,7 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

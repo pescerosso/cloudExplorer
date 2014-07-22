@@ -169,6 +169,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem14ActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem17">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Migrate bucket to another S3 account."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem17ActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delete every object and version"/>
@@ -450,6 +458,8 @@
                                   </Group>
                               </Group>
                               <Group type="102" attributes="0">
+                                  <Component id="jButton20" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jButton10" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jButton8" min="-2" max="-2" attributes="0"/>
@@ -464,7 +474,7 @@
                                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="62" max="32767" attributes="0"/>
+                          <EmptySpace pref="22" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -502,6 +512,7 @@
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jButton10" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jButton20" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -511,7 +522,7 @@
                               <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -748,6 +759,20 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jButton20">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" id="Text" palette="2" red="ff" type="palette"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Set as migration account"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="null"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton20ActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -1616,7 +1641,7 @@
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="Version 3.0&#xa;&#xa;Console message clean up for better understanding.&#xa;Tier buckets to Amazon Glacier with desired lifecycle via the &quot;Bucket&quot; menu.&#xa;Restore objects back from Amazon Glacier via the &quot;Objects&quot; menu.&#xa;Upgraded AWS S3 API to v1.8.5&#xa;Small tweaks to make GUI better.&#xa;Fixed a bug with displaying an objects Public URL&#xa;Fixed a bug with the MP3 player to play the URL correctly.&#xa;&#xa;Features:&#xa;&#xa;1. Tier buckets to and from Amazon Glacier.&#xa;2. Sync files to and from S3 storage.&#xa;3. Stream music from Amazon S3.&#xa;4. Text editor.&#xa;5. Modify Bucket and Object ACL&apos;s.&#xa;6. Take screen shots and upload them to Amazon S3.&#xa;7. Bucket versioning and lifecycles.&#xa;8. Graphical and console based background syncing.&#xa;9. Store multiple Amazon S3 accounts.&#xa;10. Image viewer."/>
+                        <Property name="text" type="java.lang.String" value="Version 3.0&#xa;&#xa;Console message clean up for better understanding.&#xa;Tier buckets to Amazon Glacier with desired lifecycle via the &quot;Bucket&quot; menu.&#xa;Restore objects back from Amazon Glacier via the &quot;Objects&quot; menu.&#xa;Upgraded AWS S3 API to v1.8.5&#xa;Small tweaks to make GUI better.&#xa;Fixed a bug with displaying an objects Public URL&#xa;Fixed a bug with the MP3 player to play the URL correctly.&#xa;&#xa;Features:&#xa;&#xa;1. Tier buckets to and from Amazon Glacier.&#xa;2. Sync files to and from S3 storage.&#xa;3. Stream music from Amazon S3.&#xa;4. Text editor.&#xa;5. Modify Bucket and Object ACL&apos;s.&#xa;6. Take screen shots and upload them to Amazon S3.&#xa;7. Bucket versioning and lifecycles.&#xa;8. Graphical and console based background syncing.&#xa;9. Store multiple Amazon S3 accounts.&#xa;10. Image viewer.&#xa;11. Migrate data between S3 accounts.&#xa;&#xa;How to migrate data between S3 accounts:&#xa;&#xa;1. Load the destination account and click &quot;Set as migration Account&quot; under Settings.&#xa;2. Create the destination bucket with the same name as the origin bucket name.&#xa;3. Load the origin S3 account and select the bucket to transfer to the new S3 account.&#xa;4. Under the &quot;Tools&quot; menu, select &quot;Migrate bucket to another S3 account&quot;.&#xa;5. Wait for transfers to complete."/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                             <TitledBorder/>
