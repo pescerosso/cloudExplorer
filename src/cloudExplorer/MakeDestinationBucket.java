@@ -28,6 +28,7 @@ public class MakeDestinationBucket implements Runnable {
             final JButton createBucket = new JButton("Start Bucket Migration");
             final JButton close = new JButton("Close");
             final JLabel blank = new JLabel(" ");
+            final JLabel blank2 = new JLabel(" ");
             final JTextField bucketName = new JTextField();
             final JLabel name = new JLabel("Destination Bucket Name:");
             name.setBackground(Color.white);
@@ -68,6 +69,7 @@ public class MakeDestinationBucket implements Runnable {
             mainFrame.jPanel14.add(bucketName);
             mainFrame.jPanel14.add(blank);
             mainFrame.jPanel14.add(createBucket);
+            mainFrame.jPanel14.add(blank2);
             mainFrame.jPanel14.add(close);
             mainFrame.jPanel14.repaint();
             mainFrame.jPanel14.revalidate();
