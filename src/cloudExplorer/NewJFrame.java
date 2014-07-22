@@ -2226,7 +2226,6 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         if (active_account > 0) {
             String save = cred.writeMigrateConfig(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jTextField5.getText());
             jTextArea1.append(save);
-            jTextArea1.append("\nSaved current account as the migration account.");
             calibrateTextArea();
         } else {
             jTextArea1.append("\nError: No account has been selected.");

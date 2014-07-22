@@ -126,6 +126,6 @@ public class Credentials {
             bfr.close();
         } catch (Exception writeConfig) {
         }
-        return "\nSaved Config";
+        return ("\nSaved current account as the migration account.");
     }
 }
