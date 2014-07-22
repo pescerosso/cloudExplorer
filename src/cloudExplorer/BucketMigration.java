@@ -34,6 +34,8 @@ public class BucketMigration implements Runnable {
     String config_file = (Home + File.separator + "s3Migrate.config");
     Get get;
     Put put;
+    Delete del;
+    Boolean deleteOrigin = false;
 
     public void calibrate() {
         try {
@@ -42,13 +44,14 @@ public class BucketMigration implements Runnable {
         }
     }
 
-    BucketMigration(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, NewJFrame AmainFrame, String Anew_bucket) {
+    BucketMigration(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, NewJFrame AmainFrame, String Anew_bucket, Boolean AdeleteOrigin) {
         access_key = Aaccess_key;
         secret_key = Asecret_key;
         bucket = Abucket;
         endpoint = Aendpoint;
         mainFrame = AmainFrame;
         new_bucket = Anew_bucket;
+        deleteOrigin = AdeleteOrigin;
     }
 
     String loadMigrationConfig() {
@@ -77,8 +80,14 @@ public class BucketMigration implements Runnable {
                 get.run();
                 put = new Put(temp_file, new_access_key, new_secret_key, new_bucket, new_endpoint, mainFrame.objectarray[i]);
                 put.run();
+                if (deleteOrigin) {
+                    del = new Delete(mainFrame.objectarray[i], access_key, secret_key, bucket, endpoint, null);
+                    del.run();
+                }
             }
         }
+        jTextArea1.append("\nBucket migration complete.");
+        calibrate();
 
     }
 
@@ -158,8 +167,8 @@ public class BucketMigration implements Runnable {
 
     }
 
-    void startc(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, NewJFrame AmainFrame, String Anew_bucket) {
-        bucketMigration = new Thread(new BucketMigration(Aaccess_key, Asecret_key, Abucket, Aendpoint, AmainFrame, Anew_bucket));
+    void startc(String Aaccess_key, String Asecret_key, String Abucket, String Aendpoint, NewJFrame AmainFrame, String Anew_bucket, Boolean AdeleteOrigin) {
+        bucketMigration = new Thread(new BucketMigration(Aaccess_key, Asecret_key, Abucket, Aendpoint, AmainFrame, Anew_bucket, AdeleteOrigin));
         bucketMigration.start();
     }
 
