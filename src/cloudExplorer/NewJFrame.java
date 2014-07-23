@@ -70,7 +70,8 @@ public class NewJFrame extends javax.swing.JFrame implements ItemListener {
         initComponents();
         this.setIconImage(new ImageIcon(getClass()
                 .getResource("cloud.jpg")).getImage());
-
+        this.jTextField3.setText("https://s3.amazonaws.com");
+        this.jTextField4.setText("443");
         File config = new File(config_file);
         if (config.exists()) {
             this.jButton9.doClick();
